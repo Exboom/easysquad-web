@@ -1,0 +1,2 @@
+class Chekin < ApplicationRecord
+end
