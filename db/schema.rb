@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_23_104953) do
+ActiveRecord::Schema.define(version: 2019_04_23_114551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,11 @@ ActiveRecord::Schema.define(version: 2019_04_23_104953) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "player_teams", primary_key: ["player", "team"], force: :cascade do |t|
+    t.integer "player", null: false
+    t.integer "team", null: false
+  end
+
   create_table "players", force: :cascade do |t|
     t.string "name", default: ""
     t.date "birthday"
@@ -92,14 +97,15 @@ ActiveRecord::Schema.define(version: 2019_04_23_104953) do
 
   create_table "reasons", force: :cascade do |t|
     t.string "reason"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "roles", force: :cascade do |t|
     t.string "role"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  end
+
+  create_table "team_tournaments", primary_key: ["team", "tournaments"], force: :cascade do |t|
+    t.integer "team", null: false
+    t.integer "tournaments", null: false
   end
 
   create_table "teams", force: :cascade do |t|
@@ -117,6 +123,12 @@ ActiveRecord::Schema.define(version: 2019_04_23_104953) do
     t.integer "federation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_roles", primary_key: ["user", "role"], force: :cascade do |t|
+    t.integer "user", null: false
+    t.integer "role", null: false
+    t.integer "team"
   end
 
   create_table "users", force: :cascade do |t|

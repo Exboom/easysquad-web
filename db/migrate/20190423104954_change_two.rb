@@ -1,10 +1,16 @@
-class CreateReasons < ActiveRecord::Migration[5.2]
+class ChangeTwo < ActiveRecord::Migration[5.2]
   def change
-    create_table :reasons do |t|
+    change_table :reasons do |t|
 
-      t.string :reason
+      t.remove :created_at
+      t.remove :updated_at
 
-      t.timestamps
+    end
+    change_table :roles do |t|
+
+      t.remove :created_at
+      t.remove :updated_at
+
     end
   end
 end

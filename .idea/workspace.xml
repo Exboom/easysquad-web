@@ -2,8 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66d94d6a-e7fd-4ac6-82dd-c4304f2fc6bf" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/models/player_team.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/team_tournament.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/user_role.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/migrate/20190423114439_create_user_roles.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/migrate/20190423114459_create_player_teams.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/migrate/20190423114551_create_team_tournaments.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/fixtures/player_teams.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/fixtures/team_tournaments.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/fixtures/user_roles.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/models/player_team_test.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/models/team_tournament_test.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/models/user_role_test.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20190423104954_change_two.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20190423104954_change_two.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/schema.rb" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -22,19 +35,28 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/db/migrate/20190423104933_create_roles.rb">
+        <entry file="file://$PROJECT_DIR$/db/migrate/20190423114439_create_user_roles.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+            <state relative-caret-position="105">
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/db/migrate/20190423114459_create_player_teams.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="60" selection-start-line="2" selection-start-column="60" selection-end-line="2" selection-end-column="60" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/db/migrate/20190423104953_create_reasons.rb">
+        <entry file="file://$PROJECT_DIR$/db/migrate/20190423114551_create_team_tournaments.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+            <state relative-caret-position="90">
+              <caret line="6" column="6" lean-forward="true" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -64,17 +86,10 @@
         <option value="$PROJECT_DIR$/db/migrate/20190423095553_create_events.rb" />
         <option value="$PROJECT_DIR$/db/migrate/20190423104933_create_roles.rb" />
         <option value="$PROJECT_DIR$/db/migrate/20190423104953_create_reasons.rb" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectConfigurationFiles">
-    <option name="files">
-      <list>
-        <option value="$PROJECT_DIR$/.idea/easysquad-web.iml" />
-        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
-        <option value="$PROJECT_DIR$/.idea/misc.xml" />
-        <option value="$PROJECT_DIR$/.idea/modules.xml" />
-        <option value="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+        <option value="$PROJECT_DIR$/db/migrate/20190423104954_change_two.rb" />
+        <option value="$PROJECT_DIR$/db/migrate/20190423114439_create_user_roles.rb" />
+        <option value="$PROJECT_DIR$/db/migrate/20190423114459_create_player_teams.rb" />
+        <option value="$PROJECT_DIR$/db/migrate/20190423114551_create_team_tournaments.rb" />
       </list>
     </option>
   </component>
@@ -100,6 +115,12 @@
               <item name="easysquad-web" type="b2602c69:ProjectViewProjectNode" />
               <item name="easysquad-web" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="easysquad-web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="easysquad-web" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="easysquad-web" type="b2602c69:ProjectViewProjectNode" />
@@ -131,6 +152,11 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/db/migrate" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/db/migrate" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -252,19 +278,19 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1556007756677</updated>
-      <workItem from="1556007759256" duration="7417000" />
+      <workItem from="1556007759256" duration="9529000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7417000" />
+    <option name="totallyTimeSpent" value="9529000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1030" y="23" width="890" height="989" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24646227" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.36084905" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" />
@@ -411,8 +437,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20190423104953_create_reasons.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/db/schema.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-44" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/federation.rb">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20190423104954_change_two.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/db/migrate/20190423104933_create_roles.rb">
       <provider selected="true" editor-type-id="text-editor">
@@ -421,10 +466,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate/20190423104953_create_reasons.rb">
+    <entry file="file://$PROJECT_DIR$/db/migrate/20190423114439_create_user_roles.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+        <state relative-caret-position="105">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20190423114459_create_player_teams.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="60" selection-start-line="2" selection-start-column="60" selection-end-line="2" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20190423114551_create_team_tournaments.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="6" lean-forward="true" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
         </state>
       </provider>
     </entry>
