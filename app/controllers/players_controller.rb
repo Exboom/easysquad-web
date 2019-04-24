@@ -23,7 +23,11 @@ class PlayersController < ApplicationController
   end
 
   def show
-    @player = Player.find([:id])
+    if Player.find_by_id(params[:id]).nil?
+      redirect_to welcome_notplayer_path  #это для теста
+    else
+      @player = Player.find([:id])
+    end
   end
 
   def destroy
