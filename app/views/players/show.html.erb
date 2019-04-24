@@ -1,0 +1,7 @@
+<h1>EasySquad</h1>
+<h2>Профиль игрока <%= @player.name %></h2>
+<p> Имя игрока: <%= @player.name %></p>
+<p> Дата рождения: <%= @player.birthday %></p>
+<p> Игровой номер: <%= @player.gamenumber %></p>
+
+<p> <%= button_to 'Редактировать профиль', edit_player_path, :method => :get %></p>

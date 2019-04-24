@@ -4,7 +4,7 @@ class CreateTeamTournaments < ActiveRecord::Migration[5.2]
 
       t.integer :team
       t.integer :tournaments
-      
+
     end
   end
 end
