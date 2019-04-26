@@ -3,21 +3,22 @@
 
 <h2> Заполните информацию об игроке</h2>
 
-<%= form_with(model: @player, local: true) do |form| %>
+<%= form_with scope: :player, url: players_path, local: true do |form| %>
 
   <p>
     <%= form.label :Имя %><br>
     <%= form.text_field :name %>
+    <%= form.hidden_field :user_id, value: params[:format]%>
   </p>
 
   <p>
     <%= form.label :Дата_рождения %><br>
-    <%= form.date_select :birthday %>
+    <%= form.date_select :birthday, :start_year => 1950, :end_year => Date.today.year %>
   </p>
 
   <p>
     <%= form.label :Игровой_номер %><br>
-    <%= form.text_field :gamenumber %>
+    <%= form.number_field :gamenumber %>
   </p>
 
   <p>

@@ -5,11 +5,16 @@ class PlayersController < ApplicationController
   end
 
   def edit
-    @player=Player.find(params[:id])
+    idp=Player.where("user_id = ?", params[:id]).pluck(:id)
+    @player=Player.find(idp)
   end
 
   def create
+    # render plain: params[:player].inspect
     @player=Player.new(player_params)
+
+    @player.save
+    redirect_to @player
   end
 
   def update
@@ -23,12 +28,18 @@ class PlayersController < ApplicationController
   end
 
   def show
-    # @teams= Team.
-    if Player.find_by_id(params[:id]).nil?
+    idp=Player.where("user_id = ?", params[:id]).pluck(:id)
+
+    if Player.find_by_id(idp).nil?
       redirect_to welcome_notplayer_path(current_user)  #это для теста
     else
-      @player = Player.find([:id])
+      @player = Player.find(idp)
     end
+
+    # render plain: params[:player].inspect
+
+    # @player = Player.find(idp)
+
   end
 
   def destroy
