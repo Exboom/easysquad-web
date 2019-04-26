@@ -5,14 +5,11 @@ class PlayersController < ApplicationController
   end
 
   def edit
-    idp=Player.where("user_id = ?", params[:id]).pluck(:id)
-    @player=Player.find(idp)
+    @player=Player.find(params[:id])
   end
 
   def create
-    # render plain: params[:player].inspect
     @player=Player.new(player_params)
-
     @player.save
     redirect_to @player
   end
@@ -28,17 +25,13 @@ class PlayersController < ApplicationController
   end
 
   def show
-    idp=Player.where("user_id = ?", params[:id]).pluck(:id)
-
-    if Player.find_by_id(idp).nil?
+    if Player.find_by_id(params[:id]).nil?
       redirect_to welcome_notplayer_path(current_user)  #это для теста
     else
-      @player = Player.find(idp)
+      @player = Player.find(params[:id])
     end
-
-    # render plain: params[:player].inspect
-
-    # @player = Player.find(idp)
+    teams = PlayerTeam.where("player = ?", params[:id]).pluck(:team)
+    @teams = Team.find(teams)
 
   end
 
@@ -51,7 +44,7 @@ class PlayersController < ApplicationController
 
   private
   def player_params
-    params.require(:player).permit(:name, :birthday, :gamenumber, :user_id)
+    params.require(:player).permit(:name, :birthday, :gamenumber, :id)
   end
 
 end

@@ -1,0 +1,31 @@
+<h1>EasySquad</h1>
+<h2>Собери свою команду!</h2>
+
+<h2> Заполните информацию о новой команде</h2>
+
+<%= form_with scope: :team, url: teams_path, local: true do |form| %>
+
+  <p>
+    <%= form.label :Имя %><br>
+    <%= form.text_field :name %>
+    <%#= form.hidden_field :id, value: params[:format]%>
+  </p>
+
+  <p>
+    <%= form.label :Владелец %><br>
+    <%= form.collection_select(:owner, User.all, :id, :email) %>
+  </p>
+
+  <p>
+    <%= form.label :Капитан %><br>
+    <%= form.collection_select(:captain, Player.all, :id, :name) %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+
+
+<% end %>
+
+<%= button_to "Назад", :back, :method => :get %>

@@ -1,21 +1,20 @@
 <h1>EasySquad</h1>
-<h2>Игровой профиль <%= current_user.email %></h2>
-<!--<p> Имя игрока: <%#= @player.name %></p>-->
-<!--<p> Дата рождения: <%#= @player.birthday %></p>-->
-<!--<p> Игровой номер: <%#= @player.gamenumber %></p>-->
-
-<% @player.each do |player|%>
-  <p> Имя игрока: <%= player.name%> </p>
-  <p> Дата рождения: <%= player.birthday%> </p>
-  <p> Игровой номер: <%= player.gamenumber%> </p>
-<% end %>
+<h2>Игровой профиль пользователя: <%= current_user.email %></h2>
+<p> Имя игрока: <%= @player.name %></p>
+<p> Дата рождения: <%= @player.birthday %></p>
+<p> Игровой номер: <%= @player.gamenumber %></p>
 
 <p> <%= button_to 'Редактировать профиль', edit_player_path, :method => :get %></p>
+<p> <%= button_to 'Удалить профиль', player_path, :method => :delete %></p>
+<%= button_to "Назад", :welcome_index, :method => :get %>
+
+
+
 
 <p>Ваши команды</p>
 
+<% @teams.each do |team|%>
+  <p><%= team.name%> <%= link_to 'показать', team_path(game) %></p>
+<% end %>
 
 
-<%#= @teams.each do |team|%>
-<!--  <p><%#= team.name%> <%#= link_to 'показать', team_path(game) %></p>-->
-<%# end %>

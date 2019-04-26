@@ -7,6 +7,16 @@ class WelcomeController < ApplicationController
       @f=1
       @games = Game.last(5)
     end
+
+
+    if Team.take.nil?
+      @f1=nil
+      @teams = "В баз нет ни одной команды!"
+    else
+      @f1=1
+      @teams=Team.all
+    end
+
   end
 
   def notplayer
