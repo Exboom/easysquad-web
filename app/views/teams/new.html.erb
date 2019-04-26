@@ -6,7 +6,7 @@
 <%= form_with scope: :team, url: teams_path, local: true do |form| %>
 
   <p>
-    <%= form.label :Имя %><br>
+    <%= form.label :Название %><br>
     <%= form.text_field :name %>
     <%#= form.hidden_field :id, value: params[:format]%>
   </p>
@@ -22,7 +22,7 @@
   </p>
 
   <p>
-    <%= form.submit %>
+    <%= form.submit("Создать") %>
   </p>
 
 

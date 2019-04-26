@@ -30,7 +30,11 @@ class TeamsController < ApplicationController
   end
 
   def show
-    @team = Team.find([:id])
+    @team = Team.find(params[:id])
+    @owner = User.find(@team.owner)
+    @cap = Player.find(@team.captain)
+    players = PlayerTeam.where("team = ?", params[:id]).pluck(:player)
+    @players = Player.find(players)
   end
 
   def destroy
