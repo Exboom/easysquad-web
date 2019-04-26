@@ -1,0 +1,30 @@
+<h1>EasySquad</h1>
+<h2>Собери свою команду!</h2>
+
+<h2> Заполните информацию об игроке</h2>
+
+<%= form_with(model: @player, local: true) do |form| %>
+
+  <p>
+    <%= form.label :Имя %><br>
+    <%= form.text_field :name %>
+  </p>
+
+  <p>
+    <%= form.label :Дата_рождения %><br>
+    <%= form.date_select :birthday %>
+  </p>
+
+  <p>
+    <%= form.label :Игровой_номер %><br>
+    <%= form.text_field :gamenumber %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+
+
+<% end %>
+
+<%= button_to "Назад", :back, :method => :get %>

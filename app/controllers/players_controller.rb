@@ -23,8 +23,9 @@ class PlayersController < ApplicationController
   end
 
   def show
+    # @teams= Team.
     if Player.find_by_id(params[:id]).nil?
-      redirect_to welcome_notplayer_path  #это для теста
+      redirect_to welcome_notplayer_path(current_user)  #это для теста
     else
       @player = Player.find([:id])
     end
@@ -39,7 +40,7 @@ class PlayersController < ApplicationController
 
   private
   def player_params
-    params.require(:player).permit(:name, :birthday, :gamenumber)
+    params.require(:player).permit(:name, :birthday, :gamenumber, :user_id)
   end
 
 end

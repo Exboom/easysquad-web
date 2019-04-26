@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 2019_04_23_114551) do
     t.integer "gamenumber"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
   end
 
   create_table "reasons", force: :cascade do |t|
@@ -125,10 +126,10 @@ ActiveRecord::Schema.define(version: 2019_04_23_114551) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_roles", primary_key: ["user", "role"], force: :cascade do |t|
-    t.integer "user", null: false
-    t.integer "role", null: false
-    t.integer "team"
+  create_table "user_roles", id: false, force: :cascade do |t|
+    t.bigint "user1", null: false
+    t.bigint "role", null: false
+    t.bigint "team"
   end
 
   create_table "users", force: :cascade do |t|

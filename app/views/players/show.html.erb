@@ -4,4 +4,10 @@
 <p> Дата рождения: <%= @player.birthday %></p>
 <p> Игровой номер: <%= @player.gamenumber %></p>
 
+<p>Ваши команды</p>
+
+<%= @teams.each do |team|%>
+  <p><%= team.name%> <%= link_to 'показать', team_path(game) %></p>
+<% end %>
+
 <p> <%= button_to 'Редактировать профиль', edit_player_path, :method => :get %></p>

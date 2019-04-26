@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   get 'welcome/notplayer'
 
 
-
   resources :players
   resources :teams
   resources :games
@@ -14,6 +13,12 @@ Rails.application.routes.draw do
   resources :locations
   resources :chekins
   resources :events
+  resources :player_teams
+  resources :team_tournaments
+  resources :user_roles
+
+  resource :reason, only: [:show]
+  resource :role, only: [:show]
 
 
 
