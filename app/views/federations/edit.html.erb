@@ -1,0 +1,41 @@
+<h1>EasySquad</h1>
+<h2>Редактирование федерации: <%= @federation.name %></h2>
+
+<%= form_with(model: @federation, local: true) do |form| %>
+
+  <% if @federation.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@federation.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @federation.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= form.label :Название %><br>
+    <%= form.text_field :name %>
+  </p>
+
+  <p>
+    <%= form.label :Электронный_адрес %><br>
+    <%= form.url_field :url %>
+  </p>
+
+  <p>
+    <%= form.label :Контакты %><br>
+    <%= form.telephone_field :contacts %>
+  </p>
+
+  <p>
+    <%= form.submit("Обновить") %>
+  </p>
+
+<% end %>
+
+<%= button_to "Назад", :back, :method => :get %>
