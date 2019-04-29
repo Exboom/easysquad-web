@@ -1,0 +1,46 @@
+<h1>EasySquad</h1>
+<h2>Собери свою команду!</h2>
+
+<h2>Отметка о присутствии на игре</h2>
+
+<%= form_with scope: :chekin, url: chekins_path, local: true do |form| %>
+
+  <p>
+    <%= form.label :Игрок %><br>
+    <%= @player.name %>
+    <%= form.hidden_field :player, value: current_user.id%>
+  </p>
+
+  <p>
+    <%= form.label :Команда %><br>
+    <%= form.collection_select(:team, Team.all, :id, :name) %>
+  </p>
+
+  <p>
+    <%= form.label :Игра %><br>
+    <%= @game.name %>
+    <%#= form.collection_select(:game, Team.all, :id, :name) %>
+    <%= form.hidden_field :game, value: params[:format]%>
+  </p>
+
+  <p>
+    <%= form.label :Вы_будете_на_игре? %><br>
+    <%= form.radio_button :game, true%> Да
+    <%= form.radio_button :game, false%> Нет
+  </p>
+
+
+  <% if @f.nil?%>
+  <p>
+    <%= form.label :Причина_отсутствия %><br>
+    <%= form.collection_select(:reasons, Reason.all, :id, :reason) %>
+  </p>
+
+  <p>
+    <%= form.submit("Отметиться") %>
+  </p>
+
+
+<% end %>
+
+<%= button_to "Назад", :back, :method => :get %>

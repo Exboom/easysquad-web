@@ -4,6 +4,17 @@
 <p> Дата рождения: <%= @player.birthday %></p>
 <p> Игровой номер: <%= @player.gamenumber %></p>
 
+
+
+<p>Ваши заявки</p>
+<% @applications.each do |app|%>
+  <p>№<%= app%> <%= link_to 'показать', application_path(app) %></p>
+<% end %>
+
+
+
+<p> <%= button_to 'Создать заявку', new_application_path(current_user), :method => :get %></p>
+
 <p> <%= button_to 'Редактировать профиль', edit_player_path, :method => :get %></p>
 <p> <%= button_to 'Удалить профиль', player_path, :method => :delete %></p>
 <%= button_to "Назад", :welcome_index, :method => :get %>

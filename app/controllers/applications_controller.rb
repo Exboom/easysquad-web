@@ -2,6 +2,7 @@ class ApplicationsController < ApplicationController
 
   def new
     @application=Application.new
+    @player=Player.find(params[:format])
   end
 
   def edit
@@ -10,6 +11,8 @@ class ApplicationsController < ApplicationController
 
   def create
     @application=Application.new(application_params)
+    @application.save
+    redirect_to @application
   end
 
   def update
@@ -24,6 +27,9 @@ class ApplicationsController < ApplicationController
 
   def show
     @application = Application.find(params[:id])
+    @player=Player.find(Application.find(params[:id]).player)
+    @team=Team.find(Application.find(params[:id]).team)
+    @tourn=Tournament.find(Application.find(params[:id]).tournament)
   end
 
   def destroy

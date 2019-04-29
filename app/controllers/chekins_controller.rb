@@ -1,7 +1,9 @@
 class ChekinsController < ApplicationController
 
   def new
+    @player=Player.find(current_user.id)
     @chekin=Chekin.new
+    @game=Game.find(params[:format])
   end
 
   def edit
@@ -10,6 +12,8 @@ class ChekinsController < ApplicationController
 
   def create
     @chekin=Chekin.new(chekin_params)
+    @chekin.save
+    redirect_to @chekin
   end
 
   def update
