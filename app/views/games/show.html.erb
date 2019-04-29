@@ -1,0 +1,21 @@
+<h1>EasySquad</h1>
+<h2>Игра: <%= @game.name %></h2>
+
+<p> Команды участницы:</p>
+<p> <%= @team1.name %> - <%= @team2.name %></p>
+<p> Дата проведения: <%= @game.time %></p>
+<p> Турнир: <%= @tourn.name %></p>
+
+<p>Результат игры:</p>
+<% if @f.nil?%>
+  <p>Игра еще не сыграна</p>
+<% else%>
+  <%= @game.game_score %>
+<% end%>
+
+
+
+<p> <%= button_to 'Редактировать игру', edit_game_path, :method => :get %></p>
+<p> <%= button_to 'Удалить игру', game_path, :method => :delete %></p>
+
+<%= button_to "Назад", :welcome_index, :method => :get %>

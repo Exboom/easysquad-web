@@ -10,6 +10,8 @@ class GamesController < ApplicationController
 
   def create
     @game=Game.new(game_params)
+    @game.save
+    redirect_to @game
   end
 
   def update
@@ -23,7 +25,15 @@ class GamesController < ApplicationController
   end
 
   def show
-    @game = Game.find([:id])
+    @game = Game.find(params[:id])
+    @team1=Team.find(Game.find(params[:id]).team_one)
+    @team2=Team.find(Game.find(params[:id]).team_two)
+    @tourn=Tournament.find(Game.find(params[:id]).tournament)
+    if Game.find(params[:id]).game_score.nil?
+      @f=nil
+    else
+      @f=1
+    end
   end
 
   def destroy

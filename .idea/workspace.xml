@@ -2,20 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66d94d6a-e7fd-4ac6-82dd-c4304f2fc6bf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/views/locations/new.html.erb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/locations/show.html.erb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/games/edit.html.erb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/games/new.html.erb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/locations/edit.html.erb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/tournaments/edit.html.erb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/applications_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/applications_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/chekins_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/chekins_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/events_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/events_controller.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/federations_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/federations_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/games_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/games_controller.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/locations_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/locations_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/teams_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/teams_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/tournaments_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/tournaments_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/player_teams_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/player_teams_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/team_tournaments_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/team_tournaments_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/user_roles_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/user_roles_controller.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/welcome_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/welcome_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/federations/new.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/federations/new.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/federations/show.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/federations/show.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/players/show.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/players/show.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/teams/new.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/teams/new.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/games/show.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/games/show.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/locations/show.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/locations/show.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/teams/edit.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/teams/edit.html.erb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/teams/show.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/teams/show.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/tournaments/new.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/tournaments/new.html.erb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/tournaments/show.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/tournaments/show.html.erb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/welcome/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/welcome/index.html.erb" afterDir="false" />
     </list>
@@ -35,29 +40,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/welcome/index.html.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="645">
-              <caret line="43" column="16" selection-start-line="43" selection-start-column="10" selection-end-line="43" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/locations_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="32" column="10" selection-start-line="32" selection-start-column="10" selection-end-line="32" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/locations/show.html.erb">
+        <entry file="file://$PROJECT_DIR$/app/controllers/games_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="6" lean-forward="true" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="8" />
+            <state relative-caret-position="45">
+              <caret line="3" column="9" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/games/new.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" selection-start-line="7" selection-end-line="30" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/games/show.html.erb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
             </state>
           </provider>
         </entry>
@@ -100,11 +105,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/db/migrate/20190423103005_create_tournaments.rb" />
-        <option value="$PROJECT_DIR$/db/migrate/20190423095525_create_locations.rb" />
-        <option value="$PROJECT_DIR$/db/migrate/20190423095536_create_chekins.rb" />
-        <option value="$PROJECT_DIR$/db/migrate/20190423095553_create_events.rb" />
-        <option value="$PROJECT_DIR$/db/migrate/20190423104933_create_roles.rb" />
         <option value="$PROJECT_DIR$/db/migrate/20190423104953_create_reasons.rb" />
         <option value="$PROJECT_DIR$/db/migrate/20190423104954_change_two.rb" />
         <option value="$PROJECT_DIR$/db/migrate/20190423114439_create_user_roles.rb" />
@@ -114,16 +114,9 @@
         <option value="$PROJECT_DIR$/app/views/players/index.html.erb" />
         <option value="$PROJECT_DIR$/../blog/app/controllers/articles_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/devise/sessions/new.html.erb" />
-        <option value="$PROJECT_DIR$/app/controllers/events_controller.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/applications_controller.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/player_teams_controller.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/user_roles_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/games/show.html.erb" />
-        <option value="$PROJECT_DIR$/app/controllers/games_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/devise/registrations/edit.html.erb" />
         <option value="$PROJECT_DIR$/app/views/welcome/show.html.erb" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/chekins_controller.rb" />
         <option value="$PROJECT_DIR$/app/controllers/reason_controller.rb" />
         <option value="$PROJECT_DIR$/app/controllers/role_controller.rb" />
         <option value="$PROJECT_DIR$/app/models/user.rb" />
@@ -133,24 +126,36 @@
         <option value="$PROJECT_DIR$/app/views/devise/registrations/new.html.erb" />
         <option value="$PROJECT_DIR$/app/views/welcome/notplayer.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/players_controller.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/team_tournaments_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/players/edit.html.erb" />
         <option value="$PROJECT_DIR$/app/views/players/new.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/teams_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/players/show.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/teams/show.html.erb" />
-        <option value="$PROJECT_DIR$/app/controllers/federations_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/welcome/index.html.erb" />
-        <option value="$PROJECT_DIR$/app/controllers/welcome_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/teams/new.html.erb" />
         <option value="$PROJECT_DIR$/app/views/locations/new.html.erb" />
         <option value="$PROJECT_DIR$/app/views/federations/new.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/locations/show.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/tournaments_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/tournaments/show.html.erb" />
         <option value="$PROJECT_DIR$/app/views/tournaments/new.html.erb" />
         <option value="$PROJECT_DIR$/app/views/federations/show.html.erb" />
+        <option value="$PROJECT_DIR$/app/controllers/applications_controller.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/chekins_controller.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/events_controller.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/federations_controller.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/player_teams_controller.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/team_tournaments_controller.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/user_roles_controller.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/welcome_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/games/new.html.erb" />
+        <option value="$PROJECT_DIR$/app/controllers/games_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/tournaments/show.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/welcome/index.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/teams/show.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/locations/show.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/teams/edit.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/tournaments/edit.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/locations/edit.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/locations_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/games/show.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/games/edit.html.erb" />
       </list>
     </option>
   </component>
@@ -166,6 +171,9 @@
     <option name="y" value="23" />
     <option name="width" value="967" />
     <option name="height" value="989" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -203,6 +211,13 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
               <item name="federations" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="easysquad-web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="easysquad-web" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="games" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="easysquad-web" type="b2602c69:ProjectViewProjectNode" />
@@ -387,12 +402,12 @@
       <workItem from="1556086260875" duration="19254000" />
       <workItem from="1556172315400" duration="14912000" />
       <workItem from="1556258732742" duration="19878000" />
-      <workItem from="1556518094310" duration="7355000" />
+      <workItem from="1556518094310" duration="13080000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71059000" />
+    <option name="totallyTimeSpent" value="76784000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -404,10 +419,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="942" y="0" width="978" height="1080" extended-state="6" />
+    <frame x="739" y="0" width="1181" height="1080" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20833333" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2045654" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -436,52 +451,6 @@
     <SUITE FILE_PATH="coverage/easysquad_web@Development__easysquad_web.rcov" NAME="Development: easysquad-web Coverage Results" MODIFIED="1556098697278" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="easysquad-web" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/models/application_record.rb">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/application.rb">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/player_team.rb">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/applications_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="35" lean-forward="true" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/events_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="8" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/player_teams_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="15" selection-start-line="17" selection-start-column="15" selection-end-line="17" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/master.key">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/games_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="28" lean-forward="true" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/devise/confirmations/new.html.erb">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/devise/passwords/edit.html.erb">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/devise/sessions/new.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
@@ -508,34 +477,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="21" lean-forward="true" selection-start-line="20" selection-start-column="15" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/reason_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" selection-start-line="2" selection-end-line="4" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/role_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="3" lean-forward="true" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/chekins_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="7" lean-forward="true" selection-start-line="2" selection-end-line="38" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/user_roles_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="5" lean-forward="true" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -603,111 +544,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/games/show.html.erb">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/team_tournaments_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="61" lean-forward="true" selection-start-line="11" selection-start-column="61" selection-end-line="11" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/players/edit.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" column="45" lean-forward="true" selection-start-line="34" selection-start-column="45" selection-end-line="34" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/players_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" selection-start-line="12" selection-end-line="13" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/players/new.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="30" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/players/show.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/teams/show.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="11" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/teams_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="36" column="14" selection-start-line="36" selection-start-column="14" selection-end-line="36" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/teams/new.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="29" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/locations/new.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/federations_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="14" lean-forward="true" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/welcome_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="40" column="4" lean-forward="true" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/tournaments_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="34" lean-forward="true" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/tournaments/show.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="39" lean-forward="true" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/federations/new.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="19" column="35" lean-forward="true" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/tournaments/new.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -718,24 +558,223 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/applications_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="42" selection-start-line="25" selection-start-column="42" selection-end-line="25" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/chekins_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="32" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/events_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="30" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/reason_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="4" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/role_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="3" lean-forward="true" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/team_tournaments_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="48" selection-start-line="25" selection-start-column="48" selection-end-line="25" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/teams_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" column="14" selection-start-line="36" selection-start-column="14" selection-end-line="36" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/user_roles_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="36" selection-start-line="25" selection-start-column="36" selection-end-line="25" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/federations_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/player_teams_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="40" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/welcome_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="45" column="19" selection-start-line="45" selection-start-column="19" selection-end-line="45" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/players_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" selection-start-line="12" selection-end-line="13" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/players/edit.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" lean-forward="true" selection-end-line="39" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/players/new.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" selection-start-line="13" selection-end-line="16" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/tournaments/new.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" selection-start-line="7" selection-end-line="29" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/welcome/index.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="43" column="16" selection-start-line="43" selection-start-column="10" selection-end-line="43" selection-end-column="16" />
+        <state relative-caret-position="360">
+          <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/teams/new.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" selection-start-line="7" selection-end-line="24" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/players/show.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="6" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/tournaments/show.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="1" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/tournaments_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="15" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/teams/edit.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="40" column="48" lean-forward="true" selection-end-line="40" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/tournaments/edit.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="51" selection-start-line="1" selection-start-column="51" selection-end-line="1" selection-end-column="51" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/locations_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" column="10" selection-start-line="32" selection-start-column="10" selection-end-line="32" selection-end-column="10" />
+        <state relative-caret-position="615">
+          <caret line="41" column="34" lean-forward="true" selection-start-line="41" selection-start-column="34" selection-end-line="41" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/locations/new.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" selection-start-line="7" selection-end-line="15" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/locations/show.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="6" lean-forward="true" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="8" />
+        <state relative-caret-position="75">
+          <caret line="5" column="54" selection-start-line="5" selection-start-column="54" selection-end-line="5" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/teams/show.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" selection-start-line="11" selection-end-line="11" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/locations/edit.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="35" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/games/show.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/games/new.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" selection-start-line="7" selection-end-line="30" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/games/edit.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="42" column="6" selection-start-line="42" selection-start-column="6" selection-end-line="42" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/games_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="9" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="9" />
         </state>
       </provider>
     </entry>

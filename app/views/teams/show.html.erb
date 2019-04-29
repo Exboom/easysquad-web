@@ -9,4 +9,6 @@
   <p><%= player.name%> <%#= link_to 'показать', team_path(game) %></p>
 <% end %>
 
+<p> <%= button_to 'Редактировать команду', edit_team_path, :method => :get %></p>
+<p> <%= button_to 'Удалить команду', team_path, :method => :delete %></p>
 <%= button_to "Назад", :welcome_index, :method => :get %>

@@ -23,7 +23,7 @@ class PlayerTeamsController < ApplicationController
   end
 
   def show
-    @playerteam = PlayerTeam.find([:id])
+    @playerteam = PlayerTeam.find(params[:id])
   end
 
   def destroy

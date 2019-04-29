@@ -1,0 +1,51 @@
+<h1>EasySquad</h1>
+<h2>Редактирование игры: <%= @game.name %></h2>
+
+<%= form_with(model: @game, local: true) do |form| %>
+
+  <% if @game.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@game.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @game.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= form.label :Название %><br>
+    <%= form.text_field :name %>
+  </p>
+
+  <p>
+    <%= form.label :Время_проведения %><br>
+    <%= form.datetime_local_field :time, :start_year => Date.today.year, :end_year => Date.today.year %>
+  </p>
+
+  <p>
+    <%= form.label :Первая_команда %><br>
+    <%= form.collection_select(:team_one, Team.all, :id, :name) %>
+  </p>
+
+  <p>
+    <%= form.label :Вторая_команда %><br>
+    <%= form.collection_select(:team_two, Team.all, :id, :name) %>
+  </p>
+
+  <p>
+    <%= form.label :Турнир %><br>
+    <%= form.collection_select(:tournament, Tournament.all, :id, :name) %>
+  </p>
+
+  <p>
+    <%= form.submit("Обновить") %>
+  </p>
+
+<% end %>
+
+<%= button_to "Назад", :back, :method => :get %>

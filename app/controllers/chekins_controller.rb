@@ -23,7 +23,7 @@ class ChekinsController < ApplicationController
   end
 
   def show
-    @chekin = Chekin.find([:id])
+    @chekin = Chekin.find(params[:id])
   end
 
   def destroy

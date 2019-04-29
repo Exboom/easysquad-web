@@ -35,8 +35,6 @@ class FederationsController < ApplicationController
       @tournaments= Tournament.find(tournkey)
     end
 
-
-    puts @f
     @federation = Federation.find(params[:id])
   end
 

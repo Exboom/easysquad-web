@@ -1,0 +1,40 @@
+<h1>EasySquad</h1>
+<h2>Собери свою команду!</h2>
+
+<h2> Заполните информацию о предстоящей игре</h2>
+
+<%= form_with scope: :game, url: games_path, local: true do |form| %>
+
+  <p>
+    <%= form.label :Название %><br>
+    <%= form.text_field :name %>
+  </p>
+
+  <p>
+    <%= form.label :Время_проведения %><br>
+    <%= form.datetime_local_field :time, :start_year => Date.today.year, :end_year => Date.today.year %>
+  </p>
+
+  <p>
+    <%= form.label :Первая_команда %><br>
+    <%= form.collection_select(:team_one, Team.all, :id, :name) %>
+  </p>
+
+  <p>
+    <%= form.label :Вторая_команда %><br>
+    <%= form.collection_select(:team_two, Team.all, :id, :name) %>
+  </p>
+
+  <p>
+    <%= form.label :Турнир %><br>
+    <%= form.collection_select(:tournament, Tournament.all, :id, :name) %>
+  </p>
+
+  <p>
+    <%= form.submit("Создать") %>
+  </p>
+
+
+<% end %>
+
+<%= button_to "Назад", :back, :method => :get %>

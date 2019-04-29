@@ -23,7 +23,7 @@ class UserRolesController < ApplicationController
   end
 
   def show
-    @userrole = UserRole.find([:id])
+    @userrole = UserRole.find(params[:id])
   end
 
   def destroy

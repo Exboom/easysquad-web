@@ -5,14 +5,15 @@
   <%= button_to 'Выйти', destroy_user_session_path, :method => :delete %>
   <%= button_to 'Профиль', player_path(current_user.id), :method => :get %>
 
-  <h3> Ближайшие игры </h3>
+  <h3> Игры </h3>
 
   <% if @f==nil %>
-    <p><%=@games%></p>
+    <p><%=@games%> <%= link_to 'Добавить игру?', new_game_path %></p>
   <% else%>
    <% @games.each do |game|%>
-    <p><%= game.name%> <%= link_to 'показать', game_path(game) %></p>
+    <p><%= game.name%> (<%= game.game_score%>) <%= link_to 'показать', game_path(game) %></p>
     <% end %>
+    <%= button_to 'Добавить игру', new_game_path, :method => :get %>
   <% end %>
 
 
@@ -21,10 +22,12 @@
   <% if @f1==nil %>
     <p><%=@teams%> <%= link_to 'Создать команду?', new_team_path %></p>
   <% else%>
+    <div style="height:100px; overflow : scroll;">
     <% @teams.each do |team|%>
       <p><%= team.name%> <%= link_to 'показать', team_path(team) %></p>
     <% end %>
-    <%= button_to 'Добавить команду?', new_team_path, :method => :get %></p>
+    </div>
+    <%= button_to 'Добавить команду', new_team_path, :method => :get %></p>
   <% end %>
 
   <h3> Федерации </h3>
@@ -35,7 +38,7 @@
     <% @federations.each do |federation|%>
       <p><%= federation.name%> <%= link_to 'показать', federation_path(federation) %></p>
     <% end %>
-    <%= button_to 'Добавить федерацию?', new_federation_path, :method => :get %></p>
+    <%= button_to 'Добавить федерацию', new_federation_path, :method => :get %></p>
   <% end %>
 
   <h3>Места проведения турниров:</h3>
@@ -46,7 +49,7 @@
     <% @tourn.each do |tourn|%>
       <p><%= tourn.name%> <%= link_to 'показать', location_path(tourn) %></p>
     <% end %>
-    <%= button_to 'Добавить место?', new_location_path, :method => :get %></p>
+    <%= button_to 'Добавить место', new_location_path, :method => :get %></p>
   <% end %>
 
 

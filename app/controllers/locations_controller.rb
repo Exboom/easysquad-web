@@ -16,7 +16,6 @@ class LocationsController < ApplicationController
 
   def update
     @location = Location.find(params[:id])
-
     if @location.update(location_params)
       redirect_to @location
     else
@@ -28,10 +27,10 @@ class LocationsController < ApplicationController
     tournkey = Tournament.where("location = ?", params[:id]).pluck(:id)
     if tournkey.empty?
       @f=nil
-      @tournaments= "На этом месте не проводятся турниры"
+      @tournaments = "На этом месте не проводятся турниры"
     else
       @f=1
-      @tournaments= Tournament.find(tournkey)
+      @tournaments = Tournament.find(tournkey)
     end
     @location = Location.find(params[:id])
   end

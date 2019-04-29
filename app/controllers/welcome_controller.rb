@@ -43,7 +43,7 @@ class WelcomeController < ApplicationController
 
     @userrols = Role.find(roles)
 
-    if teams==[nil] then
+    if teams.empty? then
       @teams = "Вы не привязаны к какой-либо команде"
       @flag=nil
     else
