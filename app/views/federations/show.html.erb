@@ -1,0 +1,23 @@
+<h1>EasySquad</h1>
+<h2>Профиль федерации: <%= @federation.name %></h2>
+<p> Сайт федерации: <%= @federation.url %></p>
+<p> Контакты: <%= @federation.contacts %></p>
+
+<p> <%= button_to 'Редактировать федерацию', edit_federation_path, :method => :get %></p>
+<p> <%= button_to 'Удалить профиль', federation_path, :method => :delete %></p>
+<%= button_to "Назад", :welcome_index, :method => :get %>
+
+
+
+
+<p>Турниры федерации:</p>
+
+<% if @f==nil %>
+  <p><%=@tournaments%> <%= link_to 'Добавить турнир?', new_tournament_path %></p>
+<% else%>
+  <% @tournaments.each do |tourn|%>
+    <p><%= tourn.name%> <%= link_to 'показать', tournament_path(tourn) %></p>
+  <% end %>
+  <%= button_to "Добавить турнир", :new_tournament, :method => :get %>
+<% end %>
+

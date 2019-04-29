@@ -10,6 +10,8 @@ class TournamentsController < ApplicationController
 
   def create
     @tournament=Tournament.new(tournament_params)
+    @tournament.save
+    redirect_to @tournament
   end
 
   def update
@@ -23,7 +25,10 @@ class TournamentsController < ApplicationController
   end
 
   def show
-    @tournament = Tournament.find([:id])
+    @local=Location.find(Tournament.find(params[:id]).location)
+    @feder=Federation.find(Tournament.find(params[:id]).federation)
+    @tournament = Tournament.find(params[:id])
+    # @team
   end
 
   def destroy

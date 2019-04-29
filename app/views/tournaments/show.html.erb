@@ -1,0 +1,15 @@
+<h1>EasySquad</h1>
+<h2>Профиль турнира: <%= @tournament.name %></h2>
+
+<p> Сезон турнира: <%= @tournament.season %></p>
+<p> Место проведения: <%= @local.name %></p>
+<p> Федерация, проводящая турнир: <%= @feder.name %></p>
+
+
+<p> Команды-участницы</p>
+<%# @teams.each do |team|%>
+<!--  <p><%#= team.name%> <%##= link_to 'показать', team_path(game) %></p>-->
+<%# end %>
+
+<p> <%= button_to 'Удалить турнир', tournament_path, :method => :delete %></p>
+<%= button_to "Назад", :welcome_index, :method => :get %>

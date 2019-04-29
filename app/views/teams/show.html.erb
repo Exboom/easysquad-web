@@ -2,8 +2,11 @@
 <h2>Профиль команды: <%= @team.name %></h2>
 
 <p> Владелец команды: <%= @owner.email %></p>
-<!--<p> Капитан команды: <%#= @owner %></p>-->
+<p> Капитан команды: <%= @cap.name %></p>
 
 <p>Игроки команды</p>
+<% @players.each do |player|%>
+  <p><%= player.name%> <%#= link_to 'показать', team_path(game) %></p>
+<% end %>
 
-
+<%= button_to "Назад", :welcome_index, :method => :get %>

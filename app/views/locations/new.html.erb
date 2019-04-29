@@ -1,0 +1,25 @@
+<h1>EasySquad</h1>
+<h2>Собери свою команду!</h2>
+
+<h2> Заполните информацию о новом месте</h2>
+
+<%= form_with scope: :location, url: locations_path, local: true do |form| %>
+
+  <p>
+    <%= form.label :Название %><br>
+    <%= form.text_field :name %>
+  </p>
+
+  <p>
+    <%= form.label :Адрес %><br>
+    <%= form.text_field :address %>
+  </p>
+
+  <p>
+    <%= form.submit("Создать") %>
+  </p>
+
+
+<% end %>
+
+<%= button_to "Назад", :back, :method => :get %>

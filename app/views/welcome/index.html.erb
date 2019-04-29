@@ -24,6 +24,29 @@
     <% @teams.each do |team|%>
       <p><%= team.name%> <%= link_to 'показать', team_path(team) %></p>
     <% end %>
+    <%= button_to 'Добавить команду?', new_team_path, :method => :get %></p>
+  <% end %>
+
+  <h3> Федерации </h3>
+
+  <% if @f2==nil %>
+    <p><%=@federations%> <%= link_to 'Создать федерацию?', new_federation_path %></p>
+  <% else%>
+    <% @federations.each do |federation|%>
+      <p><%= federation.name%> <%= link_to 'показать', federation_path(federation) %></p>
+    <% end %>
+    <%= button_to 'Добавить федерацию?', new_federation_path, :method => :get %></p>
+  <% end %>
+
+  <h3>Места проведения турниров:</h3>
+
+  <% if @f3==nil %>
+    <p><%=@tourn%> <%= link_to ' Добавить место?', new_location_path %></p>
+  <% else%>
+    <% @tourn.each do |tourn|%>
+      <p><%= tourn.name%> <%= link_to 'показать', location_path(tourn) %></p>
+    <% end %>
+    <%= button_to 'Добавить место?', new_location_path, :method => :get %></p>
   <% end %>
 
 

@@ -10,6 +10,8 @@ class FederationsController < ApplicationController
 
   def create
     @federation=Federation.new(federation_params)
+    @federation.save
+    redirect_to @federation
   end
 
   def update
@@ -23,7 +25,19 @@ class FederationsController < ApplicationController
   end
 
   def show
-    @federation = Federation.find([:id])
+    tournkey= Tournament.where("federation = ?", params[:id]).pluck(:id)
+
+    if tournkey.empty?
+      @f=nil
+      @tournaments = "Эта федерация не проводит турниров"
+    else
+      @f=1
+      @tournaments= Tournament.find(tournkey)
+    end
+
+
+    puts @f
+    @federation = Federation.find(params[:id])
   end
 
   def destroy

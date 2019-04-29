@@ -1,0 +1,22 @@
+<h1>EasySquad</h1>
+<h2>Профиль места проведения турниров: <%= @location.name %></h2>
+<p> Адрес: <%= @location.address %></p>
+
+
+<!--<p> <%#= button_to 'Редактировать федерацию', edit_federation_path, :method => :get %></p>-->
+<p> <%= button_to 'Удалить место', location_path, :method => :delete %></p>
+<%= button_to "Назад", :welcome_index, :method => :get %>
+
+
+
+
+<p>Проводимые турниры:</p>
+
+<% if @f==nil %>
+  <p><%=@tournaments%></p>
+<% else%>
+  <% @tournaments.each do |tourn|%>
+    <p><%= tourn.name%> <%= link_to 'показать', tournament_path(tourn) %></p>
+  <% end %>
+<% end %>
+

@@ -30,6 +30,7 @@ class TeamsController < ApplicationController
   end
 
   def show
+
     @team = Team.find(params[:id])
     @owner = User.find(@team.owner)
     @cap = Player.find(@team.captain)

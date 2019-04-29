@@ -17,6 +17,22 @@ class WelcomeController < ApplicationController
       @teams=Team.all
     end
 
+    if Federation.take.nil?
+      @f2=nil
+      @federations = "В баз нет ни одной федерации!"
+    else
+      @f2=1
+      @federations=Federation.all
+    end
+
+    if Location.take.nil?
+      @f3=nil
+      @tourn = "В баз нет ни одного места!"
+    else
+      @f3=1
+      @tourn=Location.all
+    end
+
   end
 
   def notplayer
