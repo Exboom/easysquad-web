@@ -31,7 +31,7 @@
 
   <fieldset id="visblock" style="display: none" disabled><legend>Почему Вас не будет?</legend>
     <p>
-      <%= form.label :Причина_отсутствия %><br>
+      <%= form.label :Причина_отсутствия, "Выберите причину (при выборе Other опишите причину в комментарии)" %><br>
       <%= form.collection_select(:reasons, Reason.all, :id, :reason) %>
     </p>
 

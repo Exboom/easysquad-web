@@ -28,6 +28,19 @@ class ChekinsController < ApplicationController
 
   def show
     @chekin = Chekin.find(params[:id])
+    @player = Player.find(Chekin.find(params[:id]).player)
+    @game = Game.find(Chekin.find(params[:id]).game)
+    @team = Team.find(Chekin.find(params[:id]).team)
+    if Chekin.find(params[:id]).chekin==true
+      @f=true
+    else
+      @f=false
+    end
+
+
+    if Chekin.find(params[:id]).reasons!=nil
+      @reason = Reason.find(Chekin.find(params[:id]).reasons)
+    end
   end
 
   def destroy

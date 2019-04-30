@@ -1,7 +1,13 @@
 <h1>EasySquad</h1>
-<!--<h2>Профиль федерации: <%#= @federation.name %></h2>-->
-<!--<p> Сайт федерации: <%#= @federation.url %></p>-->
-<!--<p> Контакты: <%#= @federation.contacts %></p>-->
+<h2>Отметка № <%= @chekin.id %></h2>
+<p> Игрок команды "<%= @team.name%>", <%= @player.name %></p>
+
+<% if @f==true %>
+  <p> будет присутствовать на игре: <%= @game.name %> </p>
+<% else %>
+  <p> не будет присутствоват на игре: <%= @game.name %> по причине: <%= @reason.reason %> <%= @chekin.comment %> </p>
+<% end %>
+
 
 <!--<p> <%#= button_to 'Редактировать федерацию', edit_federation_path, :method => :get %></p>-->
 <p> <%= button_to 'Удалить отметку', chekin_path, :method => :delete %></p>
