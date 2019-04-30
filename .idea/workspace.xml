@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66d94d6a-e7fd-4ac6-82dd-c4304f2fc6bf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/controllers/chekins_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/chekins_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/chekins/new.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/chekins/new.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/chekins/show.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/chekins/show.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/chekin.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/chekin.rb" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -22,20 +20,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/chekins_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
-              <caret line="38" column="11" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="11" />
+            <state relative-caret-position="585">
+              <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/chekins/show.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="108" selection-start-line="7" selection-start-column="108" selection-end-line="7" selection-end-column="108" />
+            <state relative-caret-position="75">
+              <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -125,10 +123,10 @@
         <option value="$PROJECT_DIR$/app/controllers/players_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/players/show.html.erb" />
         <option value="$PROJECT_DIR$/app/views/games/show.html.erb" />
-        <option value="$PROJECT_DIR$/app/models/chekin.rb" />
         <option value="$PROJECT_DIR$/app/views/chekins/new.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/chekins_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/chekins/show.html.erb" />
+        <option value="$PROJECT_DIR$/app/models/chekin.rb" />
       </list>
     </option>
   </component>
@@ -139,7 +137,7 @@
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
+  <component name="ProjectFrameBounds">
     <option name="x" value="953" />
     <option name="y" value="23" />
     <option name="width" value="967" />
@@ -396,12 +394,12 @@
       <workItem from="1556172315400" duration="14912000" />
       <workItem from="1556258732742" duration="19878000" />
       <workItem from="1556518094310" duration="19875000" />
-      <workItem from="1556604090254" duration="13746000" />
+      <workItem from="1556604090254" duration="14418000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="97325000" />
+    <option name="totallyTimeSpent" value="97997000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -413,10 +411,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="849" y="0" width="1071" height="1080" extended-state="6" />
+    <frame x="953" y="23" width="967" height="989" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19436346" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21621622" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -750,13 +748,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/chekin.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="50" selection-start-line="3" selection-start-column="50" selection-end-line="3" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/chekins/new.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="489">
@@ -767,17 +758,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/chekins_controller.rb">
+    <entry file="file://$PROJECT_DIR$/app/views/chekins/show.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="38" column="11" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="11" />
+        <state relative-caret-position="75">
+          <caret line="5" column="26" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/chekins/show.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/models/chekin.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="108" selection-start-line="7" selection-start-column="108" selection-end-line="7" selection-end-column="108" />
+        <state relative-caret-position="60">
+          <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/chekins_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
         </state>
       </provider>
     </entry>
