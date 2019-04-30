@@ -24,13 +24,12 @@
 
   <p>
     <%= form.label :Вы_будете_на_игре? %><br>
-    <%#= form.radio_button :chekin, false, onClick: "alert('hi  FALSE!');"%> <%#= form.label(:chekin_false, "Нет") %>
-    <%= form.radio_button :chekin, true, checked: true, onClick: "check(2)"%> <%= form.label(:chekin_true, "Да") %>
-    <%= form.radio_button :chekin, false, checked: false, onClick: "check(1)"%> <%= form.label(:chekin_false, "Нет") %>
+    <%= form.radio_button :chekin, "1",checked: true, onClick: "check(2)"%> <%= form.label(:chekin_true, "Да") %>
+    <%= form.radio_button :chekin, "0", onClick: "check(1)"%> <%= form.label(:chekin_false, "Нет") %>
   </p>
 
 
-  <fieldset id="visblock" style="display: none" disabled>
+  <fieldset id="visblock" style="display: none" disabled><legend>Почему Вас не будет?</legend>
     <p>
       <%= form.label :Причина_отсутствия %><br>
       <%= form.collection_select(:reasons, Reason.all, :id, :reason) %>
