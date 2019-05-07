@@ -1,24 +1,29 @@
 class ChekinsController < ApplicationController
 
-  def index
-
-  end
-
   def new
     @player=Player.find(current_user.id)
     @chekin=Chekin.new
     @game=Game.find(params[:format])
+    @lastchekin=Chekin.find_by player:@player, game: @game
+
+    # if @lastchekin.nil?
+    # else
+    #
+    #   render 'show'
+    # end
   end
 
   def edit
     @chekin=Chekin.find(params[:id])
+    @player = Player.find(@chekin.player)
+    @game = Game.find(@chekin.game)
+    @team = Team.find(@chekin.team)
   end
 
   def create
     @chekin=Chekin.new(chekin_params)
     @chekin.save
     redirect_to @chekin
-    # redirect_to welcome_index_path
   end
 
   def update
@@ -33,18 +38,11 @@ class ChekinsController < ApplicationController
 
   def show
     @chekin = Chekin.find(params[:id])
-    @player = Player.find(Chekin.find(params[:id]).player)
-    @game = Game.find(Chekin.find(params[:id]).game)
-    @team = Team.find(Chekin.find(params[:id]).team)
-    if Chekin.find(params[:id]).chekin==true
-      @f=true
-    else
-      @f=false
-    end
-
-
-    if Chekin.find(params[:id]).reasons!=nil
-      @reason = Reason.find(Chekin.find(params[:id]).reasons)
+    @player = Player.find(@chekin.player)
+    @game = Game.find(@chekin.game)
+    @team = Team.find(@chekin.team)
+    if @chekin.reasons!=nil
+      @reason = Reason.find(@chekin.reasons)
     end
   end
 

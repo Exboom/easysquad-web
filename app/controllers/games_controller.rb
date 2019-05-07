@@ -27,6 +27,7 @@ class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
     @app=Application.find_by player:current_user.id, tournament: @game.tournament
+    @players=Player.find(Chekin.where("game = ?", @game.id).pluck( :player))
     @team1=Team.find(@game.team_one)
     @team2=Team.find(@game.team_two)
     @tourn=Tournament.find(@game.tournament)

@@ -6,13 +6,12 @@
   <%= button_to 'Профиль', player_path(current_user.id), :method => :get %>
 
   <h3> Ближайшие игры </h3>
-  <% if @f0==1 %>
-    <%=@nextgame%>
+  <% if @nextgame.nil? %>
+  <p>В ближайшее время игр нет</p>
   <% else %>
     <table>
       <tr>
         <td><%= @nextgame.name%></td>
-
         <% if @app!=nil %>
           <% if (@nextgame.tournament==@app.tournament) %>
             <td><%= button_to 'Отметиться на игре', new_chekin_path(@nextgame), :method => :get %></td>
@@ -28,17 +27,16 @@
   <% end %>
 
 
-
   <h3> Прошедшие игры </h3>
 
-  <% if @f==nil %>
-    <p><%=@games%> <%= link_to 'Добавить игру?', new_game_path %></p>
+  <% if @lastgames.empty? %>
+    <p>Еще не было сыграно ни одной игры </p>
   <% else%>
     <table>
-      <% @games.each do |game|%>
+      <% @lastgames.each do |lgame|%>
         <tr>
-          <td><%= game.name%> (<%= game.game_score%>)</td>
-          <td><%= button_to 'Подробнее', game_path(game), :method => :get %></td>
+          <td><%= lgame.name%> (<%= lgame.game_score%>)</td>
+          <td><%= button_to 'Подробнее', game_path(lgame), :method => :get %></td>
         </tr>
       <% end %>
     </table>
@@ -46,23 +44,14 @@
   <% end %>
 
 
-<!--  <h3> Заявки </h3>-->
-  <%#= @app.tournament%>
-<!--  <table>-->
-    <%# @app.each do |app|%>
-<!--      <tr>-->
-<!--        <td><%#= app.tournament%> </td>-->
-<!--        <td><%#= button_to 'Подробнее', game_path(game), :method => :get %></td>-->
-<!--      </tr>-->
-    <%# end %>
-<!--  </table>-->
-
-
 
   <h3> Команды </h3>
 
-  <% if @f1==nil %>
-    <p><%=@teams%> <%= link_to 'Создать команду?', new_team_path %></p>
+  <% if @teams.empty? %>
+    <table>
+      <td>В базе отсутствуют команды</td>
+      <td><%= button_to 'Создать', new_team_path, :method => :get %></td>
+    </table>
   <% else%>
     <div style="height:100px; overflow : scroll;">
     <% @teams.each do |team|%>
@@ -80,26 +69,35 @@
 
   <h3> Федерации </h3>
 
-  <% if @f2==nil %>
-    <p><%=@federations%> <%= link_to 'Создать федерацию?', new_federation_path %></p>
+  <% if @federations.empty? %>
+    <table>
+      <td>В базе отсутствуют федерации</td>
+      <td><%= button_to 'Создать', new_federation_path, :method => :get %></td>
+    </table>
   <% else%>
     <table>
       <% @federations.each do |federation|%>
         <td><%= federation.name%></td>
         <td><%= button_to 'Подробнее', federation_path(federation), :method => :get %></td>
       <% end %>
-    </table>
+    </table> <br />
     <%= button_to 'Добавить федерацию', new_federation_path, :method => :get %></p>
   <% end %>
 
   <h3>Места проведения турниров:</h3>
 
-  <% if @f3==nil %>
-    <p><%=@tourn%> <%= link_to ' Добавить место?', new_location_path %></p>
+  <% if @locs.empty? %>
+    <table>
+      <td>В базе отсутствуют места проведения</td>
+      <td><%= button_to 'Создать', new_location_path, :method => :get %></td>
+    </table>
   <% else%>
-    <% @tourn.each do |tourn|%>
-      <p><%= tourn.name%> <%= link_to 'показать', location_path(tourn) %></p>
-    <% end %>
+    <% @locs.each do |locs|%>
+      <table>
+        <td><%= locs.name%></td>
+        <td><%= button_to 'показать', location_path(locs), :method => :get %></td>
+      </table>
+    <% end %> <br />
     <%= button_to 'Добавить место', new_location_path, :method => :get %></p>
   <% end %>
 

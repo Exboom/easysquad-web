@@ -131,7 +131,7 @@ ActiveRecord::Schema.define(version: 2019_04_23_114551) do
     t.bigint "user1", null: false
     t.bigint "role1", null: false
     t.bigint "team"
-    t.index ["user1", "role1", "team"], name: "uq_user_role_team", unique: true
+    t.index ["user1", "role1"], name: "uq_user_role_team", unique: true
   end
 
   create_table "users", force: :cascade do |t|

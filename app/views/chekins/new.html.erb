@@ -3,53 +3,107 @@
 
 <h2>Отметка о присутствии на игре</h2>
 
-<%= form_with scope: :chekin, url: chekins_path, local: true do |form| %>
+<% if @lastchekin.nil? %>
+  <%= form_with scope: :chekin, url: chekins_path, local: true do |form| %>
 
-  <p>
-    <%= form.label :Игрок %><br>
-    <%= @player.name %>
-    <%= form.hidden_field :player, value: current_user.id%>
-  </p>
-
-  <p>
-    <%= form.label :Команда %><br>
-    <%= form.collection_select(:team, Team.all, :id, :name) %>
-  </p>
-
-  <p>
-    <%= form.label :Игра %><br>
-    <%= @game.name %>
-    <%= form.hidden_field :game, value: params[:format]%>
-  </p>
-
-  <p>
-    <%= form.label :Вы_будете_на_игре? %><br>
-    <%= form.radio_button :chekin, "1",checked: true, onClick: "check(2)"%> <%= form.label(:chekin_true, "Да") %>
-    <%= form.radio_button :chekin, "0", onClick: "check(1)"%> <%= form.label(:chekin_false, "Нет") %>
-  </p>
-
-
-  <div id="visblock" style="display: none"><legend>Почему Вас не будет?</legend>
     <p>
-      <%= form.label :Причина_отсутствия%> (при выборе "Другое" опишите причину в комментарие)<br>
-      <%= form.collection_select(:reasons, Reason.all, :id, :reason,{ :prompt => "Выберите причину"}) %>
+      <%= form.label :Игрок %><br>
+      <%= @player.name %>
+      <%= form.hidden_field :player, value: current_user.id%>
     </p>
 
     <p>
-      <%= form.label :Комментарий %><br>
-      <%= form.text_area :comment %>
+      <%= form.label :Команда %><br>
+      <%= form.collection_select(:team, Team.all, :id, :name) %>
     </p>
-  </div>
+
+    <p>
+      <%= form.label :Игра %><br>
+      <%= @game.name %>
+      <%= form.hidden_field :game, value: params[:format]%>
+    </p>
+
+    <p>
+      <%= form.label :Вы_будете_на_игре? %><br>
+      <%= form.radio_button :chekin, "1",checked: true, onClick: "check(2)"%> <%= form.label(:chekin_true, "Да") %>
+      <%= form.radio_button :chekin, "0", onClick: "check(1)"%> <%= form.label(:chekin_false, "Нет") %>
+    </p>
+
+
+    <div id="visblock" style="display: none"><legend>Почему Вас не будет?</legend>
+      <p>
+        <%= form.label :Причина_отсутствия%> (при выборе "Другое" опишите причину в комментарие)<br>
+        <%= form.collection_select(:reasons, Reason.all, :id, :reason,{ :prompt => "Выберите причину"}) %>
+      </p>
+
+      <p>
+        <%= form.label :Комментарий %><br>
+        <%= form.text_area :comment %>
+      </p>
+    </div>
 
 
 
-  <p>
-    <%= form.submit("Отметиться") %>
-  </p>
+    <p>
+      <%= form.submit("Отметиться") %>
+    </p>
+
+  <% end %>
+<% else %>
+
+  <h3>Вы уже отметились на эту игру!</h3>
+  <%= button_to "Смотреть отметку", chekin_path(@lastchekin), :method => :get %>
 
 <% end %>
 
-<%= button_to "Назад", :back, :method => :get %>
+
+<%#= form_with scope: :chekin, url: chekins_path, local: true do |form| %>
+
+<!--  <p>-->
+<!--    <%#= form.label :Игрок %><br>-->
+    <%#= @player.name %>
+    <%#= form.hidden_field :player, value: current_user.id%>
+<!--  </p>-->
+
+<!--  <p>-->
+<!--    <%#= form.label :Команда %><br>-->
+    <%#= form.collection_select(:team, Team.all, :id, :name) %>
+<!--  </p>-->
+
+<!--  <p>-->
+<!--    <%#= form.label :Игра %><br>-->
+    <%#= @game.name %>
+    <%#= form.hidden_field :game, value: params[:format]%>
+<!--  </p>-->
+
+<!--  <p>-->
+<!--    <%#= form.label :Вы_будете_на_игре? %><br>-->
+    <%#= form.radio_button :chekin, "1",checked: true, onClick: "check(2)"%> <%#= form.label(:chekin_true, "Да") %>
+    <%#= form.radio_button :chekin, "0", onClick: "check(1)"%> <%#= form.label(:chekin_false, "Нет") %>
+<!--  </p>-->
+
+
+<!--  <div id="visblock" style="display: none"><legend>Почему Вас не будет?</legend>-->
+<!--    <p>-->
+<!--      <%#= form.label :Причина_отсутствия%> (при выборе "Другое" опишите причину в комментарие)<br>-->
+      <%#= form.collection_select(:reasons, Reason.all, :id, :reason,{ :prompt => "Выберите причину"}) %>
+<!--    </p>-->
+
+<!--    <p>-->
+<!--      <%#= form.label :Комментарий %><br>-->
+      <%#= form.text_area :comment %>
+<!--    </p>-->
+<!--  </div>-->
+
+
+
+<!--  <p>-->
+    <%#= form.submit("Отметиться") %>
+<!--  </p>-->
+
+<%# end %>
+
+<p><%= button_to "Назад", :back, :method => :get %>
 
 <script>
     function check(i)
