@@ -1,0 +1,21 @@
+<h1>EasySquad</h1>
+<h2>Добавление игроков для команды: <%= @team.name %></h2>
+
+<%= form_with scope: :player_team, url: player_teams_path, local: true do |f| %>
+
+  <p>
+    <%= f.hidden_field :team, value: params[:format]%>
+  </p>
+
+  <p>
+    <%= f.label :Игроки %><br>
+    <%= f.collection_select(:player, Player.all, :id, :name) %>
+  </p>
+
+
+  <p>
+    <%= f.submit("Добавить") %>
+  </p>
+
+
+<% end %>

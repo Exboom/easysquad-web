@@ -29,17 +29,18 @@
   </p>
 
 
-  <fieldset id="visblock" style="display: none" disabled><legend>Почему Вас не будет?</legend>
+  <div id="visblock" style="display: none"><legend>Почему Вас не будет?</legend>
     <p>
-      <%= form.label :Причина_отсутствия, "Выберите причину (при выборе Other опишите причину в комментарии)" %><br>
-      <%= form.collection_select(:reasons, Reason.all, :id, :reason) %>
+      <%= form.label :Причина_отсутствия%> (при выборе "Другое" опишите причину в комментарие)<br>
+      <%= form.collection_select(:reasons, Reason.all, :id, :reason,{ :prompt => "Выберите причину"}) %>
     </p>
 
     <p>
       <%= form.label :Комментарий %><br>
       <%= form.text_area :comment %>
     </p>
-  </fieldset>
+  </div>
+
 
 
   <p>
@@ -55,12 +56,9 @@
     {
         if (i==1) {
             document.getElementById('visblock').style.display='block';
-            document.getElementById('visblock').disabled=false;
         }
         else if (i==2) {
             document.getElementById('visblock').style.display='none';
-            document.getElementById('visblock').disabled=true;
-
         }
 
     }

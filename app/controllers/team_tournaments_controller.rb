@@ -1,6 +1,7 @@
 class TeamTournamentsController < ApplicationController
 
   def new
+    @team=Team.find(params[:format])
     @teamtournament=TeamTournament.new
   end
 
@@ -9,7 +10,10 @@ class TeamTournamentsController < ApplicationController
   end
 
   def create
+    @team = Team.find(params[:team_tournament][:team])
     @teamtournament=TeamTournament.new(teamtournament_params)
+    @teamtournament.save
+    redirect_to @team
   end
 
   def update
@@ -35,7 +39,7 @@ class TeamTournamentsController < ApplicationController
 
   private
   def teamtournament_params
-    params.require(:teamtournament).permit(:team, :tournament)
+    params.require(:team_tournament).permit(:team, :tournament)
   end
 
 end

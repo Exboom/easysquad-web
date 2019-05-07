@@ -1,6 +1,7 @@
 class PlayerTeamsController < ApplicationController
 
   def new
+    @team=Team.find(params[:format])
     @playerteam=PlayerTeam.new
   end
 
@@ -9,7 +10,10 @@ class PlayerTeamsController < ApplicationController
   end
 
   def create
+    @team = Team.find(params[:player_team][:team])
     @playerteam=PlayerTeam.new(playerteam_params)
+    @playerteam.save
+    redirect_to @team
   end
 
   def update
@@ -27,15 +31,17 @@ class PlayerTeamsController < ApplicationController
   end
 
   def destroy
-    @playerteam = PlayerTeam.find(params[:id])
+    @playerteam = PlayerTeam.find_by player: params[:id], team: params[:format]
+    # @playerteam = PlayerTeam.where("player = ? AND team=?", params[:id],params[:format])
     @playerteam.destroy
+    # PlayerTeam.destroy(PlayerTeam.find_by player: params[:id], team: params[:format])
 
     redirect_to welcome_index_path
   end
 
   private
   def playerteam_params
-    params.require(:playerteam).permit(:olayer, :team)
+    params.require(:player_team).permit(:player, :team)
   end
 
 end

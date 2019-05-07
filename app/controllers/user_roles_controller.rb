@@ -1,6 +1,7 @@
 class UserRolesController < ApplicationController
 
   def new
+    @user=User.find(params[:format])
     @userrole=UserRole.new
   end
 
@@ -10,6 +11,8 @@ class UserRolesController < ApplicationController
 
   def create
     @userrole=UserRole.new(userrole_params)
+    @userrole.save
+    redirect_to welcome_index_path
   end
 
   def update
@@ -35,7 +38,7 @@ class UserRolesController < ApplicationController
 
   private
   def userrole_params
-    params.require(:userrole).permit(:olayer, :role, :team)
+    params.require(:user_role).permit(:user1, :role1, :team)
   end
   
 end

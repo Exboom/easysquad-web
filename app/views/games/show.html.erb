@@ -15,8 +15,10 @@
 
 
 
+<%# if (@game.tournament==@app.tournament)%>
+  <%#= button_to 'Отметиться на игре', new_chekin_path(@game), :method => :get %>
+<%# end%>
 
-<p> <%= button_to 'Отметиться на игре', new_chekin_path(@game), :method => :get %></p>
 <p> <%= button_to 'Редактировать игру', edit_game_path, :method => :get %></p>
 <p> <%= button_to 'Удалить игру', game_path, :method => :delete %></p>
 

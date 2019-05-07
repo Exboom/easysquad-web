@@ -6,6 +6,6 @@
 <p> на турнир: <%= @tourn.name %></p>
 
 
-
+<%= button_to "Изменить заявку", :edit_application, :method => :get %>
 <p> <%= button_to 'Удалить заявку', application_path, :method => :delete %></p>
 <%= button_to "Назад", :welcome_index, :method => :get %>

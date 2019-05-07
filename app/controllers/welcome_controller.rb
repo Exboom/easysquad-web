@@ -2,10 +2,22 @@ class WelcomeController < ApplicationController
   def index
     if Game.take.nil?
       @f=nil
-      @games = "В баз нет ни одной игры"
+      @games = "В базе нет ни одной игры"
+      @nextgame = @games
     else
       @f=1
-      @games = Game.last(5)
+      @games = Game.where("game_score is not NULL")
+
+      search=Team.find(PlayerTeam.where("player = ?", current_user.id).pluck(:team))
+      @nextgame = Game.where("(team_one = ? OR team_two = ?) AND game_score is NULL", search, search).take
+
+      if @nextgame.nil?
+        @f0=1
+        @nextgame = "В ближайшее время игр нет"
+      end
+
+
+      @app=Application.find_by player:current_user.id, tournament: @nextgame.tournament
     end
 
 
@@ -33,6 +45,7 @@ class WelcomeController < ApplicationController
       @tourn=Location.all
     end
 
+    @users=User.all
   end
 
   def notplayer

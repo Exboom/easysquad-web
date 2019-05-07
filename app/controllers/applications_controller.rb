@@ -7,6 +7,7 @@ class ApplicationsController < ApplicationController
 
   def edit
     @application=Application.find(params[:id])
+    @player=Player.find(Application.find(params[:id]).player)
   end
 
   def create

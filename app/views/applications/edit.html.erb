@@ -1,0 +1,42 @@
+<h1>EasySquad</h1>
+<h2>Изменение заявки  № <%= @application.id %></h2>
+
+<%= form_with(model: @application, local: true) do |form| %>
+
+  <% if @application.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@application.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @application.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= form.label :Игрок %><br>
+    <%= @player.name %>
+  </p>
+
+  <p>
+    <%= form.label :Команда %><br>
+    <%= form.collection_select(:team, Team.all, :id, :name) %>
+  </p>
+
+  <p>
+    <%= form.label :Турнир %><br>
+    <%= form.collection_select(:tournament, Tournament.all, :id, :name) %>
+  </p>
+
+
+  <p>
+    <%= form.submit("Изменить") %>
+  </p>
+
+<% end %>
+
+<%= button_to "Назад", :back, :method => :get %>

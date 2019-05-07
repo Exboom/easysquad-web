@@ -6,9 +6,18 @@
 
 <p>Игроки команды</p>
 <% @players.each do |player|%>
-  <p><%= player.name%> <%#= link_to 'показать', team_path(game) %></p>
+  <p><%= player.name%> <%= link_to 'показать', player_path(player) %>, <%= link_to 'убрать из команды', player_team_path(player,@team), method: :delete %></p>
 <% end %>
 
+<%= button_to 'Добавить игроков', new_player_team_path(@team), :method => :get %>
+
+<p> Турниры, в которых участвует команда:</p>
+<% @tourns.each do |tourn|%>
+  <p><%= tourn.name%> <%= link_to 'подробнее', tournament_path(tourn) %></p>
+<% end %>
+
+
+<p> <%= button_to 'Добавить турниры', new_team_tournament_path(@team), :method => :get %></p>
 <p> <%= button_to 'Редактировать команду', edit_team_path, :method => :get %></p>
 <p> <%= button_to 'Удалить команду', team_path, :method => :delete %></p>
 <%= button_to "Назад", :welcome_index, :method => :get %>

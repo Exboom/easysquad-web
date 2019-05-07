@@ -22,6 +22,18 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
+
+
+  <%#= form_with scope: :user_role, url: user_roles_path, local: true do |form| %>
+
+<!--    <div class="actions">-->
+      <%#= form.collection_select(:tournament, Tournament.all, :id, :name) %>
+<!--    </div>-->
+
+  <%# end %>
+
+
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
@@ -29,4 +41,5 @@
 
 <p>Уже зарегестрированы?</p>
 
-<%= render "devise/shared/links" %> <%= button_to "Назад", :back, :method => :get %>
+<%= render "devise/shared/links" %>
+<%= button_to "Назад", :back, :method => :get %>

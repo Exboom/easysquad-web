@@ -1,5 +1,9 @@
 class ChekinsController < ApplicationController
 
+  def index
+
+  end
+
   def new
     @player=Player.find(current_user.id)
     @chekin=Chekin.new
@@ -14,6 +18,7 @@ class ChekinsController < ApplicationController
     @chekin=Chekin.new(chekin_params)
     @chekin.save
     redirect_to @chekin
+    # redirect_to welcome_index_path
   end
 
   def update

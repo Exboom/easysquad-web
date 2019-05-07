@@ -4,6 +4,10 @@
 <p> Дата рождения: <%= @player.birthday %></p>
 <p> Игровой номер: <%= @player.gamenumber %></p>
 
+<p> <%= button_to 'Редактировать профиль', edit_player_path, :method => :get %></p>
+<p> <%= button_to 'Удалить профиль', player_path, :method => :delete %></p>
+
+
 
 
 <p>Ваши заявки</p>
@@ -12,22 +16,15 @@
 <% end %>
 
 
-
 <p> <%= button_to 'Создать заявку', new_application_path(current_user), :method => :get %></p>
-
-<p> <%= button_to 'Редактировать профиль', edit_player_path, :method => :get %></p>
-<p> <%= button_to 'Удалить профиль', player_path, :method => :delete %></p>
-<%= button_to "Назад", :welcome_index, :method => :get %>
-
-
 
 
 <p>Ваши команды</p>
 
 <% @teams.each do |team|%>
-  <p><%= team.name%> <%= link_to 'показать', team_path(game) %></p>
+  <p><%= team.name%> <%= link_to 'показать', team_path(team) %></p>
 <% end %>
 
 
-
+<%= button_to "Назад", :welcome_index, :method => :get %>
 

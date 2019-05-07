@@ -27,15 +27,12 @@ class PlayersController < ApplicationController
   def show
     @applications=Application.where("player = ?", params[:id]).pluck(:id)
 
-
-
     if Player.find_by_id(params[:id]).nil?
       redirect_to welcome_notplayer_path(current_user)  #это для теста
     else
       @player = Player.find(params[:id])
     end
-    teams = PlayerTeam.where("player = ?", params[:id]).pluck(:team)
-    @teams = Team.find(teams)
+    @teams = Team.find(PlayerTeam.where("player = ?", params[:id]).pluck(:team))
 
   end
 

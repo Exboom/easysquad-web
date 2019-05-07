@@ -30,6 +30,7 @@ class TeamsController < ApplicationController
   end
 
   def show
+    @tourns=Tournament.find(TeamTournament.where("team = ?", params[:id]).pluck(:team))
 
     @team = Team.find(params[:id])
     @owner = User.find(@team.owner)

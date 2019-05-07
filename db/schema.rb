@@ -27,9 +27,9 @@ ActiveRecord::Schema.define(version: 2019_04_23_114551) do
     t.integer "player"
     t.integer "team"
     t.integer "game"
-    t.boolean "chekin", default: false
+    t.boolean "chekin", default: true
     t.integer "reasons"
-    t.boolean "presence", default: false
+    t.boolean "presence"
     t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -82,9 +82,10 @@ ActiveRecord::Schema.define(version: 2019_04_23_114551) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "player_teams", primary_key: ["player", "team"], force: :cascade do |t|
+  create_table "player_teams", id: :serial, force: :cascade do |t|
     t.integer "player", null: false
     t.integer "team", null: false
+    t.index ["player", "team"], name: "uq_player_team", unique: true
   end
 
   create_table "players", force: :cascade do |t|
@@ -93,7 +94,6 @@ ActiveRecord::Schema.define(version: 2019_04_23_114551) do
     t.integer "gamenumber"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
   end
 
   create_table "reasons", force: :cascade do |t|
@@ -104,9 +104,10 @@ ActiveRecord::Schema.define(version: 2019_04_23_114551) do
     t.string "role"
   end
 
-  create_table "team_tournaments", primary_key: ["team", "tournaments"], force: :cascade do |t|
+  create_table "team_tournaments", id: :serial, force: :cascade do |t|
     t.integer "team", null: false
-    t.integer "tournaments", null: false
+    t.integer "tournament", null: false
+    t.index ["team", "tournament"], name: "uq_team_tourn", unique: true
   end
 
   create_table "teams", force: :cascade do |t|
@@ -126,10 +127,11 @@ ActiveRecord::Schema.define(version: 2019_04_23_114551) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_roles", id: false, force: :cascade do |t|
+  create_table "user_roles", id: :serial, force: :cascade do |t|
     t.bigint "user1", null: false
-    t.bigint "role", null: false
+    t.bigint "role1", null: false
     t.bigint "team"
+    t.index ["user1", "role1", "team"], name: "uq_user_role_team", unique: true
   end
 
   create_table "users", force: :cascade do |t|

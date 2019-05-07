@@ -26,9 +26,10 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
-    @team1=Team.find(Game.find(params[:id]).team_one)
-    @team2=Team.find(Game.find(params[:id]).team_two)
-    @tourn=Tournament.find(Game.find(params[:id]).tournament)
+    @app=Application.find_by player:current_user.id, tournament: @game.tournament
+    @team1=Team.find(@game.team_one)
+    @team2=Team.find(@game.team_two)
+    @tourn=Tournament.find(@game.tournament)
     if Game.find(params[:id]).game_score.nil?
       @f=nil
     else
