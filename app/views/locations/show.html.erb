@@ -3,8 +3,8 @@
 <p> Адрес: <%= @location.address %></p>
 
 
-<p> <%= button_to 'Редактировать место', edit_location_path, :method => :get %></p>
-<p> <%= button_to 'Удалить место', location_path, :method => :delete %></p>
+<p> <%= button_to 'Редактировать место', edit_admin_location_path, :method => :get %></p>
+<p> <%= button_to 'Удалить место', admin_location_path, :method => :delete %></p>
 <%= button_to "Назад", :welcome_index, :method => :get %>
 
 

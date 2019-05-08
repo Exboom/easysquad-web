@@ -10,6 +10,6 @@
 <%# @teams.each do |team|%>
 <!--  <p><%#= team.name%> <%##= link_to 'показать', team_path(game) %></p>-->
 <%# end %>
-<p> <%= button_to 'Редактировать турнир', edit_tournament_path, :method => :get %></p>
-<p> <%= button_to 'Удалить турнир', tournament_path, :method => :delete %></p>
+<p> <%= button_to 'Редактировать турнир', edit_admin_tournament_path, :method => :get %></p>
+<p> <%= button_to 'Удалить турнир', admin_tournament_path, :method => :delete %></p>
 <%= button_to "Назад", :welcome_index, :method => :get %>

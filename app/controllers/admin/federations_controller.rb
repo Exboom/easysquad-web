@@ -1,4 +1,5 @@
 class Admin::FederationsController < ApplicationController
+  before_action :check_admin
 
   def new
     @federation=Federation.new
@@ -48,6 +49,14 @@ class Admin::FederationsController < ApplicationController
   private
   def federation_params
     params.require(:federation).permit(:name, :url, :contacts)
+  end
+
+  protected
+
+  def check_admin
+    param=UserRole.find_by user1: current_user.id
+    @userrols = Role.find(param.role1)
+    redirect_to root_path, alert:  "У Вас нет прав доступа к этой странице" unless @userrols.id==1
   end
 
 end

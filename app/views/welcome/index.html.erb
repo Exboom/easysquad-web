@@ -81,26 +81,26 @@
         <td><%= button_to 'Подробнее', federation_path(federation), :method => :get %></td>
       <% end %>
     </table> <br />
-    <%#if @userrols.id==1%>
-<!--      <%#= button_to 'Добавить федерацию', new_federation_path, :method => :get %></p>-->
-    <%#end%>
+    <%if @userrols.id==1%>
+      <%= button_to 'Добавить федерацию', new_admin_federation_path, :method => :get %></p>
+    <%end%>
   <% end %>
 
   <h3>Места проведения турниров:</h3>
   <% if @locs.empty? %>
     <table>
       <td>В базе отсутствуют места проведения</td>
-      <td><%= button_to 'Создать', new_location_path, :method => :get %></td>
+      <td><%= button_to 'Создать', new_admin_location_path, :method => :get %></td>
     </table>
   <% else%>
     <% @locs.each do |locs|%>
       <table>
         <td><%= locs.name%></td>
-        <td><%= button_to 'показать', location_path(locs), :method => :get %></td>
+        <td><%= button_to 'Подробнее', location_path(locs), :method => :get %></td>
       </table>
     <% end %> <br />
     <%if @userrols.id==1%>
-      <%= button_to 'Добавить место', new_location_path, :method => :get %></p>
+      <%= button_to 'Добавить место', new_admin_location_path, :method => :get %></p>
     <%end%>
   <% end %>
 

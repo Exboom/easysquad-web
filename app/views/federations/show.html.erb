@@ -16,8 +16,11 @@
   <p><%=@tournaments%> <%= link_to 'Добавить турнир?', new_tournament_path %></p>
 <% else%>
   <% @tournaments.each do |tourn|%>
-    <p><%= tourn.name%> <%= link_to 'показать', tournament_path(tourn) %></p>
+    <table>
+      <td><%= tourn.name%></td>
+      <td><%= button_to 'показать', tournament_path(tourn), :method => :get %></td>
+    </table> <br />
   <% end %>
-  <%= button_to "Добавить турнир", :new_tournament, :method => :get %>
+  <%= button_to "Добавить турнир", :new_admin_tournament, :method => :get %>
 <% end %>
 

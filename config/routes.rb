@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   resources :games
   resources :applications
   resources :federations, only: [:show]
-  resources :tournaments#, only: [:show]
-  resources :locations#, only: [:show]
+  resources :tournaments, only: [:show]
+  resources :locations, only: [:show]
   resources :chekins
   resources :events
   resources :player_teams
@@ -22,8 +22,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :federations, except: [:show]
-    # resources :locations, except: [:show]
-    # resources :tournaments, except: [:show]
+    resources :locations, except: [:show]
+    resources :tournaments, except: [:show]
     # resources :teams, except: [:show, :edit]
   end
 
