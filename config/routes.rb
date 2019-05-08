@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
 
   resources :players
-  resources :teams #, only: [:show, :edit]
+  resources :teams, only: [:show, :edit]
   resources :games
   resources :applications
   resources :federations, only: [:show]
@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     resources :federations, except: [:show]
     resources :locations, except: [:show]
     resources :tournaments, except: [:show]
-    # resources :teams, except: [:show, :edit]
+    resources :teams, except: [:show, :edit]
   end
 
 

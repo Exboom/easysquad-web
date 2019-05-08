@@ -1,7 +1,7 @@
 <h1>EasySquad</h1>
 <h2>Редактирование профиля команды: <%= @team.name %></h2>
 
-<%= form_with(model: @team, local: true) do |form| %>
+<%= form_with(model: [:admin,@team], local: true) do |form| %>
 
   <% if @team.errors.any? %>
     <div id="error_explanation">
@@ -22,10 +22,10 @@
     <%= form.text_field :name %>
   </p>
 
-<!--  <p>-->
-<!--    <%#= form.label :Владелец %><br>-->
-    <%#= form.collection_select(:owner, User.all, :id, :email) %>
-<!--  </p>-->
+  <p>
+    <%= form.label :Владелец %><br>
+    <%= form.collection_select(:owner, User.all, :id, :email) %>
+  </p>
 
   <p>
     <%= form.label :Капитан %><br>

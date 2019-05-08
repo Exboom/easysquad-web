@@ -1,4 +1,5 @@
 class Admin::TournamentsController < ApplicationController
+  before_action :check_admin
 
   def new
     @tournament=Tournament.new
@@ -41,6 +42,14 @@ class Admin::TournamentsController < ApplicationController
   private
   def tournament_params
     params.require(:tournament).permit(:name, :season, :location, :federation)
+  end
+
+  protected
+
+  def check_admin
+    param=UserRole.find_by user1: current_user.id
+    @userrols = Role.find(param.role1)
+    redirect_to tournament_path, alert:  "У Вас нет прав доступа для данных действий" unless @userrols.id==1
   end
 
 end
