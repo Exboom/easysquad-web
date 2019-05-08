@@ -5,6 +5,7 @@
   <%= button_to 'Выйти', destroy_user_session_path, :method => :delete %>
   <%= button_to 'Профиль', player_path(current_user.id), :method => :get %>
 
+
   <h3> Ближайшие игры </h3>
   <% if @nextgame.nil? %>
   <p>В ближайшее время игр нет</p>
@@ -28,7 +29,6 @@
 
 
   <h3> Прошедшие игры </h3>
-
   <% if @lastgames.empty? %>
     <p>Еще не было сыграно ни одной игры </p>
   <% else%>
@@ -40,13 +40,14 @@
         </tr>
       <% end %>
     </table>
-    <%#= button_to 'Добавить игру', new_game_path, :method => :get %>
   <% end %>
+  <%if @userrols.id==1%>
+    <%= button_to 'Добавить игру', new_game_path, :method => :get %>
+  <%end%>
 
 
 
   <h3> Команды </h3>
-
   <% if @teams.empty? %>
     <table>
       <td>В базе отсутствуют команды</td>
@@ -61,14 +62,13 @@
         </table>
     <% end %>
     </div>
-    <%= button_to 'Добавить команду', new_team_path, :method => :get %></p>
+    <%if @userrols.id==1%>
+      <%= button_to 'Добавить команду', new_team_path, :method => :get %></p>
+    <%end%>
   <% end %>
 
 
-
-
   <h3> Федерации </h3>
-
   <% if @federations.empty? %>
     <table>
       <td>В базе отсутствуют федерации</td>
@@ -81,11 +81,12 @@
         <td><%= button_to 'Подробнее', federation_path(federation), :method => :get %></td>
       <% end %>
     </table> <br />
-    <%= button_to 'Добавить федерацию', new_federation_path, :method => :get %></p>
+    <%#if @userrols.id==1%>
+<!--      <%#= button_to 'Добавить федерацию', new_federation_path, :method => :get %></p>-->
+    <%#end%>
   <% end %>
 
   <h3>Места проведения турниров:</h3>
-
   <% if @locs.empty? %>
     <table>
       <td>В базе отсутствуют места проведения</td>
@@ -98,13 +99,18 @@
         <td><%= button_to 'показать', location_path(locs), :method => :get %></td>
       </table>
     <% end %> <br />
-    <%= button_to 'Добавить место', new_location_path, :method => :get %></p>
+    <%if @userrols.id==1%>
+      <%= button_to 'Добавить место', new_location_path, :method => :get %></p>
+    <%end%>
   <% end %>
 
-  <h3>Список всех пользователей</h3>
-  <% @users.each do |user|%>
-    <p><%= user.email%> <%= link_to 'изменить роль', new_user_role_path(user) %></p>
-  <% end %>
+
+  <%if @userrols.id==1%>
+    <h3>Список всех пользователей</h3>
+    <% @users.each do |user|%>
+      <p><%= user.email%> <%= link_to 'изменить роль', new_user_role_path(user) %></p>
+    <% end %>
+  <%end%>
 
 
 <% else %>

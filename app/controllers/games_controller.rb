@@ -31,11 +31,6 @@ class GamesController < ApplicationController
     @team1=Team.find(@game.team_one)
     @team2=Team.find(@game.team_two)
     @tourn=Tournament.find(@game.tournament)
-    if Game.find(params[:id]).game_score.nil?
-      @f=nil
-    else
-      @f=1
-    end
   end
 
   def destroy

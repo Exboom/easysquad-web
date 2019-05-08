@@ -31,8 +31,8 @@ class PlayersController < ApplicationController
       redirect_to welcome_notplayer_path(current_user)  #это для теста
     else
       @player = Player.find(params[:id])
+      @teams = Team.find(PlayerTeam.where("player = ?", params[:id]).pluck(:team))
     end
-    @teams = Team.find(PlayerTeam.where("player = ?", params[:id]).pluck(:team))
 
   end
 

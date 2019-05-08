@@ -7,13 +7,18 @@
 <p> Турнир: <%= @tourn.name %></p>
 
 <h3>Результат игры:</h3>
-<% if @f.nil?%>
+<% if @game.game_score.nil?%>
   <p>Игра еще не сыграна</p>
 <% else%>
   <%= @game.game_score %>
 <% end%>
 
-<h3>На игре будут:</h3>
+
+<% if @game.game_score.nil?%>
+  <h3>На игре будут:</h3>
+<% else%>
+  <h3>На игре были:</h3>
+<% end%>
 
 <% if @players.empty? %>
   <p>Никто еще не отметился на игру</p>
@@ -36,7 +41,7 @@
 
 
 
-<% if @app!=nil %>
+<% if (@app!=nil) && (@game.game_score==nil) %>
   <% if (@game.tournament==@app.tournament)%>
     <%= button_to 'Отметиться на игре', new_chekin_path(@game), :method => :get %>
   <% end%>

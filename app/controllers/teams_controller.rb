@@ -34,7 +34,9 @@ class TeamsController < ApplicationController
 
     @team = Team.find(params[:id])
     @owner = User.find(@team.owner)
-    @cap = Player.find(@team.captain)
+    if @team.captain!=nil
+      @cap = Player.find(@team.captain)
+    end
     players = PlayerTeam.where("team = ?", params[:id]).pluck(:player)
     @players = Player.find(players)
   end

@@ -17,11 +17,6 @@
     <%= f.collection_select(:team, Team.all, :id, :name, { :prompt => "Выберите, если необходимо"}) %>
   </p>
 
-  <!--  <p>-->
-  <!--    <%#= f.label :Турниры %><br>-->
-  <%#= f.collection_check_boxes(:tournaments, Tournament.all, :id, :name) %>
-  <!--  </p>-->
-
 
   <p>
     <%= f.submit("Добавить") %>
@@ -29,3 +24,4 @@
 
 
 <% end %>
+<%= button_to "Назад", :welcome_index, :method => :get %>

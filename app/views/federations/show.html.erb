@@ -3,8 +3,8 @@
 <p> Сайт федерации: <%= @federation.url %></p>
 <p> Контакты: <%= @federation.contacts %></p>
 
-<p> <%= button_to 'Редактировать федерацию', edit_federation_path, :method => :get %></p>
-<p> <%= button_to 'Удалить профиль', federation_path, :method => :delete %></p>
+<p> <%= button_to 'Редактировать федерацию', edit_admin_federation_path, :method => :get %></p>
+<p> <%= button_to 'Удалить профиль', admin_federation_path, :method => :delete %></p>
 <%= button_to "Назад", :welcome_index, :method => :get %>
 
 
