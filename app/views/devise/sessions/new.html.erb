@@ -1,73 +1,42 @@
-<!--<h1>EasySquad</h1>-->
-<!--<h2>Вход в систему</h2>-->
-
-<%#= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-<!--  <div class="field">-->
-<!--    <%#= f.label :email %><br />-->
-    <%#= f.email_field :email, autofocus: true, autocomplete: "email" %>
-<!--  </div>-->
-
-<!--  <div class="field">-->
-<!--    <%#= f.label :Пароль %><br />-->
-    <%#= f.password_field :password, autocomplete: "current-password" %>
-<!--  </div>-->
-
-  <%# if devise_mapping.rememberable? %>
-<!--    <div class="field">-->
-      <%#= f.check_box :remember_me %>
-      <%#= f.label :Запомнить_меня %>
-<!--    </div>-->
-  <%# end %>
-
-
-<!--  <div class="actions">-->
-    <%#= f.submit "Войти" %>
-<!--  </div>-->
-<%# end %>
-
-<!--<p><%#= button_to "Назад", :back, :method => :get %>-->
-
-<%#= render "devise/shared/links" %>
-
-
 <div class="">
-  <div id="wrapper">
-    <div id="login" class="animate form">
-      <section class="login_content">
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-          <h1>Вход в систему</h1>
-          <div>
-            <%= f.email_field :email, autofocus: true, :class => "form-control", :placeholder =>"Email",  :required => ""  %>
+  <div id="login" class="animate form">
+    <section class="login_content">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <h1>Вход в систему</h1>
+
+        <div>
+          <%= f.email_field :email, autofocus: true, :class => "form-control", :placeholder =>"Email",  :required => ""  %>
+        </div>
+
+        <div>
+          <%= f.password_field :password, autofocus: true, :class => "form-control", :placeholder =>"Пароль",  :required => ""  %>
+        </div>
+
+        <% if devise_mapping.rememberable? -%>
+          <div class="checkbox-inline">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me, "Запомнить меня" %>
           </div>
-
-          <div>
-            <%= f.password_field :password, autofocus: true, :class => "form-control", :placeholder =>"Пароль",  :required => ""  %>
-          </div>
-
-          <% if devise_mapping.rememberable? -%>
-            <div class="checkbox-inline">
-              <%= f.check_box :remember_me %>
-              <%= f.label :remember_me, "Запомнить меня" %>
-            </div>
-          <% end -%>
+        <% end -%>
 
 
-          <div>
+        <div>
+          <%= f.submit "Вход", :class => "button7"%>
+          <a class="reset_pass" href="password/new">Забыли пароль?</a>
+        </div>
 
-            <%= f.submit "Вход", :class => "button7"%>
+        <div class="clearfix"></div>
+        <div class="separator">
 
-            <a class="reset_pass" href="password/new">Забыли пароль?</a>
-          </div>
+          <p class="change_link">Хотите создать команду?
+            <a href="sign_up" class="to_register"> Зарегистрируйтесь </a>
+          </p>
           <div class="clearfix"></div>
-          <div class="separator">
-            <div class="clearfix"></div>
-            <br />
-            <div>
-              <h1><i class="fa fa-paw" style="font-size: 26px;"></i> EasySquad</h1>
-
-              <p>©2019 Никаких прав нет. EasySquad. Собери свою команду!</p>
-            </div>
-          </div>
+        <br />
+        <div>
+          <h1><i class="fa fa-paw" style="font-size: 26px;"></i> EasySquad</h1>
+          <p>©2019 Никаких прав нет. EasySquad. Собери свою команду!</p>
+        </div>
         <% end %>
         <!-- form -->
       </section>
@@ -77,18 +46,3 @@
   </div>
 </div>
 
-
-<style>
-  .button7 {
-    font-weight: 700;
-    color: black;
-    text-decoration: none;
-    padding: .8em 1em calc(.8em + 3px);
-    border-radius: 3px;
-    background: rgb(255, 255, 255);
-    transition: 0.2s;
-  }
-  .button7:hover { background: rgb(71, 120, 167); }
-  .button7:active {
-    background: rgb(1, 3, 147);
-</style>

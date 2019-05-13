@@ -3472,12 +3472,20 @@ form:after {
     visibility: hidden
 }
 .login_content {
+
     margin: 0 auto;
     padding: 25px 0 0;
-    position: relative;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+
+    //position: relative;
     text-align: center;
     text-shadow: 0 1px 0 #fff;
-    min-width: 280px
+    min-width: 300px
 }
 .login_content a,
 .login_content .btn-default:hover {
@@ -4162,6 +4170,34 @@ ul.notifications {
     direction: rtl;
 }
 */
+
+.button7 {
+  font-weight: 700;
+  color: black;
+  text-decoration: none;
+  padding: .8em 1em calc(.8em + 3px);
+  border-radius: 3px;
+  background: rgb(255, 255, 255);
+  transition: 0.2s;
+}
+.button7:hover { background: rgb(110, 224, 227); }
+.button7:active { background: rgb(146, 237, 243); }
+
+
+.button8 {
+  font-weight: 700;
+  position: absolute;
+  left: 50%;
+  margin-right: -50%;
+  color: black;
+  text-decoration: none;
+  padding: .8em 1em calc(.8em + 3px);
+  border-radius: 3px;
+  background: rgb(255, 255, 255);
+  transition: 0.2s;
+}
+.button8:hover { background: rgb(110, 224, 227); }
+.button8:active { background: rgb(146, 237, 243); }
 
 .main_menu .label {
     line-height: 11px;

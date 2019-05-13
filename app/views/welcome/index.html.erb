@@ -1,6 +1,6 @@
 <h1>EasySquad</h1>
 <h2>Собери свою команду!</h2>
-<% if user_signed_in? %>
+
   <span>Здравствуйте, <%= current_user.email %></span>
   <%= button_to 'Выйти', destroy_user_session_path, :method => :delete %>
   <%= button_to 'Профиль', player_path(current_user.id), :method => :get %>
@@ -115,12 +115,6 @@
     </table>
     <% end %>
   <%end%>
-
-
-<% else %>
-  <%= button_to 'Войти', new_user_session_path, :method => :get %> <p>или <p><%= button_to 'Зарегистрироваться', new_user_registration_path, :method => :get %>
-<% end %>
-
 
 
 
