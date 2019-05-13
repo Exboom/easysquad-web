@@ -39,6 +39,10 @@ class TeamsController < ApplicationController
     end
     players = PlayerTeam.where("team = ?", params[:id]).pluck(:player)
     @players = Player.find(players)
+
+
+    param=UserRole.find_by user1: current_user.id
+    @userrols = Role.find(param.role1)
   end
 
   # def destroy

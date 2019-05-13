@@ -26,7 +26,10 @@ class UserRolesController < ApplicationController
   end
 
   def show
-    @userrole = UserRole.find(params[:id])
+    @user=User.find(params[:id])
+    @userrols = UserRole.where("user1 = ?", @user.id)
+    @roles=Role.find(@userrols.user1)
+    @teams=Team.find(@userrols.team)
   end
 
   def destroy

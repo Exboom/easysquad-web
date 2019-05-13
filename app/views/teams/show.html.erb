@@ -28,7 +28,10 @@
     <% end %>
 <% end %>
 
-<p> <%= button_to 'Добавить турниры', new_team_tournament_path(@team), :method => :get %></p>
+
+<%if @userrols.id==1%>
+  <p> <%= button_to 'Добавить турниры', new_team_tournament_path(@team), :method => :get %></p>
+<% end %>
 <p> <%= button_to 'Редактировать команду', edit_team_path, :method => :get %></p>
 <p> <%= button_to 'Удалить команду', admin_team_path, :method => :delete %></p>
 <%= button_to "Назад", :welcome_index, :method => :get %>

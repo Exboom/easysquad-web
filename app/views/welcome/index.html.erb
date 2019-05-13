@@ -107,8 +107,12 @@
 
   <%if @userrols.id==1%>
     <h3>Список всех пользователей</h3>
-    <% @users.each do |user|%>
-      <p><%= user.email%> <%= link_to 'изменить роль', new_user_role_path(user) %></p>
+    <table>
+      <% @users.each do |user|%>
+      <td><%= user.email%></td>
+      <td><%= link_to 'изменить роль', new_user_role_path(user) %></td>
+      <td><%= link_to 'инфо', user_role_path(user) %></td>
+    </table>
     <% end %>
   <%end%>
 
