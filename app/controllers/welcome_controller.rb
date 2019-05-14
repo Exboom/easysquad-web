@@ -12,7 +12,9 @@ class WelcomeController < ApplicationController
     @federations=Federation.all
     #локации
     @locs=Location.all
-    @users=User.all
+
+    @usersN = User.where("approved = ?", false)
+    @users = User.all
 
     if current_user!=nil
       param=UserRole.find_by user1: current_user.id
