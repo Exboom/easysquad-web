@@ -3550,7 +3550,9 @@ form:after {
     border: 1px solid #c8c8c8;
     color: #777;
     margin: 0 0 20px;
-    width: 100%
+    font-size: 15px;
+    width: 100%;
+    height: 50px
 }
 .login_content form input[type="text"]:focus,
 .login_content form input[type="email"]:focus,
