@@ -1,0 +1,82 @@
+<div class="">
+  <div id="login" class="animate">
+    <section class="login_content">
+      <%= form_with scope: :user, url: admin_users_path do |f| %>
+        <h1>Регистрация</h1>
+
+        <div>
+          <%= f.email_field :email, autofocus: true, :class => "form-control", :placeholder =>"Email",  :required => ""  %>
+        </div>
+
+        <div>
+          <%= f.password_field :password, autocomplete: "new-password", :class => "form-control", :placeholder =>"Пароль",  :required => "" %>
+        </div>
+
+        <div>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => "form-control", :placeholder =>"Повторите пароль",  :required => "" %>
+        </div>
+
+        <div>
+          <%= f.submit "Зарегистрировать", :class => "button7" %>
+          <a class="reset_pass" href="/welcome/index">Отмена</a>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="separator">
+
+          <div class="clearfix"></div>
+          <br />
+          <div>
+            <h1><i class="fa fa-paw" style="font-size: 26px;"></i> EasySquad</h1>
+            <p>©2019 Никаких прав нет. EasySquad. Собери свою команду!</p>
+          </div>
+      <% end %>
+      <!-- form -->
+    </section>
+    <!-- content -->
+  </div>
+
+</div>
+</div>
+
+
+
+
+
+<!--<h1>EasySquad</h1>-->
+<!--<h2>Регистрация нового пользователя</h2>-->
+
+<%#= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%#= render "devise/shared/error_messages", resource: resource %>
+
+<!--  <div class="field">-->
+<!--    <%#= f.label :email %><br />-->
+    <%#= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<!--  </div>-->
+
+<!--  <div class="field">-->
+    <%#= f.label :Пароль %>
+    <%# if @minimum_password_length %>
+<!--    <em>(<%#= @minimum_password_length %> знаков минимум)</em>-->
+<!--    <%# end %><br />-->
+    <%#= f.password_field :password, autocomplete: "new-password" %>
+<!--  </div>-->
+
+<!--  <div class="field">-->
+<!--    <%#= f.label :Повторите_пароль %><br />-->
+    <%#= f.password_field :password_confirmation, autocomplete: "new-password" %>
+<!--  </div>-->
+
+
+
+
+
+<!--  <div class="actions">-->
+    <%#= f.submit "Sign up" %>
+<!--  </div>-->
+<%# end %>
+
+<!--<p>Уже зарегестрированы?</p>-->
+
+<%#= render "devise/shared/links" %>
+<%#= button_to "Назад", :back, :method => :get %>

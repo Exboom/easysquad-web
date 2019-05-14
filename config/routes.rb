@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+
   get 'welcome/index'
   get 'welcome/notplayer'
 
@@ -25,6 +26,7 @@ Rails.application.routes.draw do
     resources :locations, except: [:show]
     resources :tournaments, except: [:show]
     resources :teams, except: [:show, :edit]
+    resources :users, except: [:index]
   end
 
 
