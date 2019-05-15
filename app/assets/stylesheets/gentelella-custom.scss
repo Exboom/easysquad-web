@@ -2,6 +2,7 @@
 html , body{
 
  height:100%;
+  margin: 0px;
 
 }
 
@@ -680,7 +681,7 @@ a:focus {
 }
 .top_nav .navbar-right {
     margin: 0;
-    width: 70%;
+    width: 70%; //tut men
     float: right
 }
 .top_nav .navbar-right li {
@@ -1054,7 +1055,7 @@ h2 {
     width: 100%;
     margin-bottom: 10px;
     padding: 10px 17px;
-    display: inline-block;
+    display: inline-block; //tut menyal
     background: #fff;
     border: 1px solid #E6E9ED;
     -webkit-column-break-inside: avoid;

@@ -2,18 +2,33 @@
 <html>
   <head>
     <title>EasysquadWeb</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+    <%#= csrf_meta_tags %>
+    <%#= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%#= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%#= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+<!--  </head>-->
+
+<!--  <body>-->
+
+
+<!--  <p class="notice"><%#= notice %></p>-->
+<!--  <p class="alert"><%#= alert %></p>-->
+    <%#= yield %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+    <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
   </head>
 
-  <body>
+  <body class="nav-md">
+  <div class="container body">
+    <% flash.each do |key, value| %>
+      <div align="center" id="flash" class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
 
-
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
 </html>

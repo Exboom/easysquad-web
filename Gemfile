@@ -13,6 +13,7 @@ gem 'devise'
 gem 'json'
 gem 'pg_search'
 gem 'gentelella-rails'
+
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
