@@ -1,34 +1,34 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>EasysquadWeb</title>
-    <%#= csrf_meta_tags %>
-    <%#= csp_meta_tag %>
-
-    <%#= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%#= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-<!--  </head>-->
-
-<!--  <body>-->
-
-
-<!--  <p class="notice"><%#= notice %></p>-->
-<!--  <p class="alert"><%#= alert %></p>-->
-    <%#= yield %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-
     <%= csrf_meta_tags %>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+
+<!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>-->
 
   </head>
 
-  <body class="nav-md">
-  <div class="container body">
-    <% flash.each do |key, value| %>
-      <div align="center" id="flash" class="alert alert-<%= key %>"><%= value %></div>
-    <% end %>
+  <body>
 
-    <%= yield %>
+
+  <% flash.each do |key, value| %>
+  <div style="position: absolute; top: 3px; right: 3px;">
+    <div id="my-alert" class="alert alert-primary" role="alert" alert-<%= key %>">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+
+    <%= value %>
+    </div>
+  </div>
+  <% end %>
+
+  <%= yield %>
   </body>
 </html>

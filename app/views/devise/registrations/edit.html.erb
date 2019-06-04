@@ -1,54 +1,67 @@
-<div class="">
-  <div id="login" class="animate">
-    <section class="login_content">
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-        <h1>Edit <%= resource_name.to_s.humanize %></h1>
-
-        <div>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control",  :required => ""  %>
-        </div>
-
-        <div>
-          <%= f.password_field :current_password, autocomplete: "current-password", :class => "form-control", :placeholder =>"Введите старый пароль",  :required => "" %>
-        </div>
-
-        <div >
-          <% if @minimum_password_length %>
-            <em><%= @minimum_password_length %> знаков минимум</em>
-          <% end %>
-          <%= f.password_field :password, autocomplete: "new-password", :class => "form-control", :placeholder =>"Пароль (оставьте пустым, если не хотите менять)",  :required => "" %>
-        </div>
-
-        <div>
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => "form-control", :placeholder =>"Повторите пароль",  :required => "" %>
-        </div>
+<style>
+  body {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    position: absolute;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #f5f5f5;
+    text-align: center;
+  }
+</style>
 
 
-        <div>
-          <%= f.submit "Изменить", :class => "button7" %>
-          <a class="reset_pass" href="/welcome/index">Отмена</a>
-        </div>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, :class=>"form-signin" }) do |f| %>
 
-        <div class="clearfix"></div>
-        <div class="separator">
-
-          <p class="change_link">Вам не нравится у нас?
-            <a href="sign_in" class="to_register"> Удалите аккаунт </a>
-          </p>
-          <div class="clearfix"></div>
-          <br />
-          <div>
-            <h1><i class="fa fa-paw" style="font-size: 26px;"></i> EasySquad</h1>
-            <p>©2019 Никаких прав нет. EasySquad. Собери свою команду!</p>
-          </div>
-      <% end %>
-      <!-- form -->
-    </section>
-    <!-- content -->
+  <%= image_tag "/images/soccerball_sport_futbo_6911.png", :class => "style_image", :alt => "", :width => "79", :height => "79"  %>
+  <h1 class="h3 mb-3 font-weight-normal">Редактирование профиля <%#= resource_name.to_s.humanize %></h1>
+  <div>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control",  :required => ""  %>
   </div>
 
-</div>
-</div>
+  <div>
+    <%= f.password_field :current_password, autocomplete: "current-password", :class => "form-control", :placeholder =>"Введите старый пароль",  :required => "" %>
+  </div>
+
+  <div >
+    <% if @minimum_password_length %>
+      <em><%= @minimum_password_length %> знаков минимум</em>
+    <% end %>
+    <%= f.password_field :password, autocomplete: "new-password", :class => "form-control", :placeholder =>"Пароль (оставьте пустым, если не хотите менять)",  :required => "" %>
+  </div>
+
+  <div>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => "form-control", :placeholder =>"Повторите пароль",  :required => "" %>
+  </div>
+
+
+  <div>
+    <%= f.submit "Изменить", :class => "btn btn-primary" %>
+    <a class="reset_pass" href="/welcome/index">Отмена</a>
+  </div>
+
+  <div class="clearfix"></div>
+  <div class="separator">
+
+    <p class="change_link">Вам не нравится у нас?
+      <a href="sign_in" class="to_register"> Удалите аккаунт </a>
+    </p>
+    <div class="clearfix"></div>
+    <br />
+
+    <h1 class="text-muted">
+      <%= image_tag "/images/soccer-ball_39433.ico",
+                    :class => "style_image",
+                    :alt => "",
+                    :width => "25",
+                    :height => "25",
+                    :style => "padding-bottom: 5px;height: 25px;width: 20px;"  %>
+      EasySquad</h1>
+    <p class="mt-5 mb-3 text-muted">
+      ©2019 Никаких прав нет. EasySquad. Собери свою команду!</p>
+<% end %>
 
 
 

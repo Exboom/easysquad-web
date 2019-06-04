@@ -15,47 +15,58 @@
 
 <%#= render "devise/shared/links" %>
 
+<style>
+  body {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    position: absolute;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #f5f5f5;
+    text-align: center;
+  }
+</style>
 
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {:class=>"form-signin"}) do |f| %>
 
-<div class="">
-  <div id="login" class="animate form">
-    <section class="login_content">
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <h1>Сброс пароля</h1>
+  <%= image_tag "/images/soccerball_sport_futbo_6911.png", :class => "style_image", :alt => "", :width => "79", :height => "79"  %>
+  <h1 class="h3 mb-3 font-weight-normal">Сброс пароля</h1>
 
-        <div>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control", :placeholder =>"Email",  :required => ""  %>
-        </div>
-
-
-        <div>
-          <%= f.submit "Отправить мне инструкции по сбросу пароля", :class => "button7"%>
-        </div>
-
-        <div class="clearfix"></div>
-
-        <div class="separator">
-          <p class="change_link">Вспомнили пароль?
-            <a href="/users/sign_in" class="to_register"> Войдите </a>
-          </p>
-
-          <p class="change_link">Хотите создать команду?
-            <a href="/users/sign_up" class="to_register"> Зарегистрируйтесь </a>
-          </p>
-
-          <div class="clearfix"></div>
-
-          <br />
-          <div>
-            <h1><i class="fa fa-paw" style="font-size: 26px;"></i> EasySquad</h1>
-            <p>©2019 Никаких прав нет. EasySquad. Собери свою команду!</p>
-          </div>
-      <% end %>
-      <!-- form -->
-    </section>
-    <!-- content -->
+  <div style="margin-bottom: 20px;">
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control", :placeholder =>"Email",  :required => ""  %>
   </div>
 
-</div>
-</div>
+
+  <div>
+    <%= f.submit "Отправить мне инструкции", :class => "btn btn-primary"%>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <div class="separator">
+    <p class="change_link" style="margin-top: 10px;">Вспомнили пароль?
+      <a href="/users/sign_in" class="to_register"> Войдите </a>
+    </p>
+
+    <p class="change_link">Хотите создать команду?
+      <a href="/users/sign_up" class="to_register"> Зарегистрируйтесь </a>
+    </p>
+
+    <div class="clearfix"></div>
+
+    <br />
+
+    <h1 class="text-muted">
+      <%= image_tag "/images/soccer-ball_39433.ico",
+                    :class => "style_image",
+                    :alt => "",
+                    :width => "25",
+                    :height => "25",
+                    :style => "padding-bottom: 5px;height: 25px;width: 20px;"  %>
+      EasySquad</h1>
+    <p class="mt-5 mb-3 text-muted">
+      ©2019 Никаких прав нет. EasySquad. Собери свою команду!</p>
+<% end %>
 
