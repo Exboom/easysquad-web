@@ -12,6 +12,9 @@ class WelcomeController < ApplicationController
     @federations=Federation.all
     #локации
     @locs=Location.all
+    #турниры
+    @tourns=Tournament.all
+
 
     @usersN = User.where("approved = ?", false)
     @users = User.all
@@ -33,13 +36,22 @@ class WelcomeController < ApplicationController
   end
 
   def notplayer
+
+    @teams=Team.all
+    #федерации
+    @federations=Federation.all
+    #локации
+    @locs=Location.all
+    #турниры
+    @tourns=Tournament.all
+
     @user = current_user.email
     # roles = UserRole.where("user1 = ?", params[:format]).pluck(:role1)
     @userrols = Role.find(UserRole.where("user1 = ?", params[:format]).pluck(:role1))
     teams = UserRole.where("user1 = ?", params[:format]).pluck(:team)
 
     if (teams.any?) and (teams.to_s != "[nil]")
-      @teams = Team.find(teams)
+      @teamsusr = Team.find(teams)
     end
 
   end

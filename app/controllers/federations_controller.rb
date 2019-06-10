@@ -25,14 +25,22 @@ class FederationsController < ApplicationController
   # end
 
   def show
+
+    #команды
+    @teams=Team.all
+    #федерации
+    @federations=Federation.all
+    #локации
+    @locs=Location.all
+    #турниры
+    @tourns=Tournament.all
+
     tournkey= Tournament.where("federation = ?", params[:id]).pluck(:id)
 
     if tournkey.empty?
-      @f=nil
-      @tournaments = "Эта федерация не проводит турниров"
+      @tournamentsfdr = "Эта федерация не проводит турниров"
     else
-      @f=1
-      @tournaments= Tournament.find(tournkey)
+      @tournamentsfdr= Tournament.find(tournkey)
     end
 
     @federation = Federation.find(params[:id])

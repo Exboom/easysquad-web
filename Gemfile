@@ -12,7 +12,7 @@ gem 'httparty'
 gem 'devise'
 gem 'json'
 gem 'pg_search'
-# gem 'gentelella-rails'
+gem 'gentelella-rails'
 gem 'bootstrap', '4.3.1'
 
 # Use Puma as the app server

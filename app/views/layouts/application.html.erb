@@ -14,21 +14,33 @@
 
   </head>
 
-  <body>
+  <body class="nav-md footer_fixed">
 
 
-  <% flash.each do |key, value| %>
-  <div style="position: absolute; top: 3px; right: 3px;">
-    <div id="my-alert" class="alert alert-primary" role="alert" alert-<%= key %>">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
+<!--  <p class="notice"><%#= notice %></p>-->
+<!--  <p class="alert"><%#= alert %></p>-->
 
-    <%= value %>
-    </div>
-  </div>
+  <% flash.each do |key, message| %>
+    <p id="my-alert" class="alert alert-box <%= key %>"><%= message %></p>
   <% end %>
 
   <%= yield %>
+  <%= javascript_include_tag 'jquery_ujs' %>
+  <%= javascript_include_tag 'jquery.min.js' %>
+  <%= javascript_include_tag 'bootstrap.min' %>
+  <%= javascript_include_tag 'fastclick.js' %>
+  <%= javascript_include_tag 'nprogress.js' %>
+  <%= javascript_include_tag 'jquery.mCustomScrollbar.concat.min' %>
+  <%= javascript_include_tag 'custom.min' %>
+
+
+  <script>
+      $(function(){
+          window.setTimeout(function(){
+              $('#my-alert').alert('close');
+          },5000);
+      });
+  </script>
+
   </body>
 </html>

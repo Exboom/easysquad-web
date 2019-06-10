@@ -11,7 +11,12 @@
  * It is generally better to create a new file per style scope.
  *
  */
-@import "bootstrap";
+//@import "bootstrap";
+@import "gentelella";
+@import "gentelella-custom";
+@import "pnotify.css";
+@import "pnotify.buttons.css";
+
 
 .form-signin {
   width: 100%;
@@ -51,4 +56,80 @@
   .d-md-block {
     display: block !important;
   }
+}
+
+.sidebar-sticky {
+  position: sticky;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  padding: 48px 0 0;
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.navbar-nav {
+  flex-direction: initial;
+}
+
+[role="main"] {
+  padding-top: 112px; /* Space for fixed navbar */
+  padding-bottom: 24px;
+}
+
+@media (min-width: 768px) {
+  [role="main"] {
+    padding-top: 72px; /* Space for fixed navbar */
+    padding-bottom: 24px;
+  }
+}
+
+ul.hr {
+  margin: 0; /* Обнуляем значение отступов */
+  padding: 4px; /* Значение полей */
+}
+ul.hr li {
+  display: inline; /* Отображать как строчный элемент */
+  margin-left: 20px;
+  margin-right: 10px;
+}
+a {
+  color: #000000;
+}
+
+.alert-box {
+  position: absolute;
+  top:0;
+  right:0;
+  color:#555;
+  border-radius:10px;
+  font-family:Tahoma,Geneva,Arial,sans-serif;font-size:11px;
+  padding:10px 10px 10px 36px;
+  margin:10px;
+}
+
+.alert-box span {
+  font-weight:bold;
+  text-transform:uppercase;
+}
+
+.error {
+  background:#ffecec url('images/error.png') no-repeat 10px 50%;
+  border:1px solid #f5aca6;
+}
+.success {
+  background:#e9ffd9 url('images/success.png') no-repeat 10px 50%;
+  border:1px solid #a6ca8a;
+}
+.warning {
+  background:#fff8c4 url('images/warning.png') no-repeat 10px 50%;
+  border:1px solid #f2c779;
+}
+.notice {
+  background:#e3f7fc url('images/notice.png') no-repeat 10px 50%;
+  border:1px solid #8ed9f6;
 }

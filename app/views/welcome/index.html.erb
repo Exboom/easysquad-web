@@ -1,414 +1,182 @@
-<style>
-  @media (min-width: 1350px) {
-    [role="main"] {
-      padding-top: 48px; /* Space for fixed navbar */
-    }
+<div class="container body">
+  <div class="main_container">
+    <div class="col-md-3 left_col">
+      <div class="left_col scroll-view">
+        <div class="navbar nav_title" style="border: 0;">
+          <a href="/welcome/index" class="site_title">
+            <i class="fa fa-soccer-ball-o"></i> <span>EasySquad</span></a>
+        </div>
 
-    .d-md-block {
-      display: block !important;
-    }
-  }
-</style>
+        <div class="clearfix"></div>
 
+        <!-- menu profile quick info -->
+        <div class="profile clearfix">
+          <div class="profile_pic">
+            <%= image_tag "/images/name_user_3716.ico", :class => "img-circle profile_img"%>
+          </div>
+          <div class="profile_info">
+            <span>Здравствйте,</span>
+            <h2> <%=current_user.email%></h2>
+          </div>
+        </div>
+        <!-- /menu profile quick info -->
 
-<nav class="navbar navbar-dark fixed-top bg-info flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/welcome/index">
-    <%= image_tag "/images/soccer-ball_39433.ico",
-                  :class => "style_image",
-                  :alt => "",
-                  :width => "25",
-                  :height => "25",
-                  :style => "padding-bottom: 5px;height: 25px;width: 20px;"  %>
-    EasySquad</a>
-  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-  <ul class="navbar-nav px-3">
-    <li class="nav-item text-nowrap">
-      <%= link_to 'Выйти', destroy_user_session_path, :method => :delete, :class=>"nav-link" %>
-    </li>
-  </ul>
-</nav>
+        <br>
 
-<div class="container-fluid">
-  <div class="row">
-
-    <nav class="col-md-2 d-none d-md-block bg-light sidebar" style="padding-top: 48px;">
-      <div class="sidebar-sticky">
-        <ul class="nav flex-column">
-
-          <!-- Федерации -->
-          <li class="nav-item dropright">
-            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <%= image_tag "/images/campus_school_building_front_icon-icons.com_75490.svg",
-                            :class => "style_image",
-                            :alt => "",
-                            :width => "25",
-                            :height => "25",
-                            :style => "padding-bottom: 5px;height: 25px;width: 20px;"  %>
-              Федерации <span class="sr-only">(current)</span>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <% if @federations.empty? %>
-                <a class="dropdown-item" href="#">В базе отсутствуют федерации</a>
-              <% else%>
-                <% @federations.each do |federation|%>
-                <%= link_to federation.name, federation_path(federation), :class => "dropdown-item" %>
-                <% end %>
-              <% end %>
-            </div>
-          </li>
-
-          <!-- Команды -->
-          <li class="nav-item dropright">
-            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <%= image_tag "/images/users-team_icon-icons.com_57998.svg",
-                            :class => "style_image",
-                            :alt => "",
-                            :width => "25",
-                            :height => "25",
-                            :style => "padding-bottom: 5px;height: 25px;width: 20px;"  %>
-              Команды
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-
-              <% if @teams.empty? %>
-                <a class="dropdown-item" href="#">В базе отсутствуют команды</a>
-              <% else%>
-                <% @teams.each do |team|%>
-                  <%= link_to team.name, team_path(team), :class => "dropdown-item" %>
-                <% end %>
-              <% end %>
-            </div>
-          </li>
-
-          <!-- Места -->
-          <li class="nav-item dropright">
-            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <%= image_tag "/images/stadiumsport_estadio_4328.ico",
-                            :class => "style_image",
-                            :alt => "",
-                            :width => "25",
-                            :height => "25",
-                            :style => "padding-bottom: 5px;height: 25px;width: 20px;"  %>
-              Места
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <% if @locs.empty? %>
-                <a class="dropdown-item" href="#">В базе отсутствуют места проведенияи</a>
-              <% else%>
-                <% @locs.each do |locs|%>
-                <%= link_to locs.name, location_path(locs), :class => "dropdown-item" %>
-                <% end %>
-              <% end %>
-            </div>
-          </li>
-
-          <!-- Ожидающие подтверждения -->
-          <%if @userrols.id==1%>
-            <li class="nav-item dropright">
-              <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <%= image_tag "/images/name_user_3716.ico",
-                              :class => "style_image",
-                              :alt => "",
-                              :width => "25",
-                              :height => "25",
-                              :style => "padding-bottom: 5px;height: 25px;width: 20px;"  %>
-
-               Неподтвержденные
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-
-                <% @usersN.each do |user|%>
-                  <%= link_to user.email, new_user_role_path(user), :class => "dropdown-item" %>
-                <% end %>
-
-              </div>
-            </li>
-          <% end %>
-        </ul>
-
-        <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-              Current month
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-              Last quarter
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-              Social engagement
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-              Year-end sale
-            </a>
-          </li>
-        </ul>
-
-      </div>
-    </nav>
-
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-
-    </main>
-
-  </div>
-</div>
-
-
-
-
-<div class="main_container">
-
-  <div class="top_nav">
-    <div class="nav_menu">
-      <nav>
-<!--        <div class="nav toggle">-->
-<!--          <a id="menu_toggle"><i class="fa fa-bars"></i></a>-->
-<!--        </div>-->
-        <ul class="nav navbar-nav navbar-right">
-
-          <li class="">
-            <div style="float: left; "><%= button_to 'Профиль', player_path(current_user.id), :method => :get, :class=>"button7" %></div>
-            <div style="float: left; "> <%= button_to 'Выйти', destroy_user_session_path, :method => :delete, :class=>"button7" %></div>
-          </li>
-
-        </ul>
-      </nav>
-    </div>
-
-  </div>
-
-  <div class="right_col" role="main" style="min-height: 100%;">
-    <div class>
-
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h3> Игры </h3>
-            </div>
-            <div class="x_content">
-
-              <div class="col-md-6 col-sm-12 col-xs-12">
-                <div>
-                  <div class="x_title">
-                    <h2>Ближайшие игры</h2>
-                    <div class="clearfix"></div>
-                  </div>
-                  <% if @nextgame.nil? %>
-                    <p>В ближайшее время игр нет</p>
-                  <% else %>
-                    <ul class="list-unstyled top_profiles scroll-view">
-
-                      <li class="media event">
-                        <div class="media-body">
-                          <%= link_to @nextgame.name, game_path(@nextgame) %>
-                          <% if @app!=nil %>
-                            <% if (@nextgame.tournament==@app.tournament) %>
-                              <%= button_to 'Отметиться на игре', new_chekin_path(@nextgame), :method => :get %>
-                            <% else %>
-                              <p>(Вы не заявлены за команду в этой федерации)</p>
-                            <% end %>
-                          <% else %>
-                            <p>(Вы не заявлены за команду в этой федерации)</p>
-                          <% end %>
-                        </div>
-                      </li>
-                    </ul>
-                  <% end %>
-                </div>
-              </div>
-
-              <div class="col-md-6 col-sm-12 col-xs-12">
-                <div>
-                  <div class="x_title">
-                    <h2>Прошедшие игры</h2>
-                    <div class="clearfix"></div>
-                  </div>
-                  <% if @lastgames.empty? %>
-                    <p>Еще не было сыграно ни одной игры </p>
+        <!-- sidebar menu -->
+        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+          <div class="menu_section active">
+            <h3>Меню</h3>
+            <ul class="nav side-menu" style="">
+              <!--federation-->
+              <li><a><i class="fa fa-institution"></i> Федерации <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <% if @federations.empty? %>
+                    <li><a href="#">В базе отсутствуют федерации</a></li>
                   <% else%>
-                    <ul class="list-unstyled top_profiles scroll-view">
-                      <% @lastgames.each do |lgame|%>
-                        <li class="media event">
-                          <div class="media-body">
-                            <%= link_to lgame.name, game_path(lgame) %>
-                            <p><%= lgame.game_score%></p>
-                          </div>
-                        </li>
-                      <% end %>
-                    </ul>
+                    <% @federations.each do |federation|%>
+                      <li><%= link_to federation.name, federation_path(federation)%></li>
+                    <% end %>
                   <% end %>
-                </div>
-              </div>
-
-              <%if @userrols.id==1%>
-                <%= button_to 'Добавить игру', new_game_path, :method => :get %>
-              <%end%>
-            </div>
-          </div>
-        </div>
-
-      </div> <!--игры-->
-
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h3> Команды </h3>
-            </div>
-            <div class="x_content">
-              <% if @teams.empty? %>
-                <table>
-                  <td>В базе отсутствуют команды</td>
-                  <td><%= button_to 'Создать', new_admin_team_path, :method => :get %></td>
-                </table>
-              <% else%>
-                <div style="height:100px; overflow : scroll;">
-                  <% @teams.each do |team|%>
-                    <table>
-                      <td><%= team.name%></td>
-                      <td><%= button_to 'Подробнее', team_path(team), :method => :get %></td>
-                    </table>
+                </ul>
+              </li>
+              <!--tourns-->
+              <li><a><i class="fa fa-trophy"></i> Турниры <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <% if @tourns.empty? %>
+                    <li><a href="#">В базе отсутствуют турниры</a></li>
+                  <% else%>
+                    <% @tourns.each do |tourn|%>
+                      <li><%= link_to tourn.name, tournament_path(tourn) %></li>
+                    <% end %>
                   <% end %>
-                </div>
-                <%if @userrols.id==1%>
-                  <%= button_to 'Добавить команду', new_admin_team_path, :method => :get %></p>
-                <%end%>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div> <!--команды-->
-
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h3> Федерации </h3>
-            </div>
-            <div class="x_content">
-              <% if @federations.empty? %>
-                <table>
-                  <td>В базе отсутствуют федерации</td>
-                  <td><%= button_to 'Создать', new_admin_federation_path, :method => :get %></td>
-                </table>
-              <% else%>
-                <table>
-                  <% @federations.each do |federation|%>
-                    <td><%= federation.name%></td>
-                    <td><%= button_to 'Подробнее', federation_path(federation), :method => :get %></td>
+                </ul>
+              </li>
+              <!--stadium-->
+              <li><a><i class="fa  fa-flag-checkered"></i> Стадионы <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <% if @locs.empty? %>
+                    <li><a href="#">В базе отсутствуют места проведенияи</a></li>
+                  <% else%>
+                    <% @locs.each do |locs|%>
+                      <li><%= link_to locs.name, location_path(locs)%></li>
+                    <% end %>
                   <% end %>
-                </table> <br />
-                <%if @userrols.id==1%>
-                  <%= button_to 'Добавить федерацию', new_admin_federation_path, :method => :get %></p>
-                <%end%>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div> <!--федерации-->
-
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
-              <h3>Места проведения турниров:</h3>
-            </div>
-            <div class="x_content">
-              <% if @locs.empty? %>
-                <table>
-                  <tr>
-                    <td>В базе отсутствуют места проведения</td>
-                    <td><%= button_to 'Создать', new_admin_location_path, :method => :get %></td>
-                  </tr>
-                </table>
-              <% else%>
-                <table>
-                  <% @locs.each do |locs|%>
-                    <tr>
-                      <td><%= locs.name%></td>
-                      <td><%= button_to 'Подробнее', location_path(locs), :method => :get %></td>
-                    </tr>
+                </ul>
+              </li>
+              <!--teams-->
+              <li><a><i class="fa fa-users"></i> Команды <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <% if @teams.empty? %>
+                    <li><a href="#">В базе отсутствуют команды</a></li>
+                  <% else%>
+                    <% @teams.each do |team|%>
+                      <li><%= link_to team.name, team_path(team) %></li>
+                    <% end %>
                   <% end %>
-                </table>
-                <br />
-                <%if @userrols.id==1%>
-                  <%= button_to 'Добавить место', new_admin_location_path, :method => :get %></p>
-                <%end%>
-              <% end %>
-            </div>
+                </ul>
+              </li>
+            </ul>
           </div>
-        </div>
-      </div> <!--места-->
 
-      <%if @userrols.id==1%>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="x_panel">
-              <div class="x_title">
-                <h3>Список всех пользователей</h3>
-              </div>
-              <div class="x_content">
-                <table>
-                  <% @users.each do |user|%>
-                    <tr>
-                      <td><%= user.email%></td>
-                      <td><%= link_to 'изменить роль', new_user_role_path(user) %></td>
-                      <td><%= link_to 'инфо', user_role_path(user) %></td>
-                    </tr>
-                  <% end %>
-                </table>
-              </div>
-            </div>
-          </div>
         </div>
-      <%end%> <!--список пользователей-->
+        <!-- /sidebar menu -->
 
-      <%if @userrols.id==1%>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="x_panel">
-              <div class="x_title">
-                <h3>Список ожидающих подтверждения</h3>
-              </div>
-              <div class="x_content">
-                <table>
-                  <% @usersN.each do |user|%>
-                    <tr>
-                      <td><%= user.email%></td>
-                      <td><%= link_to 'изменить роль', new_user_role_path(user) %></td>
-                      <td><%= link_to 'инфо', user_role_path(user) %></td>
-                    </tr>
-                  <% end %>
-                </table>
-                <%= link_to 'Зарегистрировать пользователя', new_admin_user_path %>
-              </div>
-            </div>
-          </div>
+        <!-- /menu footer buttons -->
+        <div class="sidebar-footer hidden-small">
+          <%= link_to destroy_user_session_path, :method => :delete,
+                      "data-toggle"=>"tooltip",
+                      "data-placement"=>"top",
+                      :title=>"",
+                      "data-original-title"=>"Logout" do%>
+            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+          <%end %>
+
         </div>
-      <%end%> <!--ожидающие подтверждения-->
+        <!-- /menu footer buttons -->
+      </div>
     </div>
+
+    <!-- top navigation -->
+    <div class="top_nav">
+      <div class="nav_menu">
+        <nav>
+          <div class="nav toggle">
+            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+          </div>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li class="">
+              <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <%=current_user.email%>
+                <span class=" fa fa-angle-down"></span>
+              </a>
+              <ul class="dropdown-menu dropdown-usermenu pull-right">
+                <li>
+                  <%= link_to 'Профиль', player_path(current_user.id), :method => :get %>
+                </li>
+                <li>
+                  <%= link_to destroy_user_session_path, :method => :delete do%>
+                    <i class="fa fa-sign-out pull-right"></i>
+                    <span>Выход</span>
+                  <%end %>
+                </li>
+              </ul>
+            </li>
+
+            <%if @userrols.id==1%>
+              <li role="presentation" class="dropdown">
+                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                  <i class="fa fa-user"></i>
+                  <span class="badge bg-green"><%= @usersN.size%></span>
+                </a>
+                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+
+                  <% @usersN.order(id: :desc).first(3).each do |user|%>
+                    <li>
+                      <%= link_to user.email, new_user_role_path(user), :class => "dropdown-item" %>
+                    </li>
+                  <% end %>
+
+                  <li>
+                    <div class="text-center">
+                      <a>
+                        <strong>See All Alerts</strong>
+                        <i class="fa fa-angle-right"></i>
+                      </a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            <%end%>
+
+
+          </ul>
+        </nav>
+      </div>
+
+    </div>
+    <!-- /top navigation -->
+
+    <!-- page content -->
+    <div class="right_col" role="main" style="min-height: 954px;">
+      <div class="">
+        <div class="page-title">
+          <div class="title_left">
+            <h3>Fixed Footer <small> Just add class <strong>footer_fixed</strong></small></h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /page content -->
+
+    <!-- footer content -->
+    <footer>
+      <div class="pull-right">
+         EasySquad by <a href="https://colorlib.com">Andrew</a>
+      </div>
+      <div class="clearfix"></div>
+    </footer>
+    <!-- /footer content -->
   </div>
-
 </div>
-
-
-
-<script>
-    $(function(){
-        window.setTimeout(function(){
-            $('#my-alert').alert('close');
-        },5000);
-    });
-</script>
-
