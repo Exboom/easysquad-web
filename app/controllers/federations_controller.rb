@@ -34,16 +34,11 @@ class FederationsController < ApplicationController
     @locs=Location.all
     #турниры
     @tourns=Tournament.all
-
-    tournkey= Tournament.where("federation = ?", params[:id]).pluck(:id)
-
-    if tournkey.empty?
-      @tournamentsfdr = "Эта федерация не проводит турниров"
-    else
-      @tournamentsfdr= Tournament.find(tournkey)
-    end
-
     @federation = Federation.find(params[:id])
+
+    @tournamentsfdr=@federation.tournaments
+
+
   end
 
   # def destroy

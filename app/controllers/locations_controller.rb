@@ -24,16 +24,10 @@ class LocationsController < ApplicationController
   # end
 
   def show
-    tournkey = Tournament.where("location = ?", params[:id]).pluck(:id)
-    if tournkey.empty?
-      @f=nil
-      @tournaments = "На этом месте не проводятся турниры"
-    else
-      @f=1
-      @tournaments = Tournament.find(tournkey)
-    end
     @location = Location.find(params[:id])
+    @tournaments=@location.tournaments
   end
+
 
   # def destroy
   #   @location = Location.find(params[:id])

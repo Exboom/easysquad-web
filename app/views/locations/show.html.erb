@@ -12,11 +12,11 @@
 
 <p>Проводимые турниры:</p>
 
-<% if @f==nil %>
-  <p><%=@tournaments%></p>
-<% else%>
+<%if @tournaments.nil?%>
+  <p>Здесь не проводятся турниры</p>
+<%else%>
   <% @tournaments.each do |tourn|%>
-    <p><%= tourn.name%> <%= link_to 'показать', tournament_path(tourn) %></p>
+    <p><%= link_to tourn.name, tournament_path(tourn)%></p>
   <% end %>
-<% end %>
+<%end%>
 

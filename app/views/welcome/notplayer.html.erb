@@ -1,162 +1,213 @@
+<div class="container body">
+  <div class="main_container">
+    <div class="col-md-3 left_col">
+      <div class="left_col scroll-view">
+        <div class="navbar nav_title" style="border: 0;">
+          <a href="/welcome/index" class="site_title">
+            <i class="fa fa-soccer-ball-o"></i> <span>EasySquad</span></a>
+        </div>
 
-<nav class="navbar navbar-dark fixed-top bg-info flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-sm-3 col-md-2 mr-0" title="На главную" href="/welcome/index">
-    <%= image_tag "/images/soccer-ball_39433.ico",
-                  :class => "style_image",
-                  :alt => "",
-                  :width => "25",
-                  :height => "25",
-                  :style => "padding-bottom: 5px;height: 25px;width: 20px;"  %>
-    EasySquad</a>
-  <ul class="navbar-nav px-3 hr">
-    <li class="nav-item text-nowrap">
-      <%= link_to 'Редактировать профиль', :edit_user_registration, :method => :get, :class=>"nav-link" %>
-    </li>
-    <li class="nav-item text-nowrap">
-      <%= link_to 'Выйти', destroy_user_session_path, :method => :delete, :class=>"nav-link" %>
-    </li>
-  </ul>
-</nav>
+        <div class="clearfix"></div>
 
-<div class="container-fluid">
-  <div class="row">
+        <!-- menu profile quick info -->
+        <div class="profile clearfix">
+          <div class="profile_pic">
+            <%= image_tag "/images/name_user_3716.ico", :class => "img-circle profile_img"%>
+          </div>
+          <div class="profile_info">
+            <span>Здравствйте,</span>
+            <h2> <%=current_user.email%></h2>
+          </div>
+        </div>
+        <!-- /menu profile quick info -->
 
+        <br>
 
-    <nav class="col-md-1 d-none d-md-block bg-light sidebar" style="padding-top: 48px;">
-      <div class="sidebar-sticky">
-        <ul class="nav flex-column">
-          <br>
+        <!-- sidebar menu -->
+        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+          <div class="menu_section active">
+            <h3>Меню</h3>
+            <ul class="nav side-menu" style="">
+              <!--federation-->
+              <li><a><i class="fa fa-institution"></i> Федерации <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <% if @federations.empty? %>
+                    <li><a href="#">В базе отсутствуют федерации</a></li>
+                  <% else%>
+                    <% @federations.each do |federation|%>
+                      <li><%= link_to federation.name, federation_path(federation)%></li>
+                    <% end %>
+                  <% end %>
+                </ul>
+              </li>
+              <!--tourns-->
+              <li><a><i class="fa fa-trophy"></i> Турниры <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <% if @tourns.empty? %>
+                    <li><a href="#">В базе отсутствуют турниры</a></li>
+                  <% else%>
+                    <% @tourns.each do |tourn|%>
+                      <li><%= link_to tourn.name, tournament_path(tourn) %></li>
+                    <% end %>
+                  <% end %>
+                </ul>
+              </li>
+              <!--stadium-->
+              <li><a><i class="fa  fa-flag-checkered"></i> Стадионы <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <% if @locs.empty? %>
+                    <li><a href="#">В базе отсутствуют места проведенияи</a></li>
+                  <% else%>
+                    <% @locs.each do |locs|%>
+                      <li><%= link_to locs.name, location_path(locs)%></li>
+                    <% end %>
+                  <% end %>
+                </ul>
+              </li>
+              <!--teams-->
+              <li><a><i class="fa fa-users"></i> Команды <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <% if @teams.empty? %>
+                    <li><a href="#">В базе отсутствуют команды</a></li>
+                  <% else%>
+                    <% @teams.each do |team|%>
+                      <li><%= link_to team.name, team_path(team) %></li>
+                    <% end %>
+                  <% end %>
+                </ul>
+              </li>
+            </ul>
+          </div>
 
-          <big><li class="nav-item">
-            <%= link_to 'Здравствуйте, '+current_user.email, player_path(current_user.id), :method => :get, :class=>"nav-link active" %>
-          </li> </big>
+        </div>
+        <!-- /sidebar menu -->
 
-          <br>
-          <!-- Федерации -->
-          <li class="nav-item dropright">
-            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <%= image_tag "/images/campus_school_building_front_icon-icons.com_75490.svg",
-                            :class => "style_image",
-                            :alt => "",
-                            :width => "25",
-                            :height => "25",
-                            :style => "padding-bottom: 5px;height: 25px;width: 20px;"  %>
-              Федерации <span class="sr-only">(current)</span>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <% if @federations.empty? %>
-                <a class="dropdown-item" href="#">В базе отсутствуют федерации</a>
-              <% else%>
-                <% @federations.each do |federation|%>
-                  <%= link_to federation.name, federation_path(federation), :class => "dropdown-item" %>
-                <% end %>
-              <% end %>
-            </div>
-          </li>
+        <!-- /menu footer buttons -->
+        <div class="sidebar-footer hidden-small">
+          <%= link_to destroy_user_session_path, :method => :delete,
+                      "data-toggle"=>"tooltip",
+                      "data-placement"=>"top",
+                      :title=>"",
+                      "data-original-title"=>"Logout" do%>
+            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+          <%end %>
 
-          <!-- Команды -->
-          <li class="nav-item dropright">
-            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <%= image_tag "/images/users-team_icon-icons.com_57998.svg",
-                            :class => "style_image",
-                            :alt => "",
-                            :width => "25",
-                            :height => "25",
-                            :style => "padding-bottom: 5px;height: 25px;width: 20px;"  %>
-              Команды
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-
-              <% if @teams.empty? %>
-                <a class="dropdown-item" href="#">В базе отсутствуют команды</a>
-              <% else%>
-                <% @teams.each do |team|%>
-                  <%= link_to team.name, team_path(team), :class => "dropdown-item" %>
-                <% end %>
-              <% end %>
-            </div>
-          </li>
-
-          <!-- Места -->
-          <li class="nav-item dropright">
-            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <%= image_tag "/images/stadiumsport_estadio_4328.ico",
-                            :class => "style_image",
-                            :alt => "",
-                            :width => "25",
-                            :height => "25",
-                            :style => "padding-bottom: 5px;height: 25px;width: 20px;"  %>
-              Места
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <% if @locs.empty? %>
-                <a class="dropdown-item" href="#">В базе отсутствуют места проведенияи</a>
-              <% else%>
-                <% @locs.each do |locs|%>
-                  <%= link_to locs.name, location_path(locs), :class => "dropdown-item" %>
-                <% end %>
-              <% end %>
-            </div>
-          </li>
-
-          <!-- Турниры -->
-          <li class="nav-item dropright">
-            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <%= image_tag "/images/cup-trophy-silhouette_icon-icons.com_73052.svg",
-                            :class => "style_image",
-                            :alt => "",
-                            :width => "25",
-                            :height => "25",
-                            :style => "padding-bottom: 5px;height: 25px;width: 20px;"  %>
-              Турниры
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <% if @tourns.empty? %>
-                <a class="dropdown-item" href="#">В базе отсутствуют турниры</a>
-              <% else%>
-                <% @tourns.each do |tourn|%>
-                  <%= link_to tourn.name, tournament_path(tourn), :class => "dropdown-item" %>
-                <% end %>
-              <% end %>
-            </div>
-          </li>
-        </ul>
+        </div>
+        <!-- /menu footer buttons -->
       </div>
-      <footer style="position: absolute;bottom: 2%;height:auto;width: 100%;text-align: center;">©2019</footer>
-    </nav>
+    </div>
 
-    <main role="main" class="col-md-11 ml-sm-auto col-lg-11 px-4">
+    <!-- top navigation -->
+    <div class="top_nav">
+      <div class="nav_menu">
+        <nav>
+          <div class="nav toggle">
+            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+          </div>
 
-      <h2>Собери свою команду!</h2>
-      <span>Здравствуйте, <%= @user %></span>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="">
+              <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <%=current_user.email%>
+                <span class=" fa fa-angle-down"></span>
+              </a>
+              <ul class="dropdown-menu dropdown-usermenu pull-right">
+                <li>
+                  <%= link_to 'Профиль', player_path(current_user.id), :method => :get %>
+                </li>
+                <li>
+                  <%= link_to destroy_user_session_path, :method => :delete do%>
+                    <i class="fa fa-sign-out pull-right"></i>
+                    <span>Выход</span>
+                  <%end %>
+                </li>
+              </ul>
+            </li>
+
+            <%#if @userrols.id==1%>
+<!--              <li role="presentation" class="dropdown">-->
+<!--                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">-->
+<!--                  <i class="fa fa-user"></i>-->
+<!--                  <span class="badge bg-green"><%#= @usersN.size%></span>-->
+<!--                </a>-->
+<!--                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">-->
+
+                  <%# @usersN.order(id: :desc).first(3).each do |user|%>
+<!--                    <li>-->
+                      <%#= link_to user.email, new_user_role_path(user), :class => "dropdown-item" %>
+<!--                    </li>-->
+                  <%# end %>
+
+<!--                  <li>-->
+<!--                    <div class="text-center">-->
+<!--                      <a>-->
+<!--                        <strong>See All Alerts</strong>-->
+<!--                        <i class="fa fa-angle-right"></i>-->
+<!--                      </a>-->
+<!--                    </div>-->
+<!--                  </li>-->
+<!--                </ul>-->
+<!--              </li>-->
+            <%#end%>
 
 
-      <p>Вы не игрок. Это ошибка? Тогда нужно <%= link_to 'заполнить игровой профиль', new_player_path(current_user) %></p>
+          </ul>
+        </nav>
+      </div>
 
-      <h3>Ваши команды:</h3>
+    </div>
+    <!-- /top navigation -->
 
-      <%if @teamsusr.nil?%>
-        <p>Вы не привязаны ни к одной команде</p>
-      <%else%>
-        <% @teamsusr.each do |team|%>
-          <table>
-            <td><%= team.name%></td>
-            <td><%= button_to 'показать', team_path(team), :method => :get %></td>
-          </table>
-        <% end %>
-      <%end%>
+    <!-- page content -->
+    <div class="right_col" role="main" style="min-height: 954px;">
+      <div class="">
+        <div class="page-title">
+          <div class="title_left">
 
 
+            <p>Вы не игрок. Это ошибка? Тогда нужно <%= link_to 'заполнить игровой профиль', new_player_path(current_user) %></p>
 
-      <h3>Ваша роль: </h3>
-      <% @userrols.each do |role| %>
-        <%= role.role%>
-      <% end %>
+            <h3>Ваши команды:</h3>
 
-    </main>
+            <%if @teamsusr.nil?%>
+              <p>Вы не привязаны ни к одной команде</p>
+            <%else%>
+              <% @teamsusr.each do |team|%>
+                <table>
+                  <td><%= team.name%></td>
+                  <td><%= button_to 'показать', team_path(team), :method => :get %></td>
+                </table>
+              <% end %>
+            <%end%>
 
+
+
+            <h3>Ваша роль: </h3>
+            <% @rols.each do |role| %>
+              <%= role.role%>
+            <% end %>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /page content -->
+
+    <!-- footer content -->
+    <footer>
+      <div class="pull-right">
+        EasySquad by <a href="https://colorlib.com">Andrew</a>
+      </div>
+      <div class="clearfix"></div>
+    </footer>
+    <!-- /footer content -->
   </div>
 </div>
+
+
+
 
 
 

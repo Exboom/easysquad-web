@@ -25,9 +25,10 @@ class TournamentsController < ApplicationController
   # end
 
   def show
-    @local=Location.find(Tournament.find(params[:id]).location)
-    @feder=Federation.find(Tournament.find(params[:id]).federation)
     @tournament = Tournament.find(params[:id])
+    @local=@tournament.location
+    @feder=@tournament.federation
+
     # @team
   end
 

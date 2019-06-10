@@ -124,15 +124,15 @@
               </ul>
             </li>
 
-            <%if @userrols.id==1%>
+            <%if @userrols.first.id==1%>
               <li role="presentation" class="dropdown">
                 <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                   <i class="fa fa-user"></i>
-                  <span class="badge bg-green"><%= @usersN.size%></span>
+                  <span class="badge bg-green"><%= @usersNew.size%></span>
                 </a>
                 <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
 
-                  <% @usersN.order(id: :desc).first(3).each do |user|%>
+                  <% @usersNew.order(id: :desc).first(3).each do |user|%>
                     <li>
                       <%= link_to user.email, new_user_role_path(user), :class => "dropdown-item" %>
                     </li>
@@ -164,6 +164,11 @@
         <div class="page-title">
           <div class="title_left">
             <h3>Fixed Footer <small> Just add class <strong>footer_fixed</strong></small></h3>
+
+            <% @userrols.each do |rol|%>
+              <li><%=  rol.role %></li>
+            <% end %>
+
           </div>
         </div>
       </div>

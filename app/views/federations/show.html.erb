@@ -213,30 +213,28 @@
                       </div>
 
                       <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <div class="x_panel">
-                            <div class="x_title">
-                              <h2>Контактные данные <small><%= @federation.name %></small></h2>
-                              <div class="clearfix"></div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-12 profile_details">
+                          <div class="well profile_view">
+                            <div class="col-sm-12">
+                              <h4 class="brief"><i><%= @federation.name %></i></h4>
+                              <div class="left col-xs-12">
+                                <ul class="list-unstyled">
+                                  <li>  <big><i class="fa fa-building"></i>Сайт: <%= @federation.url %></big>  </li>
+                                  <li> <big><i class="fa fa-phone"></i> Телефон #: <%= @federation.contacts %></big>  </li>
+                                </ul>
+                              </div>
                             </div>
-                            <div class="x_content" style="display: block;">
-                              <table class="table">
-                                <thead>
-                                <tr>
-                                  <th>Телефон:</th>
-                                  <th><%= @federation.contacts %></th>
-                                </tr>
-                                </thead>
-                                <thead>
-                                <tr>
-                                  <th>Сайт:</th>
-                                  <th><%= link_to @federation.url, @federation.url%></th>
-                                </tr>
-                                </thead>
-                              </table>
+                            <div class="col-xs-12 bottom text-right">
+                              <div class="col-xs-12 col-sm-6 emphasis" style="float:right;">
+                                <button type="button" class="btn btn-primary btn-xs" onclick="parent.location='<%= @federation.url %>'">
+                                  <i class="fa fa-user"> </i> View Profile
+                                </button>
+                              </div>
                             </div>
                           </div>
                         </div>
+
                       </div>
                     </div>
                   </div>

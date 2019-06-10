@@ -1,30 +1,296 @@
-<h1>EasySquad</h1>
-<h2>Игровой профиль пользователя: <%= current_user.email %></h2>
-<p> Имя игрока: <%= @player.name %></p>
-<p> Дата рождения: <%= @player.birthday %></p>
-<p> Игровой номер: <%= @player.gamenumber %></p>
+<div class="container body">
+  <div class="main_container">
+    <div class="col-md-3 left_col">
+      <div class="left_col scroll-view">
+        <div class="navbar nav_title" style="border: 0;">
+          <a href="/welcome/index" class="site_title">
+            <i class="fa fa-soccer-ball-o"></i> <span>EasySquad</span></a>
+        </div>
 
-<p> <%= button_to 'Редактировать профиль', edit_player_path, :method => :get %></p>
-<p> <%= button_to 'Удалить профиль', player_path, :method => :delete %></p>
+        <div class="clearfix"></div>
+
+        <!-- menu profile quick info -->
+        <div class="profile clearfix">
+          <div class="profile_pic">
+            <%= image_tag "/images/name_user_3716.ico", :class => "img-circle profile_img"%>
+          </div>
+          <div class="profile_info">
+            <span>Здравствйте,</span>
+            <h2> <%=current_user.email%></h2>
+          </div>
+        </div>
+        <!-- /menu profile quick info -->
+
+        <br>
+
+        <!-- sidebar menu -->
+        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+          <div class="menu_section active">
+            <h3>Меню</h3>
+            <ul class="nav side-menu" style="">
+              <!--federation-->
+              <li><a><i class="fa fa-institution"></i> Федерации <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <% if @federations.empty? %>
+                    <li><a href="#">В базе отсутствуют федерации</a></li>
+                  <% else%>
+                    <% @federations.each do |federation|%>
+                      <li><%= link_to federation.name, federation_path(federation)%></li>
+                    <% end %>
+                  <% end %>
+                </ul>
+              </li>
+              <!--tourns-->
+              <li><a><i class="fa fa-trophy"></i> Турниры <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <% if @tourns.empty? %>
+                    <li><a href="#">В базе отсутствуют турниры</a></li>
+                  <% else%>
+                    <% @tourns.each do |tourn|%>
+                      <li><%= link_to tourn.name, tournament_path(tourn) %></li>
+                    <% end %>
+                  <% end %>
+                </ul>
+              </li>
+              <!--stadium-->
+              <li><a><i class="fa  fa-flag-checkered"></i> Стадионы <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <% if @locs.empty? %>
+                    <li><a href="#">В базе отсутствуют места проведенияи</a></li>
+                  <% else%>
+                    <% @locs.each do |locs|%>
+                      <li><%= link_to locs.name, location_path(locs)%></li>
+                    <% end %>
+                  <% end %>
+                </ul>
+              </li>
+              <!--teams-->
+              <li><a><i class="fa fa-users"></i> Команды <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <% if @teams.empty? %>
+                    <li><a href="#">В базе отсутствуют команды</a></li>
+                  <% else%>
+                    <% @teams.each do |team|%>
+                      <li><%= link_to team.name, team_path(team) %></li>
+                    <% end %>
+                  <% end %>
+                </ul>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+        <!-- /sidebar menu -->
+
+        <!-- /menu footer buttons -->
+        <div class="sidebar-footer hidden-small">
+          <%= link_to destroy_user_session_path, :method => :delete,
+                      "data-toggle"=>"tooltip",
+                      "data-placement"=>"top",
+                      :title=>"",
+                      "data-original-title"=>"Logout" do%>
+            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+          <%end %>
+
+        </div>
+        <!-- /menu footer buttons -->
+      </div>
+    </div>
+
+    <!-- top navigation -->
+    <div class="top_nav">
+      <div class="nav_menu">
+        <nav>
+          <div class="nav toggle">
+            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+          </div>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li class="">
+              <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <%=current_user.email%>
+                <span class=" fa fa-angle-down"></span>
+              </a>
+              <ul class="dropdown-menu dropdown-usermenu pull-right">
+                <li>
+                  <%= link_to 'Профиль', player_path(current_user.id), :method => :get %>
+                </li>
+                <li>
+                  <%= link_to destroy_user_session_path, :method => :delete do%>
+                    <i class="fa fa-sign-out pull-right"></i>
+                    <span>Выход</span>
+                  <%end %>
+                </li>
+              </ul>
+            </li>
+
+            <%#if @userrols.first.id=1%>
+<!--              <li role="presentation" class="dropdown">-->
+<!--                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">-->
+<!--                  <i class="fa fa-user"></i>-->
+<!--                  <span class="badge bg-green"><%#= @usersN.size%></span>-->
+<!--                </a>-->
+<!--                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">-->
+
+                  <%# @usersN.order(id: :desc).first(3).each do |user|%>
+<!--                    <li>-->
+                      <%#= link_to user.email, new_user_role_path(user), :class => "dropdown-item" %>
+<!--                    </li>-->
+                  <%# end %>
+
+<!--                  <li>-->
+<!--                    <div class="text-center">-->
+<!--                      <a>-->
+<!--                        <strong>See All Alerts</strong>-->
+<!--                        <i class="fa fa-angle-right"></i>-->
+<!--                      </a>-->
+<!--                    </div>-->
+<!--                  </li>-->
+<!--                </ul>-->
+<!--              </li>-->
+            <%#end%>
+
+          </ul>
+        </nav>
+      </div>
+
+    </div>
+    <!-- /top navigation -->
+
+    <!-- page content -->
+    <div class="right_col" role="main" style="min-height: 954px;">
+      <div class="">
+        <div class="page-title">
+          <div class="clearfix"></div>
+
+
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2><i class="fa fa-bars"></i> Игровой профиль <small>Float left</small></h2>
+                  <ul class="nav navbar-right panel_toolbox" style="padding-left: 25px;">
+                    <li>
+                      <%= link_to edit_player_path, :method => :get,
+                                  :class=>"close-link",
+                                  "data-toggle"=>"tooltip",
+                                  "data-placement"=>"top",
+                                  :title=>"",
+                                  "data-original-title"=>"Редактировать профиль" do %>
+                        <i class="fa fa-wrench"></i>
+                      <%end %>
+                    </li>
+                    <li>
+                      <%= link_to player_path, :method => :delete, :class=>"close-link",
+                                  "data-toggle"=>"tooltip",
+                                  "data-placement"=>"top",
+                                  :title=>"",
+                                  "data-original-title"=>"Удалить профиль" do %>
+                        <i class="fa fa-close"></i>
+                      <%end %>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+
+                  <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                    <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                      <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Информация</a>
+                      </li>
+                      <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Команды</a>
+                      </li>
+                      <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Заявки</a>
+                      </li>
+                    </ul>
+                    <div id="myTabContent" class="tab-content">
+                      <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                        <h2><li> Имя: <%= @player.name %></li></h2>
+                        <h2><li> Дата рождения: <%= @player.birthday %></li></h2>
+                        <h2><li> Игровой номер: <%= @player.gamenumber %></li></h2>
+                      </div>
+                      <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+
+                        <% if @teams.empty? %>
+                          <h2>Вы не играете ни за одну команду</h2>
+                        <% else%>
+                          <% @teams.each do |team|%>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <div class="x_panel">
+                                <div class="x_title">
+                                  <h2><%=team.name %> <small></small></h2>
+                                  <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                  <div class="bs-example" data-example-id="simple-jumbotron">
+                                    <div class="jumbotron">
+                                      <!--<p> Сезон турнира: <%#= tourn.season %></p>-->
+                                    </div>
+                                  </div>
+                                </div>
+                                <%= link_to "Подробнее", team_path(team), :method => :get, :class => "btn btn-secondary" %>
+                               </div>
+                            </div>
+                          <% end %>
+                        <% end %>
+
+                      </div>
+                      <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+
+                        <% if @applications.empty? %>
+                        <h2><li>У вас нет заявок</li></h2>
+                        <% else%>
+                          <% @applications.each do |app|%>
+                            <h2><li>№<%= app%> <%= link_to 'показать', application_path(app) %></li></h2>
+                          <% end %>
+                        <% end %>
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+
+<!--            <p>Ваши заявки</p>-->
+            <%# @applications.each do |app|%>
+<!--              <p>№<%#= app%> <%#= link_to 'показать', application_path(app) %></p>-->
+            <%# end %>
+
+
+<!--            <p> <%#= button_to 'Создать заявку', new_application_path(current_user), :method => :get %></p>-->
+
+
+<!--            <p>Ваши команды</p>-->
+
+            <%# @teams.each do |team|%>
+<!--              <p><%#= team.name%> <%#= link_to 'показать', team_path(team) %></p>-->
+            <%# end %>
+
+
+            <%#= button_to "Назад", :welcome_index, :method => :get %>
+
+
+        </div>
+      </div>
+    </div>
+    <!-- /page content -->
+
+    <!-- footer content -->
+    <footer>
+      <div class="pull-right">
+        EasySquad by <a href="https://colorlib.com">Andrew</a>
+      </div>
+      <div class="clearfix"></div>
+    </footer>
+    <!-- /footer content -->
+  </div>
+</div>
 
 
 
 
-<p>Ваши заявки</p>
-<% @applications.each do |app|%>
-  <p>№<%= app%> <%= link_to 'показать', application_path(app) %></p>
-<% end %>
-
-
-<p> <%= button_to 'Создать заявку', new_application_path(current_user), :method => :get %></p>
-
-
-<p>Ваши команды</p>
-
-<% @teams.each do |team|%>
-  <p><%= team.name%> <%= link_to 'показать', team_path(team) %></p>
-<% end %>
-
-
-<%= button_to "Назад", :welcome_index, :method => :get %>
 

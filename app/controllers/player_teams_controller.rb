@@ -10,7 +10,7 @@ class PlayerTeamsController < ApplicationController
   end
 
   def create
-    @team = Team.find(params[:player_team][:team])
+    @team = Team.find(params[:player_team][:team_id])
     @playerteam=PlayerTeam.new(playerteam_params)
     @playerteam.save
     redirect_to @team
@@ -41,7 +41,7 @@ class PlayerTeamsController < ApplicationController
 
   private
   def playerteam_params
-    params.require(:player_team).permit(:player, :team)
+    params.require(:player_team).permit(:player_id, :team_id)
   end
 
 end

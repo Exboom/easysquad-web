@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_14_074452) do
+ActiveRecord::Schema.define(version: 2019_06_10_071915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,10 +83,19 @@ ActiveRecord::Schema.define(version: 2019_05_14_074452) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "piranha_res", force: :cascade do |t|
+    t.string "directory"
+    t.string "original"
+    t.string "prediction"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["directory", "original", "prediction"], name: "piranha_uq", unique: true
+  end
+
   create_table "player_teams", id: :serial, force: :cascade do |t|
-    t.integer "player", null: false
-    t.integer "team", null: false
-    t.index ["player", "team"], name: "uq_player_team", unique: true
+    t.integer "player_id", null: false
+    t.integer "team_id", null: false
+    t.index ["player_id", "team_id"], name: "uq_player_team", unique: true
   end
 
   create_table "players", force: :cascade do |t|
@@ -113,26 +122,28 @@ ActiveRecord::Schema.define(version: 2019_05_14_074452) do
 
   create_table "teams", force: :cascade do |t|
     t.string "name", default: ""
-    t.integer "owner"
-    t.integer "captain"
+    t.integer "user_id"
+    t.integer "player_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "fki_owner_to_user_pk"
   end
 
   create_table "tournaments", force: :cascade do |t|
     t.string "name"
     t.string "season"
-    t.integer "location"
-    t.integer "federation"
+    t.integer "location_id"
+    t.integer "federation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["federation_id"], name: "fki_tourn_to_feder_fk"
   end
 
   create_table "user_roles", id: :serial, force: :cascade do |t|
-    t.bigint "user1", null: false
-    t.bigint "role1", null: false
-    t.bigint "team"
-    t.index ["user1", "role1"], name: "uq_user_role_team", unique: true
+    t.bigint "user_id", null: false
+    t.bigint "role_id", null: false
+    t.bigint "team_id"
+    t.index ["user_id", "role_id"], name: "uq_user_role_team", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -143,9 +154,10 @@ ActiveRecord::Schema.define(version: 2019_05_14_074452) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "approved"
+    t.boolean "approved", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "tournaments", "federations", name: "tourn_to_feder_fk"
 end

@@ -14,24 +14,25 @@ class WelcomeController < ApplicationController
     @locs=Location.all
     #турниры
     @tourns=Tournament.all
-
-
-    @usersN = User.where("approved = ?", false)
     @users = User.all
 
+
+    @usersNew = User.where("approved = ?", false)
+
     if current_user!=nil
-      param=UserRole.find_by user1: current_user.id
-      @userrols = Role.find(param.role1)
+      @user=User.find(current_user.id)
+      @userrols=@user.roles
     end
 
-    if (current_user!=nil) and (@userrols.id!=1)
-      search=Team.find(PlayerTeam.where("player = ?", current_user.id).pluck(:team))
-      @nextgame = Game.where("(team_one = ? OR team_two = ?) AND game_score is NULL", search, search).take
-      if @nextgame.nil?
-      else
-        @app=Application.find_by player:current_user.id, tournament: @nextgame.tournament
-      end
-    end
+    # if (@userrols.first.id!=1)
+    #   # @team=
+    #   search=Team.find(PlayerTeam.where("player = ?", current_user.id).pluck(:team))
+    #   @nextgame = Game.where("(team_one = ? OR team_two = ?) AND game_score is NULL", search, search).take
+    #   if @nextgame.nil?
+    #   else
+    #     @app=Application.find_by player:current_user.id, tournament: @nextgame.tournament
+    #   end
+    # end
 
   end
 
@@ -45,14 +46,16 @@ class WelcomeController < ApplicationController
     #турниры
     @tourns=Tournament.all
 
-    @user = current_user.email
+    @user = User.find(current_user.id)
+    @teamsusr=@user.teams
+    @rols=@user.roles
     # roles = UserRole.where("user1 = ?", params[:format]).pluck(:role1)
-    @userrols = Role.find(UserRole.where("user1 = ?", params[:format]).pluck(:role1))
-    teams = UserRole.where("user1 = ?", params[:format]).pluck(:team)
-
-    if (teams.any?) and (teams.to_s != "[nil]")
-      @teamsusr = Team.find(teams)
-    end
+    # @userrols = Role.find(UserRole.where("user1 = ?", params[:format]).pluck(:role1))
+    # teams = UserRole.where("user1 = ?", params[:format]).pluck(:team)
+    #
+    # if (teams.any?) and (teams.to_s != "[nil]")
+    #   @teamsusr = Team.find(teams)
+    # end
 
   end
 

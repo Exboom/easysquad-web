@@ -12,4 +12,8 @@ class User < ApplicationRecord
     approved? ? super : :not_approved
   end
 
+  has_many :teams, foreign_key: :user_id
+  has_many :user_roles
+  has_many :roles, through: :user_roles
+
 end

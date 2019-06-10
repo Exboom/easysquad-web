@@ -4,17 +4,17 @@
 <%= form_with scope: :user_role, url: user_roles_path, local: true do |f| %>
 
   <p>
-    <%= f.hidden_field :user1, value: params[:format]%>
+    <%= f.hidden_field :user_id, value: params[:format]%>
   </p>
 
   <p>
     <%= f.label :Роль %><br>
-    <%= f.collection_select(:role1, Role.all, :id, :role) %>
+    <%= f.collection_select(:role_id, Role.all, :id, :role) %>
   </p>
 
   <p>
     <%= f.label :Команда %><br>
-    <%= f.collection_select(:team, Team.all, :id, :name, { :prompt => "Выберите, если необходимо"}) %>
+    <%= f.collection_select(:team_id, Team.all, :id, :name, { :prompt => "Выберите, если необходимо"}) %>
   </p>
 
 
