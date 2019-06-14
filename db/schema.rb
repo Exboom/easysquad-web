@@ -24,16 +24,16 @@ ActiveRecord::Schema.define(version: 2019_06_10_071915) do
   end
 
   create_table "chekins", force: :cascade do |t|
-    t.integer "player"
-    t.integer "team"
-    t.integer "game"
+    t.integer "player_id"
+    t.integer "team_id"
+    t.integer "game_id"
     t.boolean "chekin", default: true
-    t.integer "reasons"
+    t.integer "reason_id"
     t.boolean "presence"
     t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["player", "team", "game"], name: "uq_chekin", unique: true
+    t.index ["player_id", "team_id", "game_id"], name: "uq_chekin", unique: true
   end
 
   create_table "companies", force: :cascade do |t|
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2019_06_10_071915) do
     t.integer "team_two"
     t.string "name"
     t.datetime "time"
-    t.integer "tournament"
+    t.integer "tournament_id"
     t.string "game_score"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -115,9 +115,9 @@ ActiveRecord::Schema.define(version: 2019_06_10_071915) do
   end
 
   create_table "team_tournaments", id: :serial, force: :cascade do |t|
-    t.integer "team", null: false
-    t.integer "tournament", null: false
-    t.index ["team", "tournament"], name: "uq_team_tourn", unique: true
+    t.integer "team_id", null: false
+    t.integer "tournament_id", null: false
+    t.index ["team_id", "tournament_id"], name: "uq_team_tourn", unique: true
   end
 
   create_table "teams", force: :cascade do |t|

@@ -185,10 +185,10 @@
                       </div>
                       <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
 
-                        <% if @tournamentsfdr.empty? %>
-                          <h2><%=@tournamentsfdr%> <%= link_to 'Добавить турнир?', new_tournament_path %></h2>
+                        <% if @federation.tournaments.empty? %>
+                          <h2>Этой федерацией не проводятся турниры <%= link_to 'Добавить турнир?', new_tournament_path %></h2>
                         <% else%>
-                          <% @tournamentsfdr.each do |tourn|%>
+                          <% @federation.tournaments.each do |tourn|%>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                               <div class="x_panel">
                                 <div class="x_title">

@@ -36,7 +36,6 @@ class FederationsController < ApplicationController
     @tourns=Tournament.all
     @federation = Federation.find(params[:id])
 
-    @tournamentsfdr=@federation.tournaments
 
 
   end

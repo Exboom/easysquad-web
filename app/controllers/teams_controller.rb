@@ -30,15 +30,19 @@ class TeamsController < ApplicationController
   # end
 
   def show
-    @team = Team.find(params[:id])
-    @tourns=Tournament.find(TeamTournament.where("team = ?", params[:id]).pluck(:team))
+    #команды
+    @teams=Team.all
+    #федерации
+    @federations=Federation.all
+    #локации
+    @locs=Location.all
+    #турниры
+    @tourns=Tournament.all
 
+    @team = Team.find(params[:id])
     @owner = @team.user
     @cap=@team.player
 
-    @players = @team.players
-
-    puts "это вывод"+ @players.to_s
     @user=User.find(current_user.id)
     @userrols=@user.roles
 

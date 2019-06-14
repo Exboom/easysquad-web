@@ -14,9 +14,9 @@ class Admin::UsersController < ApplicationController
   protected
 
   def check_admin
-    param=UserRole.find_by user1: current_user.id
-    @userrols = Role.find(param.role1)
-    redirect_to root_path, alert:  "У Вас нет прав доступа для данных действий" unless @userrols.id==1
+    @user=User.find(current_user.id)
+    @userrols=@user.roles
+    redirect_to root_path, alert:  "У Вас нет прав доступа для данных действий" unless @userrols.first.id==1
   end
 
   def user_params
