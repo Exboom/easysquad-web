@@ -28,9 +28,13 @@ class ApplicationsController < ApplicationController
 
   def show
     @application = Application.find(params[:id])
-    @player=Player.find(Application.find(params[:id]).player)
-    @team=Team.find(Application.find(params[:id]).team)
-    @tourn=Tournament.find(Application.find(params[:id]).tournament)
+    @player=@application.player
+    @team=@application.team
+    @tourn=@application.tournament
+
+    # @player=Player.find(Application.find(params[:id]).player)
+    # @team=Team.find(Application.find(params[:id]).team)
+    # @tourn=Tournament.find(Application.find(params[:id]).tournament)
   end
 
   def destroy

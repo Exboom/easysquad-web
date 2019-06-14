@@ -14,7 +14,7 @@ class WelcomeController < ApplicationController
     @locs=Location.all
     #турниры
     @tourns=Tournament.all
-    @users = User.all
+    # @users = User.all
 
 
     @usersNew = User.where("approved = ?", false)
@@ -24,15 +24,18 @@ class WelcomeController < ApplicationController
       @userrols=@user.roles
     end
 
-    # if (@userrols.first.id!=1)
-    #   # @team=
-    #   search=Team.find(PlayerTeam.where("player = ?", current_user.id).pluck(:team))
-    #   @nextgame = Game.where("(team_one = ? OR team_two = ?) AND game_score is NULL", search, search).take
-    #   if @nextgame.nil?
-    #   else
-    #     @app=Application.find_by player:current_user.id, tournament: @nextgame.tournament
-    #   end
-    # end
+    if (@userrols.first.id!=1)
+
+
+
+      @player = Player.find(current_user.id)
+      @teampl=@player.teams
+      @nextgame = Game.where("(team_one = ? OR team_two = ?) AND game_score is NULL", @teampl, @teampl).take
+      if @nextgame.nil?
+      else
+        @app=Application.find_by player:current_user.id, tournament: @nextgame.tournament
+      end
+    end
 
   end
 
@@ -49,6 +52,7 @@ class WelcomeController < ApplicationController
     @user = User.find(current_user.id)
     @teamsusr=@user.teams
     @rols=@user.roles
+
     # roles = UserRole.where("user1 = ?", params[:format]).pluck(:role1)
     # @userrols = Role.find(UserRole.where("user1 = ?", params[:format]).pluck(:role1))
     # teams = UserRole.where("user1 = ?", params[:format]).pluck(:team)

@@ -35,7 +35,7 @@ class PlayersController < ApplicationController
     @users = User.all
 
 
-    @applications=Application.where("player = ?", params[:id]).pluck(:id)
+    @applications=Application.where("player_id = ?", params[:id]).pluck(:id)
 
     if Player.find_by_id(params[:id]).nil?
       redirect_to welcome_notplayer_path(current_user)  #это для теста

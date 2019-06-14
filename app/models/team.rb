@@ -1,6 +1,7 @@
 class Team < ApplicationRecord
   belongs_to :user
   belongs_to :player
+  has_many :applications
   has_many :user_roles
 
   has_many :player_teams

@@ -15,9 +15,13 @@ class ChekinsController < ApplicationController
 
   def edit
     @chekin=Chekin.find(params[:id])
-    @player = Player.find(@chekin.player)
-    @game = Game.find(@chekin.game)
-    @team = Team.find(@chekin.team)
+    @player=@chekin.player
+    @game=@chekin.game
+    @team=@chekin.team
+
+    # @player = Player.find(@chekin.player)
+    # @game = Game.find(@chekin.game)
+    # @team = Team.find(@chekin.team)
   end
 
   def create
@@ -38,12 +42,18 @@ class ChekinsController < ApplicationController
 
   def show
     @chekin = Chekin.find(params[:id])
-    @player = Player.find(@chekin.player)
-    @game = Game.find(@chekin.game)
-    @team = Team.find(@chekin.team)
-    if @chekin.reasons!=nil
-      @reason = Reason.find(@chekin.reasons)
-    end
+
+    @player=@chekin.player
+    @game=@chekin.game
+    @team=@chekin.team
+    @reason=@chekin.reason
+
+    # @player = Player.find(@chekin.player)
+    # @game = Game.find(@chekin.game)
+    # @team = Team.find(@chekin.team)
+    # if @chekin.reasons!=nil
+    #   @reason = Reason.find(@chekin.reasons)
+    # end
   end
 
   def destroy
