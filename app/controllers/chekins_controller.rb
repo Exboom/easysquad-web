@@ -65,7 +65,7 @@ class ChekinsController < ApplicationController
 
   private
   def chekin_params
-    params.require(:chekin).permit(:player, :team, :game, :chekin, :chekin_date, :reasons, :presence, :comment)
+    params.require(:chekin).permit(:player_id, :team_id, :game_id, :chekin, :chekin_date, :reason_id, :presence, :comment)
   end
   
 end

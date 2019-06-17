@@ -1,7 +1,6 @@
 class WelcomeController < ApplicationController
   before_action :check_input
 
-
   def index
     #игры
     @games=Game.all
@@ -15,8 +14,6 @@ class WelcomeController < ApplicationController
     #турниры
     @tourns=Tournament.all
     # @users = User.all
-
-
     @usersNew = User.where("approved = ?", false)
 
     if current_user!=nil
@@ -26,15 +23,34 @@ class WelcomeController < ApplicationController
 
     if (@userrols.first.id!=1)
 
+      if @userrols.find_by_id(4)!=nil
+        @player = Player.find(current_user.id)
+        @teampl=@player.teams
+        @nextgame=Array.new(@teampl.size)
+        # @lastchekin=Chekin.find_by player:@player, game: @game
+        @teampl.each_with_index do |teampl, index|
+          @nextgame[index]=Game.where("(team_one = ? OR team_two = ?) AND game_score is NULL", teampl, teampl).take
+        end
 
+        if !@nextgame.empty?
+          @app=Array.new(@nextgame.size)
+          @lastchekin=Array.new(@nextgame.size)
+          @nextgame.each_with_index do |nxtgm, index|
+            @app[index]=Application.find_by player:current_user.id, tournament: nxtgm.tournament
+            @lastchekin[index]=Chekin.find_by player:@player, game: @nextgame[index]
+          end
+        end
 
-      @player = Player.find(current_user.id)
-      @teampl=@player.teams
-      @nextgame = Game.where("(team_one = ? OR team_two = ?) AND game_score is NULL", @teampl, @teampl).take
-      if @nextgame.nil?
-      else
-        @app=Application.find_by player:current_user.id, tournament: @nextgame.tournament
+      elsif @userrols.find_by_id(2)!=nil
+
+        @teamrole=@user.user_roles
+
+      elsif @userrols.find_by_id(3)!=nil
+
+        @teamrole=@user.user_roles
+
       end
+
     end
 
   end
@@ -53,13 +69,6 @@ class WelcomeController < ApplicationController
     @teamsusr=@user.teams
     @rols=@user.roles
 
-    # roles = UserRole.where("user1 = ?", params[:format]).pluck(:role1)
-    # @userrols = Role.find(UserRole.where("user1 = ?", params[:format]).pluck(:role1))
-    # teams = UserRole.where("user1 = ?", params[:format]).pluck(:team)
-    #
-    # if (teams.any?) and (teams.to_s != "[nil]")
-    #   @teamsusr = Team.find(teams)
-    # end
 
   end
 
