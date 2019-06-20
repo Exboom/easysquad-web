@@ -21,12 +21,11 @@
     <p>
       <%= form.label :Игрок %><br>
       <%= @player.name %>
-      <%= form.hidden_field :player, value: current_user.id%>
     </p>
 
     <p>
       <%= form.label :Команда %><br>
-      <%= form.collection_select(:team, Team.all, :id, :name) %>
+      <%= @team.name%>
     </p>
 
     <p>

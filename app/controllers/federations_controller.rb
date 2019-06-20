@@ -25,19 +25,7 @@ class FederationsController < ApplicationController
   # end
 
   def show
-
-    #команды
-    @teams=Team.all
-    #федерации
-    @federations=Federation.all
-    #локации
-    @locs=Location.all
-    #турниры
-    @tourns=Tournament.all
     @federation = Federation.find(params[:id])
-
-
-
   end
 
   # def destroy

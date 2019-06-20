@@ -1,7 +1,7 @@
 <div class="">
   <div id="login" class="animate">
     <section class="login_content">
-      <%= form_with scope: :user, url: admin_users_path do |f| %>
+      <%= form_with scope: :user, url: admin_users_path, local: true do |f| %>
         <h1>Регистрация</h1>
 
         <div>

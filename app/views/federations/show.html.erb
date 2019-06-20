@@ -1,245 +1,103 @@
-<div class="container body">
-  <div class="main_container">
-    <div class="col-md-3 left_col">
-      <div class="left_col scroll-view">
-        <div class="navbar nav_title" style="border: 0;">
-          <a href="/welcome/index" class="site_title">
-            <i class="fa fa-soccer-ball-o"></i> <span>EasySquad</span></a>
+
+<div class="page-title">
+  <div class="clearfix"></div>
+  <div class="">
+    <div class="col-md-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2><i class="fa fa-institution"></i> <%= @federation.name %></h2>
+
+          <ul class="nav navbar-right panel_toolbox" style="padding-left: 25px;">
+            <li>
+              <%= link_to edit_admin_federation_path, :method => :get,
+                          :class=>"close-link",
+                          "data-toggle"=>"tooltip",
+                          "data-placement"=>"top",
+                          :title=>"",
+                          "data-original-title"=>"Редактировать федерацию" do %>
+                <i class="fa fa-wrench"></i>
+              <%end %>
+
+            </li>
+            <li>
+              <%= link_to admin_federation_path, :method => :delete, :class=>"close-link",
+                          "data-toggle"=>"tooltip",
+                          "data-placement"=>"top",
+                          :title=>"",
+                          "data-original-title"=>"Удалить федерацию" do %>
+                <i class="fa fa-close"></i>
+              <%end %>
+            </li>
+          </ul>
+
+          <div class="clearfix"></div>
         </div>
-
-        <div class="clearfix"></div>
-
-        <!-- menu profile quick info -->
-        <div class="profile clearfix">
-          <div class="profile_pic">
-            <%= image_tag "/images/name_user_3716.ico", :class => "img-circle profile_img"%>
-          </div>
-          <div class="profile_info">
-            <span>Здравствйте,</span>
-            <h2> <%=current_user.email%></h2>
-          </div>
-        </div>
-        <!-- /menu profile quick info -->
-
-        <br>
-
-        <!-- sidebar menu -->
-        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-          <div class="menu_section active">
-            <h3>Меню</h3>
-            <ul class="nav side-menu" style="">
-              <!--federation-->
-              <li><a><i class="fa fa-institution"></i> Федерации <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                  <% if @federations.empty? %>
-                    <li><a href="#">В базе отсутствуют федерации</a></li>
-                  <% else%>
-                    <% @federations.each do |federation|%>
-                      <li><%= link_to federation.name, federation_path(federation)%></li>
-                    <% end %>
-                  <% end %>
-                </ul>
+        <div class="x_content">
+          <div class="" role="tabpanel" data-example-id="togglable-tabs">
+            <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+              <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Описание</a>
               </li>
-              <!--tourns-->
-              <li><a><i class="fa fa-trophy"></i> Турниры <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                  <% if @tourns.empty? %>
-                    <li><a href="#">В базе отсутствуют турниры</a></li>
-                  <% else%>
-                    <% @tourns.each do |tourn|%>
-                      <li><%= link_to tourn.name, tournament_path(tourn) %></li>
-                    <% end %>
-                  <% end %>
-                </ul>
+              <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Турниры федерации</a>
               </li>
-              <!--stadium-->
-              <li><a><i class="fa  fa-flag-checkered"></i> Стадионы <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                  <% if @locs.empty? %>
-                    <li><a href="#">В базе отсутствуют места проведенияи</a></li>
-                  <% else%>
-                    <% @locs.each do |locs|%>
-                      <li><%= link_to locs.name, location_path(locs)%></li>
-                    <% end %>
-                  <% end %>
-                </ul>
-              </li>
-              <!--teams-->
-              <li><a><i class="fa fa-users"></i> Команды <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                  <% if @teams.empty? %>
-                    <li><a href="#">В базе отсутствуют команды</a></li>
-                  <% else%>
-                    <% @teams.each do |team|%>
-                      <li><%= link_to team.name, team_path(team) %></li>
-                    <% end %>
-                  <% end %>
-                </ul>
+              <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Контакты</a>
               </li>
             </ul>
-          </div>
+            <div id="myTabContent" class="tab-content">
+              <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                <p>*Описание федерации*</p>
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
 
-        </div>
-        <!-- /sidebar menu -->
+                <% if @federation.tournaments.empty? %>
+                  <h2>Этой федерацией не проводятся турниры <%= link_to 'Добавить турнир?', new_tournament_path %></h2>
+                <% else%>
+                  <% @federation.tournaments.each do |tourn|%>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <div class="x_panel">
+                        <div class="x_title">
+                          <h2><%=tourn.name %> <small><%= @federation.name %></small></h2>
+                          <div class="clearfix"></div>
+                        </div>
 
-        <!-- /menu footer buttons -->
-        <div class="sidebar-footer hidden-small">
-          <%= link_to destroy_user_session_path, :method => :delete,
-                      "data-toggle"=>"tooltip",
-                      "data-placement"=>"top",
-                      :title=>"",
-                      "data-original-title"=>"Logout" do%>
-            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-          <%end %>
-
-        </div>
-        <!-- /menu footer buttons -->
-      </div>
-    </div>
-
-    <!-- top navigation -->
-    <div class="top_nav">
-      <div class="nav_menu">
-        <nav>
-          <div class="nav toggle">
-            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-          </div>
-
-          <ul class="nav navbar-nav navbar-right">
-            <li class="">
-              <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <%=current_user.email%>
-                <span class=" fa fa-angle-down"></span>
-              </a>
-              <ul class="dropdown-menu dropdown-usermenu pull-right">
-                <li>
-                  <%= link_to 'Профиль', player_path(current_user.id), :method => :get %>
-                </li>
-                <li>
-                  <%= link_to destroy_user_session_path, :method => :delete do%>
-                    <i class="fa fa-sign-out pull-right"></i>
-                    <span>Выход</span>
-                  <%end %>
-                </li>
-              </ul>
-            </li>
-
-          </ul>
-        </nav>
-      </div>
-
-    </div>
-    <!-- /top navigation -->
-
-    <!-- page content -->
-    <div class="right_col" role="main" style="min-height: 954px;">
-      <div class="">
-        <div class="page-title">
-          <div class="clearfix"></div>
-
-          <div class="">
-            <div class="col-md-12">
-              <div class="x_panel">
-                <div class="x_title">
-                  <h2><i class="fa fa-institution"></i> <%= @federation.name %></h2>
-
-                  <ul class="nav navbar-right panel_toolbox" style="padding-left: 25px;">
-                    <li>
-
-                      <%= link_to edit_admin_federation_path, :method => :get,
-                                  :class=>"close-link",
-                                  "data-toggle"=>"tooltip",
-                                  "data-placement"=>"top",
-                                  :title=>"",
-                                  "data-original-title"=>"Редактировать федерацию" do %>
-                        <i class="fa fa-wrench"></i>
-                      <%end %>
-
-                    </li>
-                    <li>
-                      <%= link_to admin_federation_path, :method => :delete, :class=>"close-link",
-                                  "data-toggle"=>"tooltip",
-                                  "data-placement"=>"top",
-                                  :title=>"",
-                                  "data-original-title"=>"Удалить федерацию" do %>
-                        <i class="fa fa-close"></i>
-                      <%end %>
-                    </li>
-                  </ul>
-
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <div class="" role="tabpanel" data-example-id="togglable-tabs">
-                    <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                      <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Описание</a>
-                      </li>
-                      <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Турниры федерации</a>
-                      </li>
-                      <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Контакты</a>
-                      </li>
-                    </ul>
-                    <div id="myTabContent" class="tab-content">
-                      <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
-                        <p>*Описание федерации*</p>
-                      </div>
-                      <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
-
-                        <% if @federation.tournaments.empty? %>
-                          <h2>Этой федерацией не проводятся турниры <%= link_to 'Добавить турнир?', new_tournament_path %></h2>
-                        <% else%>
-                          <% @federation.tournaments.each do |tourn|%>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                              <div class="x_panel">
-                                <div class="x_title">
-                                  <h2><%=tourn.name %> <small><%= @federation.name %></small></h2>
-                                  <div class="clearfix"></div>
-                                </div>
-
-                                <div class="x_content">
-                                  <div class="bs-example" data-example-id="simple-jumbotron">
-                                    <div class="jumbotron">
-                                      <p> Сезон турнира: <%= tourn.season %></p>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <%= link_to "Подробнее", tournament_path(tourn), :method => :get, :class => "btn btn-secondary" %>
-                                <%= link_to "Добавить турнир", :new_admin_tournament, :method => :get, :class => "btn btn-secondary" %>
-                              </div>
-                            </div>
-                          <% end %>
-                          <% end %>
-                      </div>
-
-                      <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
-
-                        <div class="col-md-6 col-sm-6 col-xs-12 profile_details">
-                          <div class="well profile_view">
-                            <div class="col-sm-12">
-                              <h4 class="brief"><i><%= @federation.name %></i></h4>
-                              <div class="left col-xs-12">
-                                <ul class="list-unstyled">
-                                  <li>  <big><i class="fa fa-building"></i>Сайт: <%= @federation.url %></big>  </li>
-                                  <li> <big><i class="fa fa-phone"></i> Телефон #: <%= @federation.contacts %></big>  </li>
-                                </ul>
-                              </div>
-                            </div>
-                            <div class="col-xs-12 bottom text-right">
-                              <div class="col-xs-12 col-sm-6 emphasis" style="float:right;">
-                                <button type="button" class="btn btn-primary btn-xs" onclick="parent.location='<%= @federation.url %>'">
-                                  <i class="fa fa-user"> </i> View Profile
-                                </button>
-                              </div>
+                        <div class="x_content">
+                          <div class="bs-example" data-example-id="simple-jumbotron">
+                            <div class="jumbotron">
+                              <p> Сезон турнира: <%= tourn.season %></p>
                             </div>
                           </div>
                         </div>
 
+                        <%= link_to "Подробнее", tournament_path(tourn), :method => :get, :class => "btn btn-secondary" %>
+                        <%= link_to "Добавить турнир", :new_admin_tournament, :method => :get, :class => "btn btn-secondary" %>
+                      </div>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+
+              <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+
+                <div class="col-md-6 col-sm-6 col-xs-12 profile_details">
+                  <div class="well profile_view">
+                    <div class="col-sm-12">
+                      <h4 class="brief"><i><%= @federation.name %></i></h4>
+                      <div class="left col-xs-12">
+                        <ul class="list-unstyled">
+                          <li>  <big><i class="fa fa-building"></i>Сайт: <%= @federation.url %></big>  </li>
+                          <li> <big><i class="fa fa-phone"></i> Телефон #: <%= @federation.contacts %></big>  </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 bottom text-right">
+                      <div class="col-xs-12 col-sm-6 emphasis" style="float:right;">
+                        <button type="button" class="btn btn-primary btn-xs" onclick="parent.location='<%= @federation.url %>'">
+                          <i class="fa fa-user"> </i> View Profile
+                        </button>
                       </div>
                     </div>
                   </div>
-
                 </div>
+
               </div>
             </div>
           </div>
@@ -247,35 +105,13 @@
         </div>
       </div>
     </div>
-    <!-- /page content -->
-
-    <!-- footer content -->
-    <footer>
-      <div class="pull-right">
-        EasySquad by <a href="https://colorlib.com">Andrew</a>
-      </div>
-      <div class="clearfix"></div>
-    </footer>
-    <!-- /footer content -->
   </div>
-</div>
 
 
 
 
 
-<!--    <main role="main" class="col-md-11 ml-sm-auto col-lg-11 px-4">-->
 
-
-<!--      <p> <%#= button_to 'Редактировать федерацию', edit_admin_federation_path, :method => :get %></p>-->
-<!--      <p> <%#= button_to 'Удалить профиль', admin_federation_path, :method => :delete %></p>-->
-      <%#= button_to "Назад", :welcome_index, :method => :get %>
-
-
-<!--    </main>-->
-
-  </div>
-</div>
 
 
 

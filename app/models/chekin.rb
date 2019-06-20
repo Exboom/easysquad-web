@@ -8,5 +8,5 @@ class Chekin < ApplicationRecord
   belongs_to :player
   belongs_to :team
   belongs_to :game
-  belongs_to :reason
+  belongs_to :reason, optional: true
 end

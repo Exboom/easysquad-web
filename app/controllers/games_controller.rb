@@ -32,10 +32,6 @@ class GamesController < ApplicationController
     @team1=Team.find(@game.team_one)
     @team2=Team.find(@game.team_two)
     @tourn=@game.tournament
-
-
-    # @tourn=Tournament.find(@game.tournament)
-    # @players=Player.find(Chekin.where("game = ?", @game.id).pluck( :player))
   end
 
   def destroy

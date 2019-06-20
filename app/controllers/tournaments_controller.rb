@@ -25,18 +25,7 @@ class TournamentsController < ApplicationController
   # end
 
   def show
-    #команды
-    @teams=Team.all
-    #федерации
-    @federations=Federation.all
-    #локации
-    @locs=Location.all
-    #турниры
-    @tourns=Tournament.all
-
     @tournament = Tournament.find(params[:id])
-
-    # @team
   end
 
   # def destroy

@@ -6,21 +6,38 @@
 <% if @lastchekin.nil? %>
   <%= form_with scope: :chekin, url: chekins_path, local: true do |form| %>
 
+
+    <% if @chekin.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          <%= pluralize(@chekin.errors.count, "error") %> prohibited
+          this article from being saved:
+        </h2>
+        <ul>
+          <% @chekin.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+
+
     <p>
       <%= form.label :Игрок %><br>
-      <%= @player.name %>
-      <%= form.hidden_field :player, value: current_user.id%>
+      <%#= @player.name %>
+      <%= form.hidden_field :player_id, value: current_user.id%>
     </p>
 
     <p>
       <%= form.label :Команда %><br>
-      <%= form.collection_select(:team, Team.all, :id, :name) %>
+      <%= form.collection_select(:team_id, Team.all, :id, :name) %>
     </p>
 
     <p>
       <%= form.label :Игра %><br>
-      <%= @game.name %>
-      <%= form.hidden_field :game, value: params[:format]%>
+      <%#= @game.name %>
+      <%= form.hidden_field :game_id, value: params[:format]%>
     </p>
 
     <p>
@@ -33,7 +50,7 @@
     <div id="visblock" style="display: none"><legend>Почему Вас не будет?</legend>
       <p>
         <%= form.label :Причина_отсутствия%> (при выборе "Другое" опишите причину в комментарие)<br>
-        <%= form.collection_select(:reasons, Reason.all, :id, :reason,{ :prompt => "Выберите причину"}) %>
+        <%= form.collection_select(:reason_id, Reason.all, :id, :reason,{ :prompt => "Выберите причину"}) %>
       </p>
 
       <p>

@@ -25,23 +25,13 @@ class PlayersController < ApplicationController
   end
 
   def show
-    @teams=Team.all
-    #федерации
-    @federations=Federation.all
-    #локации
-    @locs=Location.all
-    #турниры
-    @tourns=Tournament.all
-    @users = User.all
-
-
-    @applications=Application.where("player_id = ?", params[:id]).pluck(:id)
 
     if Player.find_by_id(params[:id]).nil?
       redirect_to welcome_notplayer_path(current_user)  #это для теста
     else
       @player = Player.find(params[:id])
       @teams = @player.teams
+      @applications = @player.applications
     end
 
   end

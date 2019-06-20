@@ -31,10 +31,6 @@ class ApplicationsController < ApplicationController
     @player=@application.player
     @team=@application.team
     @tourn=@application.tournament
-
-    # @player=Player.find(Application.find(params[:id]).player)
-    # @team=Team.find(Application.find(params[:id]).team)
-    # @tourn=Tournament.find(Application.find(params[:id]).tournament)
   end
 
   def destroy

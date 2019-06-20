@@ -41,7 +41,7 @@ class Admin::TournamentsController < ApplicationController
 
   private
   def tournament_params
-    params.require(:tournament).permit(:name, :season, :location, :federation)
+    params.require(:tournament).permit(:name, :season, :location_id, :federation_id)
   end
 
   protected

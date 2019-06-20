@@ -1,2 +1,35 @@
 class ApplicationController < ActionController::Base
+
+  before_action :initialize_support
+  layout :layout_by_resource
+
+  def initialize_support
+    #команды
+    @teams=Team.all
+    #федерации
+    @federations=Federation.all
+    #локации
+    @locs=Location.all
+    #турниры
+    @tourns=Tournament.all
+    #new for all controllers
+    if current_user!=nil
+      @user=User.find(current_user.id)
+      @userrols=@user.roles
+      @usersNew = User.where("approved = ?", false)
+    end
+  end
+
+
+  protected
+
+  def layout_by_resource
+    if devise_controller?
+      "devise"
+    else
+      "application"
+    end
+  end
+
+
 end

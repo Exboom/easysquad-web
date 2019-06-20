@@ -5,12 +5,6 @@ class ChekinsController < ApplicationController
     @chekin=Chekin.new
     @game=Game.find(params[:format])
     @lastchekin=Chekin.find_by player:@player, game: @game
-
-    # if @lastchekin.nil?
-    # else
-    #
-    #   render 'show'
-    # end
   end
 
   def edit
@@ -18,23 +12,24 @@ class ChekinsController < ApplicationController
     @player=@chekin.player
     @game=@chekin.game
     @team=@chekin.team
-
-    # @player = Player.find(@chekin.player)
-    # @game = Game.find(@chekin.game)
-    # @team = Team.find(@chekin.team)
   end
 
   def create
     @chekin=Chekin.new(chekin_params)
-    @chekin.save
-    redirect_to @chekin
+    if @chekin.save
+     # redirect_to @chekin
+     redirect_to root_path
+    else
+      render 'new'
+    end
   end
 
   def update
     @chekin = Chekin.find(params[:id])
 
     if @chekin.update(chekin_params)
-      redirect_to @chekin
+      # redirect_to @chekin
+      redirect_to root_path
     else
       render 'show'
     end
@@ -42,18 +37,10 @@ class ChekinsController < ApplicationController
 
   def show
     @chekin = Chekin.find(params[:id])
-
     @player=@chekin.player
     @game=@chekin.game
     @team=@chekin.team
     @reason=@chekin.reason
-
-    # @player = Player.find(@chekin.player)
-    # @game = Game.find(@chekin.game)
-    # @team = Team.find(@chekin.team)
-    # if @chekin.reasons!=nil
-    #   @reason = Reason.find(@chekin.reasons)
-    # end
   end
 
   def destroy
@@ -65,7 +52,7 @@ class ChekinsController < ApplicationController
 
   private
   def chekin_params
-    params.require(:chekin).permit(:player_id, :team_id, :game_id, :chekin, :chekin_date, :reason_id, :presence, :comment)
+    params.require(:chekin).permit(:player_id, :team_id, :game_id, :chekin, :reason_id, :presence, :comment)
   end
   
 end

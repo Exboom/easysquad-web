@@ -17,12 +17,12 @@
 
   <p>
     <%= form.label :Место_проведения %><br>
-    <%= form.collection_select(:location, Location.all, :id, :name) %>
+    <%= form.collection_select(:location_id, Location.all, :id, :name) %>
   </p>
 
   <p>
     <%= form.label :Федерация %><br>
-    <%= form.collection_select(:federation, Federation.all, :id, :name) %>
+    <%= form.collection_select(:federation_id, Federation.all, :id, :name) %>
   </p>
 
   <p>

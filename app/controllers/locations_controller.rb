@@ -24,15 +24,6 @@ class LocationsController < ApplicationController
   # end
 
   def show
-    #команды
-    @teams=Team.all
-    #федерации
-    @federations=Federation.all
-    #локации
-    @locs=Location.all
-    #турниры
-    @tourns=Tournament.all
-
     @location = Location.find(params[:id])
   end
 

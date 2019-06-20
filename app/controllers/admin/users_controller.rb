@@ -6,6 +6,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def create
+    # render plain: params[:user].inspect
     @user = User.new(user_params)
     @user.save
     redirect_to root_path, alert:  "Пользователь зарегестрирован"
