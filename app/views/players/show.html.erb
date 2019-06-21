@@ -33,7 +33,6 @@
                 </div>
                 <div class="x_content">
 
-
                   <div class="" role="tabpanel" data-example-id="togglable-tabs">
                     <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
                       <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Информация</a>
@@ -58,13 +57,19 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                               <div class="x_panel">
                                 <div class="x_title">
-                                  <h2><%=team.name %> <small></small></h2>
+                                  <h2><%=team.name %><small>
+                                    <% team.user_roles.each do |role| %>
+                                      <% if role.user_id==current_user.id%>
+                                        <%= role.role.role %>
+                                      <% end %>
+                                    <% end %>
+                                    </small>
+                                  </h2>
                                   <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
                                   <div class="bs-example" data-example-id="simple-jumbotron">
                                     <div class="jumbotron">
-                                      <!--<p> Сезон турнира: <%#= tourn.season %></p>-->
                                     </div>
                                   </div>
                                 </div>
@@ -81,7 +86,23 @@
                         <h2><li>У вас нет заявок</li></h2>
                         <% else%>
                           <% @applications.each do |app|%>
-                            <h2><li><%= link_to"№"+app.id.to_s+", на участие в турнире "+app.tournament.name , application_path(app) %></li></h2>
+
+
+                            <h2>
+
+                              <ul>
+                                <li>№<%= app.id %></li>
+                                <ul>
+                                  <li>Турнир: <%=app.tournament.name%> </li>
+                                  <li>Команда: <%=app.team.name%> </li>
+                                </ul>
+                              </ul>
+
+
+                            </h2>
+
+
+<!--                            <h2><li><%#= link_to"№"+app.id.to_s+", на участие в турнире "+app.tournament.name , application_path(app) %></li></h2>-->
                           <% end %>
                         <% end %>
 
@@ -92,25 +113,6 @@
                 </div>
               </div>
             </div>
-
-
-<!--            <p>Ваши заявки</p>-->
-            <%# @applications.each do |app|%>
-<!--              <p>№<%#= app%> <%#= link_to 'показать', application_path(app) %></p>-->
-            <%# end %>
-
-
-<!--            <p> <%#= button_to 'Создать заявку', new_application_path(current_user), :method => :get %></p>-->
-
-
-<!--            <p>Ваши команды</p>-->
-
-            <%# @teams.each do |team|%>
-<!--              <p><%#= team.name%> <%#= link_to 'показать', team_path(team) %></p>-->
-            <%# end %>
-
-
-            <%#= button_to "Назад", :welcome_index, :method => :get %>
 
 
         </div>

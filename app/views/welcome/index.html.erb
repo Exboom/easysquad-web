@@ -1,145 +1,237 @@
+<%if @userrols.first.id!=1%>
 
-        <%if @userrols.first.id!=1%>
+<!--  for player-->
+  <%if @userrols.find_by_id(4)!=nil%>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2><i class="fa fa-align-left"></i> Игры <small><%=@player.name%></small></h2>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content" style="display: block;">
+          <!-- start accordion -->
+          <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel">
+              <a class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                <h4 class="panel-title">Ближайшие игры</h4>
+              </a>
+              <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
 
-          <%# if @nextgame.empty? %>
-          <% if @nextgames.to_s=="[nil]" %>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <div class="x_panel">
-                <div class="x_title">
-                  <h2><i class="fa fa-bars"></i> Ближайшая игра <small>Float left</small></h2>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <h3>В ближайшее время игр нет</h3>
+                  <% if (@nextgames[0].ids.empty?) %>
+                    <h3>В ближайшее время игр нет</h3>
+                  <%else %>
+
+                    <% @nextgames.each_with_index do |nxt, index|%>
+
+                      <% nxt.each do |nxtgm|%>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="x_panel">
+                            <div class="x_title">
+                              <h2><i class="fa fa-bars"></i> <%=@teampl[index].name%> <small>ближайшая</small></h2>
+                              <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+
+                              <div class="col-xs-3">
+                                <!-- required for floating -->
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs tabs-left">
+                                  <li class="active"><a href="#home<%=nxtgm.id%>" data-toggle="tab" aria-expanded="true">Игра</a>
+                                  </li>
+                                  <li class=""><a href="#profile<%=nxtgm.id%>" data-toggle="tab" aria-expanded="false">Место</a>
+                                  </li>
+                                  <li class=""><a href="#messages<%=nxtgm.id%>" data-toggle="tab" aria-expanded="false">Отметиться</a>
+                                  </li>
+                                  <li class=""><a href="#allcheck<%=nxtgm.id%>" data-toggle="tab" aria-expanded="false">Кто будет</a>
+                                  </li>
+                                </ul>
+                              </div>
+
+                              <div class="col-xs-9">
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                  <div class="tab-pane active" id="home<%=nxtgm.id%>">
+                                    <p class="lead"><%=nxtgm.name%></p>
+                                    <p>Время проведения: <%=nxtgm.time%></p>
+                                  </div>
+                                  <div class="tab-pane" id="profile<%=nxtgm.id%>">
+                                    <p><%=nxtgm.tournament.location.name%></p>
+                                    <p><%=nxtgm.tournament.location.address%></p>
+                                  </div>
+                                  <div class="tab-pane" id="messages<%=nxtgm.id%>">
+
+                                    <% if (@player.applications.find_by tournament: nxtgm.tournament.id).nil? %>
+                                      <p class="lead">Вы не заявлены за команду на этот турнир</p>
+                                    <% else %>
+                                      <% if (Chekin.find_by player:@player, game: nxtgm).nil? %>
+                                        <%= form_with scope: :chekin, url: chekins_path, local: true  do |form| %>
+                                          <%= form.hidden_field :player_id, value: current_user.id%>
+                                          <p>Ваша команда: <%= @teampl[index].name%></p>
+                                          <%= form.hidden_field :team_id, value: @teampl[index].id%>
+                                          <%= form.hidden_field :game_id, value: nxtgm.id%>
+                                          <p>
+                                            <%= form.label :Вы_будете_на_игре? %><br>
+                                            <%= form.radio_button :chekin, "1",checked: true, onClick: "check(2)"%> <%= form.label(:chekin_true, "Да") %>
+                                            <%= form.radio_button :chekin, "0", onClick: "check(1)"%> <%= form.label(:chekin_false, "Нет") %>
+                                          </p>
+
+                                          <div id="visblock" style="display: none"><legend>Почему Вас не будет?</legend>
+                                            <p>
+                                              <%= form.label :Причина_отсутствия%> (при выборе "Другое" опишите причину в комментарие)<br>
+                                              <%= form.collection_select(:reason_id, Reason.all, :id, :reason,{ :prompt => "Выберите причину"}) %>
+                                            </p>
+
+                                            <p>
+                                              <%= form.label :Комментарий %><br>
+                                              <%= form.text_area :comment %>
+                                            </p>
+                                          </div>
+                                          <p>
+                                            <%= form.submit("Отметиться") %>
+                                          </p>
+                                        <% end %>
+                                      <% else %>
+
+                                        <h3>Вы уже отметились на эту игру!</h3>
+                                        <% if (Chekin.find_by player:@player, game: nxtgm).chekin==true %>
+                                          <p>
+                                            Вы будете на игре
+                                          </p>
+                                        <% else %>
+                                          <p>
+                                            Вы не будете на игре по причине "<%= (Chekin.find_by player:@player, game: nxtgm).reason.reason %>"
+                                          </p>
+                                        <% end %>
+
+                                        <% if nxtgm.game_score.nil? %>
+                                          <%= link_to "Изменить", edit_chekin_path((Chekin.find_by player:@player, game: nxtgm)), :method => :get, :class=>"btn btn-default" %>
+                                        <% end %>
+                                      <% end %>
+                                    <% end %>
+                                  </div>
+
+                                  <div class="tab-pane" id="allcheck<%=nxtgm.id%>">
+                                    <%nxtgm.chekins.where(chekin: true).each do |checks| %>
+                                      <p>
+                                        <%=checks.player.name %>
+                                      </p>
+                                    <% end %>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="clearfix"></div>
+
+                            </div>
+                          </div>
+                        </div>
+
+
+                      <% end %>
+
+                    <% end %>
+
+                  <%end %>
+
+
                 </div>
               </div>
             </div>
-          <%else %>
+            <div class="panel">
+              <a class="panel-heading collapsed" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <h4 class="panel-title">Прошедшие игры</h4>
+              </a>
+              <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false" style="height: 0px;">
+                <div class="panel-body">
 
-            <% @nextgames.each_with_index do |nxt, index|%>
 
-              <% nxt.each do |nxtgm|%>
+                  <% if (@lastgames[0].ids.empty?) %>
+                    <h3>Ни одной игры еще не было сыграно</h3>
+                  <%else %>
 
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <div class="x_panel">
-                    <div class="x_title">
-                      <h2><i class="fa fa-bars"></i> Ближайшая игра <small><%=@teampl[index].name%></small></h2>
-                      <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
+                    <% @lastgames.each_with_index do |lst, index|%>
 
-                      <div class="col-xs-3">
-                        <!-- required for floating -->
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs tabs-left">
-                          <li class="active"><a href="#home<%=nxtgm.id%>" data-toggle="tab" aria-expanded="true">Игра</a>
-                          </li>
-                          <li class=""><a href="#profile<%=nxtgm.id%>" data-toggle="tab" aria-expanded="false">Место</a>
-                          </li>
-                          <li class=""><a href="#messages<%=nxtgm.id%>" data-toggle="tab" aria-expanded="false">Отметиться</a>
-                          </li>
-                          <li class=""><a href="#allcheck<%=nxtgm.id%>" data-toggle="tab" aria-expanded="false">Кто будет</a>
-                          </li>
-                        </ul>
-                      </div>
+                      <% lst.each do |lstgm|%>
 
-                      <div class="col-xs-9">
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                          <div class="tab-pane active" id="home<%=nxtgm.id%>">
-                            <p class="lead"><%=nxtgm.name%></p>
-                            <% if nxtgm.game_score.nil? %>
-                              <p>Игра еще не сыграна</p>
-                            <%else %>
-                              <p>Счет игры:<%=nxtgm.game_score%></p>
-                            <%end %>
-                          </div>
-                          <div class="tab-pane" id="profile<%=nxtgm.id%>">
-                            <p><%=nxtgm.tournament.location.name%></p>
-                            <p><%=nxtgm.tournament.location.address%></p>
-                          </div>
-                          <div class="tab-pane" id="messages<%=nxtgm.id%>">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="x_panel">
+                            <div class="x_title">
+                              <h2><i class="fa fa-bars"></i> <%=@teampl[index].name%> <small>сыграна</small></h2>
+                              <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
 
-                            <% if (Chekin.find_by player:@player, game: nxtgm).nil? %>
-                              <%= form_with scope: :chekin, url: chekins_path, local: true  do |form| %>
-                                <%= form.hidden_field :player_id, value: current_user.id%>
-                                <p>Ваша команда: <%= @teampl[index].name%></p>
-                                <%= form.hidden_field :team_id, value: @teampl[index].id%>
-                                <%= form.hidden_field :game_id, value: nxtgm.id%>
-                                <p>
-                                  <%= form.label :Вы_будете_на_игре? %><br>
-                                  <%= form.radio_button :chekin, "1",checked: true, onClick: "check(2)"%> <%= form.label(:chekin_true, "Да") %>
-                                  <%= form.radio_button :chekin, "0", onClick: "check(1)"%> <%= form.label(:chekin_false, "Нет") %>
-                                </p>
+                              <div class="col-xs-3">
+                                <!-- required for floating -->
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs tabs-left">
+                                  <li class="active"><a href="#home<%=lstgm.id%>" data-toggle="tab" aria-expanded="true">Игра</a>
+                                  </li>
+                                  <li class=""><a href="#profile<%=lstgm.id%>" data-toggle="tab" aria-expanded="false">Место</a>
+                                  </li>
+                                  <li class=""><a href="#allcheck<%=lstgm.id%>" data-toggle="tab" aria-expanded="false">Кто был</a>
+                                  </li>
+                                </ul>
+                              </div>
 
-                                <div id="visblock" style="display: none"><legend>Почему Вас не будет?</legend>
-                                  <p>
-                                    <%= form.label :Причина_отсутствия%> (при выборе "Другое" опишите причину в комментарие)<br>
-                                    <%= form.collection_select(:reason_id, Reason.all, :id, :reason,{ :prompt => "Выберите причину"}) %>
-                                  </p>
+                              <div class="col-xs-9">
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                  <div class="tab-pane active" id="home<%=lstgm.id%>">
+                                    <p class="lead"><%=lstgm.name%></p>
+                                    <p>Счет игры: <%=lstgm. game_score%></p>
+                                  </div>
+                                  <div class="tab-pane" id="profile<%=lstgm.id%>">
+                                    <p><%=lstgm.tournament.location.name%></p>
+                                    <p><%=lstgm.tournament.location.address%></p>
+                                  </div>
 
-                                  <p>
-                                    <%= form.label :Комментарий %><br>
-                                    <%= form.text_area :comment %>
-                                  </p>
+                                  <div class="tab-pane" id="allcheck<%=lstgm.id%>">
+
+                                    <%lstgm.chekins.where(chekin: true).each do |checks| %>
+
+                                      <p>
+                                        <%=checks.player.name %>
+                                      </p>
+
+                                    <% end %>
+
+                                  </div>
                                 </div>
-                                <p>
-                                  <%= form.submit("Отметиться") %>
-                                </p>
-                              <% end %>
-                            <% else %>
+                              </div>
 
-                              <h3>Вы уже отметились на эту игру!</h3>
-                              <% if (Chekin.find_by player:@player, game: nxtgm).chekin==true %>
-                                <p>
-                                  Вы будете на игре
-                                </p>
-                              <% else %>
-                                <p>
-                                  Вы не будете на игре по причине "<%= (Chekin.find_by player:@player, game: nxtgm).reason.reason %>"
-                                </p>
-                              <% end %>
+                              <div class="clearfix"></div>
 
-                              <% if nxtgm.game_score.nil? %>
-                                <%= link_to "Изменить", edit_chekin_path((Chekin.find_by player:@player, game: nxtgm)), :method => :get, :class=>"btn btn-default" %>
-                                <%#= link_to "Удалить", chekin_path(@lastchekin[index]), :method => :delete, :class=>"btn btn-danger" %>
-                              <% end %>
-
-                            <% end %>
-
-                          </div>
-
-                          <div class="tab-pane" id="allcheck<%=nxtgm.id%>">
-
-                            <%nxtgm.chekins.where(chekin: true).each do |checks| %>
-
-                              <p>
-                                <%=checks.player.name %>
-                              </p>
-
-                            <% end %>
-
+                            </div>
                           </div>
                         </div>
-                      </div>
 
-                      <div class="clearfix"></div>
 
-                    </div>
-                  </div>
+                      <% end %>
+
+                    <% end %>
+
+                  <%end %>
+
+
                 </div>
+              </div>
+            </div>
+          </div>
+          <!-- end of accordion -->
 
+        </div>
+      </div>
+    </div>
+  <%end %>
+<!--  for team admin-->
 
-              <% end %>
-
-            <% end %>
-
-          <%end %>
-
-        <%end %>
+<%end %>
 
 
 <script>
+
+
     function check(i)
     {
         if (i==1) {

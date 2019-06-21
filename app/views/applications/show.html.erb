@@ -1,4 +1,4 @@
-<h1>EasySquad</h1>
+
 <h2>Заявка № <%= @application.id %></h2>
 
 <p> Игрок: <%= @player.name %></p>
@@ -6,6 +6,6 @@
 <p> на турнир: <%= @tourn.name %></p>
 
 
-<%= button_to "Изменить заявку", :edit_application, :method => :get %>
-<p> <%= button_to 'Удалить заявку', application_path, :method => :delete %></p>
-<%= button_to "Назад", :welcome_index, :method => :get %>
+<%#= button_to "Изменить заявку", :edit_application, :method => :get %>
+<!--<p> <%#= button_to 'Удалить заявку', application_path, :method => :delete %></p>-->
+<%#= button_to "Назад", :welcome_index, :method => :get %>
