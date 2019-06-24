@@ -143,7 +143,6 @@ ActiveRecord::Schema.define(version: 2019_06_10_071915) do
     t.bigint "user_id", null: false
     t.bigint "role_id", null: false
     t.bigint "team_id"
-    t.index ["user_id", "role_id"], name: "uq_user_role_team", unique: true
   end
 
   create_table "users", force: :cascade do |t|

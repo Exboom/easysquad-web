@@ -53,6 +53,43 @@
                             <%= @cap.name %>
                           <% end %>
                         </p>
+
+                        <% if current_user.id==@owner.id %>
+                          <p> Адмнистраторы команды: </p>
+                          <% if @teamadmins.empty? %>
+                            <p> Дополнительные администраторы не назначены</p>
+                          <% else %>
+                            <% @teamadmins.each do |tmadm| %>
+                              <li> <%= Player.find(tmadm.user_id).name %> <%=link_to 'Убрать из администраторов', user_role_path(tmadm), method: :delete, :class => "btn btn-secondary"  %> </li>
+                            <% end %>
+                          <% end %>
+
+                          <br>
+                          <p>Добавить нового администратора?</p>
+
+                          <% if @candidates[0].nil? %>
+                            <p>Кандидатов нет</p>
+                          <% else %>
+                            <%= form_with scope: :user_role, url: user_roles_path, local: true do |f| %>
+
+                              <p>
+                                <%= f.collection_select(:user_id, @candidates, :id, :name) %>
+                              </p>
+                              <p>
+                                <%= f.hidden_field :role_id, value: 3 %>
+                              </p>
+                              <p>
+                                <%= f.hidden_field :team_id, value: @team.id %>
+                              </p>
+
+                              <p>
+                                <%= f.submit("Добавить") %>
+                              </p>
+                            <% end %>
+                          <% end %>
+
+                        <% end %>
+
                       </div>
                       <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
 

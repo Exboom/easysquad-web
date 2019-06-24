@@ -1,8 +1,21 @@
 <h1>EasySquad</h1>
-<h2>Добавление прав пользователя: <%= @user.email %></h2>
+<!--<h2>Добавление прав пользователя: <%#= @user.email %></h2>-->
 
 <%= form_with scope: :user_role, url: user_roles_path, local: true do |f| %>
 
+  <% if @userrole.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@userrole.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @userrole.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <p>
     <%= f.hidden_field :user_id, value: params[:format]%>
   </p>

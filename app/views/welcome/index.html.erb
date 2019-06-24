@@ -53,7 +53,7 @@
                                 <div class="tab-content">
                                   <div class="tab-pane active" id="home<%=nxtgm.id%>">
                                     <p class="lead"><%=nxtgm.name%></p>
-                                    <p>Время проведения: <%=nxtgm.time%></p>
+                                    <p>Время проведения: <%=nxtgm.time.to_formatted_s(:short)%></p>
                                   </div>
                                   <div class="tab-pane" id="profile<%=nxtgm.id%>">
                                     <p><%=nxtgm.tournament.location.name%></p>
@@ -223,8 +223,180 @@
         </div>
       </div>
     </div>
+    <!--  for team admin-->
+  <%elsif (@userrols.find_by_id(2)!=nil) or (@userrols.find_by_id(3)!=nil)%>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2><i class="fa fa-align-left"></i> Игры <small><%=current_user.email%></small></h2>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content" style="display: block;">
+          <!-- start accordion -->
+          <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel">
+              <a class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                <h4 class="panel-title">Ближайшие игры</h4>
+              </a>
+              <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+
+                  <% if (@nextgames[0].ids.empty?) %>
+                    <h3>В ближайшее время игр нет</h3>
+                  <%else %>
+
+                    <% @nextgames.each_with_index do |nxt, index|%>
+
+                      <% nxt.each do |nxtgm|%>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="x_panel">
+                            <div class="x_title">
+                              <h2><i class="fa fa-bars"></i> <%=@teamusr[index].name%> <small>ближайшая</small></h2>
+                              <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+
+                              <div class="col-xs-3">
+                                <!-- required for floating -->
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs tabs-left">
+                                  <li class="active"><a href="#home<%=nxtgm.id.to_i+index.to_i*2%>" data-toggle="tab" aria-expanded="true">Игра</a>
+                                  </li>
+                                  <li class=""><a href="#profile<%=nxtgm.id.to_i+index.to_i*2%>" data-toggle="tab" aria-expanded="false">Место</a>
+                                  </li>
+                                  <li class=""><a href="#allcheck<%=nxtgm.id.to_i+index.to_i*2%>" data-toggle="tab" aria-expanded="false">Кто будет</a>
+                                  </li>
+                                </ul>
+                              </div>
+
+                              <div class="col-xs-9">
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                  <div class="tab-pane active" id="home<%=nxtgm.id.to_i+index.to_i*2%>">
+                                    <p class="lead"><%=nxtgm.name%></p>
+                                    <p>Время проведения: <%=nxtgm.time.to_formatted_s(:short)%></p>
+                                  </div>
+                                  <div class="tab-pane" id="profile<%=nxtgm.id.to_i+index.to_i*2%>">
+                                    <p><%=nxtgm.tournament.location.name%></p>
+                                    <p><%=nxtgm.tournament.location.address%></p>
+                                  </div>
+                                  <div class="tab-pane" id="allcheck<%=nxtgm.id.to_i+index.to_i*2%>">
+                                    <%nxtgm.chekins.where(chekin: true).each do |checks| %>
+                                      <p>
+                                        <%=checks.player.name %>
+                                      </p>
+                                    <% end %>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="clearfix"></div>
+
+                            </div>
+                          </div>
+                        </div>
+
+
+                      <% end %>
+
+                    <% end %>
+
+                  <%end %>
+
+
+                </div>
+              </div>
+            </div>
+            <div class="panel">
+              <a class="panel-heading collapsed" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <h4 class="panel-title">Прошедшие игры</h4>
+              </a>
+              <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false" style="height: 0px;">
+                <div class="panel-body">
+
+
+                  <% if (@lastgames[0].ids.empty?) %>
+                    <h3>Ни одной игры еще не было сыграно</h3>
+                  <%else %>
+
+                    <% @lastgames.each_with_index do |lst, index|%>
+
+                      <% lst.each do |lstgm|%>
+
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="x_panel">
+                            <div class="x_title">
+                              <h2><i class="fa fa-bars"></i> <%=@teamusr[index].name%> <small>сыграна</small></h2>
+                              <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+
+                              <div class="col-xs-3">
+                                <!-- required for floating -->
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs tabs-left">
+                                  <li class="active"><a href="#home<%=lstgm.id+index.to_i*2%>" data-toggle="tab" aria-expanded="true">Игра</a>
+                                  </li>
+                                  <li class=""><a href="#profile<%=lstgm.id+index.to_i*2%>" data-toggle="tab" aria-expanded="false">Место</a>
+                                  </li>
+                                  <li class=""><a href="#allcheck<%=lstgm.id+index.to_i*2%>" data-toggle="tab" aria-expanded="false">Кто был</a>
+                                  </li>
+                                </ul>
+                              </div>
+
+                              <div class="col-xs-9">
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                  <div class="tab-pane active" id="home<%=lstgm.id+index.to_i*2%>">
+                                    <p class="lead"><%=lstgm.name%></p>
+                                    <p>Счет игры: <%=lstgm. game_score%></p>
+                                  </div>
+                                  <div class="tab-pane" id="profile<%=lstgm.id+index.to_i*2%>">
+                                    <p><%=lstgm.tournament.location.name%></p>
+                                    <p><%=lstgm.tournament.location.address%></p>
+                                  </div>
+
+                                  <div class="tab-pane" id="allcheck<%=lstgm.id+index.to_i*2%>">
+
+                                    <%lstgm.chekins.where(chekin: true).each do |checks| %>
+
+                                      <p>
+                                        <%=checks.player.name %>
+                                      </p>
+
+                                    <% end %>
+
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="clearfix"></div>
+
+                            </div>
+                          </div>
+                        </div>
+
+
+                      <% end %>
+
+                    <% end %>
+
+                  <%end %>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end of accordion -->
+
+        </div>
+      </div>
+    </div>
+
   <%end %>
-<!--  for team admin-->
+
+
+
 
 <%end %>
 

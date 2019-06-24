@@ -29,7 +29,7 @@
 
   <p>
     <%= form.label :Капитан %><br>
-    <%= form.collection_select(:captain, Player.all, :id, :name) %>
+    <%= form.collection_select(:player_id, Player.all, :id, :name) %>
   </p>
 
   <p>

@@ -19,20 +19,51 @@ class TeamsController < ApplicationController
   #   redirect_to @team
   # end
   #
-  # def update
-  #   @team = Team.find(params[:id])
-  #
-  #   if @team.update(team_params)
-  #     redirect_to @team
-  #   else
-  #     render 'show'
-  #   end
-  # end
+  def update
+    @team = Team.find(params[:id])
+
+    if @team.update(team_params)
+      redirect_to @team
+    else
+      render 'edit'
+    end
+  end
 
   def show
     @team = Team.find(params[:id])
     @owner = @team.user
     @cap=@team.player
+    @teamadmins=@team.user_roles.where(role_id: 3)
+    @cnd=@team.user_roles.where.not(role_id: 3).where.not(role_id: 2)
+    @candidates=Array.new(@cnd.size)
+    @cnd.each_with_index do |cnd, index|
+
+      @teamadmins.each do |tmadm|
+        if tmadm.user_id==cnd.user_id
+          next
+        else
+          @candidates[index]=Player.find(cnd.user_id)
+        end
+      end
+
+      # @candidates[index]=Player.find(cnd.user_id)
+    end
+    puts "Это вывод кандидатов = "
+    puts @candidates[0].nil?
+    # @teamadmins.each do |tmadm|
+    #   puts Player.find(tmadm.user_id).name
+    # end
+    #
+    # puts "Это вывод ролей = "+@teamadmins.ids.to_s
+
+    # @candidates.each do |tmcnd|
+    #   puts Player.find(tmcnd.user_id).name
+    # end
+
+    # puts "Это вывод кандидатов = "+@cnd.ids.to_s
+    #          # @candidates.ids.to_s
+
+
   end
 
   # def destroy
@@ -42,9 +73,9 @@ class TeamsController < ApplicationController
   #   redirect_to welcome_index_path
   # end
   #
-  # private
-  # def team_params
-  #   params.require(:team).permit(:name, :owner, :captain)
-  # end
+  private
+  def team_params
+    params.require(:team).permit(:name, :user_id, :player_id)
+  end
 
 end

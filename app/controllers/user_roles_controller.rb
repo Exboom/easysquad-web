@@ -11,8 +11,12 @@ class UserRolesController < ApplicationController
 
   def create
     @userrole=UserRole.new(userrole_params)
-    @userrole.save
-    redirect_to welcome_index_path
+    if @userrole.save
+      redirect_to root_path
+    else
+      render 'new'
+    end
+
   end
 
   def update
