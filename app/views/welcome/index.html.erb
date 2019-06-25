@@ -264,6 +264,8 @@
                                   </li>
                                   <li class=""><a href="#profile<%=nxtgm.id.to_i+index.to_i*2%>" data-toggle="tab" aria-expanded="false">Место</a>
                                   </li>
+                                  <li class=""><a href="#marks<%=nxtgm.id.to_i+index.to_i*2%>" data-toggle="tab" aria-expanded="false">Отметки</a>
+                                  </li>
                                   <li class=""><a href="#allcheck<%=nxtgm.id.to_i+index.to_i*2%>" data-toggle="tab" aria-expanded="false">Кто будет</a>
                                   </li>
                                 </ul>
@@ -288,6 +290,28 @@
                                     <p><%=nxtgm.tournament.location.name%></p>
                                     <p><%=nxtgm.tournament.location.address%></p>
                                   </div>
+                                  <div class="tab-pane" id="marks<%=nxtgm.id.to_i+index.to_i*2%>">
+
+                                    <%= form_with scope: :chekin, url: chekins_path, local: true  do |form| %>
+                                      <%= form.hidden_field :player_id, value: current_user.id%>
+                                      <% varsearch=Chekin.where(game: nxtgm, team: @teamusr[index]).pluck(:player_id)%>
+                                      <% varsearch=@teamusr[index].players.where.not(id: varsearch)%>
+
+                                      <% if varsearch[0].nil?  %>
+                                        <p>Некого отметить!</p>
+                                      <% else %>
+                                        <%= form.collection_select(:player_id, varsearch, :id, :name) %>
+                                        <%= form.hidden_field :team_id, value: @teamusr[index].id%>
+                                        <%= form.hidden_field :game_id, value: nxtgm.id%>
+                                        <%= form.hidden_field :chekin, value: true %>
+                                        <p>
+                                          <%= form.submit("Отметить игрока") %>
+                                        </p>
+                                      <% end %>
+
+                                    <% end %>
+
+                                  </div>
                                   <div class="tab-pane" id="allcheck<%=nxtgm.id.to_i+index.to_i*2%>">
                                     <%nxtgm.chekins.where(chekin: true).each do |checks| %>
                                       <p>
@@ -302,8 +326,6 @@
                             </div>
                           </div>
                         </div>
-
-
                       <% end %>
 
                     <% end %>

@@ -1,212 +1,180 @@
+<div class="page-title">
+  <div class="clearfix"></div>
+  <div class="">
+    <div class="col-md-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2><i class="fa fa-users"></i> <%= @team.name %></h2>
 
-        <div class="page-title">
+          <% if (current_user.id==@owner.id) or !(@userrols.find_by_id(1).nil?) %>
+            <ul class="nav navbar-right panel_toolbox" style="padding-left: 25px;">
+              <li>
+
+                <%= link_to edit_team_path, :method => :get,
+                            :class=>"close-link",
+                            "data-toggle"=>"tooltip",
+                            "data-placement"=>"top",
+                            :title=>"",
+                            "data-original-title"=>"Редактировать команду" do %>
+                  <i class="fa fa-wrench"></i>
+                <%end %>
+
+              </li>
+
+              <% if !(@userrols.find_by_id(1).nil?) %>
+                <li>
+                  <%= link_to admin_team_path, :method => :delete, :class=>"close-link",
+                              "data-toggle"=>"tooltip",
+                              "data-placement"=>"top",
+                              :title=>"",
+                              "data-original-title"=>"Удалить команду" do %>
+                    <i class="fa fa-close"></i>
+                  <%end %>
+                </li>
+              <%end %>
+            </ul>
+          <% end %>
+
           <div class="clearfix"></div>
-          <div class="">
-            <div class="col-md-12">
-              <div class="x_panel">
-                <div class="x_title">
-                  <h2><i class="fa fa-users"></i> <%= @team.name %></h2>
+        </div>
+        <div class="x_content">
+          <div class="" role="tabpanel" data-example-id="togglable-tabs">
+            <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+              <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Описание</a>
+              </li>
+              <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Игроки</a>
+              </li>
+              <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Турниры</a>
+              </li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+              <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                <p> Владелец команды: <%= @owner.email %></p>
+                <p> Капитан команды: <% if @cap.nil? %>
+                    капитан не назначен
+                  <% else %>
+                    <%= @cap.name %>
+                  <% end %>
+                </p>
 
-                  <% if (current_user.id==@owner.id) or !(@userrols.find_by_id(1).nil?) %>
-                    <ul class="nav navbar-right panel_toolbox" style="padding-left: 25px;">
-                      <li>
-
-                        <%= link_to edit_team_path, :method => :get,
-                                    :class=>"close-link",
-                                    "data-toggle"=>"tooltip",
-                                    "data-placement"=>"top",
-                                    :title=>"",
-                                    "data-original-title"=>"Редактировать команду" do %>
-                          <i class="fa fa-wrench"></i>
-                        <%end %>
-
-                      </li>
-
-                      <% if !(@userrols.find_by_id(1).nil?) %>
-                        <li>
-                          <%= link_to admin_team_path, :method => :delete, :class=>"close-link",
-                                      "data-toggle"=>"tooltip",
-                                      "data-placement"=>"top",
-                                      :title=>"",
-                                      "data-original-title"=>"Удалить команду" do %>
-                            <i class="fa fa-close"></i>
-                          <%end %>
-                        </li>
-                      <%end %>
-                    </ul>
+                <% if current_user.id==@owner.id %>
+                  <p>Адмнистраторы команды: </p>
+                  <% if @teamadmins.empty? %>
+                    <li> Дополнительные администраторы не назначены</li>
+                  <% else %>
+                    <% @teamadmins.each do |tmadm| %>
+                      <li> <%= Player.find(tmadm.user_id).name %> <%=link_to 'Убрать из администраторов', user_role_path(tmadm), method: :delete, :class => "btn btn-secondary"  %> </li>
+                    <% end %>
                   <% end %>
 
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <div class="" role="tabpanel" data-example-id="togglable-tabs">
-                    <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                      <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Описание</a>
-                      </li>
-                      <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Игроки</a>
-                      </li>
-                      <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Турниры</a>
-                      </li>
-                    </ul>
-                    <div id="myTabContent" class="tab-content">
-                      <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
-                        <p> Владелец команды: <%= @owner.email %></p>
-                        <p> Капитан команды: <% if @cap.nil? %>
-                            капитан не назначен
-                          <% else %>
-                            <%= @cap.name %>
-                          <% end %>
-                        </p>
+                  <br>
+                  <p><b><i>Добавить нового администратора?</i></b></p>
 
-                        <% if current_user.id==@owner.id %>
-                          <p> Адмнистраторы команды: </p>
-                          <% if @teamadmins.empty? %>
-                            <li> Дополнительные администраторы не назначены</li>
-                          <% else %>
-                            <% @teamadmins.each do |tmadm| %>
-                              <li> <%= Player.find(tmadm.user_id).name %> <%=link_to 'Убрать из администраторов', user_role_path(tmadm), method: :delete, :class => "btn btn-secondary"  %> </li>
-                            <% end %>
-                          <% end %>
+                  <% if @candidates[0].nil? %>
+                    <li>Кандидатов нет</li>
+                  <% else %>
+                    <%= form_with scope: :user_role, url: user_roles_path, local: true do |f| %>
 
-                          <br>
-                          <p>Добавить нового администратора?</p>
+                      <p>
+                        <%= f.collection_select(:user_id, @candidates, :id, :name) %>
+                      </p>
+                      <p>
+                        <%= f.hidden_field :role_id, value: 3 %>
+                      </p>
+                      <p>
+                        <%= f.hidden_field :team_id, value: @team.id %>
+                      </p>
 
-                          <% if @candidates[0].nil? %>
-                            <li>Кандидатов нет</li>
-                          <% else %>
-                            <%= form_with scope: :user_role, url: user_roles_path, local: true do |f| %>
+                      <p>
+                        <%= f.submit("Добавить") %>
+                      </p>
+                    <% end %>
+                  <% end %>
+                <% end %>
 
-                              <p>
-                                <%= f.collection_select(:user_id, @candidates, :id, :name) %>
-                              </p>
-                              <p>
-                                <%= f.hidden_field :role_id, value: 3 %>
-                              </p>
-                              <p>
-                                <%= f.hidden_field :team_id, value: @team.id %>
-                              </p>
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
 
-                              <p>
-                                <%= f.submit("Добавить") %>
-                              </p>
-                            <% end %>
-                          <% end %>
-                        <% end %>
+                <% if @team.players.empty? %>
+                  <h2>В этой команде нет игроков</h2>
+                <% else%>
+                  <% @team.players.each do |play|%>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <div class="x_panel">
+                        <div class="x_title">
+                          <h2><%=play.name %> <small><%= @team.name %></small></h2>
+                          <div class="clearfix"></div>
+                        </div>
 
-                      </div>
-                      <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
-
-                        <% if @team.players.empty? %>
-                          <h2>В этой команде нет игроков</h2>
-                        <% else%>
-                          <% @team.players.each do |play|%>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                              <div class="x_panel">
-                                <div class="x_title">
-                                  <h2><%=play.name %> <small><%= @team.name %></small></h2>
-                                  <div class="clearfix"></div>
-                                </div>
-
-                                <div class="x_content">
-                                  <div class="bs-example" data-example-id="simple-jumbotron">
-                                    <div class="jumbotron">
-
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <%= link_to "Подробнее", player_path(play), :method => :get, :class => "btn btn-secondary" %>
-                                <%= link_to 'Убрать из команды', player_team_path(play,@team), method: :delete, :class => "btn btn-secondary" %>
-                              </div>
-                            </div>
-                          <% end %>
-                        <% end %>
-                      </div>
-
-                      <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
-
-                        <% if @team.tournaments.empty? %>
-                        <h2>Эта команда не участвует в турнирах </h2>
-                        <% else%>
-                        <% @team.tournaments.each do |tourn|%>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="x_panel">
-                              <div class="x_title">
-                                <h2><%=tourn.name %> <small></small></h2>
-                                <div class="clearfix"></div>
-                              </div>
-
-                              <div class="x_content">
-                                <div class="bs-example" data-example-id="simple-jumbotron">
-                                  <div class="jumbotron">
-                                    <p> Сезон турнира: <%= tourn.season %></p>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <%= link_to "Подробнее", tournament_path(tourn), :method => :get, :class => "btn btn-secondary" %>
+                        <div class="x_content">
+                          <div class="bs-example" data-example-id="simple-jumbotron">
+                            <div class="jumbotron">
 
                             </div>
                           </div>
-                        <% end %>
-                        <% end %>
+                        </div>
+
+                        <%= link_to "Подробнее", player_path(play), :method => :get, :class => "btn btn-secondary" %>
+                        <%= link_to 'Убрать из команды', player_team_path(play,@team), method: :delete, :class => "btn btn-secondary" %>
+                      </div>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+
+                <% if @team.tournaments.empty? %>
+                  <h2>Эта команда не участвует в турнирах </h2>
+                <% else%>
+                  <% @team.tournaments.each do |tourn|%>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <div class="x_panel">
+                        <div class="x_title">
+                          <h2><%=tourn.name %> <small></small></h2>
+                          <div class="clearfix"></div>
+                        </div>
+
+                        <div class="x_content">
+                          <div class="bs-example" data-example-id="simple-jumbotron">
+                            <div class="jumbotron">
+                              <p> Сезон турнира: <%= tourn.season %></p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <%= link_to "Подробнее", tournament_path(tourn), :method => :get, :class => "btn btn-secondary" %>
 
                       </div>
                     </div>
-                  </div>
+                  <% end %>
+                <% end %>
 
-                </div>
+                <% if (current_user.id==@owner.id) or !(UserRole.find_by team_id:@team.id, user_id:current_user.id, role_id: 3).nil?  or !(@userrols.find_by_id(1).nil?) %>
+                  <p>Добавить турнир:</p>
+                  <%= form_with scope: :team_tournament, url: team_tournaments_path, local: true do |f| %>
+
+                    <p>
+                      <%= f.hidden_field :team, value: @team.id%>
+                    </p>
+
+                    <p>
+                      <%= f.label :Турниры %><br>
+                      <%= f.collection_select(:tournament, Tournament.where.not(id: @team.tournaments.ids), :id, :name) %>
+                    </p>
+
+                    <p>
+                      <%= f.submit("Добавить") %>
+                    </p>
+                  <% end %>
+                <% end %>
+
               </div>
             </div>
           </div>
 
         </div>
+      </div>
+    </div>
+  </div>
 
-
-
-
-
-
-
-<!--<h1>EasySquad</h1>-->
-<!--<h2>Профиль команды: <%#= @team.name %></h2>-->
-
-<!--<p> Владелец команды: <%#= @owner.email %></p>-->
-<!--<p> Капитан команды: <%# if @cap.nil? %>-->
-<!--    капитан не назначен-->
-  <%# else %>
-    <%#= @cap.name %>
-  <%# end %>
-<!--</p>-->
-
-<!--<p>Игроки команды</p>-->
-<%# if @team.players.empty? %>
-<!--  <p>В этой команде нет игроков</p>-->
-<%#else %>
-  <%# @team.players.each do |player|%>
-<!--    <p><%#= player.name%> <%#= link_to 'показать', player_path(player) %>, <%#= link_to 'убрать из команды', player_team_path(player,@team), method: :delete %></p>-->
-  <%# end %>
-<%#end %>
-
-
-<%#= button_to 'Добавить игроков', new_player_team_path(@team), :method => :get %>
-
-<!--<p> Турниры, в которых участвует команда:</p>-->
-<%# if @team.tournaments.empty? %>
-<!--  <p>Команда не участвует в турнирах</p>-->
-<%# else %>
-<!--  <table>-->
-    <%# @tourns.each do |tourn|%>
-<!--    <td><%#= tourn.name%></td>-->
-<!--    <td><%#= button_to 'подробнее', tournament_path(tourn), :method => :get%></td>-->
-<!--  </table>-->
-    <%# end %>
-<%# end %>
-
-
-<%#if @userrols.first.id==1%>
-<!--  <p> <%#= button_to 'Добавить турниры', new_team_tournament_path(@team), :method => :get %></p>-->
-<%# end %>
-<!--<p> <%#= button_to 'Редактировать команду', edit_team_path, :method => :get %></p>-->
-<!--<p> <%#= button_to 'Удалить команду', admin_team_path, :method => :delete %></p>-->
-<%#= button_to "Назад", :welcome_index, :method => :get %>
+</div>

@@ -32,9 +32,7 @@ class PlayerTeamsController < ApplicationController
 
   def destroy
     @playerteam = PlayerTeam.find_by player: params[:id], team: params[:format]
-    # @playerteam = PlayerTeam.where("player = ? AND team=?", params[:id],params[:format])
     @playerteam.destroy
-    # PlayerTeam.destroy(PlayerTeam.find_by player: params[:id], team: params[:format])
 
     redirect_to welcome_index_path
   end
