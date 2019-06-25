@@ -57,7 +57,7 @@
                         <% if current_user.id==@owner.id %>
                           <p> Адмнистраторы команды: </p>
                           <% if @teamadmins.empty? %>
-                            <p> Дополнительные администраторы не назначены</p>
+                            <li> Дополнительные администраторы не назначены</li>
                           <% else %>
                             <% @teamadmins.each do |tmadm| %>
                               <li> <%= Player.find(tmadm.user_id).name %> <%=link_to 'Убрать из администраторов', user_role_path(tmadm), method: :delete, :class => "btn btn-secondary"  %> </li>
