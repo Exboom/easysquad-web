@@ -1,5 +1,7 @@
 class TeamsController < ApplicationController
 
+  before_action :check_owner, only: [:edit]
+
   # def index
   #   @teams=Team.all
   # end
@@ -58,10 +60,17 @@ class TeamsController < ApplicationController
   #
   #   redirect_to welcome_index_path
   # end
-  #
+
   private
   def team_params
     params.require(:team).permit(:name, :user_id, :player_id)
   end
+
+  def check_owner
+    @team = Team.find(params[:id])
+    redirect_to team_path,
+                alert:  "У Вас нет прав доступа для данных действий" unless (current_user.id==@team.user_id) or !(@userrols.find_by_id(1).nil?)
+  end
+
 
 end

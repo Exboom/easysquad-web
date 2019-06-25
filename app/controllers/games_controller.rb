@@ -15,10 +15,12 @@ class GamesController < ApplicationController
   end
 
   def update
+    session[:return_to] ||= request.referer
     @game = Game.find(params[:id])
 
     if @game.update(game_params)
-      redirect_to @game
+      # redirect_to @game
+      redirect_to session.delete(:return_to)
     else
       render 'show'
     end

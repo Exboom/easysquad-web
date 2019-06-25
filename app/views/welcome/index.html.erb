@@ -275,6 +275,14 @@
                                   <div class="tab-pane active" id="home<%=nxtgm.id.to_i+index.to_i*2%>">
                                     <p class="lead"><%=nxtgm.name%></p>
                                     <p>Время проведения: <%=nxtgm.time.to_formatted_s(:short)%></p>
+                                    <p><b><i>Игра сыграна?</i></b></p>
+                                    <p>Установите счет:</p>
+
+                                    <%= form_with(model: nxtgm, local: true) do |form| %>
+                                      <%= form.text_field :game_score %>
+                                      <%= form.submit("Установить") %>
+                                    <% end %>
+
                                   </div>
                                   <div class="tab-pane" id="profile<%=nxtgm.id.to_i+index.to_i*2%>">
                                     <p><%=nxtgm.tournament.location.name%></p>

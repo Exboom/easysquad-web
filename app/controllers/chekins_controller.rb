@@ -15,10 +15,12 @@ class ChekinsController < ApplicationController
   end
 
   def create
+    session[:return_to] ||= request.referer
     @chekin=Chekin.new(chekin_params)
     if @chekin.save
      # redirect_to @chekin
-     redirect_to root_path
+     # redirect_to root_path
+     redirect_to session.delete(:return_to)
     else
       render 'new'
     end

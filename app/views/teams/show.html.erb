@@ -1,36 +1,40 @@
 
         <div class="page-title">
           <div class="clearfix"></div>
-
           <div class="">
             <div class="col-md-12">
               <div class="x_panel">
                 <div class="x_title">
                   <h2><i class="fa fa-users"></i> <%= @team.name %></h2>
 
-                  <ul class="nav navbar-right panel_toolbox" style="padding-left: 25px;">
-                    <li>
+                  <% if (current_user.id==@owner.id) or !(@userrols.find_by_id(1).nil?) %>
+                    <ul class="nav navbar-right panel_toolbox" style="padding-left: 25px;">
+                      <li>
 
-                      <%= link_to edit_team_path, :method => :get,
-                                  :class=>"close-link",
-                                  "data-toggle"=>"tooltip",
-                                  "data-placement"=>"top",
-                                  :title=>"",
-                                  "data-original-title"=>"Редактировать команду" do %>
-                        <i class="fa fa-wrench"></i>
-                      <%end %>
+                        <%= link_to edit_team_path, :method => :get,
+                                    :class=>"close-link",
+                                    "data-toggle"=>"tooltip",
+                                    "data-placement"=>"top",
+                                    :title=>"",
+                                    "data-original-title"=>"Редактировать команду" do %>
+                          <i class="fa fa-wrench"></i>
+                        <%end %>
 
-                    </li>
-                    <li>
-                      <%= link_to team_path, :method => :delete, :class=>"close-link",
-                                  "data-toggle"=>"tooltip",
-                                  "data-placement"=>"top",
-                                  :title=>"",
-                                  "data-original-title"=>"Удалить команду" do %>
-                        <i class="fa fa-close"></i>
+                      </li>
+
+                      <% if !(@userrols.find_by_id(1).nil?) %>
+                        <li>
+                          <%= link_to admin_team_path, :method => :delete, :class=>"close-link",
+                                      "data-toggle"=>"tooltip",
+                                      "data-placement"=>"top",
+                                      :title=>"",
+                                      "data-original-title"=>"Удалить команду" do %>
+                            <i class="fa fa-close"></i>
+                          <%end %>
+                        </li>
                       <%end %>
-                    </li>
-                  </ul>
+                    </ul>
+                  <% end %>
 
                   <div class="clearfix"></div>
                 </div>
@@ -68,7 +72,7 @@
                           <p>Добавить нового администратора?</p>
 
                           <% if @candidates[0].nil? %>
-                            <p>Кандидатов нет</p>
+                            <li>Кандидатов нет</li>
                           <% else %>
                             <%= form_with scope: :user_role, url: user_roles_path, local: true do |f| %>
 
@@ -87,7 +91,6 @@
                               </p>
                             <% end %>
                           <% end %>
-
                         <% end %>
 
                       </div>

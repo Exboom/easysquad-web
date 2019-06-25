@@ -10,9 +10,12 @@ class UserRolesController < ApplicationController
   end
 
   def create
+    session[:return_to] ||= request.referer
+
     @userrole=UserRole.new(userrole_params)
     if @userrole.save
-      redirect_to root_path
+      # redirect_to root_path
+      redirect_to session.delete(:return_to)
     else
       render 'new'
     end
@@ -36,10 +39,13 @@ class UserRolesController < ApplicationController
   end
 
   def destroy
+    session[:return_to] ||= request.referer
+
     @userrole = UserRole.find(params[:id])
     @userrole.destroy
+    # redirect_to welcome_index_path
 
-    redirect_to welcome_index_path
+    redirect_to session.delete(:return_to)
   end
 
   private
