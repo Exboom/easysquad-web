@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
   get 'welcome/notplayer'
+  get 'welcome/update_teams', as: 'update_teams'
 
 
   resources :players

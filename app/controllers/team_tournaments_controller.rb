@@ -10,10 +10,12 @@ class TeamTournamentsController < ApplicationController
   end
 
   def create
-    @team = Team.find(params[:team_tournament][:team])
+    session[:return_to] ||= request.referer
+    # @team = Team.find(params[:team_tournament][:team])
     @teamtournament=TeamTournament.new(teamtournament_params)
     @teamtournament.save
-    redirect_to @team
+    redirect_to session.delete(:return_to)
+    # redirect_to @team
   end
 
   def update
@@ -31,15 +33,16 @@ class TeamTournamentsController < ApplicationController
   end
 
   def destroy
-    @teamtournament = TeamTournament.find(params[:id])
+    session[:return_to] ||= request.referer
+    @teamtournament = TeamTournament.find_by(team_id:params[:id], tournament_id:params[:format])
     @teamtournament.destroy
-
-    redirect_to welcome_index_path
+    redirect_to session.delete(:return_to)
+    # redirect_to welcome_index_path
   end
 
   private
   def teamtournament_params
-    params.require(:team_tournament).permit(:team, :tournament)
+    params.require(:team_tournament).permit(:team_id, :tournament_id)
   end
 
 end

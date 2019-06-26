@@ -9,15 +9,20 @@ class GamesController < ApplicationController
   end
 
   def create
+    session[:return_to] ||= request.referer
     @game=Game.new(game_params)
-    @game.save
-    redirect_to @game
+    if @game.save
+      redirect_to session.delete(:return_to)
+    else
+      render 'new'
+    end
+
+    # redirect_to @game
   end
 
   def update
     session[:return_to] ||= request.referer
     @game = Game.find(params[:id])
-
     if @game.update(game_params)
       # redirect_to @game
       redirect_to session.delete(:return_to)
@@ -45,7 +50,7 @@ class GamesController < ApplicationController
 
   private
   def game_params
-    params.require(:game).permit(:team_one, :team_two, :name, :time, :tournament, :game_score)
+    params.require(:game).permit(:team_one, :team_two, :name, :time, :tournament_id, :game_score)
   end
 
 end

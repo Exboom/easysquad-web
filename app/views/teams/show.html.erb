@@ -57,7 +57,7 @@
                   <% end %>
                 </p>
 
-                <% if current_user.id==@owner.id %>
+                <% if (current_user.id==@owner.id) or !(@userrols.find_by_id(1).nil?)%>
                   <p>Адмнистраторы команды: </p>
                   <% if @teamadmins.empty? %>
                     <li> Дополнительные администраторы не назначены</li>
@@ -144,6 +144,11 @@
 
                         <%= link_to "Подробнее", tournament_path(tourn), :method => :get, :class => "btn btn-secondary" %>
 
+                        <% if (current_user.id==@owner.id) or !(UserRole.find_by team_id:@team.id, user_id:current_user.id, role_id: 3).nil?  or !(@userrols.find_by_id(1).nil?) %>
+                          <%= link_to "Выйти из турнира", team_tournament_path(@team,tourn), :method => :delete, :class => "btn btn-secondary" %>
+                        <% end %>
+
+
                       </div>
                     </div>
                   <% end %>
@@ -154,12 +159,12 @@
                   <%= form_with scope: :team_tournament, url: team_tournaments_path, local: true do |f| %>
 
                     <p>
-                      <%= f.hidden_field :team, value: @team.id%>
+                      <%= f.hidden_field :team_id, value: @team.id%>
                     </p>
 
                     <p>
                       <%= f.label :Турниры %><br>
-                      <%= f.collection_select(:tournament, Tournament.where.not(id: @team.tournaments.ids), :id, :name) %>
+                      <%= f.collection_select(:tournament_id, Tournament.where.not(id: @team.tournaments.ids), :id, :name) %>
                     </p>
 
                     <p>

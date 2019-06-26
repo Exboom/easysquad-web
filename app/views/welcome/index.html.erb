@@ -1,5 +1,4 @@
 <%if @userrols.first.id!=1%>
-
 <!--  for player-->
   <%if @userrols.find_by_id(4)!=nil%>
     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -217,9 +216,72 @@
                 </div>
               </div>
             </div>
+
+            <% if (@userrols.find_by_id(3)!=nil) %>
+              <div class="panel">
+                <a class="panel-heading collapsed" role="tab" id="headingThree" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseTwo">
+                  <h4 class="panel-title">Добавить игру</h4>
+                </a>
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="false" style="height: 0px;">
+                  <div class="panel-body">
+
+                    <%= form_with scope: :game, url: games_path, html: {:id=>"demo-form2", "data-parsley-validate"=>"", :class=>"form-horizontal form-label-left", :novalidate=>""}, local: true do |form| %>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tourn">Турнир <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <%= form.collection_select(:tournament_id, Tournament.all, :id, :name, {:prompt => "Выберите турнир"}, {:id=>"tourn", :class=>"form-control"}) %>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Название <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <%= form.text_field :name, :id=>"name", :class=>"form-control col-md-7 col-xs-12" %>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="date">Время проведения <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <%= form.datetime_local_field :time, :start_year => Date.today.year, :end_year => Date.today.year, :id=>"date", :class=>"form-control col-md-7 col-xs-12" %>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Ваша команда <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <%= form.collection_select(:team_one, @teamusrng, :id, :name, {}, {:id=>"myteam", :class=>"form-control"}) %>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="enemyteam">Команда соперника <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <%= form.collection_select(:team_one, @alltournteams, :id, :name, {}, {:id=>"enemyteam", :class=>"form-control"}) %>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+
+                        <%= form.submit "Создать", :class=>"btn btn-success" %>
+
+                      </div>
+
+                    <% end %>
+
+                  </div>
+                </div>
+              </div>
+            <%end %>
+
           </div>
           <!-- end of accordion -->
-
         </div>
       </div>
     </div>
@@ -234,6 +296,7 @@
         <div class="x_content" style="display: block;">
           <!-- start accordion -->
           <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+<!--            next games-->
             <div class="panel">
               <a class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                 <h4 class="panel-title">Ближайшие игры</h4>
@@ -336,14 +399,13 @@
                 </div>
               </div>
             </div>
+<!--            last games-->
             <div class="panel">
               <a class="panel-heading collapsed" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                 <h4 class="panel-title">Прошедшие игры</h4>
               </a>
               <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false" style="height: 0px;">
                 <div class="panel-body">
-
-
                   <% if (@lastgames[0].ids.empty?) %>
                     <h3>Ни одной игры еще не было сыграно</h3>
                   <%else %>
@@ -411,7 +473,67 @@
                     <% end %>
 
                   <%end %>
+                </div>
+              </div>
+            </div>
+<!--            new games-->
+            <div class="panel">
+              <a class="panel-heading collapsed" role="tab" id="headingThree" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseTwo">
+                <h4 class="panel-title">Добавить игру</h4>
+              </a>
+              <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="false" style="height: 0px;">
+                <div class="panel-body">
 
+
+                  <%= form_with scope: :game, url: games_path, html: {:id=>"demo-form2", "data-parsley-validate"=>"", :class=>"form-horizontal form-label-left", :novalidate=>""}, local: true do |form| %>
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tourn">Турнир <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <%= form.collection_select(:tournament_id, Tournament.all, :id, :name, {:prompt => "Выберите турнир"}, {:id=>"tourn", :class=>"form-control"}) %>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Название <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <%= form.text_field :name, :id=>"name", :class=>"form-control col-md-7 col-xs-12" %>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="date">Время проведения <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <%= form.datetime_local_field :time, :start_year => Date.today.year, :end_year => Date.today.year, :id=>"date", :class=>"form-control col-md-7 col-xs-12" %>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Ваша команда <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <%= form.collection_select(:team_one, @teamusrng, :id, :name, {}, {:id=>"myteam", :class=>"form-control"}) %>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="enemyteam">Команда соперника <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <%= form.collection_select(:team_one, @alltournteams, :id, :name, {}, {:id=>"enemyteam", :class=>"form-control"}) %>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+
+                      <%= form.submit "Создать", :class=>"btn btn-success" %>
+
+                    </div>
+
+                  <% end %>
 
                 </div>
               </div>
@@ -432,8 +554,6 @@
 
 
 <script>
-
-
     function check(i)
     {
         if (i==1) {
@@ -443,4 +563,7 @@
             document.getElementById('visblock').style.display='none';
         }
     }
+
+
+
 </script>

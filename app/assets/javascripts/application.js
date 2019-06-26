@@ -15,6 +15,7 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
+//= require welcome.coffee
 // require turbolinks
 
 // require_tree .
