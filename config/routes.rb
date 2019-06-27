@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :path_prefix => 'dev'
 
   get 'welcome/index'
   get 'welcome/notplayer'
   get 'welcome/update_teams', as: 'update_teams'
+  get 'welcome/update_enemy', as: 'update_enemy'
+  get 'application/adm_new_up', as: 'adm_new_up'
 
 
   resources :players
@@ -27,7 +29,8 @@ Rails.application.routes.draw do
     resources :locations, except: [:show]
     resources :tournaments, except: [:show]
     resources :teams, except: [:show, :edit]
-    resources :users, except: [:index]
+    # resources :users, except: [:index]
+    resources :users
   end
 
 

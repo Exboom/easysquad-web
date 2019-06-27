@@ -18,9 +18,19 @@
 //= require welcome.coffee
 // require turbolinks
 
-// require_tree .
-// require gentelella
-// require gentelella-custom
-// require jquery3
-// require popper
-// require bootstrap-sprockets
+$(document).ready(function() {
+
+    $('#newup').click(function () {
+
+            setTimeout(function () {
+                $.ajax({
+                    url: "/application/adm_new_up",
+                    type: "GET",
+                    dataType: "script"
+                })
+            }, 1000);
+
+        }
+    );
+
+});

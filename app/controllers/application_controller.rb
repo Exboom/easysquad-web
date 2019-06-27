@@ -20,6 +20,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def adm_new_up
+    @user=User.find(current_user.id)
+    @userrols=@user.roles
+    @usersNew = User.where("approved = ?", false)
+    respond_to do |format|
+      format.js
+    end
+    redirect_to root_path
+  end
+
   protected
 
   def layout_by_resource

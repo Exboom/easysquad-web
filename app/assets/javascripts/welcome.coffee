@@ -13,3 +13,17 @@ $ ->
         console.log("AJAX Error: #{textStatus}")
       success: (data, textStatus, jqXHR) ->
         console.log("Dynamic team select OK!")
+
+$ ->
+  $(document).on 'change', '#myteam', (evt) ->
+    $.ajax 'welcome/update_enemy',
+      type: 'GET'
+      dataType: 'script'
+      data: {
+        tournament_id: $("#tourn option:selected").val()
+        myteam_id: $("#myteam option:selected").val()
+      }
+      error: (jqXHR, textStatus, errorThrown) ->
+        console.log("AJAX Error: #{textStatus}")
+      success: (data, textStatus, jqXHR) ->
+        console.log("Dynamic team select OK!")

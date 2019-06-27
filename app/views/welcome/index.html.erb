@@ -515,7 +515,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Ваша команда <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <%= form.collection_select(:team_one, @teamusrng, :id, :name, {}, {:id=>"myteam", :class=>"form-control"}) %>
+                        <%= form.collection_select(:team_one, @teamusrng, :id, :name, {:prompt => "Выберите команду"}, {:id=>"myteam", :class=>"form-control"}) %>
                       </div>
                     </div>
 
@@ -523,7 +523,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="enemyteam">Команда соперника <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <%= form.collection_select(:team_one, @alltournteams, :id, :name, {}, {:id=>"enemyteam", :class=>"form-control"}) %>
+                        <%= form.collection_select(:team_one, @alltournteams, :id, :name, {:prompt => "Выберите соперника"}, {:id=>"enemyteam", :class=>"form-control"}) %>
                       </div>
                     </div>
 
@@ -546,9 +546,6 @@
     </div>
 
   <%end %>
-
-
-
 
 <%end %>
 

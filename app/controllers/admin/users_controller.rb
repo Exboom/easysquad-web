@@ -5,11 +5,30 @@ class Admin::UsersController < ApplicationController
     @user = User.new
   end
 
+  def edit
+    @user=User.find(params[:id])
+  end
+
   def create
     # render plain: params[:user].inspect
     @user = User.new(user_params)
     @user.save
     redirect_to root_path, alert:  "Пользователь зарегестрирован"
+  end
+
+  def update
+    session[:return_to] ||= request.referer
+    if params[:user][:password].blank?
+      params[:user].delete(:password)
+      params[:user].delete(:password_confirmation)
+    end
+    @user = User.find(params[:id])
+    @user.update(user_params)
+    if @user.update(user_params)
+      redirect_to session.delete(:return_to)
+    else
+      render 'show'
+    end
   end
 
   protected
@@ -22,7 +41,7 @@ class Admin::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(
-        :name, :email, :password, :password_confirmation
+        :name, :email, :password, :password_confirmation, :approved
     )
   end
 

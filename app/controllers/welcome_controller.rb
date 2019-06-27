@@ -31,16 +31,27 @@ class WelcomeController < ApplicationController
   def update_teams
     @tourn=Tournament.find(params[:tournament_id])
     @alltournteams=@tourn.teams
-
     if @userrols.find_by_id(2)!=nil
       @teamusrng=@tourn.teams.where(user_id: current_user.id)
+      if @teamusrng.size==1
+        @alltournteams=@tourn.teams.where.not(id: @teamusrng[0])
+      end
     elsif @userrols.find_by_id(3)!=nil
       @player = Player.find(current_user.id)
-      @teamusrng=@tourn.teams.find(@player.teams.ids)
+      @teamusrng = UserRole.where(user_id: current_user.id, role_id: 3).pluck(:team_id)
+      @teamusrng=@tourn.teams.where(id: @teamusrng)
+      if @teamusrng.size==1
+        @alltournteams=@tourn.teams.where.not(id: @teamusrng[0])
+      end
     end
     respond_to do |format|
       format.js
     end
+  end
+
+  def update_enemy
+    @tourn=Tournament.find(params[:tournament_id])
+    @alltournteams=@tourn.teams.where.not(id: params[:myteam_id])
   end
 
   def notplayer

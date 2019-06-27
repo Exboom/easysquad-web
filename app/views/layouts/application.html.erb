@@ -9,6 +9,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application'%>
+    <%#= javascript_tag "var AUTH_TOKEN = '#{form_authenticity_token}';" if protect_against_forgery?%>
 
 
 <!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>-->
@@ -174,7 +175,15 @@
 
                     <% @usersNew.order(id: :desc).first(3).each do |user|%>
                       <li>
-                        <%= link_to user.email, new_user_role_path(user), :class => "dropdown-item" %>
+                        <p class="dropdown-item" style=text-align:center;">
+                          <%= form_with(url: "/admin/users/"+user.id.to_s, method: "PATCH", html: {:style=>"text-align: center;"}) do |form| %>
+                            <%= user.email %>
+                            <input type="hidden" name="user[approved1]" value=true />
+                            <%= form.hidden_field :id, value: user.id%>
+                            <%= form.submit "Подтвердить", :id=>"newup", :class=>"btn btn-success" %>
+                          <% end %>
+                        </p>
+
                       </li>
                     <% end %>
 
@@ -220,11 +229,6 @@
     </div>
   </div>
 
-
-
-
-  <%#= yield %>
-
   <%= javascript_include_tag 'bootstrap.min' %>
   <%= javascript_include_tag 'fastclick.js' %>
   <%= javascript_include_tag 'nprogress.js' %>
@@ -238,6 +242,7 @@
               $('#my-alert').alert('close');
           },5000);
       });
+
   </script>
 
   </body>
