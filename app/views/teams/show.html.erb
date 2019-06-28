@@ -120,6 +120,86 @@
                     </div>
                   <% end %>
                 <% end %>
+
+                <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3">
+
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="x_panel">
+                      <div class="x_title">
+                        <h2> Добавить игрока? <small>Sessions</small></h2>
+                        <div class="clearfix"></div>
+                      </div>
+                      <div class="x_content">
+
+                        <!-- start accordion -->
+                        <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                          <div class="panel">
+                            <a class="panel-heading collapsed" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                              <h4 class="panel-title">Зарегистрировать нового игрока</h4>
+                            </a>
+                            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="height: 0px;">
+                              <div class="panel-body">
+
+                                <div id="login" class="animate">
+                                  <section class="login_content">
+                                    <%= form_with scope: :user, url: users_path, local: true do |f| %>
+                                      <h1>Регистрация</h1>
+
+                                      <div>
+                                        <%= f.email_field :email, autofocus: true, :class => "form-control", :placeholder =>"Email",  :required => ""  %>
+                                      </div>
+
+                                      <div>
+                                        <%= f.password_field :password, autocomplete: "new-password", :class => "form-control", :placeholder =>"Пароль",  :required => "" %>
+                                      </div>
+
+                                      <div>
+                                        <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => "form-control", :placeholder =>"Повторите пароль",  :required => "" %>
+                                      </div>
+
+                                      <div>
+                                        <%= f.submit "Зарегистрировать", :class => "button7" %>
+                                      </div>
+
+                                      <div class="clearfix"></div>
+                                      <div class="separator"></div>
+
+                                      <div class="clearfix"></div>
+                                      <br />
+                                      <div>
+                                        <h1><i class="fa fa-paw" style="font-size: 26px;"></i> EasySquad</h1>
+                                        <p>©2019 Никаких прав нет. EasySquad. Собери свою команду!</p>
+                                      </div>
+                                    <% end %>
+                                    <!-- form -->
+                                  </section>
+                                  <!-- content -->
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                          <div class="panel">
+                            <a class="panel-heading collapsed" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                              <h4 class="panel-title">Добавить из зарегистрированных</h4>
+                            </a>
+                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false">
+                              <div class="panel-body">
+                                <p><strong>Collapsible Item 2 data</strong>
+                                </p>
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- end of accordion -->
+
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
               <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
 

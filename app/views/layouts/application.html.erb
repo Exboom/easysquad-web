@@ -9,14 +9,10 @@
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application'%>
-    <%#= javascript_tag "var AUTH_TOKEN = '#{form_authenticity_token}';" if protect_against_forgery?%>
-
-
-<!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>-->
 
   </head>
 
-  <body class="nav-md footer_fixed" >
+  <body class="nav-md" >
 
   <!--  <p class="notice"><%#= notice %></p>-->
   <!--  <p class="alert"><%#= alert %></p>-->
@@ -28,7 +24,7 @@
 
   <div class="container body">
     <div class="main_container">
-      <div class="col-md-3 left_col">
+      <div class="col-md-3 left_col menu_fixed">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
             <a href="/" class="site_title">
@@ -52,7 +48,6 @@
                 <h2><%=(Player.find (current_user.id)).name.split(' ')[0]%></h2>
               <%end %>
 
-<!--              <h2> <%#=current_user.email%></h2>-->
             </div>
           </div>
           <!-- /menu profile quick info -->
@@ -169,7 +164,7 @@
                 <li role="presentation" class="dropdown">
                   <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-user"></i>
-                    <span class="badge bg-green"><%= @usersNew.size%></span>
+                    <span id="numeric" class="badge bg-green"><%= @usersNew.size%></span>
                   </a>
                   <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
 
@@ -178,7 +173,7 @@
                         <p class="dropdown-item" style=text-align:center;">
                           <%= form_with(url: "/admin/users/"+user.id.to_s, method: "PATCH", html: {:style=>"text-align: center;"}) do |form| %>
                             <%= user.email %>
-                            <input type="hidden" name="user[approved1]" value=true />
+                            <input type="hidden" name="user[approved]" value=true />
                             <%= form.hidden_field :id, value: user.id%>
                             <%= form.submit "Подтвердить", :id=>"newup", :class=>"btn btn-success" %>
                           <% end %>
@@ -195,6 +190,7 @@
                         </a>
                       </div>
                     </li>
+
                   </ul>
                 </li>
               <%end%>
