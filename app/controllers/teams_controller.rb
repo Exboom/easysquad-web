@@ -23,7 +23,6 @@ class TeamsController < ApplicationController
   #
   def update
     @team = Team.find(params[:id])
-
     if @team.update(team_params)
       redirect_to @team
     else
@@ -42,16 +41,14 @@ class TeamsController < ApplicationController
       if @teamadmins[0].nil?
         @candidates[index]=Player.find(cnd.user_id)
       else
-        @teamadmins.each do |tmadm|
-          if tmadm.user_id==cnd.user_id
-            next
-          else
-            @candidates[index]=Player.find(cnd.user_id)
-          end
+        if @teamadmins.where(user_id: cnd.user_id).empty?
+          @candidates[index]=Player.find(cnd.user_id)
+        else
+          next
         end
       end
     end
-
+    @candidates=@candidates.reject{ |item| item.nil? }
   end
 
   # def destroy

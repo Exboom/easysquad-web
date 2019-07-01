@@ -13,24 +13,20 @@
 // require rails_ujs
 // require activestorage
 //= require jquery
-//= require jquery.turbolinks
+// require jquery.turbolinks
 //= require jquery_ujs
 //= require welcome.coffee
 // require turbolinks
 
 $(document).ready(function() {
+});
 
-    $('#newup').click(function () {
-
-            setTimeout(function () {
-                $.ajax({
-                    url: "/application/adm_new_up",
-                    type: "GET",
-                    dataType: "script"
-                })
-            }, 1000);
-
-        }
-    );
-
+$('#menu1').on('click','input',function () {
+    setTimeout(function () {
+        $.ajax({
+            url: "/application/adm_new_up",
+            type: "GET",
+            dataType: "script"
+        })
+    }, 500);
 });

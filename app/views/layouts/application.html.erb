@@ -6,10 +6,8 @@
     <title>EasysquadWeb</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application'%>
-
+    <%#= javascript_include_tag 'application'%>
   </head>
 
   <body class="nav-md" >
@@ -21,10 +19,9 @@
     <p id="my-alert" class="alert alert-box <%= key %>"><%= message %></p>
   <% end %>
 
-
   <div class="container body">
     <div class="main_container">
-      <div class="col-md-3 left_col menu_fixed">
+      <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
             <a href="/" class="site_title">
@@ -98,10 +95,10 @@
                 <!--teams-->
                 <li><a><i class="fa fa-users"></i> Команды <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <% if @teams.empty? %>
+                    <% if @allteams.empty? %>
                       <li><a href="#">В базе отсутствуют команды</a></li>
                     <% else%>
-                      <% @teams.each do |team|%>
+                      <% @allteams.each do |team|%>
                         <li><%= link_to team.name, team_path(team) %></li>
                       <% end %>
                     <% end %>
@@ -122,7 +119,6 @@
                         "data-original-title"=>"Logout" do%>
               <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
             <%end %>
-
           </div>
           <!-- /menu footer buttons -->
         </div>
@@ -225,6 +221,7 @@
     </div>
   </div>
 
+  <%= javascript_include_tag 'application'%>
   <%= javascript_include_tag 'bootstrap.min' %>
   <%= javascript_include_tag 'fastclick.js' %>
   <%= javascript_include_tag 'nprogress.js' %>

@@ -1,94 +1,84 @@
-<div class="page-title">
-  <div class="clearfix"></div>
+<div class="clearfix"></div>
 
-  <div class="col-md-12 col-sm-12 col-xs-12">
-    <div class="x_panel">
-      <div class="x_title">
-        <h2><i class="fa fa-bars"></i> Профиль пользователя <small>Float left</small></h2>
-        <ul class="nav navbar-right panel_toolbox" style="padding-left: 25px;">
-          <li>
-            <%= link_to edit_user_registration_path, :method => :get,
-                        :class=>"close-link",
-                        "data-toggle"=>"tooltip",
-                        "data-placement"=>"top",
-                        :title=>"",
-                        "data-original-title"=>"Редактировать профиль" do %>
-              <i class="fa fa-wrench"></i>
-            <%end %>
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2><i class="fa fa-bars"></i> Профиль пользователя <small>Float left</small></h2>
+      <ul class="nav navbar-right panel_toolbox" style="padding-left: 25px;">
+        <li>
+          <%= link_to edit_user_registration_path, :method => :get,
+                      :class=>"close-link",
+                      "data-toggle"=>"tooltip",
+                      "data-placement"=>"top",
+                      :title=>"",
+                      "data-original-title"=>"Редактировать профиль" do %>
+            <i class="fa fa-wrench"></i>
+          <%end %>
+        </li>
+        <li>
+          <%= link_to user_registration_path, :method => :delete, :class=>"close-link",
+                      "data-toggle"=>"tooltip",
+                      "data-placement"=>"top",
+                      :title=>"",
+                      "data-original-title"=>"Удалить профиль" do %>
+            <i class="fa fa-close"></i>
+          <%end %>
+        </li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="x_content">
+      <p>Вы не игрок. Это ошибка? Тогда нужно <%= link_to 'заполнить игровой профиль', new_player_path(current_user) %></p>
+      <div class="clearfix"></div>
+      <div class="" role="tabpanel" data-example-id="togglable-tabs">
+        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Информация</a>
           </li>
-          <li>
-            <%= link_to user_registration_path, :method => :delete, :class=>"close-link",
-                        "data-toggle"=>"tooltip",
-                        "data-placement"=>"top",
-                        :title=>"",
-                        "data-original-title"=>"Удалить профиль" do %>
-              <i class="fa fa-close"></i>
-            <%end %>
+          <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Команды</a>
           </li>
         </ul>
-        <div class="clearfix"></div>
-      </div>
+        <div id="myTabContent" class="tab-content">
+          <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+            <h2><li> Email: <%= @user.email %></li></h2>
+            <h2><li> Дата регистрации: <%= @user.created_at.to_s.split(' ')[0]%></li></h2>
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
 
-      <div class="x_content">
-        <p>Вы не игрок. Это ошибка? Тогда нужно <%= link_to 'заполнить игровой профиль', new_player_path(current_user) %></p>
-        <div class="clearfix"></div>
-        <div class="" role="tabpanel" data-example-id="togglable-tabs">
-          <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Информация</a>
-            </li>
-            <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Команды</a>
-            </li>
-          </ul>
-          <div id="myTabContent" class="tab-content">
-            <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
-              <h2><li> Email: <%= @user.email %></li></h2>
-              <h2><li> Дата регистрации: <%= @user.created_at.to_s.split(' ')[0]%></li></h2>
-            </div>
-            <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
-
-              <% if @teamsusr.empty? %>
-                <h2>Вы не играете ни за одну команду</h2>
-              <% else%>
-                <% @teamsusr.each do |team|%>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class="x_panel">
-                      <div class="x_title">
-                        <h2><%=team.name %><small>
-                          <% team.user_roles.each do |role| %>
-                            <% if role.user_id==current_user.id%>
-                              <%= role.role.role %>
-                            <% end %>
+            <% if @teamsusr.empty? %>
+              <h2>Вы не играете ни за одну команду</h2>
+            <% else%>
+              <% @teamsusr.each do |team|%>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="x_panel">
+                    <div class="x_title">
+                      <h2><%=team.name %><small>
+                        <% team.user_roles.each do |role| %>
+                          <% if role.user_id==current_user.id%>
+                            <%= role.role.role %>
                           <% end %>
-                        </small>
-                        </h2>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="x_content">
-                        <div class="bs-example" data-example-id="simple-jumbotron">
-                          <div class="jumbotron">
-                          </div>
+                        <% end %>
+                      </small>
+                      </h2>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                      <div class="bs-example" data-example-id="simple-jumbotron">
+                        <div class="jumbotron">
                         </div>
                       </div>
-                      <%= link_to "Подробнее", team_path(team), :method => :get, :class => "btn btn-secondary" %>
                     </div>
+                    <%= link_to "Подробнее", team_path(team), :method => :get, :class => "btn btn-secondary" %>
                   </div>
-                <% end %>
+                </div>
               <% end %>
-
-            </div>
+            <% end %>
 
           </div>
-        </div>
 
+        </div>
       </div>
+
     </div>
   </div>
-
-
-
-
-
-
-
-
-
+</div>

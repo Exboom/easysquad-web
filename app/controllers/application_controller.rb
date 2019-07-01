@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   def initialize_support
     #команды
-    @teams=Team.all
+    @allteams=Team.all
     #федерации
     @federations=Federation.all
     #локации

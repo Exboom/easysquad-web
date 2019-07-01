@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  # before_action :check_admin
+  before_action :check_admin
 
   def new
     @user = User.new
@@ -17,6 +17,9 @@ class UsersController < ApplicationController
     end
     @user = User.new(user_params)
     if @user.save
+      UserRole.new(user_id: @user.id, role_id: 4, team_id: params[:user][:team_id]).save
+      Player.new(id: @user.id, name: params[:user][:name]).save
+      PlayerTeam.new(player_id: @user.id, team_id: params[:user][:team_id]).save
       redirect_to session.delete(:return_to), alert:  "Пользователь зарегестрирован"
     else
       render 'show'
@@ -41,20 +44,15 @@ class UsersController < ApplicationController
   protected
 
   def check_admin
-    @team = Team.find(params[:id])
-    redirect_to team_path,
-                alert:  "У Вас нет прав доступа для данных действий" unless (current_user.id==@team.user_id) or !(@userrols.find_by_id(1).nil?)
-
-
-
+    @team = Team.find(params[:user][:team_id])
     @user=User.find(current_user.id)
-    @userrols=@user.roles
-    redirect_to root_path, alert:  "У Вас нет прав доступа для данных действий" unless @userrols.first.id==1
+    redirect_to team_path,
+                alert:  "У Вас нет прав доступа для данных действий" unless (current_user.id==@team.user_id) or !UserRole.where(user_id:@user, role_id:3, team_id:@team).nil?
   end
 
   def user_params
     params.require(:user).permit(
-        :name, :email, :password, :password_confirmation, :approved
+        :email, :password, :password_confirmation, :approved
     )
   end
 

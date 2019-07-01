@@ -1,109 +1,80 @@
+<div class="clearfix"></div>
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2><i class="fa fa-flag-checkered"></i> <%= @location.name %></h2>
 
-        <div class="page-title">
-          <div class="clearfix"></div>
+      <ul class="nav navbar-right panel_toolbox" style="padding-left: 25px;">
+        <li>
 
-          <div class="">
-            <div class="col-md-12">
-              <div class="x_panel">
-                <div class="x_title">
-                  <h2><i class="fa fa-flag-checkered"></i> <%= @location.name %></h2>
+          <%= link_to edit_admin_location_path, :method => :get,
+                      :class=>"close-link",
+                      "data-toggle"=>"tooltip",
+                      "data-placement"=>"top",
+                      :title=>"",
+                      "data-original-title"=>"Редактировать локацию" do %>
+            <i class="fa fa-wrench"></i>
+          <%end %>
 
-                  <ul class="nav navbar-right panel_toolbox" style="padding-left: 25px;">
-                    <li>
+        </li>
+        <li>
+          <%= link_to admin_location_path, :method => :delete, :class=>"close-link",
+                      "data-toggle"=>"tooltip",
+                      "data-placement"=>"top",
+                      :title=>"",
+                      "data-original-title"=>"Удалить локацию" do %>
+            <i class="fa fa-close"></i>
+          <%end %>
+        </li>
+      </ul>
 
-                      <%= link_to edit_admin_location_path, :method => :get,
-                                  :class=>"close-link",
-                                  "data-toggle"=>"tooltip",
-                                  "data-placement"=>"top",
-                                  :title=>"",
-                                  "data-original-title"=>"Редактировать локацию" do %>
-                        <i class="fa fa-wrench"></i>
-                      <%end %>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+      <div class="" role="tabpanel" data-example-id="togglable-tabs">
+        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Описание</a>
+          </li>
+          <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Проводимые турниры</a>
+          </li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+          <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+            <p> Адрес: <%= @location.address %></p>
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
 
-                    </li>
-                    <li>
-                      <%= link_to admin_location_path, :method => :delete, :class=>"close-link",
-                                  "data-toggle"=>"tooltip",
-                                  "data-placement"=>"top",
-                                  :title=>"",
-                                  "data-original-title"=>"Удалить локацию" do %>
-                        <i class="fa fa-close"></i>
-                      <%end %>
-                    </li>
-                  </ul>
-
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <div class="" role="tabpanel" data-example-id="togglable-tabs">
-                    <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                      <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Описание</a>
-                      </li>
-                      <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Проводимые турниры</a>
-                      </li>
-                    </ul>
-                    <div id="myTabContent" class="tab-content">
-                      <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
-                        <p> Адрес: <%= @location.address %></p>
-                      </div>
-                      <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
-
-                        <% if @location.tournaments.empty? %>
-                          <h2>Здесь не проводятся турниры </h2>
-                        <% else%>
-                          <% @location.tournaments.each do |tourn|%>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                              <div class="x_panel">
-                                <div class="x_title">
-                                  <h2><%=tourn.name %> <small></small></h2>
-                                  <div class="clearfix"></div>
-                                </div>
-
-                                <div class="x_content">
-                                  <div class="bs-example" data-example-id="simple-jumbotron">
-                                    <div class="jumbotron">
-                                      <p> Сезон турнира: <%= tourn.season %></p>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <%= link_to "Подробнее", tournament_path(tourn), :method => :get, :class => "btn btn-secondary" %>
-                                <%= link_to "Добавить турнир", :new_admin_tournament, :method => :get, :class => "btn btn-secondary" %>
-                              </div>
-                            </div>
-                          <% end %>
-                        <% end %>
-                      </div>
-
+            <% if @location.tournaments.empty? %>
+              <h2>Здесь не проводятся турниры </h2>
+            <% else%>
+              <% @location.tournaments.each do |tourn|%>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="x_panel">
+                    <div class="x_title">
+                      <h2><%=tourn.name %> <small></small></h2>
+                      <div class="clearfix"></div>
                     </div>
-                  </div>
 
+                    <div class="x_content">
+                      <div class="bs-example" data-example-id="simple-jumbotron">
+                        <div class="jumbotron">
+                          <p> Сезон турнира: <%= tourn.season %></p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <%= link_to "Подробнее", tournament_path(tourn), :method => :get, :class => "btn btn-secondary" %>
+                    <%= link_to "Добавить турнир", :new_admin_tournament, :method => :get, :class => "btn btn-secondary" %>
+                  </div>
                 </div>
-              </div>
-            </div>
+              <% end %>
+            <% end %>
           </div>
 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-
-
-
-
-
-
-<!--<h1>EasySquad</h1>-->
-<!--<h2>Профиль места проведения турниров: <%#= @location.name %></h2>-->
-<!--<p> Адрес: <%#= @location.address %></p>-->
-
-
-
-
-<!--<p>Проводимые турниры:</p>-->
-
-<%#if @location.tournaments.empty?%>
-<!--  <p>Здесь не проводятся турниры</p>-->
-<%#else%>
-  <%# @location.tournaments.each do |tourn|%>
-<!--    <p><%#= link_to tourn.name, tournament_path(tourn)%></p>-->
-  <%# end %>
-<%#end%>
 
