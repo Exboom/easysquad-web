@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
     if current_user!=nil
       @user=User.find(current_user.id)
       @userrols=@user.roles
+      @userrols=@user.user_roles
       @usersNew = User.where("approved = ?", false)
     end
   end

@@ -51,6 +51,15 @@ class TeamsController < ApplicationController
     @candidates=@candidates.reject{ |item| item.nil? }
   end
 
+  def appfortourn
+
+  end
+
+  def creat_appfortourn
+
+  end
+
+
   # def destroy
   #   @team = Team.find(params[:id])
   #   @team.destroy

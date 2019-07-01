@@ -32,7 +32,7 @@ class UserRolesController < ApplicationController
 
   def show
     @user=User.find(params[:id])
-    @userrols=@user.roles
+    # @userrols=@user.roles
     @teams=@user.teams
   end
 

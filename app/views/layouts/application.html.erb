@@ -11,14 +11,11 @@
   </head>
 
   <body class="nav-md" >
-
   <!--  <p class="notice"><%#= notice %></p>-->
   <!--  <p class="alert"><%#= alert %></p>-->
-
   <% flash.each do |key, message| %>
     <p id="my-alert" class="alert alert-box <%= key %>"><%= message %></p>
   <% end %>
-
   <div class="container body">
     <div class="main_container">
       <div class="col-md-3 left_col">
@@ -30,7 +27,6 @@
           </div>
 
           <div class="clearfix"></div>
-
           <!-- menu profile quick info -->
           <div class="profile clearfix">
             <div class="profile_pic">
@@ -38,19 +34,15 @@
             </div>
             <div class="profile_info">
               <span>Здравствйте,</span>
-
               <% if (Player.find_by_id (current_user.id)).nil? %>
                 <h2> <%=current_user.email%></h2>
               <%else %>
                 <h2><%=(Player.find (current_user.id)).name.split(' ')[0]%></h2>
               <%end %>
-
             </div>
           </div>
           <!-- /menu profile quick info -->
-
           <br>
-
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section active">
@@ -106,10 +98,8 @@
                 </li>
               </ul>
             </div>
-
           </div>
           <!-- /sidebar menu -->
-
           <!-- /menu footer buttons -->
           <div class="sidebar-footer hidden-small">
             <%= link_to destroy_user_session_path, :method => :delete,
@@ -123,7 +113,6 @@
           <!-- /menu footer buttons -->
         </div>
       </div>
-
       <!-- top navigation -->
       <div class="top_nav">
         <div class="nav_menu">
@@ -131,7 +120,6 @@
             <div class="nav toggle">
               <a id="menu_toggle"><i class="fa fa-bars"></i></a>
             </div>
-
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -155,15 +143,13 @@
                   </li>
                 </ul>
               </li>
-
-              <%if @userrols.first.id==1%>
+              <%if (@userrols.find_by role: 1)!=nil%>
                 <li role="presentation" class="dropdown">
                   <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-user"></i>
                     <span id="numeric" class="badge bg-green"><%= @usersNew.size%></span>
                   </a>
                   <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-
                     <% @usersNew.order(id: :desc).first(3).each do |user|%>
                       <li>
                         <p class="dropdown-item" style=text-align:center;">
@@ -177,7 +163,6 @@
 
                       </li>
                     <% end %>
-
                     <li>
                       <div class="text-center">
                         <a>
@@ -186,30 +171,21 @@
                         </a>
                       </div>
                     </li>
-
                   </ul>
                 </li>
               <%end%>
-
-
             </ul>
           </nav>
         </div>
-
       </div>
       <!-- /top navigation -->
-
       <!-- page content -->
       <div class="right_col" role="main" style="min-height: 954px;">
         <div class="">
-
           <%= yield %>
-
-
         </div>
       </div>
       <!-- /page content -->
-
       <!-- footer content -->
       <footer>
         <div class="pull-right">
@@ -220,14 +196,12 @@
       <!-- /footer content -->
     </div>
   </div>
-
   <%= javascript_include_tag 'application'%>
   <%= javascript_include_tag 'bootstrap.min' %>
   <%= javascript_include_tag 'fastclick.js' %>
   <%= javascript_include_tag 'nprogress.js' %>
   <%= javascript_include_tag 'jquery.mCustomScrollbar.concat.min' %>
   <%= javascript_include_tag 'custom.min' %>
-
 
   <script>
       $(function(){

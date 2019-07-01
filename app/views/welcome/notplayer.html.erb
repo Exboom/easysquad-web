@@ -1,5 +1,4 @@
 <div class="clearfix"></div>
-
 <div class="col-md-12 col-sm-12 col-xs-12">
   <div class="x_panel">
     <div class="x_title">
@@ -27,7 +26,6 @@
       </ul>
       <div class="clearfix"></div>
     </div>
-
     <div class="x_content">
       <p>Вы не игрок. Это ошибка? Тогда нужно <%= link_to 'заполнить игровой профиль', new_player_path(current_user) %></p>
       <div class="clearfix"></div>
@@ -44,7 +42,6 @@
             <h2><li> Дата регистрации: <%= @user.created_at.to_s.split(' ')[0]%></li></h2>
           </div>
           <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
-
             <% if @teamsusr.empty? %>
               <h2>Вы не играете ни за одну команду</h2>
             <% else%>
@@ -73,12 +70,9 @@
                 </div>
               <% end %>
             <% end %>
-
           </div>
-
         </div>
       </div>
-
     </div>
   </div>
 </div>

@@ -2,8 +2,8 @@ class WelcomeController < ApplicationController
   before_action :check_input
 
   def index
-    if (@userrols.first.id!=1)
-      if @userrols.find_by_id(4)!=nil
+    if (@userrols.find_by role: 1).nil?
+      if (@userrols.find_by role: 4)!=nil
         @player = Player.find(current_user.id)
         @teampl=@player.teams
         @teamusrng=@teampl
@@ -14,7 +14,7 @@ class WelcomeController < ApplicationController
           @nextgames[index]=Game.where("(team_one = ? OR team_two = ?) AND game_score is NULL", teampl, teampl)
           @lastgames[index]=Game.where("(team_one = ? OR team_two = ?) AND game_score is NOT NULL", teampl, teampl)
         end
-      elsif (@userrols.find_by_id(2)!=nil) or (@userrols.find_by_id(3)!=nil)
+      elsif ((@userrols.find_by role: 2)!=nil) or ((@userrols.find_by role: 3)!=nil)
         @teamusr=@user.teams
         @teamusrng=@teamusr
         @nextgames=Array.new(@teamusr.size)
@@ -31,12 +31,12 @@ class WelcomeController < ApplicationController
   def update_teams
     @tourn=Tournament.find(params[:tournament_id])
     @alltournteams=@tourn.teams
-    if @userrols.find_by_id(2)!=nil
+    if (@userrols.find_by role: 2)!=nil
       @teamusrng=@tourn.teams.where(user_id: current_user.id)
       if @teamusrng.size==1
         @alltournteams=@tourn.teams.where.not(id: @teamusrng[0])
       end
-    elsif @userrols.find_by_id(3)!=nil
+    elsif (@userrols.find_by role: 3)!=nil
       @player = Player.find(current_user.id)
       @teamusrng = UserRole.where(user_id: current_user.id, role_id: 3).pluck(:team_id)
       @teamusrng=@tourn.teams.where(id: @teamusrng)

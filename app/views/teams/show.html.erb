@@ -1,135 +1,120 @@
-
-  <div class="clearfix"></div>
-  <div class="">
-    <div class="col-md-12">
-      <div class="x_panel">
-        <div class="x_title">
-          <h2><i class="fa fa-users"></i> <%= @team.name %></h2>
-
-          <% if (current_user.id==@owner.id) or !(@userrols.find_by_id(1).nil?) %>
-            <ul class="nav navbar-right panel_toolbox" style="padding-left: 25px;">
+<div class="clearfix"></div>
+<div class="">
+  <div class="col-md-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2><i class="fa fa-users"></i> <%= @team.name %></h2>
+        <% if (current_user.id==@owner.id) or ((@userrols.find_by role:1)!=nil) %>
+          <ul class="nav navbar-right panel_toolbox" style="padding-left: 25px;">
+            <li>
+              <%= link_to edit_team_path, :method => :get,
+                          :class=>"close-link",
+                          "data-toggle"=>"tooltip",
+                          "data-placement"=>"top",
+                          :title=>"",
+                          "data-original-title"=>"Редактировать команду" do %>
+                <i class="fa fa-wrench"></i>
+              <%end %>
+            </li>
+            <% if (@userrols.find_by  role: 1)!=nil %>
               <li>
-
-                <%= link_to edit_team_path, :method => :get,
-                            :class=>"close-link",
+                <%= link_to admin_team_path, :method => :delete, :class=>"close-link",
                             "data-toggle"=>"tooltip",
                             "data-placement"=>"top",
                             :title=>"",
-                            "data-original-title"=>"Редактировать команду" do %>
-                  <i class="fa fa-wrench"></i>
+                            "data-original-title"=>"Удалить команду" do %>
+                  <i class="fa fa-close"></i>
                 <%end %>
-
               </li>
-
-              <% if !(@userrols.find_by_id(1).nil?) %>
-                <li>
-                  <%= link_to admin_team_path, :method => :delete, :class=>"close-link",
-                              "data-toggle"=>"tooltip",
-                              "data-placement"=>"top",
-                              :title=>"",
-                              "data-original-title"=>"Удалить команду" do %>
-                    <i class="fa fa-close"></i>
-                  <%end %>
-                </li>
-              <%end %>
-            </ul>
-          <% end %>
-
-          <div class="clearfix"></div>
-        </div>
-        <div class="x_content">
-          <div class="" role="tabpanel" data-example-id="togglable-tabs">
-            <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-              <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Описание</a>
-              </li>
-              <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Игроки</a>
-              </li>
-              <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Турниры</a>
-              </li>
-            </ul>
-            <div id="myTabContent" class="tab-content">
-              <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
-                <p> Владелец команды: <%= @owner.email %></p>
-                <p> Капитан команды: <% if @cap.nil? %>
-                    капитан не назначен
-                  <% else %>
-                    <%= @cap.name %>
-                  <% end %>
-                </p>
-
-                <% if (current_user.id==@owner.id) or !(@userrols.find_by_id(1).nil?)%>
-                  <p>Адмнистраторы команды: </p>
-                  <% if @teamadmins.empty? %>
-                    <li> Дополнительные администраторы не назначены</li>
-                  <% else %>
-                    <% @teamadmins.each do |tmadm| %>
-                      <li> <%= Player.find(tmadm.user_id).name %> <%=link_to 'Убрать из администраторов', user_role_path(tmadm), method: :delete, :class => "btn btn-secondary"  %> </li>
-                    <% end %>
-                  <% end %>
-
-                  <br>
-                  <p><b><i>Добавить нового администратора?</i></b></p>
-
-                  <% if @candidates[0].nil? %>
-                    <li>Кандидатов нет</li>
-                  <% else %>
-                    <%= form_with scope: :user_role, url: user_roles_path, local: true do |f| %>
-
-                      <p>
-                        <%= f.collection_select(:user_id, @candidates, :id, :name) %>
-                      </p>
-                      <p>
-                        <%= f.hidden_field :role_id, value: 3 %>
-                      </p>
-                      <p>
-                        <%= f.hidden_field :team_id, value: @team.id %>
-                      </p>
-                      <p>
-                        <%= f.submit("Добавить") %>
-                      </p>
-                    <% end %>
+            <%end %>
+          </ul>
+        <% end %>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <div class="" role="tabpanel" data-example-id="togglable-tabs">
+          <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Описание</a>
+            </li>
+            <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Игроки</a>
+            </li>
+            <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Турниры</a>
+            </li>
+          </ul>
+          <div id="myTabContent" class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+              <p> Владелец команды: <%= @owner.email %></p>
+              <p> Капитан команды: <% if @cap.nil? %>
+                  капитан не назначен
+                <% else %>
+                  <%= @cap.name %>
+                <% end %>
+              </p>
+              <% if (current_user.id==@owner.id) or ((@userrols.find_by role: 1)!=nil)%>
+                <p>Адмнистраторы команды: </p>
+                <% if @teamadmins.empty? %>
+                  <li> Дополнительные администраторы не назначены</li>
+                <% else %>
+                  <% @teamadmins.each do |tmadm| %>
+                    <li> <%= Player.find(tmadm.user_id).name %> <%=link_to 'Убрать из администраторов', user_role_path(tmadm), method: :delete, :class => "btn btn-secondary"  %> </li>
                   <% end %>
                 <% end %>
-
-              </div>
-              <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
-
-                <% if @team.players.empty? %>
-                  <h2>В этой команде нет игроков</h2>
-                <% else%>
-                  <% @team.players.each do |play|%>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <div class="x_panel">
-                        <div class="x_title">
-                          <h2><%=play.name %> <small><%= @team.name %></small></h2>
-                          <div class="clearfix"></div>
-                        </div>
-
-                        <div class="x_content">
-                          <div class="bs-example" data-example-id="simple-jumbotron">
-                            <div class="jumbotron">
-
-                            </div>
-                          </div>
-                        </div>
-
-                        <%= link_to "Подробнее", player_path(play), :method => :get, :class => "btn btn-secondary" %>
-                        <%= link_to 'Убрать из команды', player_team_path(play,@team), method: :delete, :class => "btn btn-secondary" %>
+                <br>
+                <p><b><i>Добавить нового администратора?</i></b></p>
+                <% if @candidates[0].nil? %>
+                  <li>Кандидатов нет</li>
+                <% else %>
+                  <%= form_with scope: :user_role, url: user_roles_path, html: {"data-parsley-validate"=>"", :class=>"form-horizontal form-label-left col-md-12 col-sm-12 col-xs-12", :novalidate=>""}, local: true do |f| %>
+                    <div class="form-group">
+                      <div class="col-md-3 col-sm-3 col-xs-12">
+                        <%= f.collection_select(:user_id, @candidates, :id, :name, {:prompt => "Выберите кандидата"}, { :class=>"form-control"}) %>
                       </div>
+                    </div>
+                    <p>
+                      <%= f.hidden_field :role_id, value: 3 %>
+                    </p>
+                    <p>
+                      <%= f.hidden_field :team_id, value: @team.id %>
+                    </p>
+                    <div class="col-md-6 col-sm-6 col-xs-12 ">
+                      <%= f.submit "Добавить", :class=>"btn btn-success" %>
                     </div>
                   <% end %>
                 <% end %>
-
-                <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3">
-
+              <% end %>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+              <% if @team.players.empty? %>
+                <h2>В этой команде нет игроков</h2>
+              <% else%>
+                <% @team.players.each do |play|%>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="x_panel">
                       <div class="x_title">
-                        <h2> Добавить игрока? <small>Sessions</small></h2>
+                        <h2><%=play.name %> <small><%= @team.name %></small></h2>
                         <div class="clearfix"></div>
                       </div>
                       <div class="x_content">
-
+                        <div class="bs-example" data-example-id="simple-jumbotron">
+                          <div class="jumbotron">
+                          </div>
+                        </div>
+                      </div>
+                      <%= link_to "Подробнее", player_path(play), :method => :get, :class => "btn btn-secondary" %>
+                      <%= link_to 'Убрать из команды', player_team_path(play,@team), method: :delete, :class => "btn btn-secondary" %>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+              <% if (current_user.id==@owner.id) or ((@userrols.find_by role: 1)!=nil) or ((@userrols.find_by team_id:@team.id, user_id:current_user.id, role_id: 3)!=nil) %>
+                <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3">
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="x_panel">
+                      <div class="x_title">
+                        <h2> Добавить игрока?</h2>
+                        <div class="clearfix"></div>
+                      </div>
+                      <div class="x_content">
                         <!-- start accordion -->
                         <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
                           <div class="panel">
@@ -182,7 +167,6 @@
                                   </section>
                                   <!-- content -->
                                 </div>
-
                               </div>
                             </div>
                           </div>
@@ -192,12 +176,8 @@
                             </a>
                             <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false">
                               <div class="panel-body">
-
-
                                 <%= form_with scope: :player_team, url: player_teams_path,html: {:id=>"demo-form2", "data-parsley-validate"=>"", :class=>"form-horizontal form-label-left", :novalidate=>""}, local: true do |f| %>
-
                                   <%= f.hidden_field :team_id, value: @team.id%>
-
                                   <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tourn">Игрок
                                     </label>
@@ -205,83 +185,66 @@
                                       <%= f.collection_select(:player_id, Player.where.not(id: @team.players), :id, :name, {:prompt => "Выберите игрока"}, {:id=>"tourn", :class=>"form-control"}) %>
                                     </div>
                                   </div>
-
                                   <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                                     <%= f.submit "Добавить", :class=>"btn btn-success" %>
                                   </div>
-
                                 <% end %>
-
                               </div>
                             </div>
                           </div>
                         </div>
                         <!-- end of accordion -->
-
-
                       </div>
                     </div>
                   </div>
                 </div>
-
-              </div>
-              <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
-
-                <% if @team.tournaments.empty? %>
-                  <h2>Эта команда не участвует в турнирах </h2>
-                <% else%>
-                  <% @team.tournaments.each do |tourn|%>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <div class="x_panel">
-                        <div class="x_title">
-                          <h2><%=tourn.name %> <small></small></h2>
-                          <div class="clearfix"></div>
-                        </div>
-
-                        <div class="x_content">
-                          <div class="bs-example" data-example-id="simple-jumbotron">
-                            <div class="jumbotron">
-                              <p> Сезон турнира: <%= tourn.season %></p>
-                            </div>
+              <% end %>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+              <% if @team.tournaments.empty? %>
+                <h2>Эта команда не участвует в турнирах </h2>
+              <% else%>
+                <% @team.tournaments.each do |tourn|%>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="x_panel">
+                      <div class="x_title">
+                        <h2><%=tourn.name %> <small></small></h2>
+                        <div class="clearfix"></div>
+                      </div>
+                      <div class="x_content">
+                        <div class="bs-example" data-example-id="simple-jumbotron">
+                          <div class="jumbotron">
+                            <p> Сезон турнира: <%= tourn.season %></p>
                           </div>
                         </div>
-
-                        <%= link_to "Подробнее", tournament_path(tourn), :method => :get, :class => "btn btn-secondary" %>
-
-                        <% if (current_user.id==@owner.id) or !(UserRole.find_by team_id:@team.id, user_id:current_user.id, role_id: 3).nil?  or !(@userrols.find_by_id(1).nil?) %>
-                          <%= link_to "Выйти из турнира", team_tournament_path(@team,tourn), :method => :delete, :class => "btn btn-secondary" %>
-                        <% end %>
-
-
                       </div>
+                      <%= link_to "Подробнее", tournament_path(tourn), :method => :get, :class => "btn btn-secondary" %>
+                      <% if (current_user.id==@owner.id) or ((@userrols.find_by team_id:@team.id, user_id:current_user.id, role_id: 3)!=nil)  or ((@userrols.find_by role: 1)!=nil) %>
+                        <%= link_to "Выйти из турнира", team_tournament_path(@team,tourn), :method => :delete, :class => "btn btn-secondary" %>
+                        <%= link_to "Создать заявку", appfortourn_path(:param1=>@team,:param2=>tourn), :method => :get, :class => "btn btn-secondary" %>
+                      <% end %>
                     </div>
-                  <% end %>
+                  </div>
                 <% end %>
-
-                <% if (current_user.id==@owner.id) or !(UserRole.find_by team_id:@team.id, user_id:current_user.id, role_id: 3).nil?  or !(@userrols.find_by_id(1).nil?) %>
+              <% end %>
+              <% if (current_user.id==@owner.id) or ((@userrols.find_by team_id:@team.id, user_id:current_user.id, role_id: 3)!=nil)  or ((@userrols.find_by role: 1)!=nil) %>
+                <%= form_with scope: :team_tournament, url: team_tournaments_path, html: { "data-parsley-validate"=>"", :class=>"form-horizontal form-label-left col-md-12 col-sm-12 col-xs-12", :novalidate=>""}, local: true do |f| %>
                   <p>Добавить турнир:</p>
-                  <%= form_with scope: :team_tournament, url: team_tournaments_path, local: true do |f| %>
-
-                    <p>
-                      <%= f.hidden_field :team_id, value: @team.id%>
-                    </p>
-
-                    <p>
-                      <%= f.label :Турниры %><br>
-                      <%= f.collection_select(:tournament_id, Tournament.where.not(id: @team.tournaments.ids), :id, :name) %>
-                    </p>
-
-                    <p>
-                      <%= f.submit("Добавить") %>
-                    </p>
-                  <% end %>
+                  <%= f.hidden_field :team_id, value: @team.id%>
+                  <div class="form-group">
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+                      <%= f.collection_select(:tournament_id, Tournament.where.not(id: @team.tournaments.ids), :id, :name, {:prompt => "Выберите турнир"}, { :class=>"form-control"}) %>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-6 col-xs-12 ">
+                    <%= f.submit "Добавить", :class=>"btn btn-success" %>
+                  </div>
                 <% end %>
-
-              </div>
+              <% end %>
             </div>
           </div>
-
         </div>
       </div>
     </div>
   </div>
+</div>

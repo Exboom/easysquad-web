@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get 'welcome/update_teams', as: 'update_teams'
   get 'welcome/update_enemy', as: 'update_enemy'
   get 'application/adm_new_up', as: 'adm_new_up'
+  get 'teams/appfortourn', as: 'appfortourn'
+  post 'teams/creat_appfortourn', as: 'creat_appfortourn'
 
 
   resources :players
