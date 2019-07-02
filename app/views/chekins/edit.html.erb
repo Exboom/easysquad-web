@@ -1,6 +1,3 @@
-<h1>EasySquad</h1>
-<h2>Собери свою команду!</h2>
-
 <h2>Измненение отметки о присутствии на игре</h2>
 
 <%= form_with(model: @chekin, local: true) do |form| %>
@@ -61,7 +58,7 @@
 
 
 
-<p><%= button_to "Назад", :back, :method => :get %>
+<p><%= button_to "Назад", root_path, :method => :get %>
 
   <script>
       function check(i)

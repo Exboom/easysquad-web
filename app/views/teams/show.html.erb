@@ -221,7 +221,7 @@
                       <%= link_to "Подробнее", tournament_path(tourn), :method => :get, :class => "btn btn-secondary" %>
                       <% if (current_user.id==@owner.id) or ((@userrols.find_by team_id:@team.id, user_id:current_user.id, role_id: 3)!=nil)  or ((@userrols.find_by role: 1)!=nil) %>
                         <%= link_to "Выйти из турнира", team_tournament_path(@team,tourn), :method => :delete, :class => "btn btn-secondary" %>
-                        <%= link_to "Создать заявку", appfortourn_path(:param1=>@team,:param2=>tourn), :method => :get, :class => "btn btn-secondary" %>
+                        <%= link_to "Создать заявку", appfortourn_path(:team=>@team,:tourn=>tourn), :method => :get, :class => "btn btn-secondary" %>
                       <% end %>
                     </div>
                   </div>

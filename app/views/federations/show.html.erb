@@ -1,115 +1,103 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2><i class="fa fa-institution"></i> <%= @federation.name %></h2>
 
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="x_panel">
-        <div class="x_title">
-          <h2><i class="fa fa-institution"></i> <%= @federation.name %></h2>
+      <ul class="nav navbar-right panel_toolbox" style="padding-left: 25px;">
+        <li>
+          <%= link_to edit_admin_federation_path, :method => :get,
+                      :class=>"close-link",
+                      "data-toggle"=>"tooltip",
+                      "data-placement"=>"top",
+                      :title=>"",
+                      "data-original-title"=>"Редактировать федерацию" do %>
+            <i class="fa fa-wrench"></i>
+          <%end %>
 
-          <ul class="nav navbar-right panel_toolbox" style="padding-left: 25px;">
-            <li>
-              <%= link_to edit_admin_federation_path, :method => :get,
-                          :class=>"close-link",
-                          "data-toggle"=>"tooltip",
-                          "data-placement"=>"top",
-                          :title=>"",
-                          "data-original-title"=>"Редактировать федерацию" do %>
-                <i class="fa fa-wrench"></i>
-              <%end %>
+        </li>
+        <li>
+          <%= link_to admin_federation_path, :method => :delete, :class=>"close-link",
+                      "data-toggle"=>"tooltip",
+                      "data-placement"=>"top",
+                      :title=>"",
+                      "data-original-title"=>"Удалить федерацию" do %>
+            <i class="fa fa-close"></i>
+          <%end %>
+        </li>
+      </ul>
 
-            </li>
-            <li>
-              <%= link_to admin_federation_path, :method => :delete, :class=>"close-link",
-                          "data-toggle"=>"tooltip",
-                          "data-placement"=>"top",
-                          :title=>"",
-                          "data-original-title"=>"Удалить федерацию" do %>
-                <i class="fa fa-close"></i>
-              <%end %>
-            </li>
-          </ul>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+      <div class="" role="tabpanel" data-example-id="togglable-tabs">
+        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Описание</a>
+          </li>
+          <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Турниры федерации</a>
+          </li>
+          <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Контакты</a>
+          </li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+          <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+            <p>*Описание федерации*</p>
+          </div>
+          <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
 
-          <div class="clearfix"></div>
-        </div>
-        <div class="x_content">
-          <div class="" role="tabpanel" data-example-id="togglable-tabs">
-            <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-              <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Описание</a>
-              </li>
-              <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Турниры федерации</a>
-              </li>
-              <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Контакты</a>
-              </li>
-            </ul>
-            <div id="myTabContent" class="tab-content">
-              <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
-                <p>*Описание федерации*</p>
-              </div>
-              <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+            <% if @federation.tournaments.empty? %>
+              <h2>Этой федерацией не проводятся турниры <%= link_to 'Добавить турнир?', new_tournament_path %></h2>
+            <% else%>
+              <% @federation.tournaments.each do |tourn|%>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="x_panel">
+                    <div class="x_title">
+                      <h2><%=tourn.name %> <small><%= @federation.name %></small></h2>
+                      <div class="clearfix"></div>
+                    </div>
 
-                <% if @federation.tournaments.empty? %>
-                  <h2>Этой федерацией не проводятся турниры <%= link_to 'Добавить турнир?', new_tournament_path %></h2>
-                <% else%>
-                  <% @federation.tournaments.each do |tourn|%>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <div class="x_panel">
-                        <div class="x_title">
-                          <h2><%=tourn.name %> <small><%= @federation.name %></small></h2>
-                          <div class="clearfix"></div>
+                    <div class="x_content">
+                      <div class="bs-example" data-example-id="simple-jumbotron">
+                        <div class="jumbotron">
+                          <p> Сезон турнира: <%= tourn.season %></p>
                         </div>
-
-                        <div class="x_content">
-                          <div class="bs-example" data-example-id="simple-jumbotron">
-                            <div class="jumbotron">
-                              <p> Сезон турнира: <%= tourn.season %></p>
-                            </div>
-                          </div>
-                        </div>
-
-                        <%= link_to "Подробнее", tournament_path(tourn), :method => :get, :class => "btn btn-secondary" %>
-                        <%= link_to "Добавить турнир", :new_admin_tournament, :method => :get, :class => "btn btn-secondary" %>
                       </div>
                     </div>
-                  <% end %>
-                <% end %>
-              </div>
 
-              <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
-
-                <div class="col-md-6 col-sm-6 col-xs-12 profile_details">
-                  <div class="well profile_view">
-                    <div class="col-sm-12">
-                      <h4 class="brief"><i><%= @federation.name %></i></h4>
-                      <div class="left col-xs-12">
-                        <ul class="list-unstyled">
-                          <li>  <big><i class="fa fa-building"></i>Сайт: <%= @federation.url %></big>  </li>
-                          <li> <big><i class="fa fa-phone"></i> Телефон #: <%= @federation.contacts %></big>  </li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div class="col-xs-12 bottom text-right">
-                      <div class="col-xs-12 col-sm-6 emphasis" style="float:right;">
-                        <button type="button" class="btn btn-primary btn-xs" onclick="parent.location='<%= @federation.url %>'">
-                          <i class="fa fa-user"> </i> View Profile
-                        </button>
-                      </div>
-                    </div>
+                    <%= link_to "Подробнее", tournament_path(tourn), :method => :get, :class => "btn btn-secondary" %>
+                    <%= link_to "Добавить турнир", :new_admin_tournament, :method => :get, :class => "btn btn-secondary" %>
                   </div>
                 </div>
-
-              </div>
-
-            </div>
+              <% end %>
+            <% end %>
           </div>
+
+          <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+
+            <div class="col-md-6 col-sm-6 col-xs-12 profile_details">
+              <div class="well profile_view">
+                <div class="col-sm-12">
+                  <h4 class="brief"><i><%= @federation.name %></i></h4>
+                  <div class="left col-xs-12">
+                    <ul class="list-unstyled">
+                      <li>  <big><i class="fa fa-building"></i>Сайт: <%= @federation.url %></big>  </li>
+                      <li> <big><i class="fa fa-phone"></i> Телефон #: <%= @federation.contacts %></big>  </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-xs-12 bottom text-right">
+                  <div class="col-xs-12 col-sm-6 emphasis" style="float:right;">
+                    <button type="button" class="btn btn-primary btn-xs" onclick="parent.location='<%= @federation.url %>'">
+                      <i class="fa fa-user"> </i> View Profile
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
         </div>
       </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
+  </div>
+</div>

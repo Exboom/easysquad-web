@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'application/adm_new_up', as: 'adm_new_up'
   get 'teams/appfortourn', as: 'appfortourn'
   post 'teams/creat_appfortourn', as: 'creat_appfortourn'
+  patch 'chekins/failed', as: 'failed'
 
 
   resources :players

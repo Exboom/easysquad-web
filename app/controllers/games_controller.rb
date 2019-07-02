@@ -24,17 +24,19 @@ class GamesController < ApplicationController
     session[:return_to] ||= request.referer
     @game = Game.find(params[:id])
     if @game.update(game_params)
-      # redirect_to @game
-      redirect_to session.delete(:return_to)
+      Event.new(user_id: current_user.id, what_event: "Установлен счет игры "+@game.name+", новое значение: "+@game.game_score, time_event: DateTime.now).save
+      redirect_to session.delete(:return_to), alert: "Счет установлен"
     else
-      render 'show'
+      redirect_to session.delete(:return_to), alert: "Произошла ошибка"
+      @game.errors.full_messages.each do |msg|
+        puts msg
+      end
     end
   end
 
   def show
     @game = Game.find(params[:id])
     @app=Application.find_by player:current_user.id, tournament: @game.tournament
-
     @players=@game.chekins.player
     @team1=Team.find(@game.team_one)
     @team2=Team.find(@game.team_two)

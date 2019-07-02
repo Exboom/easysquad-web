@@ -42,7 +42,7 @@ class ApplicationsController < ApplicationController
 
   private
   def application_params
-    params.require(:application).permit(:player, :team, :tournament)
+    params.require(:application).permit(:player_id, :team_id, :tournament_id)
   end
   
 end

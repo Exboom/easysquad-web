@@ -52,13 +52,40 @@ class TeamsController < ApplicationController
   end
 
   def appfortourn
-
+    @tourn=Tournament.find(params[:tourn])
+    @team = Team.find(params[:team])
+    @allplayers = @team.players
+    @players=Array.new(@allplayers.size)
+    @allplayers.each_with_index  do |plr, index|
+      if plr.applications.where(tournament_id: @tourn.id).empty?
+        @players[index]=plr
+      else
+        next
+      end
+    end
+    @players.reject!{ |item| item.nil? }
   end
 
   def creat_appfortourn
-
+    session[:return_to] ||= request.referer
+    @team=Team.find(params[:game][:team_id])
+    @plrapp=params[:game][:player_id]
+    @plrapp.each do |app|
+      puts "Вывод ид "+app.to_s
+      if app.nil? or app==""
+        next
+      else
+        @newapp=Application.new(player_id:app, team_id: @team.id, tournament_id:params[:game][:tourn_id])
+        if @newapp.save
+        else
+          @newapp.errors.full_messages.each do |msg|
+            puts msg
+          end
+        end
+      end
+    end
+    redirect_to session.delete(:return_to), alert: "Заявка создана"
   end
-
 
   # def destroy
   #   @team = Team.find(params[:id])
