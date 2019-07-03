@@ -36,7 +36,6 @@ class ApplicationsController < ApplicationController
   def destroy
     @application = Application.find(params[:id])
     @application.destroy
-
     redirect_to welcome_index_path
   end
 

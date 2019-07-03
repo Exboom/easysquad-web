@@ -1,35 +1,47 @@
-<h1>EasySquad</h1>
-<h2>Собери свою команду!</h2>
+<%= form_with scope: :tournament, url: admin_tournaments_path, html: {:id=>"demo-form2", "data-parsley-validate"=>"", :class=>"form-horizontal form-label-left", :novalidate=>""}, local: true do |form| %>
 
-<h2> Заполните информацию о турнире</h2>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">
+    </label>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <h2> Заполните информацию о новом турнире</h2>
+    </div>
+  </div>
 
-<%= form_with scope: :tournament, url: admin_tournaments_path, local: true do |form| %>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Название
+    </label>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <%= form.text_field :name, :id=>"name", :class=>"form-control col-md-5 col-xs-12" %>
+    </div>
+  </div>
 
-  <p>
-    <%= form.label :Название %><br>
-    <%= form.text_field :name %>
-  </p>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Сезон
+    </label>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <%= form.text_field :season, :id=>"name", :class=>"form-control col-md-5 col-xs-12" %>
+    </div>
+  </div>
 
-  <p>
-    <%= form.label :Сезон %><br>
-    <%= form.text_field :season %>
-  </p>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="enemyteam">Место проведения
+    </label>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <%= form.collection_select(:location_id, Location.all, :id, :name, {:prompt => "Выберите место проведения"}, { :class=>"form-control"}) %>
+    </div>
+  </div>
 
-  <p>
-    <%= form.label :Место_проведения %><br>
-    <%= form.collection_select(:location_id, Location.all, :id, :name) %>
-  </p>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="enemyteam">Федерация
+    </label>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <%= form.collection_select(:federation_id, Federation.all, :id, :name, {:prompt => "Выберите федерацию"}, { :class=>"form-control"}) %>
+    </div>
+  </div>
 
-  <p>
-    <%= form.label :Федерация %><br>
-    <%= form.collection_select(:federation_id, Federation.all, :id, :name) %>
-  </p>
-
-  <p>
-    <%= form.submit("Создать") %>
-  </p>
-
+  <div class="col-md-4 col-sm-4 col-xs-12 col-md-offset-3">
+    <%= form.submit "Создать", :class=>"btn btn-success" %>
+  </div>
 
 <% end %>
-
-<%= button_to "Назад", :back, :method => :get %>

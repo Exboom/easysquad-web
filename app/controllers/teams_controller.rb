@@ -2,25 +2,10 @@ class TeamsController < ApplicationController
 
   before_action :check_owner, only: [:edit]
 
-  # def index
-  #   @teams=Team.all
-  # end
-  #
-  # def new
-  #   @team=Team.new
-  #   @users=User.all
-  # end
-  #
   def edit
     @team=Team.find(params[:id])
   end
-  #
-  # def create
-  #   @team=Team.new(team_params)
-  #   @team.save
-  #   redirect_to @team
-  # end
-  #
+
   def update
     @team = Team.find(params[:id])
     if @team.update(team_params)
@@ -71,7 +56,6 @@ class TeamsController < ApplicationController
     @team=Team.find(params[:game][:team_id])
     @plrapp=params[:game][:player_id]
     @plrapp.each do |app|
-      puts "Вывод ид "+app.to_s
       if app.nil? or app==""
         next
       else
@@ -87,13 +71,6 @@ class TeamsController < ApplicationController
     redirect_to session.delete(:return_to), alert: "Заявка создана"
   end
 
-  # def destroy
-  #   @team = Team.find(params[:id])
-  #   @team.destroy
-  #
-  #   redirect_to welcome_index_path
-  # end
-
   private
   def team_params
     params.require(:team).permit(:name, :user_id, :player_id)
@@ -104,6 +81,5 @@ class TeamsController < ApplicationController
     redirect_to team_path,
                 alert:  "У Вас нет прав доступа для данных действий" unless (current_user.id==@team.user_id) or !(@userrols.find_by_id(1).nil?)
   end
-
 
 end

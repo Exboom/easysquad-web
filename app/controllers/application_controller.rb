@@ -15,7 +15,6 @@ class ApplicationController < ActionController::Base
     #new for all controllers
     if current_user!=nil
       @user=User.find(current_user.id)
-      @userrols=@user.roles
       @userrols=@user.user_roles
       @usersNew = User.where("approved = ?", false)
     end
@@ -23,7 +22,6 @@ class ApplicationController < ActionController::Base
 
   def adm_new_up
     @user=User.find(current_user.id)
-    @userrols=@user.roles
     @usersNew = User.where("approved = ?", false)
     respond_to do |format|
       format.js

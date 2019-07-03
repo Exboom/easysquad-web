@@ -1,25 +1,31 @@
-<h1>EasySquad</h1>
-<h2>Собери свою команду!</h2>
+<%= form_with scope: :location, url: admin_locations_path, html: {:id=>"demo-form2", "data-parsley-validate"=>"", :class=>"form-horizontal form-label-left", :novalidate=>""}, local: true do |form| %>
 
-<h2> Заполните информацию о новом месте</h2>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">
+    </label>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <h2> Заполните информацию о новом месте</h2>
+    </div>
+  </div>
 
-<%= form_with scope: :location, url: admin_locations_path, local: true do |form| %>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Название
+    </label>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <%= form.text_field :name, :id=>"name", :class=>"form-control col-md-5 col-xs-12" %>
+    </div>
+  </div>
 
-  <p>
-    <%= form.label :Название %><br>
-    <%= form.text_field :name %>
-  </p>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Адрес
+    </label>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <%= form.text_field :address, :id=>"name", :class=>"form-control col-md-5 col-xs-12" %>
+    </div>
+  </div>
 
-  <p>
-    <%= form.label :Адрес %><br>
-    <%= form.text_field :address %>
-  </p>
-
-  <p>
-    <%= form.submit("Создать") %>
-  </p>
-
+  <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+    <%= form.submit "Создать", :class=>"btn btn-success" %>
+  </div>
 
 <% end %>
-
-<%= button_to "Назад", :back, :method => :get %>

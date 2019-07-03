@@ -25,25 +25,18 @@ class Admin::FederationsController < ApplicationController
     end
   end
 
-  # def show
-  #   tournkey= Tournament.where("federation = ?", params[:id]).pluck(:id)
-  #
-  #   if tournkey.empty?
-  #     @f=nil
-  #     @tournaments = "Эта федерация не проводит турниров"
-  #   else
-  #     @f=1
-  #     @tournaments= Tournament.find(tournkey)
-  #   end
-  #
-  #   @federation = Federation.find(params[:id])
-  # end
-
   def destroy
     @federation = Federation.find(params[:id])
+    @tournaments=@federation.tournaments
+    @tournaments.each do |tourn|
+      tourn.team_tournaments.destroy_all
+      tourn.games.each do |game|
+        game.chekins.destroy_all
+      end
+    end
+    @tournaments.destroy_all
     @federation.destroy
-
-    redirect_to welcome_index_path
+    redirect_to root_path, alert: "Федеарция успешно удалена"
   end
 
   private
@@ -54,7 +47,6 @@ class Admin::FederationsController < ApplicationController
   protected
 
   def check_admin
-
     @user=User.find(current_user.id)
     @userrols=@user.roles
     redirect_to federation_path, alert:  "У Вас нет прав доступа для данных действий" unless @userrols.first.id==1

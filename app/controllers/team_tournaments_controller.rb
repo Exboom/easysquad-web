@@ -35,9 +35,10 @@ class TeamTournamentsController < ApplicationController
   def destroy
     session[:return_to] ||= request.referer
     @teamtournament = TeamTournament.find_by(team_id:params[:id], tournament_id:params[:format])
-    @teamtournament.destroy
+    if @teamtournament.destroy
+      Application.where(tournament_id: params[:format], team_id:params[:id]).destroy_all
+    end
     redirect_to session.delete(:return_to)
-    # redirect_to welcome_index_path
   end
 
   private

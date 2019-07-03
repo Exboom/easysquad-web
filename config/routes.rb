@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     resources :federations, except: [:show]
     resources :locations, except: [:show]
     resources :tournaments, except: [:show]
-    resources :teams, except: [:show, :edit]
+    resources :teams, except: [:show]
     # resources :users, except: [:index]
     resources :users
   end

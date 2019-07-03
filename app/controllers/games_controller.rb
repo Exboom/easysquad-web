@@ -12,12 +12,13 @@ class GamesController < ApplicationController
     session[:return_to] ||= request.referer
     @game=Game.new(game_params)
     if @game.save
-      redirect_to session.delete(:return_to)
+      redirect_to session.delete(:return_to), alert: "Игра успешно добавлена"
     else
-      render 'new'
+      redirect_to session.delete(:return_to), alert: "Произошла ошибка при добавлении игры"
+      @game.errors.full_messages.each do |msg|
+        puts msg
+      end
     end
-
-    # redirect_to @game
   end
 
   def update
@@ -46,7 +47,6 @@ class GamesController < ApplicationController
   def destroy
     @game = Game.find(params[:id])
     @game.destroy
-
     redirect_to welcome_index_path
   end
 

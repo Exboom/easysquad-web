@@ -8,21 +8,25 @@
       <div class="" role="tabpanel" data-example-id="togglable-tabs">
         <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
           <% if ((@userrols.find_by role: 4)!=nil)%>
-            <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Игрок</a>
+            <li role="presentation" class="active"><a href="#tab_content1" role="tab" id="home-tab"  data-toggle="tab" aria-expanded="true">Игрок</a>
             </li>
           <% end %>
 
           <% if ((@userrols.find_by role: 3)!=nil)%>
-            <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Администратор команды</a>
+            <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="true">Администратор команды</a>
             </li>
           <% end %>
 
           <% if ((@userrols.find_by role: 2)!=nil)%>
-            <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Владелец</a>
-            </li>
+            <% if ((@userrols.find_by role: 2)!=nil) and ((@userrols.find_by role: 4)==nil)%>
+              <li role="presentation" class="active"><a href="#tab_content3" role="tab" id="home-tab" data-toggle="tab" aria-expanded="true">Владелец</a>
+              </li>
+            <% else %>
+              <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="true">Владелец</a>
+              </li>
+            <% end %>
           <% end %>
         </ul>
-
         <div id="myTabContent" class="tab-content">
           <% if ((@userrols.find_by role: 4)!=nil)%>
             <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
@@ -50,28 +54,28 @@
                                     <!-- required for floating -->
                                     <!-- Nav tabs -->
                                     <ul class="nav nav-tabs tabs-left">
-                                      <li class="active"><a href="#home<%=nxtgm.id%>" data-toggle="tab" aria-expanded="true">Игра</a>
+                                      <li class="active"><a href="#home<%=nxtgm.id*4+(1+index.to_i*4)%>" data-toggle="tab" aria-expanded="true">Игра</a>
                                       </li>
-                                      <li class=""><a href="#profile<%=nxtgm.id%>" data-toggle="tab" aria-expanded="false">Место</a>
+                                      <li class=""><a href="#profile<%=nxtgm.id*4+(1+index.to_i*4)%>" data-toggle="tab" aria-expanded="false">Место</a>
                                       </li>
-                                      <li class=""><a href="#messages<%=nxtgm.id%>" data-toggle="tab" aria-expanded="false">Отметиться</a>
+                                      <li class=""><a href="#messages<%=nxtgm.id*4+(1+index.to_i*4)%>" data-toggle="tab" aria-expanded="false">Отметиться</a>
                                       </li>
-                                      <li class=""><a href="#allcheck<%=nxtgm.id%>" data-toggle="tab" aria-expanded="false">Кто будет</a>
+                                      <li class=""><a href="#allcheck<%=nxtgm.id*4+(1+index.to_i*4)%>" data-toggle="tab" aria-expanded="false">Кто будет</a>
                                       </li>
                                     </ul>
                                   </div>
                                   <div class="col-xs-9">
                                     <!-- Tab panes -->
                                     <div class="tab-content">
-                                      <div class="tab-pane active" id="home<%=nxtgm.id%>">
+                                      <div class="tab-pane active" id="home<%=nxtgm.id*4+(1+index.to_i*4)%>">
                                         <p class="lead"><%=nxtgm.name%></p>
                                         <p>Время проведения: <%=nxtgm.time.to_formatted_s(:short)%></p>
                                       </div>
-                                      <div class="tab-pane" id="profile<%=nxtgm.id%>">
+                                      <div class="tab-pane" id="profile<%=nxtgm.id*4+(1+index.to_i*4)%>">
                                         <p><%=nxtgm.tournament.location.name%></p>
                                         <p><%=nxtgm.tournament.location.address%></p>
                                       </div>
-                                      <div class="tab-pane" id="messages<%=nxtgm.id%>">
+                                      <div class="tab-pane" id="messages<%=nxtgm.id*4+(1+index.to_i*4)%>">
                                         <% if (@player.applications.find_by tournament: nxtgm.tournament.id).nil? %>
                                           <p class="lead">Вы не заявлены за команду на этот турнир</p>
                                         <% else %>
@@ -120,7 +124,7 @@
                                         <% end %>
                                       </div>
 
-                                      <div class="tab-pane" id="allcheck<%=nxtgm.id%>">
+                                      <div class="tab-pane" id="allcheck<%=nxtgm.id*4+(1+index.to_i*4)%>">
                                         <%nxtgm.chekins.where(chekin: true).each do |checks| %>
                                           <p>
                                             <%=checks.player.name %>
@@ -162,11 +166,11 @@
                                     <!-- required for floating -->
                                     <!-- Nav tabs -->
                                     <ul class="nav nav-tabs tabs-left">
-                                      <li class="active"><a href="#home<%=lstgm.id%>" data-toggle="tab" aria-expanded="true">Игра</a>
+                                      <li class="active"><a href="#home<%=lstgm.id*4+(2+index.to_i*4)%>" data-toggle="tab" aria-expanded="true">Игра</a>
                                       </li>
-                                      <li class=""><a href="#profile<%=lstgm.id%>" data-toggle="tab" aria-expanded="false">Место</a>
+                                      <li class=""><a href="#profile<%=lstgm.id*4+(2+index.to_i*4)%>" data-toggle="tab" aria-expanded="false">Место</a>
                                       </li>
-                                      <li class=""><a href="#allcheck<%=lstgm.id%>" data-toggle="tab" aria-expanded="false">Кто был</a>
+                                      <li class=""><a href="#allcheck<%=lstgm.id*4+(2+index.to_i*4)%>" data-toggle="tab" aria-expanded="false">Кто был</a>
                                       </li>
                                     </ul>
                                   </div>
@@ -174,15 +178,15 @@
                                   <div class="col-xs-9">
                                     <!-- Tab panes -->
                                     <div class="tab-content">
-                                      <div class="tab-pane active" id="home<%=lstgm.id%>">
+                                      <div class="tab-pane active" id="home<%=lstgm.id*4+(2+index.to_i*4)%>">
                                         <p class="lead"><%=lstgm.name%></p>
                                         <p>Счет игры: <%=lstgm. game_score%></p>
                                       </div>
-                                      <div class="tab-pane" id="profile<%=lstgm.id%>">
+                                      <div class="tab-pane" id="profile<%=lstgm.id*4+(2+index.to_i*4)%>">
                                         <p><%=lstgm.tournament.location.name%></p>
                                         <p><%=lstgm.tournament.location.address%></p>
                                       </div>
-                                      <div class="tab-pane" id="allcheck<%=lstgm.id%>">
+                                      <div class="tab-pane" id="allcheck<%=lstgm.id*4+(2+index.to_i*4)%>">
                                         <%lstgm.chekins.where(chekin: true).each do |checks| %>
                                           <p>
                                             <%=checks.player.name %>
@@ -204,8 +208,6 @@
               </div>
             </div>
           <% end %>
-
-
 
           <% if ((@userrols.find_by role: 3)!=nil)%>
             <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
@@ -232,20 +234,20 @@
                                     <!-- required for floating -->
                                     <!-- Nav tabs -->
                                     <ul class="nav nav-tabs tabs-left">
-                                      <li class="active"><a href="#home<%=nxtgm.id.to_i*3+index.to_i*3%>" data-toggle="tab" aria-expanded="true">Игра</a>
+                                      <li class="active"><a href="#home<%=nxtgm.id.to_i*3+(1+index.to_i*3)%>" data-toggle="tab" aria-expanded="true">Игра</a>
                                       </li>
-                                      <li class=""><a href="#profile<%=nxtgm.id.to_i*3+index.to_i*3%>" data-toggle="tab" aria-expanded="false">Место</a>
+                                      <li class=""><a href="#profile<%=nxtgm.id.to_i*3+(1+index.to_i*3)%>" data-toggle="tab" aria-expanded="false">Место</a>
                                       </li>
-                                      <li class=""><a href="#marks<%=nxtgm.id.to_i*3+index.to_i*3%>" data-toggle="tab" aria-expanded="false">Отметки</a>
+                                      <li class=""><a href="#marks<%=nxtgm.id.to_i*3+(1+index.to_i*3)%>" data-toggle="tab" aria-expanded="false">Отметки</a>
                                       </li>
-                                      <li class=""><a href="#allcheck<%=nxtgm.id.to_i*3+index.to_i*3%>" data-toggle="tab" aria-expanded="false">Кто будет</a>
+                                      <li class=""><a href="#allcheck<%=nxtgm.id.to_i*3+(1+index.to_i*3)%>" data-toggle="tab" aria-expanded="false">Кто будет</a>
                                       </li>
                                     </ul>
                                   </div>
                                   <div class="col-xs-9">
                                     <!-- Tab panes -->
                                     <div class="tab-content">
-                                      <div class="tab-pane active" id="home<%=nxtgm.id.to_i*3+index.to_i*3%>">
+                                      <div class="tab-pane active" id="home<%=nxtgm.id.to_i*3+(1+index.to_i*3)%>">
                                         <p class="lead"><%=nxtgm.name%></p>
                                         <p>Время проведения: <%=nxtgm.time.to_formatted_s(:short)%></p>
                                         <p><b><i>Игра сыграна?</i></b></p>
@@ -255,11 +257,11 @@
                                           <%= form.submit("Установить") %>
                                         <% end %>
                                       </div>
-                                      <div class="tab-pane" id="profile<%=nxtgm.id.to_i*3+index.to_i*3%>">
+                                      <div class="tab-pane" id="profile<%=nxtgm.id.to_i*3+(1+index.to_i*3)%>">
                                         <p><%=nxtgm.tournament.location.name%></p>
                                         <p><%=nxtgm.tournament.location.address%></p>
                                       </div>
-                                      <div class="tab-pane" id="marks<%=nxtgm.id.to_i*3+index.to_i*3%>">
+                                      <div class="tab-pane" id="marks<%=nxtgm.id.to_i*3+(1+index.to_i*3)%>">
 
                                         <%= form_with scope: :chekin, url: chekins_path, local: true  do |form| %>
                                           <%= form.hidden_field :player_id, value: current_user.id%>
@@ -279,7 +281,7 @@
                                           <% end %>
                                         <% end %>
                                       </div>
-                                      <div class="tab-pane" id="allcheck<%=nxtgm.id.to_i*3+index.to_i*3%>">
+                                      <div class="tab-pane" id="allcheck<%=nxtgm.id.to_i*3+(1+index.to_i*3)%>">
                                         <%nxtgm.chekins.where(chekin: true).each do |checks| %>
                                           <p>
                                             <%=checks.player.name %>
@@ -321,26 +323,26 @@
                                     <!-- required for floating -->
                                     <!-- Nav tabs -->
                                     <ul class="nav nav-tabs tabs-left">
-                                      <li class="active"><a href="#home<%=lstgm.id*3+index.to_i*3%>" data-toggle="tab" aria-expanded="true">Игра</a>
+                                      <li class="active"><a href="#home<%=lstgm.id*3+(2+index.to_i*3)%>" data-toggle="tab" aria-expanded="true">Игра</a>
                                       </li>
-                                      <li class=""><a href="#profile<%=lstgm.id*3+index.to_i*3%>" data-toggle="tab" aria-expanded="false">Место</a>
+                                      <li class=""><a href="#profile<%=lstgm.id*3+(2+index.to_i*3)%>" data-toggle="tab" aria-expanded="false">Место</a>
                                       </li>
-                                      <li class=""><a href="#allcheck<%=lstgm.id*3+index.to_i*3%>" data-toggle="tab" aria-expanded="false">Кто был</a>
+                                      <li class=""><a href="#allcheck<%=lstgm.id*3+(2+index.to_i*3)%>" data-toggle="tab" aria-expanded="false">Кто был</a>
                                       </li>
                                     </ul>
                                   </div>
                                   <div class="col-xs-9">
                                     <!-- Tab panes -->
                                     <div class="tab-content">
-                                      <div class="tab-pane active" id="home<%=lstgm.id*3+index.to_i*3%>">
+                                      <div class="tab-pane active" id="home<%=lstgm.id*3+(2+index.to_i*3)%>">
                                         <p class="lead"><%=lstgm.name%></p>
                                         <p>Счет игры: <%=lstgm. game_score%></p>
                                       </div>
-                                      <div class="tab-pane" id="profile<%=lstgm.id*3+index.to_i*3%>">
+                                      <div class="tab-pane" id="profile<%=lstgm.id*3+(2+index.to_i*3)%>">
                                         <p><%=lstgm.tournament.location.name%></p>
                                         <p><%=lstgm.tournament.location.address%></p>
                                       </div>
-                                      <div class="tab-pane" id="allcheck<%=lstgm.id*3+index.to_i*3%>">
+                                      <div class="tab-pane" id="allcheck<%=lstgm.id*3+(2+index.to_i*3)%>">
                                         <%lstgm.chekins.where(chekin: true).each do |checks| %>
                                           <p>
                                             <%=checks.player.name %>
@@ -425,14 +427,19 @@
           <% end %>
 
           <% if ((@userrols.find_by role: 2)!=nil)%>
-            <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
-              <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+
+            <% if ((@userrols.find_by role: 2)!=nil) and ((@userrols.find_by role: 4)==nil)%>
+              <div role="tabpanel" class="tab-pane fade active in" id="tab_content3" aria-labelledby="home-tab">
+            <% else %>
+              <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+            <% end %>
+              <div class="accordion" id="accordion3" role="tablist" aria-multiselectable="true">
                 <!--            next games-->
                 <div class="panel">
-                  <a class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                  <a class="panel-heading" role="tab" id="headingSix" data-toggle="collapse" data-parent="#accordion3" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
                     <h4 class="panel-title">Ближайшие игры</h4>
                   </a>
-                  <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                  <div id="collapseSix" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSix">
                     <div class="panel-body">
                       <% if (@nextgames_adm[0].ids.empty?) %>
                         <h3>В ближайшее время игр нет</h3>
@@ -450,20 +457,20 @@
                                     <!-- required for floating -->
                                     <!-- Nav tabs -->
                                     <ul class="nav nav-tabs tabs-left">
-                                      <li class="active"><a href="#home<%=nxtgm.id.to_i+index.to_i*2%>" data-toggle="tab" aria-expanded="true">Игра</a>
+                                      <li class="active"><a href="#home<%=nxtgm.id.to_i*2+(1+index.to_i*2)%>" data-toggle="tab" aria-expanded="true">Игра</a>
                                       </li>
-                                      <li class=""><a href="#profile<%=nxtgm.id.to_i+index.to_i*2%>" data-toggle="tab" aria-expanded="false">Место</a>
+                                      <li class=""><a href="#profile<%=nxtgm.id.to_i*2+(1+index.to_i*2)%>" data-toggle="tab" aria-expanded="false">Место</a>
                                       </li>
-                                      <li class=""><a href="#marks<%=nxtgm.id.to_i+index.to_i*2%>" data-toggle="tab" aria-expanded="false">Отметки</a>
+                                      <li class=""><a href="#marks<%=nxtgm.id.to_i*2+(1+index.to_i*2)%>" data-toggle="tab" aria-expanded="false">Отметки</a>
                                       </li>
-                                      <li class=""><a href="#allcheck<%=nxtgm.id.to_i+index.to_i*2%>" data-toggle="tab" aria-expanded="false">Кто будет</a>
+                                      <li class=""><a href="#allcheck<%=nxtgm.id.to_i*2+(1+index.to_i*2)%>" data-toggle="tab" aria-expanded="false">Кто будет</a>
                                       </li>
                                     </ul>
                                   </div>
                                   <div class="col-xs-9">
                                     <!-- Tab panes -->
                                     <div class="tab-content">
-                                      <div class="tab-pane active" id="home<%=nxtgm.id.to_i+index.to_i*2%>">
+                                      <div class="tab-pane active" id="home<%=nxtgm.id.to_i*2+(1+index.to_i*2)%>">
                                         <p class="lead"><%=nxtgm.name%></p>
                                         <p>Время проведения: <%=nxtgm.time.to_formatted_s(:short)%></p>
                                         <p><b><i>Игра сыграна?</i></b></p>
@@ -473,11 +480,11 @@
                                           <%= form.submit("Установить") %>
                                         <% end %>
                                       </div>
-                                      <div class="tab-pane" id="profile<%=nxtgm.id.to_i+index.to_i*2%>">
+                                      <div class="tab-pane" id="profile<%=nxtgm.id.to_i*2+(1+index.to_i*2)%>">
                                         <p><%=nxtgm.tournament.location.name%></p>
                                         <p><%=nxtgm.tournament.location.address%></p>
                                       </div>
-                                      <div class="tab-pane" id="marks<%=nxtgm.id.to_i+index.to_i*2%>">
+                                      <div class="tab-pane" id="marks<%=nxtgm.id.to_i*2+(1+index.to_i*2)%>">
 
                                         <%= form_with scope: :chekin, url: chekins_path, local: true  do |form| %>
                                           <%= form.hidden_field :player_id, value: current_user.id%>
@@ -497,7 +504,7 @@
                                           <% end %>
                                         <% end %>
                                       </div>
-                                      <div class="tab-pane" id="allcheck<%=nxtgm.id.to_i+index.to_i*2%>">
+                                      <div class="tab-pane" id="allcheck<%=nxtgm.id.to_i*2+(1+index.to_i*2)%>">
                                         <%nxtgm.chekins.where(chekin: true).each do |checks| %>
                                           <p>
                                             <%=checks.player.name %>
@@ -517,12 +524,12 @@
                     </div>
                   </div>
                 </div>
-                <!--            last games-->
+                <!--last games-->
                 <div class="panel">
-                  <a class="panel-heading collapsed" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  <a class="panel-heading collapsed" role="tab" id="headingSeven" data-toggle="collapse" data-parent="#accordion3" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
                     <h4 class="panel-title">Прошедшие игры</h4>
                   </a>
-                  <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false" style="height: 0px;">
+                  <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven" aria-expanded="false" style="height: 0px;">
                     <div class="panel-body">
                       <% if (@lastgames_adm[0].ids.empty?) %>
                         <h3>Ни одной игры еще не было сыграно</h3>
@@ -540,26 +547,26 @@
                                     <!-- required for floating -->
                                     <!-- Nav tabs -->
                                     <ul class="nav nav-tabs tabs-left">
-                                      <li class="active"><a href="#home<%=lstgm.id+index.to_i*2%>" data-toggle="tab" aria-expanded="true">Игра</a>
+                                      <li class="active"><a href="#home<%=lstgm.id*2+(2+index.to_i*2)%>" data-toggle="tab" aria-expanded="true">Игра</a>
                                       </li>
-                                      <li class=""><a href="#profile<%=lstgm.id+index.to_i*2%>" data-toggle="tab" aria-expanded="false">Место</a>
+                                      <li class=""><a href="#profile<%=lstgm.id*2+(2+index.to_i*2)%>" data-toggle="tab" aria-expanded="false">Место</a>
                                       </li>
-                                      <li class=""><a href="#allcheck<%=lstgm.id+index.to_i*2%>" data-toggle="tab" aria-expanded="false">Кто был</a>
+                                      <li class=""><a href="#allcheck<%=lstgm.id*2+(2+index.to_i*2)%>" data-toggle="tab" aria-expanded="false">Кто был</a>
                                       </li>
                                     </ul>
                                   </div>
                                   <div class="col-xs-9">
                                     <!-- Tab panes -->
                                     <div class="tab-content">
-                                      <div class="tab-pane active" id="home<%=lstgm.id+index.to_i*2%>">
+                                      <div class="tab-pane active" id="home<%=lstgm.id*2+(2+index.to_i*2)%>">
                                         <p class="lead"><%=lstgm.name%></p>
                                         <p>Счет игры: <%=lstgm. game_score%></p>
                                       </div>
-                                      <div class="tab-pane" id="profile<%=lstgm.id+index.to_i*2%>">
+                                      <div class="tab-pane" id="profile<%=lstgm.id*2+(2+index.to_i*2)%>">
                                         <p><%=lstgm.tournament.location.name%></p>
                                         <p><%=lstgm.tournament.location.address%></p>
                                       </div>
-                                      <div class="tab-pane" id="allcheck<%=lstgm.id+index.to_i*2%>">
+                                      <div class="tab-pane" id="allcheck<%=lstgm.id*2+(2+index.to_i*2)%>">
                                         <%lstgm.chekins.where(chekin: true).each do |checks| %>
                                           <p>
                                             <%=checks.player.name %>
@@ -579,12 +586,12 @@
                     </div>
                   </div>
                 </div>
-                <!--            new games-->
+                <!--new games-->
                 <div class="panel">
-                  <a class="panel-heading collapsed" role="tab" id="headingThree" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseTwo">
+                  <a class="panel-heading collapsed" role="tab" id="headingEight" data-toggle="collapse" data-parent="#accordion3" href="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
                     <h4 class="panel-title">Добавить игру</h4>
                   </a>
-                  <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="false" style="height: 0px;">
+                  <div id="collapseEight" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEight" aria-expanded="false" style="height: 0px;">
                     <div class="panel-body">
 
                       <%= form_with scope: :game, url: games_path, html: {:id=>"demo-form2", "data-parsley-validate"=>"", :class=>"form-horizontal form-label-left", :novalidate=>""}, local: true do |form| %>
@@ -634,16 +641,13 @@
                           <%= form.submit "Создать", :class=>"btn btn-success" %>
 
                         </div>
-
                       <% end %>
-
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           <% end %>
-
         </div>
       </div>
     </div>

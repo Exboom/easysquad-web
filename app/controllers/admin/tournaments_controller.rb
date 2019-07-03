@@ -25,17 +25,15 @@ class Admin::TournamentsController < ApplicationController
     end
   end
 
-  # def show
-  #   @local=Location.find(Tournament.find(params[:id]).location)
-  #   @feder=Federation.find(Tournament.find(params[:id]).federation)
-  #   @tournament = Tournament.find(params[:id])
-  #   # @team
-  # end
-
   def destroy
     @tournament = Tournament.find(params[:id])
+    @tournament.team_tournaments.destroy_all
+    @tournament.applications.destroy_all
+    @tournament.games.each do |game|
+      game.chekins.destroy_all
+    end
+    @tournament.games.destroy_all
     @tournament.destroy
-
     redirect_to welcome_index_path
   end
 

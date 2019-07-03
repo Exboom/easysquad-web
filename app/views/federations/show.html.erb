@@ -45,7 +45,7 @@
           <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
 
             <% if @federation.tournaments.empty? %>
-              <h2>Этой федерацией не проводятся турниры <%= link_to 'Добавить турнир?', new_tournament_path %></h2>
+              <h2>Этой федерацией не проводятся турниры <%= link_to 'Добавить турнир?', new_admin_tournament_path %></h2>
             <% else%>
               <% @federation.tournaments.each do |tourn|%>
                 <div class="col-md-6 col-sm-6 col-xs-12">

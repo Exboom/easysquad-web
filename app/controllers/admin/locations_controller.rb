@@ -5,7 +5,6 @@ class Admin::LocationsController < ApplicationController
     @location=Location.new
   end
 
-
   def edit
     @location=Location.find(params[:id])
   end
@@ -24,18 +23,6 @@ class Admin::LocationsController < ApplicationController
       render 'show'
     end
   end
-
-  # def show
-  #   tournkey = Tournament.where("location = ?", params[:id]).pluck(:id)
-  #   if tournkey.empty?
-  #     @f=nil
-  #     @tournaments = "На этом месте не проводятся турниры"
-  #   else
-  #     @f=1
-  #     @tournaments = Tournament.find(tournkey)
-  #   end
-  #   @location = Location.find(params[:id])
-  # end
 
   def destroy
     @location = Location.find(params[:id])

@@ -1,6 +1,4 @@
-<h1>Редактирование профиля</h1>
-
-<%= form_with(model: @player, local: true) do |form| %>
+<%= form_with(model: @player, html: {:id=>"demo-form2", "data-parsley-validate"=>"", :class=>"form-horizontal form-label-left", :novalidate=>""}, local: true) do |form| %>
 
   <% if @player.errors.any? %>
     <div id="error_explanation">
@@ -16,25 +14,42 @@
     </div>
   <% end %>
 
-  <p>
-    <%= form.label :Имя %><br>
-    <%= form.text_field :name %>
-  </p>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">
+    </label>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <h2>Редактирование профиля</h2>
+    </div>
+  </div>
 
-  <p>
-    <%= form.label :Дата_рождения %><br>
-    <%= form.date_select :birthday %>
-  </p>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Имя
+    </label>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <%= form.text_field :name, :id=>"name", :class=>"form-control col-md-5 col-xs-12" %>
+    </div>
+  </div>
 
-  <p>
-    <%= form.label :Игровой_номер %><br>
-    <%= form.text_field :gamenumber %>
-  </p>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Дата рождения
+    </label>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <%= form.date_field :birthday, :min => "1950-01-01", :end_year => Date.today.year, :class=>"form-control col-md-5 col-xs-12" %>
+    </div>
+  </div>
 
-  <p>
-    <%= form.submit("Обновить информацию") %>
-  </p>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Игровой номер
+    </label>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <%= form.number_field :gamenumber, :min=>1, :class=>"form-control col-md-5 col-xs-12" %>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+    <%= form.submit "Обновить", :class=>"btn btn-success" %>
+  </div>
 
 <% end %>
 
-<%= button_to "Назад", :back, :method => :get %>
+<%#= button_to "Назад", :back, :method => :get %>

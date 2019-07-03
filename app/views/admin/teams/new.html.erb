@@ -1,39 +1,31 @@
-<h1>EasySquad</h1>
-<h2>Собери свою команду!</h2>
+<%= form_with scope: :team, url: admin_teams_path, html: {:id=>"demo-form2", "data-parsley-validate"=>"", :class=>"form-horizontal form-label-left", :novalidate=>""}, local: true do |form| %>
 
-<h2> Заполните информацию о новой команде</h2>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">
+    </label>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <h2> Заполните информацию о новой команде</h2>
+    </div>
+  </div>
 
-<%= form_with scope: :team, url: admin_teams_path, local: true do |form| %>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Название
+    </label>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <%= form.text_field :name, :id=>"name", :class=>"form-control col-md-5 col-xs-12" %>
+    </div>
+  </div>
 
-  <p>
-  <%= form.label :Название %><br>
-  <%= form.text_field :name %>
-</p>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="enemyteam">Владелец
+    </label>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <%= form.collection_select(:user_id, User.all, :id, :email, {:prompt => "Выберите владельца"}, {:id=>"enemyteam", :class=>"form-control"}) %>
+    </div>
+  </div>
 
-  <p>
-    <%= form.label :Владелец %><br>
-    <%= form.collection_select(:owner, User.all, :id, :email) %>
-  </p>
-
-  <p>
-    <%= form.label :Капитан %><br>
-    <%= form.collection_select(:captain, Player.all, :id, :name) %>
-  </p>
-
-
-  <%#= form_with scope: :team_tournament, url: team_tournaments_path, local: true do |f| %>
-
-<!--    <p>-->
-<!--      <%#= f.label :Турниры %><br>-->
-      <%#= f.collection_select(:tournaments, Tournament.all, :id, :name) %>
-<!--    </p>-->
-
-
-  <p>
-    <%= form.submit("Создать") %>
-  </p>
-
+  <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+    <%= form.submit "Создать", :class=>"btn btn-success" %>
+  </div>
 
 <% end %>
-
-<%= button_to "Назад", :back, :method => :get %>

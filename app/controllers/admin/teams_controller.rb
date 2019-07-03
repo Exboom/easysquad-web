@@ -10,9 +10,9 @@ class Admin::TeamsController < ApplicationController
     @users=User.all
   end
 
-  # def edit
-  #   @team=Team.find(params[:id])
-  # end
+  def edit
+    @team=Team.find(params[:id])
+  end
 
   def create
     @team=Team.new(team_params)
@@ -30,20 +30,12 @@ class Admin::TeamsController < ApplicationController
     end
   end
 
-  # def show
-  #   @tourns=Tournament.find(TeamTournament.where("team = ?", params[:id]).pluck(:team))
-  #
-  #   @team = Team.find(params[:id])
-  #   @owner = User.find(@team.owner)
-  #   if @team.captain!=nil
-  #     @cap = Player.find(@team.captain)
-  #   end
-  #   players = PlayerTeam.where("team = ?", params[:id]).pluck(:player)
-  #   @players = Player.find(players)
-  # end
-
   def destroy
     @team = Team.find(params[:id])
+    @team.player_teams.destroy_all
+    @team.team_tournaments.destroy_all
+    Game.where(team_one: @team)or(Game.where(team_two: @team)).destroy_all
+    @team.applications.destroy_all
     @team.destroy
 
     redirect_to welcome_index_path
@@ -51,7 +43,7 @@ class Admin::TeamsController < ApplicationController
 
   private
   def team_params
-    params.require(:team).permit(:name, :owner, :captain)
+    params.require(:team).permit(:name, :user_id, :player_id)
   end
 
   protected

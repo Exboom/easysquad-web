@@ -31,7 +31,6 @@ class WelcomeController < ApplicationController
         end
       end
     end
-    # for new view
   end
 
   def update_teams

@@ -1,46 +1,47 @@
-<h1>EasySquad</h1>
-<h2>Редактирование профиля турнира: <%= @tournament.name %></h2>
+<%= form_with(model: [:admin, @tournament], html: {:id=>"demo-form2", "data-parsley-validate"=>"", :class=>"form-horizontal form-label-left", :novalidate=>""}, local: true) do |form| %>
 
-<%= form_with(model: [:admin, @tournament], local: true) do |form| %>
-
-  <% if @tournament.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@tournament.errors.count, "error") %> prohibited
-        this article from being saved:
-      </h2>
-      <ul>
-        <% @tournament.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">
+    </label>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <h2>Редактирование профиля турнира: <%= @tournament.name %></h2>
     </div>
-  <% end %>
+  </div>
 
-  <p>
-    <%= form.label :Название %><br>
-    <%= form.text_field :name %>
-  </p>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Название
+    </label>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <%= form.text_field :name, :id=>"name", :class=>"form-control col-md-5 col-xs-12" %>
+    </div>
+  </div>
 
-  <p>
-    <%= form.label :Сезон %><br>
-    <%= form.text_field :season %>
-  </p>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Сезон
+    </label>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <%= form.text_field :season, :id=>"name", :class=>"form-control col-md-5 col-xs-12" %>
+    </div>
+  </div>
 
-  <p>
-    <%= form.label :Место_проведения %><br>
-    <%= form.collection_select(:location, Location.all, :id, :name) %>
-  </p>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="enemyteam">Место проведения
+    </label>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <%= form.collection_select(:location_id, Location.all, :id, :name, {:prompt => "Выберите место проведения"}, { :class=>"form-control"}) %>
+    </div>
+  </div>
 
-  <p>
-    <%= form.label :Федерация %><br>
-    <%= form.collection_select(:federation, Federation.all, :id, :name) %>
-  </p>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="enemyteam">Федерация
+    </label>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <%= form.collection_select(:federation_id, Federation.all, :id, :name, {:prompt => "Выберите федерацию"}, { :class=>"form-control"}) %>
+    </div>
+  </div>
 
-  <p>
-    <%= form.submit("Обновить") %>
-  </p>
+  <div class="col-md-4 col-sm-4 col-xs-12 col-md-offset-3">
+    <%= form.submit "Создать", :class=>"btn btn-success" %>
+  </div>
 
 <% end %>
-
-<%= button_to "Назад", :back, :method => :get %>

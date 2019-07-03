@@ -1,21 +1,35 @@
 <div class="clearfix"></div>
 <div class="">
-  <div class="col-md-12">
+  <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
         <h2><i class="fa fa-users"></i> <%= @team.name %></h2>
         <% if (current_user.id==@owner.id) or ((@userrols.find_by role:1)!=nil) %>
           <ul class="nav navbar-right panel_toolbox" style="padding-left: 25px;">
-            <li>
-              <%= link_to edit_team_path, :method => :get,
-                          :class=>"close-link",
-                          "data-toggle"=>"tooltip",
-                          "data-placement"=>"top",
-                          :title=>"",
-                          "data-original-title"=>"Редактировать команду" do %>
-                <i class="fa fa-wrench"></i>
-              <%end %>
-            </li>
+            <% if (@userrols.find_by role:1)!=nil %>
+              <li>
+                <%= link_to edit_admin_team_path, :method => :get,
+                            :class=>"close-link",
+                            "data-toggle"=>"tooltip",
+                            "data-placement"=>"top",
+                            :title=>"",
+                            "data-original-title"=>"Редактировать команду" do %>
+                  <i class="fa fa-wrench"></i>
+                <%end %>
+              </li>
+            <% else %>
+              <li>
+                <%= link_to edit_team_path, :method => :get,
+                            :class=>"close-link",
+                            "data-toggle"=>"tooltip",
+                            "data-placement"=>"top",
+                            :title=>"",
+                            "data-original-title"=>"Редактировать команду" do %>
+                  <i class="fa fa-wrench"></i>
+                <%end %>
+              </li>
+          <%end %>
+
             <% if (@userrols.find_by  role: 1)!=nil %>
               <li>
                 <%= link_to admin_team_path, :method => :delete, :class=>"close-link",
@@ -101,14 +115,16 @@
                         </div>
                       </div>
                       <%= link_to "Подробнее", player_path(play), :method => :get, :class => "btn btn-secondary" %>
-                      <%= link_to 'Убрать из команды', player_team_path(play,@team), method: :delete, :class => "btn btn-secondary" %>
+                      <% if (current_user.id==@owner.id) or ((@userrols.find_by role: 1)!=nil) or ((@userrols.find_by team_id:@team.id, user_id:current_user.id, role_id: 3)!=nil) %>
+                        <%= link_to 'Убрать из команды', player_team_path(play,@team), method: :delete, :class => "btn btn-secondary" %>
+                      <% end %>
                     </div>
                   </div>
                 <% end %>
               <% end %>
               <% if (current_user.id==@owner.id) or ((@userrols.find_by role: 1)!=nil) or ((@userrols.find_by team_id:@team.id, user_id:current_user.id, role_id: 3)!=nil) %>
-                <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-3">
-                  <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                     <div class="x_panel">
                       <div class="x_title">
                         <h2> Добавить игрока?</h2>
