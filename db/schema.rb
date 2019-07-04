@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_10_071915) do
+ActiveRecord::Schema.define(version: 2019_07_04_071346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,13 @@ ActiveRecord::Schema.define(version: 2019_06_10_071915) do
     t.datetime "time_event"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "score", limit: 500
+    t.integer "team_id"
+    t.boolean "checkin"
+    t.integer "player_id"
+    t.integer "game_id"
+    t.boolean "admin"
+    t.integer "reason_id"
   end
 
   create_table "federations", force: :cascade do |t|
@@ -68,6 +75,7 @@ ActiveRecord::Schema.define(version: 2019_06_10_071915) do
     t.string "game_score"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "location_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -75,6 +83,11 @@ ActiveRecord::Schema.define(version: 2019_06_10_071915) do
     t.string "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "locations_tournaments", id: false, force: :cascade do |t|
+    t.bigint "tournament_id", null: false
+    t.bigint "location_id", null: false
   end
 
   create_table "logins", force: :cascade do |t|

@@ -25,7 +25,18 @@ class GamesController < ApplicationController
     session[:return_to] ||= request.referer
     @game = Game.find(params[:id])
     if @game.update(game_params)
-      Event.new(user_id: current_user.id, what_event: "Установлен счет игры "+@game.name+", новое значение: "+@game.game_score, time_event: DateTime.now).save
+      @event=Event.new(user_id: current_user.id,
+                       what_event: "Установлен счет",
+                       game_id: @game.id,
+                       player_id: current_user.id,
+                       team_id: params[:game][:team_id],
+                       score: @game.game_score,
+                       time_event: DateTime.now)
+      if !@event.save
+        @event.errors.full_messages.each do |msg|
+          puts msg
+        end
+      end
       redirect_to session.delete(:return_to), alert: "Счет установлен"
     else
       redirect_to session.delete(:return_to), alert: "Произошла ошибка"
@@ -52,7 +63,7 @@ class GamesController < ApplicationController
 
   private
   def game_params
-    params.require(:game).permit(:team_one, :team_two, :name, :time, :tournament_id, :game_score)
+    params.require(:game).permit(:team_one, :team_two, :name, :time, :tournament_id, :location_id, :game_score)
   end
 
 end

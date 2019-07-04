@@ -43,7 +43,13 @@
             <div id="myTabContent" class="tab-content">
               <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
                 <li> Сезон турнира: <%= @tournament.season %></li>
-                <li> Место проведения: <%= @tournament.location.name %></li>
+                <li> Места проведения:
+                  <ul>
+                    <% @tournament.locations.each do |lct| %>
+                      <li><%= lct.name %></li>
+                    <% end %>
+                  </ul>
+                </li>
                 <li> Федерация, проводящая турнир: <%= @tournament.federation.name %></li>
               </div>
               <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">

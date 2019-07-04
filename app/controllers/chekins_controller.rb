@@ -18,8 +18,21 @@ class ChekinsController < ApplicationController
     session[:return_to] ||= request.referer
     @chekin=Chekin.new(chekin_params)
     if @chekin.save
-      Event.new(user_id: current_user.id, what_event: "Отметка о присутствии игрока", time_event: DateTime.now).save
-      redirect_to session.delete(:return_to), alert: "Вы успешно отметились на игру"
+      @event=Event.new(user_id: current_user.id,
+                       player_id: @chekin.player_id,
+                       what_event: "Отметка на игру",
+                       checkin: @chekin.chekin,
+                       admin: params[:chekin][:admin],
+                       reason_id: params[:chekin][:reason_id],
+                       team_id: @chekin.team_id,
+                       game_id: @chekin.game_id,
+                       time_event: DateTime.now)
+      if !@event.save
+        @event.errors.full_messages.each do |msg|
+          puts msg
+        end
+      end
+      redirect_to session.delete(:return_to), alert: "Отметка произведена успешно"
     else
       redirect_to session.delete(:return_to), alert: "Произошла ошибка!"
       @chekin.errors.full_messages.each do |msg|
@@ -31,7 +44,19 @@ class ChekinsController < ApplicationController
   def update
     @chekin = Chekin.find(params[:id])
     if @chekin.update(chekin_params)
-      Event.new(user_id: current_user.id, what_event: "Изменение отметки о присутствии игрока "+@chekin.player.name+" новое значение: "+@chekin.chekin.to_s, time_event: DateTime.now).save
+      @event=Event.new(user_id: current_user.id,
+                       player_id: @chekin.player_id,
+                       what_event: "Изменение отметки",
+                       checkin: @chekin.chekin,
+                       team_id: @chekin.team_id,
+                       reason_id: params[:chekin][:reason_id],
+                       game_id: @chekin.game_id,
+                       time_event: DateTime.now)
+      if !@event.save
+        @event.errors.full_messages.each do |msg|
+          puts msg
+        end
+      end
       redirect_to root_path, alert: "Отметка изменена"
     else
       redirect_to root_path, alert: "Произошла ошибка!"
@@ -45,7 +70,19 @@ class ChekinsController < ApplicationController
     session[:return_to] ||= request.referer
     @chekin = Chekin.find(params[:format])
     if @chekin.update(chekin: false, presence: false, comment: "Игрок подвел команду")
-      Event.new(user_id: current_user.id, what_event: "Изменение отметки о присутствии, игрок "+@chekin.player.name+" подвел команду", time_event: DateTime.now).save
+      @event=Event.new(user_id: current_user.id,
+                       player_id: @chekin.player_id,
+                       what_event: "Изменение отметки(неявка игрока)",
+                       admin: true,
+                       checkin: @chekin.chekin,
+                       team_id: @chekin.team_id,
+                       game_id: @chekin.game_id,
+                       time_event: DateTime.now)
+      if !@event.save
+        @event.errors.full_messages.each do |msg|
+          puts msg
+        end
+      end
       redirect_to session.delete(:return_to), alert: "Отметка изменена"
     else
       redirect_to session.delete(:return_to), alert: "Произошла ошибка"

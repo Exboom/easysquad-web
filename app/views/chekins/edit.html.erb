@@ -41,7 +41,7 @@
     <div id="visblock" style="display: none"><legend>Почему Вас не будет?</legend>
       <p>
         <%= form.label :Причина_отсутствия%> (при выборе "Другое" опишите причину в комментарие)<br>
-        <%= form.collection_select(:reasons, Reason.all, :id, :reason,{ :prompt => "Выберите причину"}) %>
+        <%= form.collection_select(:reason_id, Reason.all, :id, :reason,{ :prompt => "Выберите причину"}) %>
       </p>
 
       <p>

@@ -11,14 +11,30 @@ class Admin::TournamentsController < ApplicationController
 
   def create
     @tournament=Tournament.new(tournament_params)
-    @tournament.save
+    @lct=params[:tournament][:location_id]
+    if @tournament.save
+      @lct.each do |lct|
+        if lct.nil? or lct==""
+          next
+        else
+          @tournament.locations<<Location.find(lct)
+        end
+      end
+    end
     redirect_to @tournament
   end
 
   def update
     @tournament = Tournament.find(params[:id])
-
+    @lct=params[:tournament][:location_id]
     if @tournament.update(tournament_params)
+      @lct.each do |lct|
+        if lct.nil? or lct==""
+          next
+        else
+          @tournament.locations<<Location.find(lct)
+        end
+      end
       redirect_to @tournament
     else
       render 'show'
@@ -33,13 +49,14 @@ class Admin::TournamentsController < ApplicationController
       game.chekins.destroy_all
     end
     @tournament.games.destroy_all
+    @tournament.locations.clear
     @tournament.destroy
     redirect_to welcome_index_path
   end
 
   private
   def tournament_params
-    params.require(:tournament).permit(:name, :season, :location_id, :federation_id)
+    params.require(:tournament).permit(:name, :season, :federation_id)
   end
 
   protected

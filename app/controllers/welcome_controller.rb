@@ -16,11 +16,19 @@ class WelcomeController < ApplicationController
       end
 
       if (@userrols.find_by role: 3)!=nil
+        @history=Event.order(id: :desc).first(10)
+        @lct=Location.all
         @alltournteams=Team.all #all teams in tourn
       end
 
       if ((@userrols.find_by role: 2)!=nil)
+        @lct=Location.all
         @teamusr=@user.teams
+        if @history.nil?
+          @history=Event.where(team_id: @teamusr.ids).order(id: :desc).first(10)
+        else
+          @history=(@history+Event.where(team_id: @teamusr.ids).order(id: :desc).first(10)).uniq
+        end
         @teamusrng_adm=@teamusr
         @nextgames_adm=Array.new(@teamusr.size)
         @lastgames_adm=Array.new(@teamusr.size)
@@ -35,6 +43,7 @@ class WelcomeController < ApplicationController
 
   def update_teams
     @tourn=Tournament.find(params[:tournament_id])
+    @lct=@tourn.locations
     @alltournteams=@tourn.teams
     if (@userrols.find_by role: 2)!=nil
       @teamusrng_adm=@tourn.teams.where(user_id: current_user.id)
