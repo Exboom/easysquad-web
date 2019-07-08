@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Role.destroy_all
 Role.create([
                 {
                     id: 1,
@@ -24,6 +25,7 @@ Role.create([
                 }
             ]
 )
+Reason.destroy_all
 Reason.create([
                   {
                       id: 1,
@@ -43,6 +45,7 @@ Reason.create([
                   }
               ]
 )
+User.destroy_all
 User.create([
                 {
                     id: 1,
@@ -52,6 +55,7 @@ User.create([
                 }
             ]
 )
+UserRole.destroy_all
 UserRole.create([
                 {
                     user_id: 1,
