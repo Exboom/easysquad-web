@@ -47,8 +47,7 @@ User.create([
                 {
                     id: 1,
                     email: "admin@mail.ru",
-                    password: "123456",
-                    password_confirmation: "123456",
+                    encrypted_password: "$2a$11$8wPDw6zi7F.JrsgZ0s1OVeo5bWnrZBjPOJb6Boqk.wX28KphIjYee",
                     approved: true
                 }
             ]
