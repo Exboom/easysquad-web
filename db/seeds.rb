@@ -46,15 +46,20 @@ Reason.create([
               ]
 )
 User.destroy_all
-User.create([
-                {
-                    id: 1,
-                    email: "admin@mail.ru",
-                    encrypted_password: "$2a$11$8wPDw6zi7F.JrsgZ0s1OVeo5bWnrZBjPOJb6Boqk.wX28KphIjYee",
-                    approved: true
-                }
-            ]
-)
+user=User.new
+user.email='admin@mail.ru'
+user.password='123456'
+user.encrypted_password='123456'
+user.save!
+# User.create([
+#                 {
+#                     id: 1,
+#                     email: 'admin@mail.ru',
+#                     encrypted_password: "$2a$11$8wPDw6zi7F.JrsgZ0s1OVeo5bWnrZBjPOJb6Boqk.wX28KphIjYee",
+#                     approved: true
+#                 }
+#             ]
+# )
 UserRole.destroy_all
 UserRole.create([
                 {
