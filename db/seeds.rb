@@ -51,6 +51,8 @@ user.email='admin@mail.ru'
 user.password='123456'
 user.encrypted_password='123456'
 user.save!
+user.update(approved: true)
+
 # User.create([
 #                 {
 #                     id: 1,
@@ -63,7 +65,7 @@ user.save!
 UserRole.destroy_all
 UserRole.create([
                 {
-                    user_id: 1,
+                    user_id: user,
                     role_id: 1
                 }
             ]
