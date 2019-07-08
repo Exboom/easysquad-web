@@ -29,19 +29,19 @@ Reason.destroy_all
 Reason.create([
                   {
                       id: 1,
-                      role: "Семья"
+                      reason: "Семья"
                   },
                   {
                       id: 2,
-                      role: "Работа"
+                      reason: "Работа"
                   },
                   {
                       id: 3,
-                      role: "Болезнь"
+                      reason: "Болезнь"
                   },
                   {
                       id: 4,
-                      role: "Другое"
+                      reason: "Другое"
                   }
               ]
 )
