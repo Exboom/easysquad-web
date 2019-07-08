@@ -36,13 +36,6 @@ ActiveRecord::Schema.define(version: 2019_07_04_071346) do
     t.index ["player_id", "team_id", "game_id"], name: "uq_chekin", unique: true
   end
 
-  create_table "companies", force: :cascade do |t|
-    t.string "name"
-    t.string "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "events", force: :cascade do |t|
     t.integer "user_id"
     t.string "what_event"
@@ -90,21 +83,6 @@ ActiveRecord::Schema.define(version: 2019_07_04_071346) do
     t.bigint "location_id", null: false
   end
 
-  create_table "logins", force: :cascade do |t|
-    t.string "login"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "piranha_res", force: :cascade do |t|
-    t.string "directory"
-    t.string "original"
-    t.string "prediction"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["directory", "original", "prediction"], name: "piranha_uq", unique: true
-  end
-
   create_table "player_teams", id: :serial, force: :cascade do |t|
     t.integer "player_id", null: false
     t.integer "team_id", null: false
@@ -139,6 +117,7 @@ ActiveRecord::Schema.define(version: 2019_07_04_071346) do
     t.integer "player_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "default_password"
     t.index ["user_id"], name: "fki_owner_to_user_pk"
   end
 

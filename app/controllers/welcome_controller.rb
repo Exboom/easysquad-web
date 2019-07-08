@@ -38,6 +38,8 @@ class WelcomeController < ApplicationController
           @lastgames_adm[index_adm]=Game.where("(team_one = ? OR team_two = ?) AND game_score is NOT NULL", teampl_adm, teampl_adm)
         end
       end
+    else
+      @history=Event.all
     end
   end
 

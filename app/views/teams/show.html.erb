@@ -143,8 +143,6 @@
                                 <div id="login" class="animate">
                                   <section class="login_content">
                                     <%= form_with scope: :user, url: users_path, local: true do |f| %>
-                                      <h1>Регистрация</h1>
-
                                       <div>
                                         <%= f.email_field :email, autofocus: true, :class => "form-control", :placeholder =>"Email",  :required => ""  %>
                                       </div>
@@ -153,31 +151,17 @@
                                         <%= f.text_field :name, :class => "form-control", :placeholder =>"Имя игрока",  :required => "" %>
                                       </div>
 
-                                      <p>
-                                        <%= f.hidden_field :team_id, value: @team.id%>
-                                      </p>
+                                      <%= f.hidden_field :team_id, value: @team.id%>
 
-                                      <div>
-                                        <%= f.password_field :password, autocomplete: "new-password", :class => "form-control", :placeholder =>"Пароль",  :required => "" %>
-                                      </div>
-
-                                      <div>
-                                        <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => "form-control", :placeholder =>"Повторите пароль",  :required => "" %>
-                                      </div>
+                                      <%= f.hidden_field :approved, value: true%>
 
                                       <div>
                                         <%= f.submit "Зарегистрировать", :class => "button7" %>
                                       </div>
 
                                       <div class="clearfix"></div>
-                                      <div class="separator"></div>
 
                                       <div class="clearfix"></div>
-                                      <br />
-                                      <div>
-                                        <h1><i class="fa fa-paw" style="font-size: 26px;"></i> EasySquad</h1>
-                                        <p>©2019 Никаких прав нет. EasySquad. Собери свою команду!</p>
-                                      </div>
                                     <% end %>
                                     <!-- form -->
                                   </section>

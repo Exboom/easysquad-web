@@ -15,14 +15,26 @@ class UsersController < ApplicationController
       params[:user].delete(:password)
       params[:user].delete(:password_confirmation)
     end
-    @user = User.new(user_params)
+    @team=Team.find(params[:user][:team_id])
+    @user = User.new(email: params[:user][:email],password: @team.default_password, password_confirmation: @team.default_password)
     if @user.save
+      @user.update(approved: params[:user][:approved])
       UserRole.new(user_id: @user.id, role_id: 4, team_id: params[:user][:team_id]).save
       Player.new(id: @user.id, name: params[:user][:name]).save
       PlayerTeam.new(player_id: @user.id, team_id: params[:user][:team_id]).save
+      @mail=UserMailer.new_player #mail in my email for test
+      if @mail.deliver_now
+        puts "Все хорошо"
+      else
+        @mail.errors.full_messages.each do |msg|
+          puts msg
+        end
+      end
       redirect_to session.delete(:return_to), alert:  "Пользователь зарегестрирован"
     else
-      render 'show'
+      @user.errors.full_messages.each do |msg|
+        puts msg
+      end
     end
   end
 

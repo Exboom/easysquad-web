@@ -16,8 +16,14 @@ class Admin::TeamsController < ApplicationController
 
   def create
     @team=Team.new(team_params)
-    @team.save
-    redirect_to @team
+    if @team.save
+      UserRole.new(user_id:@team.user,role_id: 2, team_id: @team.id).save
+      redirect_to root_path, alert: "Команда успешно создана"
+    else
+      @team.errors.full_messages.each do |msg|
+        puts msg
+      end
+    end
   end
 
   def update
@@ -36,6 +42,7 @@ class Admin::TeamsController < ApplicationController
     @team.team_tournaments.destroy_all
     Game.where(team_one: @team)or(Game.where(team_two: @team)).destroy_all
     @team.applications.destroy_all
+    UserRole.where(team_id: @team).destroy_all
     @team.destroy
 
     redirect_to welcome_index_path
@@ -43,7 +50,7 @@ class Admin::TeamsController < ApplicationController
 
   private
   def team_params
-    params.require(:team).permit(:name, :user_id, :player_id)
+    params.require(:team).permit(:name, :user_id, :player_id, :default_password)
   end
 
   protected
