@@ -10,7 +10,6 @@ class PlayersController < ApplicationController
   end
 
   def create
-    @user=User.find(params[:player][:id])
     @player=Player.new(player_params)
     @plrteams=params[:player][:team_ids]
     if @player.save
@@ -18,25 +17,26 @@ class PlayersController < ApplicationController
         if team.nil? or team==""
           next
         else
-          UserRole.new(user_id:@user.id,role_id: 4,team_id:team).save
+          UserRole.new(user_id:current_user.id,role_id: 4,team_id:team).save
           PlayerTeam.new(player_id:@player.id, team_id:team).save
         end
       end
+      redirect_to @player, flash: {notice: "Игровой профиль создан"}
+    else
+      redirect_to root_path, flash: {"alert-danger": "Произошла ошибка: "+ @player.errors.full_messages.join(' ')}
     end
-    redirect_to @player, alert: "Игровой профиль создан"
   end
 
   def update
     @player = Player.find(params[:id])
     if @player.update(player_params)
-      redirect_to @player
+      redirect_to @player, flash: {notice: "Игровой профиль обновлен"}
     else
-      render 'show'
+      redirect_to @player, flash: {"alert-danger": "Произошла ошибка: "+ @player.errors.full_messages.join(' ')}
     end
   end
 
   def show
-
     if Player.find_by_id(params[:id]).nil?
       redirect_to welcome_notplayer_path(current_user)
     else
@@ -47,7 +47,6 @@ class PlayersController < ApplicationController
         @teams=(@teams+@user.teams).uniq
       end
     end
-
   end
 
   def destroy

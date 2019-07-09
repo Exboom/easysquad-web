@@ -23,7 +23,7 @@ class WelcomeController < ApplicationController
 
       if ((@userrols.find_by role: 2)!=nil)
         @lct=Location.all
-        @teamusr=@user.teams
+        @teamusr=current_user.teams
         if @history.nil?
           @history=Event.where(team_id: @teamusr.ids).order(id: :desc).first(10)
         else
@@ -71,8 +71,8 @@ class WelcomeController < ApplicationController
   end
 
   def notplayer
-    @teamsusr=@user.teams
-    @rols=@user.roles
+    @teamsusr=current_user.teams
+    @rols=current_user.roles
   end
 
   protected
@@ -81,7 +81,6 @@ class WelcomeController < ApplicationController
     unless user_signed_in?
       redirect_to new_user_session_path
     end
-
   end
 
 end

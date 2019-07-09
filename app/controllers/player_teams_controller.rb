@@ -1,35 +1,14 @@
 class PlayerTeamsController < ApplicationController
 
-  def new
-    @team=Team.find(params[:format])
-    @playerteam=PlayerTeam.new
-  end
-
-  def edit
-    @playerteam=PlayerTeam.find(params[:id])
-  end
-
   def create
     @team = Team.find(params[:player_team][:team_id])
     @playerteam=PlayerTeam.new(playerteam_params)
     if @playerteam.save
       UserRole.new(user_id: params[:player_team][:player_id], role_id:4, team_id: params[:player_team][:team_id]).save
-    end
-    redirect_to @team, alert:  "Игрок добавлен в команду"
-  end
-
-  def update
-    @playerteam = PlayerTeam.find(params[:id])
-
-    if @playerteam.update(playerteam_params)
-      redirect_to @playerteam
+      redirect_to @team, flash: {notice: "Игрок добавлен в команду"}
     else
-      render 'show'
+      redirect_to @team, flash: {"alert-danger": "Произошла ошибка: "+ @team.errors.full_messages.join(' ')}
     end
-  end
-
-  def show
-    @playerteam = PlayerTeam.find(params[:id])
   end
 
   def destroy

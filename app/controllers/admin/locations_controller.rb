@@ -11,23 +11,25 @@ class Admin::LocationsController < ApplicationController
 
   def create
     @location=Location.new(location_params)
-    @location.save
-    redirect_to @location
+    if @location.save
+      redirect_to @location, flash: {notice: "Место провдения успешно создано"}
+    else
+      redirect_to root_path, flash: {"alert-danger": "Произошла ошибка: "+ @location.errors.full_messages.join(' ')}
+    end
   end
 
   def update
     @location = Location.find(params[:id])
     if @location.update(location_params)
-      redirect_to @location
+      redirect_to @location, flash: {notice: "Место провдения успешно обновлено"}
     else
-      render 'show'
+      redirect_to @location, flash: {"alert-danger": "Произошла ошибка: "+ @location.errors.full_messages.join(' ')}
     end
   end
 
   def destroy
     @location = Location.find(params[:id])
     @location.destroy
-
     redirect_to welcome_index_path
   end
 
@@ -39,7 +41,6 @@ class Admin::LocationsController < ApplicationController
   protected
 
   def check_admin
-    @user=User.find(current_user.id)
     redirect_to location_path, alert:  "У Вас нет прав доступа для данных действий" unless ((@userrols.find_by role: 1)!=nil)
   end
 

@@ -1,35 +1,13 @@
 class TeamTournamentsController < ApplicationController
 
-  def new
-    @team=Team.find(params[:format])
-    @teamtournament=TeamTournament.new
-  end
-
-  def edit
-    @teamtournament=TeamTournament.find(params[:id])
-  end
-
   def create
     session[:return_to] ||= request.referer
-    # @team = Team.find(params[:team_tournament][:team])
     @teamtournament=TeamTournament.new(teamtournament_params)
-    @teamtournament.save
-    redirect_to session.delete(:return_to)
-    # redirect_to @team
-  end
-
-  def update
-    @teamtournament = TeamTournament.find(params[:id])
-
-    if @teamtournament.update(teamtournament_params)
-      redirect_to @teamtournament
+    if @teamtournament.save
+      redirect_to session.delete(:return_to), flash: {notice: "Турнир добавлен"}
     else
-      render 'show'
+      redirect_to session.delete(:return_to), flash: {"alert-danger": "Произошла ошибка: "+ @teamtournament.errors.full_messages.join(' ')}
     end
-  end
-
-  def show
-    @teamtournament = TeamTournament.find(params[:id])
   end
 
   def destroy
@@ -37,8 +15,10 @@ class TeamTournamentsController < ApplicationController
     @teamtournament = TeamTournament.find_by(team_id:params[:id], tournament_id:params[:format])
     if @teamtournament.destroy
       Application.where(tournament_id: params[:format], team_id:params[:id]).destroy_all
+      redirect_to session.delete(:return_to), flash: {notice: "Участие в турнире отменено"}
+    else
+      redirect_to session.delete(:return_to), flash: {"alert-danger": "Произошла ошибка: "+ @teamtournament.errors.full_messages.join(' ')}
     end
-    redirect_to session.delete(:return_to)
   end
 
   private

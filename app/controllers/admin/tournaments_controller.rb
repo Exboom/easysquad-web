@@ -20,8 +20,10 @@ class Admin::TournamentsController < ApplicationController
           @tournament.locations<<Location.find(lct)
         end
       end
+      redirect_to @tournament, flash: {notice: "Турнир успешно создан"}
+    else
+      redirect_to root_path, flash: {"alert-danger": "Произошла ошибка: "+ @tournament.errors.full_messages.join(' ')}
     end
-    redirect_to @tournament
   end
 
   def update
@@ -35,9 +37,9 @@ class Admin::TournamentsController < ApplicationController
           @tournament.locations<<Location.find(lct)
         end
       end
-      redirect_to @tournament
+      redirect_to @tournament, flash: {notice: "Турнир успешно обновлен"}
     else
-      render 'show'
+      redirect_to @tournament, flash: {"alert-danger": "Произошла ошибка: "+ @tournament.errors.full_messages.join(' ')}
     end
   end
 
@@ -62,7 +64,6 @@ class Admin::TournamentsController < ApplicationController
   protected
 
   def check_admin
-    @user=User.find(current_user.id)
     redirect_to tournament_path, alert:  "У Вас нет прав доступа для данных действий" unless ((@userrols.find_by role: 1)!=nil)
   end
 

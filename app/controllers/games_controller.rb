@@ -1,23 +1,12 @@
 class GamesController < ApplicationController
 
-  def new
-    @game=Game.new
-  end
-
-  def edit
-    @game=Game.find(params[:id])
-  end
-
   def create
     session[:return_to] ||= request.referer
     @game=Game.new(game_params)
     if @game.save
-      redirect_to session.delete(:return_to), alert: "Игра успешно добавлена"
+      redirect_to session.delete(:return_to), flash: {notice: "Игра успешно добавлена"}
     else
-      redirect_to session.delete(:return_to), alert: "Произошла ошибка при добавлении игры"
-      @game.errors.full_messages.each do |msg|
-        puts msg
-      end
+      redirect_to session.delete(:return_to), flash: {"alert-danger": "Произошла ошибка: "+ @game.errors.full_messages.join(' ')}
     end
   end
 
@@ -32,27 +21,10 @@ class GamesController < ApplicationController
                        team_id: params[:game][:team_id],
                        score: @game.game_score,
                        time_event: DateTime.now)
-      if !@event.save
-        @event.errors.full_messages.each do |msg|
-          puts msg
-        end
-      end
-      redirect_to session.delete(:return_to), alert: "Счет установлен"
+      redirect_to session.delete(:return_to), flash: {notice: "Счет установлен"}
     else
-      redirect_to session.delete(:return_to), alert: "Произошла ошибка"
-      @game.errors.full_messages.each do |msg|
-        puts msg
-      end
+      redirect_to session.delete(:return_to), flash: {"alert-danger": "Произошла ошибка: "+ @game.errors.full_messages.join(' ')}
     end
-  end
-
-  def show
-    @game = Game.find(params[:id])
-    @app=Application.find_by player:current_user.id, tournament: @game.tournament
-    @players=@game.chekins.player
-    @team1=Team.find(@game.team_one)
-    @team2=Team.find(@game.team_two)
-    @tourn=@game.tournament
   end
 
   def destroy

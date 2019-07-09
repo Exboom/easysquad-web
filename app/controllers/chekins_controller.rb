@@ -1,12 +1,5 @@
 class ChekinsController < ApplicationController
 
-  def new
-    @player=Player.find(current_user.id)
-    @chekin=Chekin.new
-    @game=Game.find(params[:format])
-    @lastchekin=Chekin.find_by player:@player, game: @game
-  end
-
   def edit
     @chekin=Chekin.find(params[:id])
     @player=@chekin.player
@@ -27,17 +20,9 @@ class ChekinsController < ApplicationController
                        team_id: @chekin.team_id,
                        game_id: @chekin.game_id,
                        time_event: DateTime.now)
-      if !@event.save
-        @event.errors.full_messages.each do |msg|
-          puts msg
-        end
-      end
-      redirect_to session.delete(:return_to), alert: "Отметка произведена успешно"
+      redirect_to session.delete(:return_to), flash: {notice: "Отметка произведена успешно"}
     else
-      redirect_to session.delete(:return_to), alert: "Произошла ошибка!"
-      @chekin.errors.full_messages.each do |msg|
-        msg
-      end
+      redirect_to session.delete(:return_to), flash: {"alert-danger": "Произошла ошибка: "+ @chekin.errors.full_messages.join(' ')}
     end
   end
 
@@ -52,17 +37,9 @@ class ChekinsController < ApplicationController
                        reason_id: params[:chekin][:reason_id],
                        game_id: @chekin.game_id,
                        time_event: DateTime.now)
-      if !@event.save
-        @event.errors.full_messages.each do |msg|
-          puts msg
-        end
-      end
-      redirect_to root_path, alert: "Отметка изменена"
+      redirect_to root_path, flash: {notice: "Отметка изменена"}
     else
-      redirect_to root_path, alert: "Произошла ошибка!"
-      @chekin.errors.full_messages.each do |msg|
-        msg
-      end
+      redirect_to root_path, flash: {"alert-danger": "Произошла ошибка: "+ @chekin.errors.full_messages.join(' ')}
     end
   end
 
@@ -78,32 +55,15 @@ class ChekinsController < ApplicationController
                        team_id: @chekin.team_id,
                        game_id: @chekin.game_id,
                        time_event: DateTime.now)
-      if !@event.save
-        @event.errors.full_messages.each do |msg|
-          puts msg
-        end
-      end
-      redirect_to session.delete(:return_to), alert: "Отметка изменена"
+      redirect_to session.delete(:return_to), flash: {notice: "Отметка изменена"}
     else
-      redirect_to session.delete(:return_to), alert: "Произошла ошибка"
-      @chekin.errors.full_messages.each do |msg|
-        puts msg
-      end
+      redirect_to session.delete(:return_to), flash: {"alert-danger": "Произошла ошибка: "+ @chekin.errors.full_messages.join(' ')}
     end
-  end
-
-  def show
-    @chekin = Chekin.find(params[:id])
-    @player=@chekin.player
-    @game=@chekin.game
-    @team=@chekin.team
-    @reason=@chekin.reason
   end
 
   def destroy
     @chekin = Chekin.find(params[:id])
     @chekin.destroy
-
     redirect_to welcome_index_path
   end
 

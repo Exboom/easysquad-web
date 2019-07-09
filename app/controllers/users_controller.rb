@@ -22,19 +22,19 @@ class UsersController < ApplicationController
       UserRole.new(user_id: @user.id, role_id: 4, team_id: params[:user][:team_id]).save
       Player.new(id: @user.id, name: params[:user][:name]).save
       PlayerTeam.new(player_id: @user.id, team_id: params[:user][:team_id]).save
-      @mail=UserMailer.new_player #mail in my email for test
-      if @mail.deliver_now
-        puts "Все хорошо"
-      else
-        @mail.errors.full_messages.each do |msg|
-          puts msg
-        end
-      end
-      redirect_to session.delete(:return_to), alert:  "Пользователь зарегестрирован"
+
+      # @mail=UserMailer.new_player #mail in my email for test
+      # if @mail.deliver_now
+      #   puts "Все хорошо"
+      # else
+      #   @mail.errors.full_messages.each do |msg|
+      #     puts msg
+      #   end
+      # end
+
+      redirect_to session.delete(:return_to), flash: {notice: "Пользователь зарегестрирован"}
     else
-      @user.errors.full_messages.each do |msg|
-        puts msg
-      end
+      redirect_to session.delete(:return_to), flash: {"alert-danger": "Произошла ошибка: "+ @user.errors.full_messages.join(' ')}
     end
   end
 
@@ -47,9 +47,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.update(user_params)
     if @user.update(user_params)
-      redirect_to session.delete(:return_to)
+      redirect_to session.delete(:return_to), flash: {notice: "Информация обновлена"}
     else
-      render 'show'
+      redirect_to session.delete(:return_to), flash: {"alert-danger": "Произошла ошибка: "+ @user.errors.full_messages.join(' ')}
     end
   end
 
@@ -57,9 +57,8 @@ class UsersController < ApplicationController
 
   def check_admin
     @team = Team.find(params[:user][:team_id])
-    @user=User.find(current_user.id)
     redirect_to team_path,
-                alert:  "У Вас нет прав доступа для данных действий" unless (current_user.id==@team.user_id) or !UserRole.where(user_id:@user, role_id:3, team_id:@team).nil?
+                alert:  "У Вас нет прав доступа для данных действий" unless (current_user.id==@team.user_id) or !UserRole.where(user_id:current_user, role_id:3, team_id:@team).nil?
   end
 
   def user_params

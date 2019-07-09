@@ -11,17 +11,19 @@ class Admin::FederationsController < ApplicationController
 
   def create
     @federation=Federation.new(federation_params)
-    @federation.save
-    redirect_to @federation
+    if @federation.save
+      redirect_to @federation, flash: {notice: "Федерация успешно создана"}
+    else
+      redirect_to root_path, flash: {"alert-danger": "Произошла ошибка: "+ @federation.errors.full_messages.join(' ')}
+    end
   end
 
   def update
     @federation = Federation.find(params[:id])
-
     if @federation.update(federation_params)
-      redirect_to @federation
+      redirect_to @federation, flash: {notice: "Федерация успешно обновлена"}
     else
-      render 'show'
+      redirect_to @federation, flash: {"alert-danger": "Произошла ошибка: "+ @federation.errors.full_messages.join(' ')}
     end
   end
 
@@ -47,7 +49,6 @@ class Admin::FederationsController < ApplicationController
   protected
 
   def check_admin
-    @user=User.find(current_user.id)
     redirect_to federation_path, alert:  "У Вас нет прав доступа для данных действий" unless ((@userrols.find_by role: 1)!=nil)
   end
 

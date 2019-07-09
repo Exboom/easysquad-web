@@ -9,9 +9,9 @@ class TeamsController < ApplicationController
   def update
     @team = Team.find(params[:id])
     if @team.update(team_params)
-      redirect_to @team
+      redirect_to @team, flash: {notice: "Информация о команде изменена"}
     else
-      render 'edit'
+      redirect_to @team, flash: {"alert-danger": "Произошла ошибка: "+ @team.errors.full_messages.join(' ')}
     end
   end
 
@@ -62,13 +62,11 @@ class TeamsController < ApplicationController
         @newapp=Application.new(player_id:app, team_id: @team.id, tournament_id:params[:game][:tourn_id])
         if @newapp.save
         else
-          @newapp.errors.full_messages.each do |msg|
-            puts msg
-          end
+          redirect_to session.delete(:return_to), flash: {"alert-danger": "Произошла ошибка: "+ @newapp.errors.full_messages.join(' ')}
         end
       end
     end
-    redirect_to session.delete(:return_to), alert: "Заявка создана"
+    redirect_to session.delete(:return_to), flash: {notice: "Заявка создана"}
   end
 
   private

@@ -38,8 +38,8 @@
         </ul>
         <div id="myTabContent" class="tab-content">
           <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
-            <h2><li> Email: <%= @user.email %></li></h2>
-            <h2><li> Дата регистрации: <%= @user.created_at.to_s.split(' ')[0]%></li></h2>
+            <h2><li> Email: <%= current_user.email %></li></h2>
+            <h2><li> Дата регистрации: <%= current_user.created_at.to_s.split(' ')[0]%></li></h2>
           </div>
           <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
             <% if @teamsusr.empty? %>

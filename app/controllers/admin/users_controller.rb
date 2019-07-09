@@ -11,8 +11,11 @@ class Admin::UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.save
-    redirect_to root_path, alert:  "Пользователь зарегестрирован"
+    if @user.save
+      redirect_to root_path, flash: {notice: "Пользователь зарегестрирован"}
+    else
+      redirect_to root_path, flash: {"alert-danger": "Произошла ошибка: "+ @user.errors.full_messages.join(' ')}
+    end
   end
 
   def update
@@ -24,16 +27,15 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.update(user_params)
     if @user.update(user_params)
-      redirect_to session.delete(:return_to)
+      redirect_to session.delete(:return_to), flash: {notice: "Информация обновлена"}
     else
-      render 'show'
+      redirect_to session.delete(:return_to), flash: {"alert-danger": "Произошла ошибка: "+ @user.errors.full_messages.join(' ')}
     end
   end
 
   protected
 
   def check_admin
-    @user=User.find(current_user.id)
     redirect_to root_path, alert:  "У Вас нет прав доступа для данных действий" unless ((@userrols.find_by role: 1)!=nil)
   end
 

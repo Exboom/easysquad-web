@@ -4,24 +4,17 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
 
   def initialize_support
-    #команды
     @allteams=Team.all
-    #федерации
     @federations=Federation.all
-    #локации
     @locs=Location.all
-    #турниры
     @tourns=Tournament.all
-    #new for all controllers
     if current_user!=nil
-      @user=User.find(current_user.id)
-      @userrols=@user.user_roles
+      @userrols=current_user.user_roles
       @usersNew = User.where("approved = ?", false)
     end
   end
 
   def adm_new_up
-    @user=User.find(current_user.id)
     @usersNew = User.where("approved = ?", false)
     respond_to do |format|
       format.js
@@ -37,6 +30,5 @@ class ApplicationController < ActionController::Base
       "application"
     end
   end
-
 
 end
