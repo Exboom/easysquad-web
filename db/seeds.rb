@@ -53,20 +53,5 @@ user.encrypted_password='123456'
 user.save!
 user.update(approved: true)
 
-# User.create([
-#                 {
-#                     id: 1,
-#                     email: 'admin@mail.ru',
-#                     encrypted_password: "$2a$11$8wPDw6zi7F.JrsgZ0s1OVeo5bWnrZBjPOJb6Boqk.wX28KphIjYee",
-#                     approved: true
-#                 }
-#             ]
-# )
 UserRole.destroy_all
-UserRole.create([
-                {
-                    user_id: user,
-                    role_id: 1
-                }
-            ]
-)
+UserRole.new(user_id:user.id, role_id:1).save!
