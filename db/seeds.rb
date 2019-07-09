@@ -46,12 +46,12 @@ Reason.create([
               ]
 )
 User.destroy_all
-user=User.new
-user.email='admin@mail.ru'
-user.password='123456'
-user.encrypted_password='123456'
-user.save!
-user.update(approved: true)
-
-UserRole.destroy_all
-UserRole.new(user_id:user.id, role_id:1).save!
+# user=User.new
+# user.email='admin@mail.ru'
+# user.password='123456'
+# user.encrypted_password='123456'
+# user.save!
+# user.update(approved: true)
+#
+# UserRole.destroy_all
+# UserRole.new(user_id:user.id, role_id:1).save!
