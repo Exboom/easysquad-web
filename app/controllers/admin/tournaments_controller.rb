@@ -63,8 +63,7 @@ class Admin::TournamentsController < ApplicationController
 
   def check_admin
     @user=User.find(current_user.id)
-    @userrols=@user.roles
-    redirect_to tournament_path, alert:  "У Вас нет прав доступа для данных действий" unless @userrols.first.id==1
+    redirect_to tournament_path, alert:  "У Вас нет прав доступа для данных действий" unless ((@userrols.find_by role: 1)!=nil)
   end
 
 end
