@@ -17,7 +17,7 @@ class Admin::TeamsController < ApplicationController
   def create
     @team=Team.new(team_params)
     if @team.save
-      UserRole.new(user_id:@team.user,role_id: 2, team_id: @team.id).save!
+      UserRole.new(user_id:@team.user.id,role_id: 2, team_id: @team.id).save!
       redirect_to root_path, alert: "Команда успешно создана"
     else
       @team.errors.full_messages.each do |msg|
