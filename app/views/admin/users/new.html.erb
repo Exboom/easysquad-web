@@ -3,15 +3,15 @@
     <%= form_with scope: :user, url: admin_users_path, local: true do |f| %>
 
       <div>
-        <%= f.email_field :email, autofocus: true, :class => "form-control", :placeholder =>"Email",  :required => ""  %>
+        <%= f.email_field :email, autofocus: true, :class => "form-control", :placeholder => "Email", :required => "" %>
       </div>
 
       <div>
-        <%= f.password_field :password, autocomplete: "new-password", :class => "form-control", :placeholder =>"Пароль",  :required => "" %>
+        <%= f.password_field :password, autocomplete: "new-password", :class => "form-control", :placeholder => "Пароль", :required => "" %>
       </div>
 
       <div>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => "form-control", :placeholder =>"Повторите пароль",  :required => "" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => "form-control", :placeholder => "Повторите пароль", :required => "" %>
       </div>
 
       <div>

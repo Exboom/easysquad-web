@@ -1,0 +1,18 @@
+<%= form_with scope: :chekin, url: chekins_path, local: true do |form| %>
+  <%= form.hidden_field :player_id, value: current_user.id %>
+  <% varplayers = Application.where(tournament: nxtgm.tournament.id, team: teamprsns[index]).pluck(:player_id) %>
+  <% varsearch = Chekin.where(game: nxtgm, team: teamprsns[index]).pluck(:player_id) %>
+  <% varsearch = teamprsns[index].players.where(id: varplayers).where.not(id: varsearch) %>
+  <% if varsearch[0].nil? %>
+    <p>Некого отметить!</p>
+  <% else %>
+    <%= form.collection_select(:player_id, varsearch, :id, :name) %>
+    <%= form.hidden_field :team_id, value: teamprsns[index].id %>
+    <%= form.hidden_field :game_id, value: nxtgm.id %>
+    <%= form.hidden_field :chekin, value: true %>
+    <%= form.hidden_field :admin, value: true %>
+    <p>
+      <%= form.submit("Отметить игрока") %>
+    </p>
+  <% end %>
+<% end %>

@@ -5,39 +5,39 @@
       <div class="x_panel">
         <div class="x_title">
           <h2><i class="fa fa-trophy"></i> <%= @tournament.name %></h2>
-
-          <ul class="nav navbar-right panel_toolbox" style="padding-left: 25px;">
-            <li>
-
-              <%= link_to edit_admin_tournament_path, :method => :get,
-                          :class=>"close-link",
-                          "data-toggle"=>"tooltip",
-                          "data-placement"=>"top",
-                          :title=>"",
-                          "data-original-title"=>"Редактировать турнир" do %>
-                <i class="fa fa-wrench"></i>
-              <%end %>
-
-            </li>
-            <li>
-              <%= link_to admin_tournament_path, :method => :delete, :class=>"close-link",
-                          "data-toggle"=>"tooltip",
-                          "data-placement"=>"top",
-                          :title=>"",
-                          "data-original-title"=>"Удалить турнир" do %>
-                <i class="fa fa-close"></i>
-              <%end %>
-            </li>
-          </ul>
-
+          <% if (@userrols.find_by role: 1) != nil %>
+            <ul class="nav navbar-right panel_toolbox" style="padding-left: 25px;">
+              <li>
+                <%= link_to edit_admin_tournament_path, :method => :get,
+                            :class => "close-link",
+                            "data-toggle" => "tooltip",
+                            "data-placement" => "top",
+                            :title => "",
+                            "data-original-title" => "Редактировать турнир" do %>
+                  <i class="fa fa-wrench"></i>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to admin_tournament_path, :method => :delete, :class => "close-link",
+                            "data-toggle" => "tooltip",
+                            "data-placement" => "top",
+                            :title => "",
+                            "data-original-title" => "Удалить турнир" do %>
+                  <i class="fa fa-close"></i>
+                <% end %>
+              </li>
+            </ul>
+          <% end %>
           <div class="clearfix"></div>
         </div>
         <div class="x_content">
           <div class="" role="tabpanel" data-example-id="togglable-tabs">
             <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-              <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Описание</a>
+              <li role="presentation" class="active">
+                <a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Описание</a>
               </li>
-              <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Команды-участницы</a>
+              <li role="presentation" class="">
+                <a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Команды-участницы</a>
               </li>
             </ul>
             <div id="myTabContent" class="tab-content">
@@ -53,22 +53,21 @@
                 <li> Федерация, проводящая турнир: <%= @tournament.federation.name %></li>
               </div>
               <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
-
                 <% if @tournament.teams.empty? %>
                   <h2>В этом турнире не участвует ни одна команда </h2>
-                <% else%>
-                  <% @tournament.teams.each do |team|%>
+                <% else %>
+                  <% @tournament.teams.each do |team| %>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       <div class="x_panel">
                         <div class="x_title">
-                          <h2><%=team.name %> <small><%= @tournament.name %></small></h2>
+                          <h2><%= team.name %>
+                            <small><%= @tournament.name %></small>
+                          </h2>
                           <div class="clearfix"></div>
                         </div>
-
                         <div class="x_content">
                           <div class="bs-example" data-example-id="simple-jumbotron">
                             <div class="jumbotron">
-                              <!--                                      <p> Сезон турнира: <%#= tourn.season %></p>-->
                             </div>
                           </div>
                         </div>

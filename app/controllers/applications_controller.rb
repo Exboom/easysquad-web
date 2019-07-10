@@ -1,7 +1,7 @@
 class ApplicationsController < ApplicationController
 
   def create
-    @application=Application.new(application_params)
+    @application = Application.new(application_params)
     @application.save
     redirect_to @application
   end
@@ -22,8 +22,9 @@ class ApplicationsController < ApplicationController
   end
 
   private
+
   def application_params
     params.require(:application).permit(:player_id, :team_id, :tournament_id)
   end
-  
+
 end

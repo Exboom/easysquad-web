@@ -1,29 +1,29 @@
 class PlayersController < ApplicationController
 
   def new
-    @player=Player.new
-    @user=User.find(current_user.id)
+    @player = Player.new
+    @user = User.find(current_user.id)
   end
 
   def edit
-    @player=Player.find(params[:id])
+    @player = Player.find(params[:id])
   end
 
   def create
-    @player=Player.new(player_params)
-    @plrteams=params[:player][:team_ids]
+    @player = Player.new(player_params)
+    @plrteams = params[:player][:team_ids]
     if @player.save
       @plrteams.each do |team|
-        if team.nil? or team==""
+        if team.nil? or team == ""
           next
         else
-          UserRole.new(user_id:current_user.id,role_id: 4,team_id:team).save
-          PlayerTeam.new(player_id:@player.id, team_id:team).save
+          UserRole.new(user_id: current_user.id, role_id: 4, team_id: team).save
+          PlayerTeam.new(player_id: @player.id, team_id: team).save
         end
       end
       redirect_to @player, flash: {notice: "Игровой профиль создан"}
     else
-      redirect_to root_path, flash: {"alert-danger": "Произошла ошибка: "+ @player.errors.full_messages.join(' ')}
+      redirect_to root_path, flash: {"alert-danger": "Произошла ошибка: " + @player.errors.full_messages.join(' ')}
     end
   end
 
@@ -32,7 +32,7 @@ class PlayersController < ApplicationController
     if @player.update(player_params)
       redirect_to @player, flash: {notice: "Игровой профиль обновлен"}
     else
-      redirect_to @player, flash: {"alert-danger": "Произошла ошибка: "+ @player.errors.full_messages.join(' ')}
+      redirect_to @player, flash: {"alert-danger": "Произошла ошибка: " + @player.errors.full_messages.join(' ')}
     end
   end
 
@@ -43,8 +43,8 @@ class PlayersController < ApplicationController
       @player = Player.find(params[:id])
       @teams = @player.teams
       @applications = @player.applications
-      if (@userrols.find_by role: 2)!=nil
-        @teams=(@teams+@user.teams).uniq
+      if (@userrols.find_by role: 2) != nil
+        @teams = (@teams + @user.teams).uniq
       end
     end
   end
@@ -53,20 +53,15 @@ class PlayersController < ApplicationController
     session[:return_to] ||= request.referer
     @player = Player.find(params[:id])
     if @player.destroy
-      UserRole.where(user_id:@player.id, role_id: 4).destroy_all
-      @player.player_teams.destroy_all
-      @player.chekins.destroy_all
-      @player.applications.destroy_all
-      redirect_to welcome_index_path, alert: "Игровой профиль успешно удален"
+      UserRole.where(user_id: @player.id, role_id: 4).destroy_all
+      redirect_to root_path, flash: {notice: "Игровой профиль удален"}
     else
-      redirect_to session.delete(:return_to), alert: "Произошла ошибка"
-      @player.errors.full_messages.each do |msg|
-        puts msg
-      end
+      redirect_to @player, flash: {"alert-danger": "Произошла ошибка: " + @player.errors.full_messages.join(' ')}
     end
   end
 
   private
+
   def player_params
     params.require(:player).permit(:name, :birthday, :gamenumber, :id)
   end

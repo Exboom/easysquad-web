@@ -12,20 +12,20 @@
   }
 </style>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {:class=>"form-signin"}) do |f| %>
-  <%= image_tag "/images/soccerball_sport_futbo_6911.png", :class => "style_image", :alt => "", :width => "79", :height => "79"  %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {:class => "form-signin"}) do |f| %>
+  <%= image_tag "/images/soccerball_sport_futbo_6911.png", :class => "style_image", :alt => "", :width => "79", :height => "79" %>
   <h1 class="h3 mb-3 font-weight-normal">Регистрация</h1>
 
   <div>
-    <%= f.email_field :email, autofocus: true, :class => "form-control", :placeholder =>"Email",  :required => ""  %>
+    <%= f.email_field :email, autofocus: true, :class => "form-control", :placeholder => "Email", :required => "" %>
   </div>
 
   <div>
-    <%= f.password_field :password, autocomplete: "new-password", :class => "form-control", :placeholder =>"Пароль",  :required => "" %>
+    <%= f.password_field :password, autocomplete: "new-password", :class => "form-control", :placeholder => "Пароль", :required => "" %>
   </div>
 
   <div style="margin-bottom: 20px;">
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => "form-control", :placeholder =>"Повторите пароль",  :required => "" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => "form-control", :placeholder => "Повторите пароль", :required => "" %>
   </div>
 
   <div>
@@ -34,13 +34,12 @@
   </div>
 
   <div class="clearfix"></div>
-  <div class="separator"></div>
-
+  <div class="separator">
     <p class="change_link" style="margin-top: 10px;">Уже зарегестрированы?
       <a href="sign_in" class="to_register"> Войдите </a>
     </p>
     <div class="clearfix"></div>
-    <br />
+    <br/>
 
     <h1 class="text-muted">
       <%= image_tag "/images/soccer-ball_39433.ico",
@@ -48,8 +47,9 @@
                     :alt => "",
                     :width => "25",
                     :height => "25",
-                    :style => "padding-bottom: 5px;height: 25px;width: 20px;"  %>
+                    :style => "padding-bottom: 5px;height: 25px;width: 20px;" %>
       EasySquad</h1>
     <p class="mt-5 mb-3 text-muted">
       ©2019 Никаких прав нет. EasySquad. Собери свою команду!</p>
+  </div>
 <% end %>

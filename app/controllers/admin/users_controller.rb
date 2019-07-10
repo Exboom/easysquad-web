@@ -6,7 +6,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def edit
-    @user=User.find(params[:id])
+    @user = User.find(params[:id])
   end
 
   def create
@@ -14,7 +14,7 @@ class Admin::UsersController < ApplicationController
     if @user.save
       redirect_to root_path, flash: {notice: "Пользователь зарегестрирован"}
     else
-      redirect_to root_path, flash: {"alert-danger": "Произошла ошибка: "+ @user.errors.full_messages.join(' ')}
+      redirect_to root_path, flash: {"alert-danger": "Произошла ошибка: " + @user.errors.full_messages.join(' ')}
     end
   end
 
@@ -29,14 +29,24 @@ class Admin::UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to session.delete(:return_to), flash: {notice: "Информация обновлена"}
     else
-      redirect_to session.delete(:return_to), flash: {"alert-danger": "Произошла ошибка: "+ @user.errors.full_messages.join(' ')}
+      redirect_to session.delete(:return_to), flash: {"alert-danger": "Произошла ошибка: " + @user.errors.full_messages.join(' ')}
+    end
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    if @user.destroy
+      Player.find(@user.id).destroy
+      redirect_to root_path, flash: {notice: "Информация обновлена"}
+    else
+      redirect_to root_path, flash: {"alert-danger": "Произошла ошибка: " + @user.errors.full_messages.join(' ')}
     end
   end
 
   protected
 
   def check_admin
-    redirect_to root_path, alert:  "У Вас нет прав доступа для данных действий" unless ((@userrols.find_by role: 1)!=nil)
+    redirect_to root_path, alert: "У Вас нет прав доступа для данных действий" unless ((@userrols.find_by role: 1) != nil)
   end
 
   def user_params

@@ -4,12 +4,12 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
 
   def initialize_support
-    @allteams=Team.all
-    @federations=Federation.all
-    @locs=Location.all
-    @tourns=Tournament.all
-    if current_user!=nil
-      @userrols=current_user.user_roles
+    @allteams = Team.all
+    @federations = Federation.all
+    @locs = Location.all
+    @tourns = Tournament.all
+    if current_user != nil
+      @userrols = current_user.user_roles
       @usersNew = User.where("approved = ?", false)
     end
   end

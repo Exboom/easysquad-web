@@ -1,47 +1,30 @@
 <!DOCTYPE html>
 <html>
-<head >
+<head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>EasysquadWeb</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application'%>
-
-
-  <!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>-->
-
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
 </head>
-
-<body class="nav-md footer_fixed" >
-
-<!--  <p class="notice"><%#= notice %></p>-->
-<!--  <p class="alert"><%#= alert %></p>-->
-
+<body class="nav-md footer_fixed">
 <% flash.each do |key, message| %>
   <p id="my-alert" class="alert alert-box <%= key %>"><%= message %></p>
 <% end %>
-
-
-
 <%= yield %>
-
 <%= javascript_include_tag 'bootstrap.min' %>
 <%= javascript_include_tag 'fastclick.js' %>
 <%= javascript_include_tag 'nprogress.js' %>
 <%= javascript_include_tag 'jquery.mCustomScrollbar.concat.min' %>
 <%= javascript_include_tag 'custom.min' %>
-
-
 <script>
-    $(function(){
-        window.setTimeout(function(){
+    $(function () {
+        window.setTimeout(function () {
             $('#my-alert').alert('close');
-        },5000);
+        }, 5000);
     });
 </script>
-
 </body>
 </html>

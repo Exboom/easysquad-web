@@ -1,4 +1,4 @@
-<%= form_with scope: :player, url: players_path, html: {:id=>"demo-form2", "data-parsley-validate"=>"", :class=>"form-horizontal form-label-left", :novalidate=>""}, local: true do |form| %>
+<%= form_with scope: :player, url: players_path, html: {:id => "demo-form2", "data-parsley-validate" => "", :class => "form-horizontal form-label-left", :novalidate => ""}, local: true do |form| %>
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">
     </label>
@@ -6,41 +6,16 @@
       <h2> Заполните информацию игрового профиля</h2>
     </div>
   </div>
-
-  <div class="form-group">
-    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Имя
-    </label>
-    <div class="col-md-4 col-sm-4 col-xs-12">
-      <%= form.text_field :name, :id=>"name", :class=>"form-control col-md-5 col-xs-12" %>
-      <%= form.hidden_field :id, value: params[:format]%>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Дата рождения
-    </label>
-    <div class="col-md-4 col-sm-4 col-xs-12">
-      <%= form.date_field :birthday, :min => "1950-01-01", :end_year => Date.today.year, :class=>"form-control col-md-5 col-xs-12" %>
-    </div>
-  </div>
-
+  <%= form.hidden_field :id, value: params[:format] %>
+  <%= render partial: "player", locals: {form: form} %>
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Выберите команды:
     </label>
     <div class="col-md-5 col-sm-5 col-xs-12">
-      <%= form.collection_check_boxes(:team_ids, @user.teams, :id, :name, {}, { :class=>"form-control checkbox inline"}) %>
+      <%= form.collection_check_boxes(:team_ids, @user.teams, :id, :name, {}, {:class => "form-control checkbox inline"}) %>
     </div>
   </div>
-
-  <div class="form-group">
-    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Игровой номер
-    </label>
-    <div class="col-md-4 col-sm-4 col-xs-12">
-      <%= form.number_field :gamenumber, :min=>1, :class=>"form-control col-md-5 col-xs-12" %>
-    </div>
-  </div>
-
   <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-    <%= form.submit "Создать", :class=>"btn btn-success" %>
+    <%= form.submit "Создать", :class => "btn btn-success" %>
   </div>
 <% end %>

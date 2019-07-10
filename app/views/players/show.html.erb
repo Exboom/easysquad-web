@@ -3,72 +3,82 @@
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <h2><i class="fa fa-bars"></i> Игровой профиль <small>Float left</small></h2>
+        <h2><i class="fa fa-bars"></i> Игровой профиль
+        </h2>
         <ul class="nav navbar-right panel_toolbox" style="padding-left: 25px;">
           <li>
             <%= link_to edit_user_registration_path, :method => :get,
-                        :class=>"close-link",
-                        "data-toggle"=>"tooltip",
-                        "data-placement"=>"top",
-                        :title=>"",
-                        "data-original-title"=>"Изменить пароль" do %>
+                        :class => "close-link",
+                        "data-toggle" => "tooltip",
+                        "data-placement" => "top",
+                        :title => "",
+                        "data-original-title" => "Изменить пароль" do %>
               <i class="fa fa-cogs"></i>
-            <%end %>
+            <% end %>
           </li>
           <li>
             <%= link_to edit_player_path, :method => :get,
-                        :class=>"close-link",
-                        "data-toggle"=>"tooltip",
-                        "data-placement"=>"top",
-                        :title=>"",
-                        "data-original-title"=>"Редактировать игровой профиль" do %>
+                        :class => "close-link",
+                        "data-toggle" => "tooltip",
+                        "data-placement" => "top",
+                        :title => "",
+                        "data-original-title" => "Редактировать игровой профиль" do %>
               <i class="fa fa-wrench"></i>
-            <%end %>
+            <% end %>
           </li>
           <li>
-            <%= link_to player_path, :method => :delete, :class=>"close-link",
-                        "data-toggle"=>"tooltip",
-                        "data-placement"=>"top",
-                        :title=>"",
-                        "data-original-title"=>"Удалить игровой профиль" do %>
+            <%= link_to player_path, :method => :delete, :class => "close-link",
+                        "data-toggle" => "tooltip",
+                        "data-placement" => "top",
+                        :title => "",
+                        "data-original-title" => "Удалить игровой профиль" do %>
               <i class="fa fa-close"></i>
-            <%end %>
+            <% end %>
           </li>
         </ul>
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
-
         <div class="" role="tabpanel" data-example-id="togglable-tabs">
           <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Информация</a>
+            <li role="presentation" class="active">
+              <a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Информация</a>
             </li>
-            <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Команды</a>
+            <li role="presentation" class="">
+              <a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Команды</a>
             </li>
-            <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Заявки</a>
+            <li role="presentation" class="">
+              <a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Заявки</a>
             </li>
           </ul>
           <div id="myTabContent" class="tab-content">
             <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
-              <h2><li> Имя: <%= @player.name %></li></h2>
-              <h2><li> Дата рождения: <%= @player.birthday %></li></h2>
-              <h2><li> Игровой номер: <%= @player.gamenumber %></li></h2>
+              <h2>
+                <li> Имя: <%= @player.name %></li>
+              </h2>
+              <h2>
+                <li> Дата рождения: <%= @player.birthday %></li>
+              </h2>
+              <h2>
+                <li> Игровой номер: <%= @player.gamenumber %></li>
+              </h2>
             </div>
             <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
               <% if @teams.empty? %>
                 <h2>Вы не играете ни за одну команду</h2>
-              <% else%>
-                <% @teams.each do |team|%>
+              <% else %>
+                <% @teams.each do |team| %>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="x_panel">
                       <div class="x_title">
-                        <h2><%=team.name %><small>
-                          <% team.user_roles.each do |role| %>
-                            <% if role.user_id==current_user.id%>
-                              <%= role.role.role %>
+                        <h2><%= team.name %>
+                          <small>
+                            <% team.user_roles.each do |role| %>
+                              <% if role.user_id == current_user.id %>
+                                <%= role.role.role %>
+                              <% end %>
                             <% end %>
-                          <% end %>
-                        </small>
+                          </small>
                         </h2>
                         <div class="clearfix"></div>
                       </div>
@@ -86,15 +96,17 @@
             </div>
             <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
               <% if @applications.empty? %>
-                <h2><li>У вас нет заявок</li></h2>
-              <% else%>
-                <% @applications.each do |app|%>
+                <h2>
+                  <li>У вас нет заявок</li>
+                </h2>
+              <% else %>
+                <% @applications.each do |app| %>
                   <h2>
                     <ul>
                       <li>№<%= app.id %></li>
                       <ul>
-                        <li>Турнир: <%=app.tournament.name%> </li>
-                        <li>Команда: <%=app.team.name%> </li>
+                        <li>Турнир: <%= app.tournament.name %> </li>
+                        <li>Команда: <%= app.team.name %> </li>
                       </ul>
                     </ul>
                   </h2>

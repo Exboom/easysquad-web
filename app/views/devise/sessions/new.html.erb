@@ -11,62 +11,48 @@
     text-align: center;
   }
 </style>
-
-
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {:class=>"form-signin"}) do |f| %>
-
- <%= image_tag "/images/soccerball_sport_futbo_6911.png", :class => "style_image", :alt => "", :width => "79", :height => "79"  %>
-
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {:class => "form-signin"}) do |f| %>
+  <%= image_tag "soccerball_sport_futbo_6911.png", :class => "style_image", :alt => "", :width => "79", :height => "79" %>
   <h1 class="h3 mb-3 font-weight-normal">Вход в систему</h1>
-
   <div>
-    <%= f.email_field :email, autofocus: true, :class => "form-control", :placeholder =>"Email",  :required => ""  %>
+    <%= f.email_field :email, autofocus: true, :class => "form-control", :placeholder => "Email", :required => "" %>
   </div>
-
   <div>
-    <%= f.password_field :password, autofocus: true, :class => "form-control", :placeholder =>"Пароль",  :required => ""  %>
+    <%= f.password_field :password, autofocus: true, :class => "form-control", :placeholder => "Пароль", :required => "" %>
   </div>
-
   <% if devise_mapping.rememberable? -%>
     <div class="checkbox mb-3">
       <%= f.check_box :remember_me %>
       <%= f.label :remember_me, "Запомнить меня" %>
     </div>
-  <% end -%>
-
-
+  <% end %>
   <div>
-    <%= f.submit "Вход", :class => "btn btn-primary"%>
+    <%= f.submit "Вход", :class => "btn btn-primary" %>
     <a class="reset_pass" href="password/new">Забыли пароль?</a>
   </div>
-
   <div class="clearfix"></div>
   <div class="separator">
-
     <p class="change_link" style="margin-top: 10px;">Хотите создать команду?
       <a href="sign_up" class="to_register"> Зарегистрируйтесь </a>
     </p>
     <div class="clearfix"></div>
-    <br />
-
+    <br/>
     <h1 class="text-muted">
       <%= image_tag "/images/soccer-ball_39433.ico",
                     :class => "style_image",
                     :alt => "",
                     :width => "25",
                     :height => "25",
-                    :style => "padding-bottom: 5px;height: 25px;width: 20px;"  %>
+                    :style => "padding-bottom: 5px;height: 25px;width: 20px;" %>
       EasySquad</h1>
     <p class="mt-5 mb-3 text-muted">
       ©2019 Никаких прав нет. EasySquad. Собери свою команду!</p>
-
+  </div>
 <% end %>
-
 <script>
-    $(function(){
-        window.setTimeout(function(){
+    $(function () {
+        window.setTimeout(function () {
             $('#my-alert').alert('close');
-        },7000);
+        }, 7000);
     });
 </script>

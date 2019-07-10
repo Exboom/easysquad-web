@@ -2,61 +2,59 @@ class Admin::TournamentsController < ApplicationController
   before_action :check_admin
 
   def new
-    @tournament=Tournament.new
+    @tournament = Tournament.new
   end
 
   def edit
-    @tournament=Tournament.find(params[:id])
+    @tournament = Tournament.find(params[:id])
   end
 
   def create
-    @tournament=Tournament.new(tournament_params)
-    @lct=params[:tournament][:location_id]
+    @tournament = Tournament.new(tournament_params)
+    @lct = params[:tournament][:location_id]
     if @tournament.save
       @lct.each do |lct|
-        if lct.nil? or lct==""
+        if lct.nil? or lct == ""
           next
         else
-          @tournament.locations<<Location.find(lct)
+          @tournament.locations << Location.find(lct)
         end
       end
       redirect_to @tournament, flash: {notice: "Турнир успешно создан"}
     else
-      redirect_to root_path, flash: {"alert-danger": "Произошла ошибка: "+ @tournament.errors.full_messages.join(' ')}
+      redirect_to root_path, flash: {"alert-danger": "Произошла ошибка: " + @tournament.errors.full_messages.join(' ')}
     end
   end
 
   def update
     @tournament = Tournament.find(params[:id])
-    @lct=params[:tournament][:location_id]
+    @lct = params[:tournament][:location_id]
     if @tournament.update(tournament_params)
       @lct.each do |lct|
-        if lct.nil? or lct==""
+        if lct.nil? or lct == ""
           next
         else
-          @tournament.locations<<Location.find(lct)
+          @tournament.locations << Location.find(lct)
         end
+        @tournament.locations = @tournament.locations.uniq
       end
       redirect_to @tournament, flash: {notice: "Турнир успешно обновлен"}
     else
-      redirect_to @tournament, flash: {"alert-danger": "Произошла ошибка: "+ @tournament.errors.full_messages.join(' ')}
+      redirect_to @tournament, flash: {"alert-danger": "Произошла ошибка: " + @tournament.errors.full_messages.join(' ')}
     end
   end
 
   def destroy
     @tournament = Tournament.find(params[:id])
-    @tournament.team_tournaments.destroy_all
-    @tournament.applications.destroy_all
-    @tournament.games.each do |game|
-      game.chekins.destroy_all
+    if @tournament.destroy
+      redirect_to root_path, flash: {notice: "Турнир успешно обновлен"}
+    else
+      redirect_to @tournament, flash: {"alert-danger": "Произошла ошибка: " + @tournament.errors.full_messages.join(' ')}
     end
-    @tournament.games.destroy_all
-    @tournament.locations.clear
-    @tournament.destroy
-    redirect_to welcome_index_path
   end
 
   private
+
   def tournament_params
     params.require(:tournament).permit(:name, :season, :federation_id)
   end
@@ -64,7 +62,7 @@ class Admin::TournamentsController < ApplicationController
   protected
 
   def check_admin
-    redirect_to tournament_path, alert:  "У Вас нет прав доступа для данных действий" unless ((@userrols.find_by role: 1)!=nil)
+    redirect_to tournament_path, alert: "У Вас нет прав доступа для данных действий" unless ((@userrols.find_by role: 1) != nil)
   end
 
 end

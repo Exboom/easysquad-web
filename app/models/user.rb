@@ -14,8 +14,8 @@ class User < ApplicationRecord
 
   has_many :events
 
-  has_many :teams, foreign_key: :user_id
-  has_many :user_roles
+  has_many :teams
+  has_many :user_roles, dependent: :destroy
   has_many :roles, through: :user_roles
 
 end

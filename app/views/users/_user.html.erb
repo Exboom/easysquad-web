@@ -1,17 +1,15 @@
-<% @usersNew.order(id: :desc).first(3).each do |user|%>
+<% @usersNew.order(id: :desc).first(3).each do |user| %>
   <li>
     <p class="dropdown-item" style=text-align:center;">
-      <%= form_with(url: "/admin/users/"+user.id.to_s, method: "PATCH", html: {:style=>"text-align: center;"}) do |form| %>
+      <%= form_with(url: "/admin/users/" + user.id.to_s, method: "PATCH", html: {:style => "text-align: center;"}) do |form| %>
         <%= user.email %>
-        <input type="hidden" name="user[approved]" value=true />
-        <%= form.hidden_field :id, value: user.id%>
-        <%= form.submit "Подтвердить", :id=>"newup", :class=>"btn btn-success" %>
+        <input type="hidden" name="user[approved]" value=true/>
+        <%= form.hidden_field :id, value: user.id %>
+        <%= form.submit "Подтвердить", :id => "newup", :class => "btn btn-success" %>
       <% end %>
     </p>
-
   </li>
 <% end %>
-
 <li>
   <div class="text-center">
     <a>

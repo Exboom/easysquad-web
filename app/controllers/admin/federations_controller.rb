@@ -2,19 +2,19 @@ class Admin::FederationsController < ApplicationController
   before_action :check_admin
 
   def new
-    @federation=Federation.new
+    @federation = Federation.new
   end
 
   def edit
-    @federation=Federation.find(params[:id])
+    @federation = Federation.find(params[:id])
   end
 
   def create
-    @federation=Federation.new(federation_params)
+    @federation = Federation.new(federation_params)
     if @federation.save
       redirect_to @federation, flash: {notice: "Федерация успешно создана"}
     else
-      redirect_to root_path, flash: {"alert-danger": "Произошла ошибка: "+ @federation.errors.full_messages.join(' ')}
+      redirect_to root_path, flash: {"alert-danger": "Произошла ошибка: " + @federation.errors.full_messages.join(' ')}
     end
   end
 
@@ -23,25 +23,21 @@ class Admin::FederationsController < ApplicationController
     if @federation.update(federation_params)
       redirect_to @federation, flash: {notice: "Федерация успешно обновлена"}
     else
-      redirect_to @federation, flash: {"alert-danger": "Произошла ошибка: "+ @federation.errors.full_messages.join(' ')}
+      redirect_to @federation, flash: {"alert-danger": "Произошла ошибка: " + @federation.errors.full_messages.join(' ')}
     end
   end
 
   def destroy
     @federation = Federation.find(params[:id])
-    @tournaments=@federation.tournaments
-    @tournaments.each do |tourn|
-      tourn.team_tournaments.destroy_all
-      tourn.games.each do |game|
-        game.chekins.destroy_all
-      end
+    if @federation.destroy
+      redirect_to root_path, flash: {notice: "Федерация успешно обновлена"}
+    else
+      redirect_to @federation, flash: {"alert-danger": "Произошла ошибка: " + @federation.errors.full_messages.join(' ')}
     end
-    @tournaments.destroy_all
-    @federation.destroy
-    redirect_to root_path, alert: "Федеарция успешно удалена"
   end
 
   private
+
   def federation_params
     params.require(:federation).permit(:name, :url, :contacts)
   end
@@ -49,7 +45,7 @@ class Admin::FederationsController < ApplicationController
   protected
 
   def check_admin
-    redirect_to federation_path, alert:  "У Вас нет прав доступа для данных действий" unless ((@userrols.find_by role: 1)!=nil)
+    redirect_to federation_path, alert: "У Вас нет прав доступа для данных действий" unless ((@userrols.find_by role: 1) != nil)
   end
 
 end
