@@ -41,9 +41,10 @@ class PlayersController < ApplicationController
       redirect_to welcome_notplayer_path(current_user)
     else
       @player = Player.find(params[:id])
+      @userrols_plr = User.find(params[:id]).user_roles
       @teams = @player.teams
       @applications = @player.applications
-      if (@userrols.find_by role: 2) != nil
+      if (@userrols_plr.find_by role: 2) != nil
         @teams = (@teams + @user.teams).uniq
       end
     end
@@ -53,10 +54,19 @@ class PlayersController < ApplicationController
     session[:return_to] ||= request.referer
     @player = Player.find(params[:id])
     if @player.destroy
-      UserRole.where(user_id: @player.id, role_id: 4).destroy_all
+      UserRole.where(user_id: @player.id, role_id: 4).where(user_id: @player.id, role_id: 3).destroy_all
       redirect_to root_path, flash: {notice: "Игровой профиль удален"}
     else
       redirect_to @player, flash: {"alert-danger": "Произошла ошибка: " + @player.errors.full_messages.join(' ')}
+    end
+  end
+
+  def destroy_together_user
+    @player = Player.find(current_user.id)
+    if @player.destroy
+      redirect_to root_path, flash: {notice: "Игровой профиль удален"}
+    else
+      redirect_to root_path, flash: {"alert-danger": "Произошла ошибка: " + @player.errors.full_messages.join(' ')}
     end
   end
 

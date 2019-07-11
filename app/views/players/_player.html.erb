@@ -2,7 +2,7 @@
   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Имя
   </label>
   <div class="col-md-4 col-sm-4 col-xs-12">
-    <%= form.text_field :name, :id => "name", :class => "form-control col-md-5 col-xs-12" %>
+    <%= form.text_field :name, :id => "name", :class => "form-control col-md-5 col-xs-12", :onkeyup => "checkParams()" %>
   </div>
 </div>
 
@@ -10,7 +10,7 @@
   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Дата рождения
   </label>
   <div class="col-md-4 col-sm-4 col-xs-12">
-    <%= form.date_field :birthday, :min => "1950-01-01", :end_year => Date.today.year, :class => "form-control col-md-5 col-xs-12" %>
+    <%= form.date_field :birthday, :min => "1950-01-01", :end_year => Date.today.year, :id => "date", :class => "form-control col-md-5 col-xs-12", :onchange => "checkParams()" %>
   </div>
 </div>
 
@@ -18,6 +18,6 @@
   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Игровой номер
   </label>
   <div class="col-md-4 col-sm-4 col-xs-12">
-    <%= form.number_field :gamenumber, :min => 1, :class => "form-control col-md-5 col-xs-12" %>
+    <%= form.number_field :gamenumber, :min => 1, :id => "gnum", :class => "form-control col-md-5 col-xs-12", :onchange => "checkParams()" %>
   </div>
 </div>

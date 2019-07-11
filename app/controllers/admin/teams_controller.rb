@@ -1,4 +1,5 @@
 class Admin::TeamsController < ApplicationController
+  include ApplicationHelper
   before_action :check_admin
 
   def index
@@ -48,12 +49,6 @@ class Admin::TeamsController < ApplicationController
 
   def team_params
     params.require(:team).permit(:name, :user_id, :player_id, :default_password)
-  end
-
-  protected
-
-  def check_admin
-    redirect_to team_path, alert: "У Вас нет прав доступа для данных действий" unless ((@userrols.find_by role: 1) != nil)
   end
 
 end

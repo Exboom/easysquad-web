@@ -1,4 +1,6 @@
 class Admin::FederationsController < ApplicationController
+
+  include ApplicationHelper
   before_action :check_admin
 
   def new
@@ -40,12 +42,6 @@ class Admin::FederationsController < ApplicationController
 
   def federation_params
     params.require(:federation).permit(:name, :url, :contacts)
-  end
-
-  protected
-
-  def check_admin
-    redirect_to federation_path, alert: "У Вас нет прав доступа для данных действий" unless ((@userrols.find_by role: 1) != nil)
   end
 
 end

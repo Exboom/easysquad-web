@@ -1,4 +1,5 @@
 class Admin::UsersController < ApplicationController
+  include ApplicationHelper
   before_action :check_admin
 
   def new
@@ -44,10 +45,6 @@ class Admin::UsersController < ApplicationController
   end
 
   protected
-
-  def check_admin
-    redirect_to root_path, alert: "У Вас нет прав доступа для данных действий" unless ((@userrols.find_by role: 1) != nil)
-  end
 
   def user_params
     params.require(:user).permit(

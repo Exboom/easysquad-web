@@ -18,10 +18,10 @@
 //= require welcome.coffee
 // require turbolinks
 
-$(document).ready(function() {
+$(document).ready(function () {
 });
 
-$('#menu1').on('click','input',function () {
+$('#menu1').on('click', 'input', function () {
     setTimeout(function () {
         $.ajax({
             url: "/application/adm_new_up",

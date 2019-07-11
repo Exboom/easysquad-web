@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'teams/appfortourn', as: 'appfortourn'
   post 'teams/creat_appfortourn', as: 'creat_appfortourn'
   patch 'chekins/failed', as: 'failed'
+  delete 'players/destroy_together_user', as: 'destroy_together_user'
 
 
   resources :players

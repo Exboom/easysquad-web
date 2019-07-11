@@ -5,37 +5,40 @@
       <div class="x_title">
         <h2><i class="fa fa-bars"></i> Игровой профиль
         </h2>
-        <ul class="nav navbar-right panel_toolbox" style="padding-left: 25px;">
-          <li>
-            <%= link_to edit_user_registration_path, :method => :get,
-                        :class => "close-link",
-                        "data-toggle" => "tooltip",
-                        "data-placement" => "top",
-                        :title => "",
-                        "data-original-title" => "Изменить пароль" do %>
-              <i class="fa fa-cogs"></i>
-            <% end %>
-          </li>
-          <li>
-            <%= link_to edit_player_path, :method => :get,
-                        :class => "close-link",
-                        "data-toggle" => "tooltip",
-                        "data-placement" => "top",
-                        :title => "",
-                        "data-original-title" => "Редактировать игровой профиль" do %>
-              <i class="fa fa-wrench"></i>
-            <% end %>
-          </li>
-          <li>
-            <%= link_to player_path, :method => :delete, :class => "close-link",
-                        "data-toggle" => "tooltip",
-                        "data-placement" => "top",
-                        :title => "",
-                        "data-original-title" => "Удалить игровой профиль" do %>
-              <i class="fa fa-close"></i>
-            <% end %>
-          </li>
-        </ul>
+        <% if (current_user.id == @player.id) %>
+          <ul class="nav navbar-right panel_toolbox" style="padding-left: 25px;">
+            <li>
+              <%= link_to edit_user_registration_path, :method => :get,
+                          :class => "close-link",
+                          "data-toggle" => "tooltip",
+                          "data-placement" => "top",
+                          :title => "",
+                          "data-original-title" => "Изменить пароль/удалить профиль" do %>
+                <i class="fa fa-cogs"></i>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to edit_player_path, :method => :get,
+                          :class => "close-link",
+                          "data-toggle" => "tooltip",
+                          "data-placement" => "top",
+                          :title => "",
+                          "data-original-title" => "Редактировать игровой профиль" do %>
+                <i class="fa fa-wrench"></i>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to player_path, :method => :delete, :class => "close-link",
+                          "data-toggle" => "tooltip",
+                          "data-placement" => "top",
+                          :title => "",
+                          "data-original-title" => "Удалить игровой профиль" do %>
+                <i class="fa fa-close"></i>
+              <% end %>
+            </li>
+          </ul>
+        <% end %>
+
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
@@ -74,8 +77,14 @@
                         <h2><%= team.name %>
                           <small>
                             <% team.user_roles.each do |role| %>
-                              <% if role.user_id == current_user.id %>
-                                <%= role.role.role %>
+                              <% if @player.id == current_user.id %>
+                                <% if role.user_id == current_user.id %>
+                                  <%= role.role.role %>
+                                <% end %>
+                              <% else %>
+                                <% if role.user_id == @player.id %>
+                                  <%= role.role.role %>
+                                <% end %>
                               <% end %>
                             <% end %>
                           </small>

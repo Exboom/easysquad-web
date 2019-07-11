@@ -1,4 +1,5 @@
 class Admin::LocationsController < ApplicationController
+  include ApplicationHelper
   before_action :check_admin
 
   def new
@@ -41,12 +42,5 @@ class Admin::LocationsController < ApplicationController
   def location_params
     params.require(:location).permit(:name, :address)
   end
-
-  protected
-
-  def check_admin
-    redirect_to location_path, alert: "У Вас нет прав доступа для данных действий" unless ((@userrols.find_by role: 1) != nil)
-  end
-
 
 end
