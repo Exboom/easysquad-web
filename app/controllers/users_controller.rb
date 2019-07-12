@@ -22,16 +22,16 @@ class UsersController < ApplicationController
       UserRole.new(user_id: @user.id, role_id: 4, team_id: params[:user][:team_id]).save
       Player.new(id: @user.id, name: params[:user][:name]).save
       PlayerTeam.new(player_id: @user.id, team_id: params[:user][:team_id]).save
-
-      # @mail=UserMailer.new_player #mail in my email for test
-      # if @mail.deliver_now
-      #   puts "Все хорошо"
-      # else
-      #   @mail.errors.full_messages.each do |msg|
-      #     puts msg
-      #   end
-      # end
-
+      # mailer
+      @mail=UserMailer.new_player #mail in my email for test
+      if @mail.deliver_now
+        puts "Все хорошо"
+      else
+        @mail.errors.full_messages.each do |msg|
+          puts msg
+        end
+      end
+      # mailer
       redirect_to session.delete(:return_to), flash: {notice: "Пользователь зарегестрирован"}
     else
       redirect_to session.delete(:return_to), flash: {"alert-danger": "Произошла ошибка: " + @user.errors.full_messages.join(' ')}

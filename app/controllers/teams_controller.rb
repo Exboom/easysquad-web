@@ -2,6 +2,10 @@ class TeamsController < ApplicationController
 
   before_action :check_owner, only: [:edit]
 
+  def index
+    @teams = Team.all
+  end
+
   def edit
     @team = Team.find(params[:id])
   end
@@ -42,7 +46,7 @@ class TeamsController < ApplicationController
     @allplayers = @team.players
     @players = Array.new(@allplayers.size)
     @allplayers.each_with_index do |plr, index|
-      if plr.applications.where(tournament_id: @tourn.id).empty?
+      if plr.rosters.where(tournament_id: @tourn.id).empty?
         @players[index] = plr
       else
         next
@@ -59,7 +63,7 @@ class TeamsController < ApplicationController
       if app.nil? or app == ""
         next
       else
-        @newapp = Application.new(player_id: app, team_id: @team.id, tournament_id: params[:game][:tourn_id])
+        @newapp = Roster.new(player_id: app, team_id: @team.id, tournament_id: params[:game][:tourn_id])
         if @newapp.save
         else
           redirect_to session.delete(:return_to), flash: {"alert-danger": "Произошла ошибка: " + @newapp.errors.full_messages.join(' ')}
@@ -78,7 +82,7 @@ class TeamsController < ApplicationController
   def check_owner
     @team = Team.find(params[:id])
     redirect_to team_path,
-                alert: "У Вас нет прав доступа для данных действий" unless (current_user.id == @team.user_id) or ((@userrols.find_by role: 3) != nil)
+                alert: "У Вас нет прав доступа для данных действий" unless (current_user.id == @team.user_id) or ((@userrols.find_by role: 3, team: @team.id) != nil)
   end
 
 end

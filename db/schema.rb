@@ -15,14 +15,6 @@ ActiveRecord::Schema.define(version: 2019_07_04_071346) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "applications", force: :cascade do |t|
-    t.integer "player_id"
-    t.integer "team_id"
-    t.integer "tournament_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "chekins", force: :cascade do |t|
     t.integer "player_id"
     t.integer "team_id"
@@ -103,6 +95,14 @@ ActiveRecord::Schema.define(version: 2019_07_04_071346) do
 
   create_table "roles", force: :cascade do |t|
     t.string "role"
+  end
+
+  create_table "rosters", id: :bigint, default: -> { "nextval('applications_id_seq'::regclass)" }, force: :cascade do |t|
+    t.integer "player_id"
+    t.integer "team_id"
+    t.integer "tournament_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "team_tournaments", id: :serial, force: :cascade do |t|

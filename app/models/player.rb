@@ -1,7 +1,7 @@
 class Player < ApplicationRecord
   has_many :teams
   has_many :chekins, dependent: :destroy
-  has_many :applications, dependent: :destroy
+  has_many :rosters, dependent: :destroy
   has_many :events
 
   has_many :player_teams, dependent: :destroy

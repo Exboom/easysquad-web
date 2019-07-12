@@ -1,4 +1,4 @@
-class Application < ApplicationRecord
+class Roster < ApplicationRecord
   belongs_to :player
   belongs_to :team
   belongs_to :tournament

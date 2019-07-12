@@ -13,12 +13,12 @@ Rails.application.routes.draw do
 
 
   resources :players
-  resources :teams, only: [:show, :edit, :update]
+  resources :teams, only: [:show, :edit, :update, :index]
   resources :games
-  resources :applications
-  resources :federations, only: [:show]
-  resources :tournaments, only: [:show]
-  resources :locations, only: [:show]
+  resources :rosters
+  resources :federations, only: [:show, :index]
+  resources :tournaments, only: [:show, :index]
+  resources :locations, only: [:show, :index]
   resources :chekins
   resources :events
   resources :player_teams
@@ -30,10 +30,10 @@ Rails.application.routes.draw do
   resource :role, only: [:show]
 
   namespace :admin do
-    resources :federations, except: [:show]
-    resources :locations, except: [:show]
-    resources :tournaments, except: [:show]
-    resources :teams, except: [:show]
+    resources :federations, except: [:show, :index]
+    resources :locations, except: [:show, :index]
+    resources :tournaments, except: [:show, :index]
+    resources :teams, except: [:show, :index]
     # resources :users, except: [:index]
     resources :users
   end

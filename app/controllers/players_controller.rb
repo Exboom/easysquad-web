@@ -43,7 +43,7 @@ class PlayersController < ApplicationController
       @player = Player.find(params[:id])
       @userrols_plr = User.find(params[:id]).user_roles
       @teams = @player.teams
-      @applications = @player.applications
+      @applications = @player.rosters
       if (@userrols_plr.find_by role: 2) != nil
         @teams = (@teams + @user.teams).uniq
       end

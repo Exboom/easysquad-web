@@ -6,7 +6,7 @@ class Team < ApplicationRecord
   has_many :gamet_one, class_name:'Game', foreign_key: "team_one"
   has_many :gamet_two, class_name:'Game', foreign_key: "team_two"
 
-  has_many :applications, dependent: :destroy
+  has_many :rosters, dependent: :destroy
   has_many :user_roles, dependent: :destroy
 
   has_many :player_teams, dependent: :destroy

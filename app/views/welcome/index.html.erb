@@ -134,7 +134,7 @@
                                           <p><%= nxtgm.location.address %></p>
                                         </div>
                                         <div class="tab-pane" id="messages<%= nxtgm.id * 4 + (idgen + 1 + index.to_i * 4) %>">
-                                          <% if (@player.applications.find_by tournament: nxtgm.tournament.id).nil? %>
+                                          <% if (@player.rosters.find_by tournament: nxtgm.tournament.id).nil? %>
                                             <p class="lead">Вы не заявлены за команду на этот турнир</p>
                                           <% else %>
                                             <% if (Chekin.find_by player: @player, game: nxtgm).nil? %>

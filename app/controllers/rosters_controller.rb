@@ -1,13 +1,13 @@
-class ApplicationsController < ApplicationController
+class RostersController < ApplicationController
 
   def create
-    @application = Application.new(application_params)
+    @application = Roster.new(application_params)
     @application.save
     redirect_to @application
   end
 
   def update
-    @application = Application.find(params[:id])
+    @application = Roster.find(params[:id])
     if @application.update(application_params)
       redirect_to @application
     else
@@ -16,9 +16,9 @@ class ApplicationsController < ApplicationController
   end
 
   def destroy
-    @application = Application.find(params[:id])
+    @application = Roster.find(params[:id])
     @application.destroy
-    redirect_to welcome_index_path
+    redirect_to root_path
   end
 
   private

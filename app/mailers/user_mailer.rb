@@ -1,11 +1,9 @@
 class UserMailer < ApplicationMailer
 
-  default from: 'info@easysquad.com',
-          template_path: "mailers/user"
+  default template_path: "mailers/user"
 
   def new_player
-    mail to: 'dr.modi@yandex.ru',
-         subject: "Чел зарегался"
+    mail(from: 'dr.modi@yndex.ru', to: 'apo@aiweapps.com', subject: ' Регистрация на ресурсе')
   end
 
   def new_team

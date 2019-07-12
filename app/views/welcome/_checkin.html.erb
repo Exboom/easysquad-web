@@ -1,6 +1,6 @@
 <%= form_with scope: :chekin, url: chekins_path, local: true do |form| %>
   <%= form.hidden_field :player_id, value: current_user.id %>
-  <% varplayers = Application.where(tournament: nxtgm.tournament.id, team: teamprsns[index]).pluck(:player_id) %>
+  <% varplayers = Roster.where(tournament: nxtgm.tournament.id, team: teamprsns[index]).pluck(:player_id) %>
   <% varsearch = Chekin.where(game: nxtgm, team: teamprsns[index]).pluck(:player_id) %>
   <% varsearch = teamprsns[index].players.where(id: varplayers).where.not(id: varsearch) %>
   <% if varsearch[0].nil? %>
