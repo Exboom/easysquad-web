@@ -1,0 +1,56 @@
+<% if history.empty? %>
+  <h2>История пуста</h2>
+<% else %>
+  <table class="table">
+    <thead>
+    <tr>
+      <td>Пользователь</td>
+      <td>Игра</td>
+      <td>Действие</td>
+      <td>Время</td>
+      <td>Значение</td>
+    </tr>
+    </thead>
+    <tbody>
+    <% history.each do |hstr| %>
+      <tr>
+        <% if hstr.score.nil? %>
+          <td>
+            <%= whose_event_nscore(hstr) %>
+          </td>
+          <td>
+            <%= hstr.game.name %>
+          </td>
+          <td>
+            <%= hstr.what_event %> |
+            <%= hstr.player.name %>
+          </td>
+          <td>
+            <%= hstr.time_event %>
+          </td>
+          <td>
+            <%= hstr.checkin.to_s %>
+            <%= value_event(hstr) %>
+          </td>
+        <% else %>
+          <td>
+            <%= whose_event_score(hstr) %>
+          </td>
+          <td>
+            <%= hstr.game.name %>
+          </td>
+          <td>
+            <%= hstr.what_event %>
+          </td>
+          <td>
+            <%= hstr.time_event %>
+          </td>
+          <td>
+            <%= hstr.score %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>

@@ -29,11 +29,7 @@
           </div>
           <div class="profile_info">
             <span>Здравствйте,</span>
-            <% if (Player.find_by_id (current_user.id)).nil? %>
-              <h2> <%= current_user.email %></h2>
-            <% else %>
-              <h2><%= (Player.find (current_user.id)).name.split(' ')[0] %></h2>
-            <% end %>
+            <h2> <%= welcome_name(current_user) %></h2>
           </div>
         </div>
         <!-- /menu profile quick info -->
@@ -111,11 +107,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li class="">
               <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <% if (Player.find_by_id (current_user.id)).nil? %>
-                  <%= current_user.email %>
-                <% else %>
-                  <%= (Player.find (current_user.id)).name %>
-                <% end %>
+                <%= profile_name(current_user) %>
                 <span class=" fa fa-angle-down"></span>
               </a>
               <ul class="dropdown-menu dropdown-usermenu pull-right">

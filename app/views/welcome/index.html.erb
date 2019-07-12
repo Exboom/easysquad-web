@@ -1,4 +1,4 @@
-<% if ((@userrols.find_by role: 1)!=nil)%>
+<% if ((@userrols.find_by role: 1) != nil) %>
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
@@ -31,85 +31,7 @@
             </div>
             <div class="x_content">
               <ul>
-                <% if @history.empty? %>
-                  <h2>История пуста</h2>
-                <% else %>
-                  <table class="table">
-                    <thead>
-                    <tr>
-                      <td>Пользователь</td>
-                      <td>Игра</td>
-                      <td>Действие</td>
-                      <td>Время</td>
-                      <td>Значение</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <% @history.each do |hstr| %>
-                      <tr>
-                        <% if hstr.score.nil? %>
-                          <% if hstr.admin == true %>
-                            <% if Player.where(id: (hstr.user_id)).empty? %>
-                              <td>
-                                <%= hstr.user.email %>(admin)
-                              </td>
-                            <% else %>
-                              <td>
-                                <%= hstr.player.name %>(admin)
-                              </td>
-                            <% end %>
-                          <% else %>
-                            <td>
-                              <%= hstr.player.name %>
-                            </td>
-                          <% end %>
-                          <td>
-                            <%= hstr.game.name %>
-                          </td>
-                          <td>
-                            <%= hstr.what_event %> |
-                            <%= hstr.player.name %>
-                          </td>
-                          <td>
-                            <%= hstr.time_event %>
-                          </td>
-                          <td>
-                            <%= hstr.checkin.to_s %>
-                            <% if hstr.checkin == false %>
-                              <% if Reason.find_by(id: hstr.reason_id).nil? %>
-                              <% else %>
-                                | <%= Reason.find_by(id: hstr.reason_id).reason %>
-                              <% end %>
-                            <% end %>
-                          </td>
-                        <% else %>
-                          <% if Player.where(id: (hstr.user_id)).empty? %>
-                            <td>
-                              <%= hstr.user.email %>(admin)
-                            </td>
-                          <% else %>
-                            <td>
-                              <%= hstr.player.name %>(admin)
-                            </td>
-                          <% end %>
-                          <td>
-                            <%= hstr.game.name %>
-                          </td>
-                          <td>
-                            <%= hstr.what_event %>
-                          </td>
-                          <td>
-                            <%= hstr.time_event %>
-                          </td>
-                          <td>
-                            <%= hstr.score %>
-                          </td>
-                        <% end %>
-                      </tr>
-                    <% end %>
-                    </tbody>
-                  </table>
-                <% end %>
+                <%= render partial: "history", locals: {history: @history} %>
               </ul>
             </div>
           </div>
@@ -216,34 +138,7 @@
                                             <p class="lead">Вы не заявлены за команду на этот турнир</p>
                                           <% else %>
                                             <% if (Chekin.find_by player: @player, game: nxtgm).nil? %>
-                                              <%= form_with scope: :chekin, url: chekins_path, local: true do |form| %>
-                                                <%= form.hidden_field :player_id, value: current_user.id %>
-                                                <p>Ваша команда: <%= @teampl[index].name %></p>
-                                                <%= form.hidden_field :team_id, value: @teampl[index].id %>
-                                                <%= form.hidden_field :game_id, value: nxtgm.id %>
-                                                <p>
-                                                  <%= form.label :Вы_будете_на_игре? %><br>
-                                                  <%= form.radio_button :chekin, "1", checked: true, onClick: "check(2)" %> <%= form.label(:chekin_true, "Да") %>
-                                                  <%= form.radio_button :chekin, "0", onClick: "check(1)" %> <%= form.label(:chekin_false, "Нет") %>
-                                                </p>
-
-                                                <div id="visblock" style="display: none">
-                                                  <legend>Почему Вас не будет?</legend>
-                                                  <p>
-                                                    <%= form.label :Причина_отсутствия %> (при выборе "Другое" опишите
-                                                    причину в комментарие)<br>
-                                                    <%= form.collection_select(:reason_id, Reason.all, :id, :reason, {:prompt => "Выберите причину"}) %>
-                                                  </p>
-
-                                                  <p>
-                                                    <%= form.label :Комментарий %><br>
-                                                    <%= form.text_area :comment %>
-                                                  </p>
-                                                </div>
-                                                <p>
-                                                  <%= form.submit("Отметиться") %>
-                                                </p>
-                                              <% end %>
+                                              <%= render partial: "new_plr_checkin", locals: {teampl: @teampl, index: index, nxtgm: nxtgm, current_user: current_user} %>
                                             <% else %>
                                               <h3>Вы уже отметились на эту игру!</h3>
                                               <% if (Chekin.find_by player: @player, game: nxtgm).chekin == true %>
@@ -515,89 +410,11 @@
             <!-- history for admins-->
             <% if ((@userrols.find_by role: 3) != nil) or ((@userrols.find_by role: 2) != nil) %>
               <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="profile-tab">
-                <% if @history.empty? %>
-                  <h2>История пуста</h2>
-                <% else %>
-                  <table class="table">
-                    <thead>
-                    <tr>
-                      <td>Пользователь</td>
-                      <td>Игра</td>
-                      <td>Действие</td>
-                      <td>Время</td>
-                      <td>Значение</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <% @history.each do |hstr| %>
-                      <tr>
-                        <% if hstr.score.nil? %>
-                          <% if hstr.admin == true %>
-                            <% if Player.where(id: (hstr.user_id)).empty? %>
-                              <td>
-                                <%= hstr.user.email %>(admin)
-                              </td>
-                            <% else %>
-                              <td>
-                                <%= Player.find(hstr.player_id).name %>(admin)
-                              </td>
-                            <% end %>
-                          <% else %>
-                            <td>
-                              <%= Player.find(hstr.player_id).name %>
-                            </td>
-                          <% end %>
-                          <td>
-                            <%= hstr.game.name %>
-                          </td>
-                          <td>
-                            <%= hstr.what_event %> |
-                            <%= Player.find(hstr.player_id).name %>
-                          </td>
-                          <td>
-                            <%= hstr.time_event %>
-                          </td>
-                          <td>
-                            <%= hstr.checkin.to_s %>
-                            <% if hstr.checkin == false %>
-                              <% if Reason.find_by(id: hstr.reason_id).nil? %>
-                              <% else %>
-                                | <%= Reason.find_by(id: hstr.reason_id).reason %>
-                              <% end %>
-                            <% end %>
-                          </td>
-                        <% else %>
-                          <% if Player.where(id: (hstr.user_id)).empty? %>
-                            <td>
-                              <%= hstr.user.email %>(admin)
-                            </td>
-                          <% else %>
-                            <td>
-                              <%= hstr.player.name %>(admin)
-                            </td>
-                          <% end %>
-                          <td>
-                            <%= hstr.game.name %>
-                          </td>
-                          <td>
-                            <%= hstr.what_event %>
-                          </td>
-                          <td>
-                            <%= hstr.time_event %>
-                          </td>
-                          <td>
-                            <%= hstr.score %>
-                          </td>
-                        <% end %>
-                      </tr>
-                    <% end %>
-                    </tbody>
-                  </table>
-                <% end %>
+                <%= render partial: "history", locals: {history: @history} %>
               </div>
             <% end %>
             <!-- panel for owner-->
-            <% if ((@userrols.find_by role: 2)!=nil)%>
+            <% if ((@userrols.find_by role: 2) != nil) %>
               <% if ((@userrols.find_by role: 2) != nil) and ((@userrols.find_by role: 4) == nil) %>
                 <div role="tabpanel" class="tab-pane fade active in" id="tab_content3" aria-labelledby="home-tab">
               <% else %>

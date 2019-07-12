@@ -3,9 +3,9 @@
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">
     </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
-      <h3>Заявка на турнир: "<%= @tourn.name %>" <br>
+      <h4>Заявка на турнир: "<%= @tourn.name %>" <br>
         Команда: <%= @team.name %>
-      </h3>
+      </h4>
     </div>
   </div>
   <%= form.hidden_field :team_id, value: @team.id %>
@@ -14,11 +14,7 @@
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Ваша команда:
     </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
-      <% if @players.empty? %>
-        <h3> Нет доступных к заявке игроков</h3>
-      <% else %>
-        <%= form.collection_check_boxes(:player_id, @players, :id, :name, {}, {:class => "form-control checkbox inline"}) %>
-      <% end %>
+      <%= new_app(@players, form) %>
     </div>
   </div>
   <% if !@players.empty? %>

@@ -82,22 +82,7 @@
                 <% if @candidates[0].nil? %>
                   <li>Кандидатов нет</li>
                 <% else %>
-                  <%= form_with scope: :user_role, url: user_roles_path, html: {"data-parsley-validate" => "", :class => "form-horizontal form-label-left col-md-12 col-sm-12 col-xs-12", :novalidate => ""}, local: true do |f| %>
-                    <div class="form-group">
-                      <div class="col-md-3 col-sm-3 col-xs-12">
-                        <%= f.collection_select(:user_id, @candidates, :id, :name, {:prompt => "Выберите кандидата"}, {:class => "form-control"}) %>
-                      </div>
-                    </div>
-                    <p>
-                      <%= f.hidden_field :role_id, value: 3 %>
-                    </p>
-                    <p>
-                      <%= f.hidden_field :team_id, value: @team.id %>
-                    </p>
-                    <div class="col-md-6 col-sm-6 col-xs-12 ">
-                      <%= f.submit "Добавить", :class => "btn btn-success" %>
-                    </div>
-                  <% end %>
+                  <%= render partial: "new_adm", locals: {candidate: @candidates, team: @team} %>
                 <% end %>
               <% end %>
             </div>
@@ -121,9 +106,7 @@
                         </div>
                       </div>
                       <%= link_to "Подробнее", player_path(play), :method => :get, :class => "btn btn-secondary" %>
-                      <% if (current_user.id == @owner.id) or ((@userrols.find_by role: 1) != nil) or ((@userrols.find_by team_id: @team.id, user_id: current_user.id, role_id: 3) != nil) %>
-                        <%= link_to 'Убрать из команды', player_team_path(play, @team), method: :delete, :class => "btn btn-secondary" %>
-                      <% end %>
+                      <%= plr_team_out(current_user, @owner, @userrols, @team, play) %>
                     </div>
                   </div>
                 <% end %>
@@ -145,24 +128,9 @@
                             </a>
                             <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="height: 0px;">
                               <div class="panel-body">
-
                                 <div id="login" class="animate">
                                   <section class="login_content">
-                                    <%= form_with scope: :user, url: users_path, local: true do |f| %>
-                                      <div>
-                                        <%= f.email_field :email, autofocus: true, :class => "form-control", :placeholder => "Email", :required => "" %>
-                                      </div>
-                                      <div>
-                                        <%= f.text_field :name, :class => "form-control", :placeholder => "Имя игрока", :required => "" %>
-                                      </div>
-                                      <%= f.hidden_field :team_id, value: @team.id %>
-                                      <%= f.hidden_field :approved, value: true %>
-                                      <div>
-                                        <%= f.submit "Зарегистрировать", :class => "button7" %>
-                                      </div>
-                                      <div class="clearfix"></div>
-                                    <% end %>
-                                    <!-- form -->
+                                    <%= render partial: "new_plr_reg", locals: {team: @team} %>
                                   </section>
                                   <!-- content -->
                                 </div>
@@ -175,19 +143,7 @@
                             </a>
                             <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false">
                               <div class="panel-body">
-                                <%= form_with scope: :player_team, url: player_teams_path, html: {:id => "demo-form2", "data-parsley-validate" => "", :class => "form-horizontal form-label-left", :novalidate => ""}, local: true do |f| %>
-                                  <%= f.hidden_field :team_id, value: @team.id %>
-                                  <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tourn">Игрок
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                      <%= f.collection_select(:player_id, Player.where.not(id: @team.players), :id, :name, {:prompt => "Выберите игрока"}, {:id => "tourn", :class => "form-control"}) %>
-                                    </div>
-                                  </div>
-                                  <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                    <%= f.submit "Добавить", :class => "btn btn-success" %>
-                                  </div>
-                                <% end %>
+                                <%= render partial: "new_plr_all", locals: {team: @team} %>
                               </div>
                             </div>
                           </div>
@@ -219,28 +175,13 @@
                         </div>
                       </div>
                       <%= link_to "Подробнее", tournament_path(tourn), :method => :get, :class => "btn btn-secondary" %>
-                      <% if (current_user.id == @owner.id) or ((@userrols.find_by team_id: @team.id, user_id: current_user.id, role_id: 3) != nil) or ((@userrols.find_by role: 1) != nil) %>
-                        <%= link_to "Выйти из турнира", team_tournament_path(@team, tourn), :method => :delete, :class => "btn btn-secondary" %>
-                        <%= link_to "Создать заявку", appfortourn_path(:team => @team, :tourn => tourn), :method => :get, :class => "btn btn-secondary" %>
-                      <% end %>
+                      <%= tourn_team_out(current_user, @owner, @userrols, @team, tourn) %>
+                      <%= tourn_team_newapp(current_user, @owner, @userrols, @team, tourn) %>
                     </div>
                   </div>
                 <% end %>
               <% end %>
-              <% if (current_user.id == @owner.id) or ((@userrols.find_by team_id: @team.id, user_id: current_user.id, role_id: 3) != nil) or ((@userrols.find_by role: 1) != nil) %>
-                <%= form_with scope: :team_tournament, url: team_tournaments_path, html: {"data-parsley-validate" => "", :class => "form-horizontal form-label-left col-md-12 col-sm-12 col-xs-12", :novalidate => ""}, local: true do |f| %>
-                  <p>Добавить турнир:</p>
-                  <%= f.hidden_field :team_id, value: @team.id %>
-                  <div class="form-group">
-                    <div class="col-md-3 col-sm-3 col-xs-12">
-                      <%= f.collection_select(:tournament_id, Tournament.where.not(id: @team.tournaments.ids), :id, :name, {:prompt => "Выберите турнир"}, {:class => "form-control"}) %>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-xs-12 ">
-                    <%= f.submit "Добавить", :class => "btn btn-success" %>
-                  </div>
-                <% end %>
-              <% end %>
+              <%= new_tourn_team(current_user, @owner, @userrols, @team) %>
             </div>
           </div>
         </div>

@@ -1,0 +1,26 @@
+<%= form_with scope: :chekin, url: chekins_path, local: true do |form| %>
+  <%= form.hidden_field :player_id, value: current_user.id %>
+  <p>Ваша команда: <%= teampl[index].name %></p>
+  <%= form.hidden_field :team_id, value: teampl[index].id %>
+  <%= form.hidden_field :game_id, value: nxtgm.id %>
+  <p>
+    <%= form.label :Вы_будете_на_игре? %><br>
+    <%= form.radio_button :chekin, "1", checked: true, onClick: "check(2)" %> <%= form.label(:chekin_true, "Да") %>
+    <%= form.radio_button :chekin, "0", onClick: "check(1)" %> <%= form.label(:chekin_false, "Нет") %>
+  </p>
+  <div id="visblock" style="display: none">
+    <legend>Почему Вас не будет?</legend>
+    <p>
+      <%= form.label :Причина_отсутствия %> (при выборе "Другое" опишите
+      причину в комментарие)<br>
+      <%= form.collection_select(:reason_id, Reason.all, :id, :reason, {:prompt => "Выберите причину"}) %>
+    </p>
+    <p>
+      <%= form.label :Комментарий %><br>
+      <%= form.text_area :comment %>
+    </p>
+  </div>
+  <p>
+    <%= form.submit("Отметиться") %>
+  </p>
+<% end %>

@@ -76,17 +76,7 @@
                       <div class="x_title">
                         <h2><%= team.name %>
                           <small>
-                            <% team.user_roles.each do |role| %>
-                              <% if @player.id == current_user.id %>
-                                <% if role.user_id == current_user.id %>
-                                  <%= role.role.role %>
-                                <% end %>
-                              <% else %>
-                                <% if role.user_id == @player.id %>
-                                  <%= role.role.role %>
-                                <% end %>
-                              <% end %>
-                            <% end %>
+                            <%= role_in_team(team, @player, current_user) %>
                           </small>
                         </h2>
                         <div class="clearfix"></div>
