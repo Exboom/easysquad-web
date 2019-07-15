@@ -1,0 +1,5 @@
+<% @teams.each do |team| %>
+  <h3>
+    <li><%= link_to team.name, team_path(team), method: :get %></li>
+  </h3>
+<% end %>

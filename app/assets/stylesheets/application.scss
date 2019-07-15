@@ -24,9 +24,11 @@
   padding: 15px;
   margin: auto;
 }
+
 .form-signin .checkbox {
   font-weight: 400;
 }
+
 .form-signin .form-control {
   position: relative;
   box-sizing: border-box;
@@ -34,14 +36,17 @@
   padding: 10px;
   font-size: 16px;
 }
+
 .form-signin .form-control:focus {
   z-index: 2;
 }
+
 .form-signin input[type="email"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
+
 .form-signin input[type="password"] {
   margin-bottom: 10px;
   border-top-left-radius: 0;
@@ -92,44 +97,73 @@ ul.hr {
   margin: 0; /* Обнуляем значение отступов */
   padding: 4px; /* Значение полей */
 }
+
 ul.hr li {
   display: inline; /* Отображать как строчный элемент */
   margin-left: 20px;
   margin-right: 10px;
 }
+
 a {
   color: #000000;
 }
 
 .alert-box {
   position: absolute;
-  top:0;
-  right:45%;
-  color:#555;
-  border-radius:10px;
-  font-family:Tahoma,Geneva,Arial,sans-serif;font-size:11px;
-  padding:10px 10px 10px 36px;
-  margin:10px;
+  top: 0;
+  right: 45%;
+  color: #555;
+  border-radius: 10px;
+  font-family: Tahoma, Geneva, Arial, sans-serif;
+  font-size: 11px;
+  padding: 10px 10px 10px 36px;
+  margin: 10px;
 }
 
 .alert-box span {
-  font-weight:bold;
-  text-transform:uppercase;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .error {
-  background:#ffecec url('images/error.png') no-repeat 10px 50%;
-  border:1px solid #f5aca6;
+  background: #ffecec url('images/error.png') no-repeat 10px 50%;
+  border: 1px solid #f5aca6;
 }
+
 .success {
-  background:#e9ffd9 url('images/success.png') no-repeat 10px 50%;
-  border:1px solid #a6ca8a;
+  background: #e9ffd9 url('images/success.png') no-repeat 10px 50%;
+  border: 1px solid #a6ca8a;
 }
+
 .warning {
-  background:#fff8c4 url('images/warning.png') no-repeat 10px 50%;
-  border:1px solid #f2c779;
+  background: #fff8c4 url('images/warning.png') no-repeat 10px 50%;
+  border: 1px solid #f2c779;
 }
+
 .notice {
-  background:#e3f7fc url('images/notice.png') no-repeat 10px 50%;
-  border:1px solid #8ed9f6;
+  background: #e3f7fc url('images/notice.png') no-repeat 10px 50%;
+  border: 1px solid #8ed9f6;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
 }

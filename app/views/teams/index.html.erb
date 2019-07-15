@@ -6,7 +6,50 @@
     </div>
     <div class="x_content">
 
+      <div id="team_content">
+        <% @teams.each do |team| %>
+          <h3>
+            <li><%= link_to team.name, team_path(team), method: :get %></li>
+          </h3>
+        <% end %>
+      </div>
+      <div class="pagination" style="text-align: center">
+        <a id="prev" onclick="checkPageMinus()">❮</a>
+        <a>
+          <input id="page" type="hidden" value="0">
+          <div id="counter" style="display: inline-block" value>1</div>
+          / <%= @teams_page %>
+        </a>
+        <a id="next" onclick="checkPagePlus()">❯</a>
+      </div>
 
     </div>
   </div>
 </div>
+<script>
+    function checkPagePlus() {
+        var counter = $('#page').val();
+        if ((Number(counter) + 1) < <%= @teams_page %>) {
+            $('#counter').html(+$('#counter').html() + 1);
+            $('#page').val(+$('#page').val() + 1);
+            $.ajax({
+                url: "/teams",
+                type: "GET",
+                data: {offset: (Number(counter) + 1)}
+            })
+        }
+    }
+
+    function checkPageMinus() {
+        var counter = $('#page').val();
+        if ((Number(counter) + 1) != 1) {
+            $('#counter').html(+$('#counter').html() - 1);
+            $('#page').val(+$('#page').val() - 1);
+            $.ajax({
+                url: "/teams",
+                type: "GET",
+                data: {offset: (Number(counter) - 1)}
+            })
+        }
+    }
+</script>

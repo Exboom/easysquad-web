@@ -3,7 +3,15 @@ class TeamsController < ApplicationController
   before_action :check_owner, only: [:edit]
 
   def index
-    @teams = Team.all
+    @teams_page = (Team.all.size/10.0).ceil
+    if params[:offset].nil?
+      @teams = Team.limit(10).offset(0)
+    else
+      @teams = Team.limit(10).offset(params[:offset].to_i*10)
+      respond_to do |format|
+        format.js
+      end
+    end
   end
 
   def edit

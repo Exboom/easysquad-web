@@ -1,0 +1,5 @@
+<% @locations.each do |location| %>
+  <h3>
+    <li><%= link_to location.name, location_path(location), method: :get %></li>
+  </h3>
+<% end %>

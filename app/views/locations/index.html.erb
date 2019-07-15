@@ -6,7 +6,50 @@
     </div>
     <div class="x_content">
 
+      <div id="location_content">
+        <% @locations.each do |location| %>
+          <h3>
+            <li><%= link_to location.name, location_path(location), method: :get %></li>
+          </h3>
+        <% end %>
+      </div>
+      <div class="pagination" style="text-align: center">
+        <a id="prev" onclick="checkPageMinus()">❮</a>
+        <a>
+          <input id="page" type="hidden" value="0">
+          <div id="counter" style="display: inline-block" value>1</div>
+          / <%= @locations_page %>
+        </a>
+        <a id="next" onclick="checkPagePlus()">❯</a>
+      </div>
 
     </div>
   </div>
 </div>
+<script>
+    function checkPagePlus() {
+        var counter = $('#page').val();
+        if ((Number(counter) + 1) < <%= @locations_page %>) {
+            $('#counter').html(+$('#counter').html() + 1);
+            $('#page').val(+$('#page').val() + 1);
+            $.ajax({
+                url: "/locations",
+                type: "GET",
+                data: {offset: (Number(counter) + 1)}
+            })
+        }
+    }
+
+    function checkPageMinus() {
+        var counter = $('#page').val();
+        if ((Number(counter) + 1) != 1) {
+            $('#counter').html(+$('#counter').html() - 1);
+            $('#page').val(+$('#page').val() - 1);
+            $.ajax({
+                url: "/locations",
+                type: "GET",
+                data: {offset: (Number(counter) - 1)}
+            })
+        }
+    }
+</script>

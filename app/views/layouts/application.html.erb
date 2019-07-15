@@ -40,52 +40,15 @@
             <h3>Меню</h3>
             <ul class="nav side-menu" style="">
               <!--federation-->
-              <li><a><i class="fa fa-institution"></i> Федерации <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                  <% if @federations.empty? %>
-                    <li><a href="#">В базе отсутствуют федерации</a></li>
-                  <% else %>
-                    <% @federations.each do |federation| %>
-                      <li><%= link_to federation.name, federation_path(federation) %></li>
-                    <% end %>
-                  <% end %>
-                </ul>
-              </li>
-              <!--tourns-->
-              <li><a><i class="fa fa-trophy"></i> Турниры <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                  <% if @tourns.empty? %>
-                    <li><a href="#">В базе отсутствуют турниры</a></li>
-                  <% else %>
-                    <% @tourns.each do |tourn| %>
-                      <li><%= link_to tourn.name, tournament_path(tourn) %></li>
-                    <% end %>
-                  <% end %>
-                </ul>
+              <li><a href="/federations"><i class="fa fa-institution"></i> Федерации</a>
+                <!--tourns-->
+              <li><a href="/tournaments"><i class="fa fa-trophy"></i> Турниры </a>
               </li>
               <!--stadium-->
-              <li><a><i class="fa  fa-flag-checkered"></i> Стадионы <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                  <% if @locs.empty? %>
-                    <li><a href="#">В базе отсутствуют места проведенияи</a></li>
-                  <% else %>
-                    <% @locs.each do |locs| %>
-                      <li><%= link_to locs.name, location_path(locs) %></li>
-                    <% end %>
-                  <% end %>
-                </ul>
+              <li><a href="/locations"><i class="fa  fa-flag-checkered"></i> Стадионы </a>
               </li>
               <!--teams-->
-              <li><a><i class="fa fa-users"></i> Команды <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                  <% if @allteams.empty? %>
-                    <li><a href="#">В базе отсутствуют команды</a></li>
-                  <% else %>
-                    <% @allteams.each do |team| %>
-                      <li><%= link_to team.name, team_path(team) %></li>
-                    <% end %>
-                  <% end %>
-                </ul>
+              <li><a href="/teams"><i class="fa fa-users"></i> Команды </a>
               </li>
             </ul>
           </div>
