@@ -30,4 +30,13 @@ module TeamsHelper
       render partial: "new_tourn", locals: {team: team}
     end
   end
+
+  def cap_team(cap)
+    if cap.nil?
+      return "капитан не назначен"
+    else
+      return cap.name
+    end
+  end
+
 end

@@ -1,11 +1,11 @@
 class LocationsController < ApplicationController
 
   def index
-    @locations_page = (Location.all.size/10.0).ceil
+    @locations_page = (Location.all.size/13.0).ceil
     if params[:offset].nil?
-      @locations = Location.limit(10).offset(0)
+      @locations = Location.limit(13).offset(0)
     else
-      @locations = Location.limit(10).offset(params[:offset].to_i*10)
+      @locations = Location.limit(13).offset(params[:offset].to_i*13)
       respond_to do |format|
         format.js
       end

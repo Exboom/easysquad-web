@@ -1,11 +1,11 @@
 class FederationsController < ApplicationController
 
   def index
-    @federations_page = (Federation.all.size/10.0).ceil
+    @federations_page = (Federation.all.size/13.0).ceil
     if params[:offset].nil?
-      @federations = Federation.limit(10).offset(0)
+      @federations = Federation.limit(13).offset(0)
     else
-      @federations = Federation.limit(10).offset(params[:offset].to_i*10)
+      @federations = Federation.limit(13).offset(params[:offset].to_i*13)
       respond_to do |format|
         format.js
       end

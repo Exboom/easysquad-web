@@ -20,10 +20,11 @@ class UsersController < ApplicationController
     if @user.save
       @user.update(approved: params[:user][:approved])
       UserRole.new(user_id: @user.id, role_id: 4, team_id: params[:user][:team_id]).save
-      Player.new(id: @user.id, name: params[:user][:name]).save
+      @player=Player.new(id: @user.id, name: params[:user][:name])
+      @player.save
       PlayerTeam.new(player_id: @user.id, team_id: params[:user][:team_id]).save
       # mailer
-      @mail=UserMailer.new_player #mail in my email for test
+      @mail=UserMailer.with(user: @user, team:@team, player:@player).new_player
       if @mail.deliver_now
         puts "Все хорошо"
       else

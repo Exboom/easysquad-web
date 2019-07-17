@@ -16,7 +16,7 @@ class Admin::FederationsController < ApplicationController
     if @federation.save
       redirect_to @federation, flash: {notice: "Федерация успешно создана"}
     else
-      redirect_to root_path, flash: {"alert-danger": "Произошла ошибка: " + @federation.errors.full_messages.join(' ')}
+      redirect_back fallback_location: root_path, flash: {"alert-danger": "Произошла ошибка: " + @federation.errors.full_messages.join(' ')}
     end
   end
 
@@ -25,7 +25,7 @@ class Admin::FederationsController < ApplicationController
     if @federation.update(federation_params)
       redirect_to @federation, flash: {notice: "Федерация успешно обновлена"}
     else
-      redirect_to @federation, flash: {"alert-danger": "Произошла ошибка: " + @federation.errors.full_messages.join(' ')}
+      redirect_back fallback_location: @federation, flash: {"alert-danger": "Произошла ошибка: " + @federation.errors.full_messages.join(' ')}
     end
   end
 
@@ -34,14 +34,14 @@ class Admin::FederationsController < ApplicationController
     if @federation.destroy
       redirect_to root_path, flash: {notice: "Федерация успешно обновлена"}
     else
-      redirect_to @federation, flash: {"alert-danger": "Произошла ошибка: " + @federation.errors.full_messages.join(' ')}
+      redirect_back fallback_location: @federation, flash: {"alert-danger": "Произошла ошибка: " + @federation.errors.full_messages.join(' ')}
     end
   end
 
   private
 
   def federation_params
-    params.require(:federation).permit(:name, :url, :contacts)
+    params.require(:federation).permit(:name, :url, :contacts, :description)
   end
 
 end

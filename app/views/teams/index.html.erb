@@ -5,14 +5,11 @@
       <div class="clearfix"></div>
     </div>
     <div class="x_content">
-
-      <div id="team_content">
+      <ul id="team_content" class="border">
         <% @teams.each do |team| %>
-          <h3>
-            <li><%= link_to team.name, team_path(team), method: :get %></li>
-          </h3>
+          <li><%= link_to team.name, team_path(team), method: :get %></li>
         <% end %>
-      </div>
+      </ul>
       <div class="pagination" style="text-align: center">
         <a id="prev" onclick="checkPageMinus()">❮</a>
         <a>

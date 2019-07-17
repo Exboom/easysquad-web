@@ -29,8 +29,11 @@ class GamesController < ApplicationController
 
   def destroy
     @game = Game.find(params[:id])
-    @game.destroy
-    redirect_to welcome_index_path
+    if @game.destroy
+      redirect_back fallback_location: root_path, flash: {notice: "Игра удалена"}
+    else
+      redirect_back fallback_location: root_path, flash: {"alert-danger": "Произошла ошибка: " + @game.errors.full_messages.join(' ')}
+    end
   end
 
   private

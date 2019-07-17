@@ -34,14 +34,14 @@
   </p>
 <% end %>
 
-<p><%= button_to "Назад", root_path, :method => :get %>
+<p><%= button_to "Назад", root_path, :method => :get %></p>
 
-  <script>
-      function check(i) {
-          if (i == 1) {
-              document.getElementById('visblock').style.display = 'block';
-          } else if (i == 2) {
-              document.getElementById('visblock').style.display = 'none';
-          }
-      }
-  </script>
+<script>
+    function check(i) {
+        if (i == 1) {
+            document.getElementById('visblock').style.display = 'block';
+        } else if (i == 2) {
+            document.getElementById('visblock').style.display = 'none';
+        }
+    }
+</script>

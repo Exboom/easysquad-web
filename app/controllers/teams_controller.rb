@@ -3,11 +3,11 @@ class TeamsController < ApplicationController
   before_action :check_owner, only: [:edit]
 
   def index
-    @teams_page = (Team.all.size/10.0).ceil
+    @teams_page = (Team.all.size / 13.0).ceil
     if params[:offset].nil?
-      @teams = Team.limit(10).offset(0)
+      @teams = Team.limit(13).offset(0)
     else
-      @teams = Team.limit(10).offset(params[:offset].to_i*10)
+      @teams = Team.limit(13).offset(params[:offset].to_i * 13)
       respond_to do |format|
         format.js
       end
@@ -64,7 +64,6 @@ class TeamsController < ApplicationController
   end
 
   def creat_appfortourn
-    session[:return_to] ||= request.referer
     @team = Team.find(params[:game][:team_id])
     @plrapp = params[:game][:player_id]
     @plrapp.each do |app|
@@ -74,11 +73,11 @@ class TeamsController < ApplicationController
         @newapp = Roster.new(player_id: app, team_id: @team.id, tournament_id: params[:game][:tourn_id])
         if @newapp.save
         else
-          redirect_to session.delete(:return_to), flash: {"alert-danger": "Произошла ошибка: " + @newapp.errors.full_messages.join(' ')}
+          redirect_back fallback_location: @team, flash: {"alert-danger": "Произошла ошибка: " + @newapp.errors.full_messages.join(' ')}
         end
       end
     end
-    redirect_to session.delete(:return_to), flash: {notice: "Заявка создана"}
+    redirect_to @team, flash: {notice: "Заявка создана"}
   end
 
   private

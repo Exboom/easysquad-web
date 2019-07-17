@@ -268,6 +268,17 @@
                                     <h2><i class="fa fa-bars"></i> <%= @teampl[index].name %>
                                       <small>ближайшая</small>
                                     </h2>
+                                    <ul class="nav navbar-right panel_toolbox" style="padding-left: 50px;">
+                                      <li>
+                                        <%= link_to game_path(nxtgm), :method => :DELETE, :class => "close-link",
+                                                    "data-toggle" => "tooltip",
+                                                    "data-placement" => "top",
+                                                    :title => "",
+                                                    "data-original-title" => "Удалить игру" do %>
+                                          <i class="fa fa-close"></i>
+                                        <% end %>
+                                      </li>
+                                    </ul>
                                     <div class="clearfix"></div>
                                   </div>
                                   <div class="x_content">
@@ -439,6 +450,17 @@
                                   <h2><i class="fa fa-bars"></i> <%= @teamusr[index].name %>
                                     <small>ближайшая</small>
                                   </h2>
+                                  <ul class="nav navbar-right panel_toolbox" style="padding-left: 50px;">
+                                    <li>
+                                      <%= link_to game_path(nxtgm), :method => :DELETE, :class => "close-link",
+                                                  "data-toggle" => "tooltip",
+                                                  "data-placement" => "top",
+                                                  :title => "",
+                                                  "data-original-title" => "Удалить игру" do %>
+                                        <i class="fa fa-close"></i>
+                                      <% end %>
+                                    </li>
+                                  </ul>
                                   <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">

@@ -15,7 +15,7 @@ class Admin::LocationsController < ApplicationController
     if @location.save
       redirect_to @location, flash: {notice: "Место провдения успешно создано"}
     else
-      redirect_to root_path, flash: {"alert-danger": "Произошла ошибка: " + @location.errors.full_messages.join(' ')}
+      redirect_back fallback_location: root_path, flash: {"alert-danger": "Произошла ошибка: " + @location.errors.full_messages.join(' ')}
     end
   end
 
@@ -24,7 +24,7 @@ class Admin::LocationsController < ApplicationController
     if @location.update(location_params)
       redirect_to @location, flash: {notice: "Место провдения успешно обновлено"}
     else
-      redirect_to @location, flash: {"alert-danger": "Произошла ошибка: " + @location.errors.full_messages.join(' ')}
+      redirect_back fallback_location: @location, flash: {"alert-danger": "Произошла ошибка: " + @location.errors.full_messages.join(' ')}
     end
   end
 
@@ -33,7 +33,7 @@ class Admin::LocationsController < ApplicationController
     if @location.destroy
       redirect_to root_path, flash: {notice: "Место провдения успешно удалено"}
     else
-      redirect_to @location, flash: {"alert-danger": "Произошла ошибка: " + @location.errors.full_messages.join(' ')}
+      redirect_back fallback_location: @location, flash: {"alert-danger": "Произошла ошибка: " + @location.errors.full_messages.join(' ')}
     end
   end
 

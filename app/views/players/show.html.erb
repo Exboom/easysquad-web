@@ -38,7 +38,6 @@
             </li>
           </ul>
         <% end %>
-
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
@@ -56,61 +55,51 @@
           </ul>
           <div id="myTabContent" class="tab-content">
             <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
-              <h2>
-                <li> Имя: <%= @player.name %></li>
-              </h2>
-              <h2>
-                <li> Дата рождения: <%= @player.birthday %></li>
-              </h2>
-              <h2>
-                <li> Игровой номер: <%= @player.gamenumber %></li>
-              </h2>
+              <blockquote>
+                Имя: <%= @player.name %> </br>
+                Дата рождения: <%= @player.birthday %> </br>
+                Игровой номер: <%= @player.gamenumber %> </br>
+              </blockquote>
             </div>
             <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
               <% if @teams.empty? %>
                 <h2>Вы не играете ни за одну команду</h2>
               <% else %>
-                <% @teams.each do |team| %>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class="x_panel">
-                      <div class="x_title">
-                        <h2><%= team.name %>
-                          <small>
-                            <%= role_in_team(team, @player, current_user) %>
-                          </small>
-                        </h2>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="x_content">
-                        <div class="bs-example" data-example-id="simple-jumbotron">
-                          <div class="jumbotron">
-                          </div>
-                        </div>
-                      </div>
+                <ul class="zebra">
+                  <% @teams.each do |team| %>
+                    <li>
+                      <h2><%= team.name %>
+                        <small>
+                          (
+                          <% role_in_team(team, @player, current_user).each do |role| %>
+                            <%= role.role.role %>
+                          <% end %>)
+                        </small>
+                      </h2>
                       <%= link_to "Подробнее", team_path(team), :method => :get, :class => "btn btn-secondary" %>
-                    </div>
-                  </div>
-                <% end %>
+                    </li>
+                  <% end %>
+                </ul>
               <% end %>
             </div>
             <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
-              <% if @applications.empty? %>
-                <h2>
-                  <li>У вас нет заявок</li>
-                </h2>
-              <% else %>
-                <% @applications.each do |app| %>
-                  <h2>
-                    <ul>
-                      <li>№<%= app.id %></li>
+              <blockquote>
+                <% if @applications.empty? %>
+                  Заявки отсутсвутют
+                <% else %>
+                  <% @applications.each do |app| %>
+                    <h2>
                       <ul>
-                        <li>Турнир: <%= app.tournament.name %> </li>
-                        <li>Команда: <%= app.team.name %> </li>
+                        <li>№<%= app.id %></li>
+                        <ul>
+                          <li>Турнир: <%= app.tournament.name %> </li>
+                          <li>Команда: <%= app.team.name %> </li>
+                        </ul>
                       </ul>
-                    </ul>
-                  </h2>
+                    </h2>
+                  <% end %>
                 <% end %>
-              <% end %>
+              </blockquote>
             </div>
           </div>
         </div>

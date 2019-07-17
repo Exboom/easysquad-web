@@ -29,7 +29,7 @@
     </div>
     <div class="x_content">
       <p>Вы не игрок. Это ошибка? Тогда
-        нужно <%= link_to 'заполнить игровой профиль', new_player_path(current_user) %></p>
+        нужно <strong><%= link_to 'заполнить игровой профиль', new_player_path(current_user) %></strong></p>
       <div class="clearfix"></div>
       <div class="" role="tabpanel" data-example-id="togglable-tabs">
         <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
@@ -42,38 +42,29 @@
         </ul>
         <div id="myTabContent" class="tab-content">
           <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
-            <h2>
-              <li> Email: <%= current_user.email %></li>
-            </h2>
-            <h2>
-              <li> Дата регистрации: <%= current_user.created_at.to_s.split(' ')[0] %></li>
-            </h2>
+            <blockquote>
+              Email: <%= current_user.email %> </br>
+              Дата регистрации: <%= current_user.created_at.to_s.split(' ')[0] %>
+            </blockquote>
           </div>
           <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
             <% if @teamsusr.empty? %>
-              <h2>Вы не играете ни за одну команду</h2>
+              <blockquote>
+                Не найдено ни одной команды
+              </blockquote>
             <% else %>
-              <% @teamsusr.each do |team| %>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <div class="x_panel">
-                    <div class="x_title">
-                      <h2><%= team.name %>
-                        <small>
-                          <%= notplayer_team_role(team, current_user) %>
-                        </small>
-                      </h2>
-                      <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
-                      <div class="bs-example" data-example-id="simple-jumbotron">
-                        <div class="jumbotron">
-                        </div>
-                      </div>
-                    </div>
+              <ul class="zebra">
+                <% @teamsusr.each do |team| %>
+                  <li>
+                    <h2><%= team.name %>
+                      <small>
+                        (<%= notplayer_team_role(team, current_user) %>)
+                      </small>
+                    </h2>
                     <%= link_to "Подробнее", team_path(team), :method => :get, :class => "btn btn-secondary" %>
-                  </div>
-                </div>
-              <% end %>
+                  </li>
+                <% end %>
+              </ul>
             <% end %>
           </div>
         </div>

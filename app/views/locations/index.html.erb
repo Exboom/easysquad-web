@@ -6,13 +6,11 @@
     </div>
     <div class="x_content">
 
-      <div id="location_content">
+      <ul id="location_content" class="border">
         <% @locations.each do |location| %>
-          <h3>
-            <li><%= link_to location.name, location_path(location), method: :get %></li>
-          </h3>
+          <li><%= link_to location.name, location_path(location), method: :get %></li>
         <% end %>
-      </div>
+      </ul>
       <div class="pagination" style="text-align: center">
         <a id="prev" onclick="checkPageMinus()">❮</a>
         <a>

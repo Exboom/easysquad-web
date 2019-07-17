@@ -22,7 +22,7 @@ class Admin::TeamsController < ApplicationController
       User.find(@team.user.id).update(approved: true)
       redirect_to @team, flash: {notice: "Команда успешно создана"}
     else
-      redirect_to root_path, flash: {"alert-danger": "Произошла ошибка: " + @team.errors.full_messages.join(' ')}
+      redirect_back fallback_location: root_path, flash: {"alert-danger": "Произошла ошибка: " + @team.errors.full_messages.join(' ')}
     end
   end
 
@@ -31,7 +31,7 @@ class Admin::TeamsController < ApplicationController
     if @team.update(team_params)
       redirect_to @team, flash: {notice: "Команда успешно обновлена"}
     else
-      redirect_to @team, flash: {"alert-danger": "Произошла ошибка: " + @team.errors.full_messages.join(' ')}
+      redirect_back fallback_location: @team, flash: {"alert-danger": "Произошла ошибка: " + @team.errors.full_messages.join(' ')}
     end
   end
 
@@ -41,7 +41,7 @@ class Admin::TeamsController < ApplicationController
     if @team.destroy
       redirect_to root_path, flash: {notice: "Команда успешно удалена"}
     else
-      redirect_to @team, flash: {"alert-danger": "Произошла ошибка: " + @team.errors.full_messages.join(' ')}
+      redirect_back fallback_location: @team, flash: {"alert-danger": "Произошла ошибка: " + @team.errors.full_messages.join(' ')}
     end
   end
 

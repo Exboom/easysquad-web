@@ -94,20 +94,15 @@
 }
 
 ul.hr {
-  margin: 0; /* Обнуляем значение отступов */
-  padding: 4px; /* Значение полей */
+  margin: 0;
+  padding: 4px;
 }
 
 ul.hr li {
-  display: inline; /* Отображать как строчный элемент */
+  display: inline;
   margin-left: 20px;
   margin-right: 10px;
 }
-
-a {
-  color: #000000;
-}
-
 .alert-box {
   position: absolute;
   top: 0;
@@ -167,3 +162,38 @@ a {
 .pagination a:hover:not(.active) {
   background-color: #ddd;
 }
+
+.border {
+  list-style: none;
+  padding: 0;
+}
+
+.border li {
+  font-family: "Lucida Sans";
+  padding: 7px 20px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border-left: 10px solid #5a728e;
+  box-shadow: 2px -2px 5px 0 rgba(0, 0, 0, .1),
+  -2px -2px 5px 0 rgba(0, 0, 0, .1),
+  2px 2px 5px 0 rgba(0, 0, 0, .1),
+  -2px 2px 5px 0 rgba(0, 0, 0, .1);
+  font-size: 20px;
+  letter-spacing: 2px;
+  transition: 0.3s all linear;
+}
+
+.border li:hover {
+  border-left: 10px solid transparent;
+  border-right: 10px solid #5a728e;
+}
+
+.zebra {
+  list-style: none;
+  border-left: 10px solid #5a728e;
+  padding: 0;
+  font-family: "Lucida Sans";
+}
+.zebra li {padding: 10px;}
+.zebra li:nth-child(odd) {background: #E1F1FF;}
+.zebra li:nth-child(even) {background: white;}

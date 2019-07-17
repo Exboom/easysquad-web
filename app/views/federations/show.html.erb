@@ -1,7 +1,11 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
   <div class="x_panel">
     <div class="x_title">
-      <h2><i class="fa fa-institution"></i> <%= @federation.name %></h2>
+      <h2>
+        <a onclick="javascript:history.back(); return false;" data-toggle="tooltip" , data-placement="top" ,
+           title="" , data-original-title="Назад"><i class="fa fa-arrow-left"></i></a>
+        <i class="fa fa-institution"></i> <%= @federation.name %>
+      </h2>
       <% if (@userrols.find_by role: 1) != nil %>
         <ul class="nav navbar-right panel_toolbox" style="padding-left: 25px;">
           <li>
@@ -44,35 +48,28 @@
         </ul>
         <div id="myTabContent" class="tab-content">
           <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
-            <p>*Описание федерации*</p>
+            <blockquote>
+              <p><%= @federation.description %></p>
+            </blockquote>
           </div>
           <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
-
             <% if @federation.tournaments.empty? %>
-              <h2>Этой федерацией не проводятся
-                турниры <%= link_to 'Добавить турнир?', new_admin_tournament_path %></h2>
+              <blockquote>
+                Этой федерацией не проводятся турниры
+              </blockquote>
             <% else %>
-              <% @federation.tournaments.each do |tourn| %>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <div class="x_panel">
-                    <div class="x_title">
-                      <h2><%= tourn.name %>
-                        <small><%= @federation.name %></small>
-                      </h2>
-                      <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
-                      <div class="bs-example" data-example-id="simple-jumbotron">
-                        <div class="jumbotron">
-                          <p> Сезон турнира: <%= tourn.season %></p>
-                        </div>
-                      </div>
-                    </div>
+              <ul class="zebra">
+                <% @federation.tournaments.each do |tourn| %>
+                  <li>
+                    <h2><%= tourn.name %>
+                      <small>
+                        (<%= tourn.season %>)
+                      </small>
+                    </h2>
                     <%= link_to "Подробнее", tournament_path(tourn), :method => :get, :class => "btn btn-secondary" %>
-                    <%= link_to "Добавить турнир", :new_admin_tournament, :method => :get, :class => "btn btn-secondary" %>
-                  </div>
-                </div>
-              <% end %>
+                  </li>
+                <% end %>
+              </ul>
             <% end %>
           </div>
           <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
@@ -82,15 +79,15 @@
                   <h4 class="brief"><i><%= @federation.name %></i></h4>
                   <div class="left col-xs-12">
                     <ul class="list-unstyled">
-                      <li><big><i class="fa fa-building"></i>Сайт: <%= @federation.url %></big></li>
-                      <li><big><i class="fa fa-phone"></i> Телефон #: <%= @federation.contacts %></big></li>
+                      <li><big><i class="fa fa-building"></i> Сайт: <%= @federation.url %></big></li>
+                      <li><big><i class="fa fa-phone"></i> Телефон: <%= @federation.contacts %></big></li>
                     </ul>
                   </div>
                 </div>
                 <div class="col-xs-12 bottom text-right">
                   <div class="col-xs-12 col-sm-6 emphasis" style="float:right;">
                     <button type="button" class="btn btn-primary btn-xs" onclick="parent.location='<%= @federation.url %>'">
-                      <i class="fa fa-user"> </i> View Profile
+                      <i class="fa fa-mail-forward"> </i> Открыть сайт
                     </button>
                   </div>
                 </div>

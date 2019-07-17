@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
 
   def initialize_support
-    if current_user != nil
+    if user_signed_in?
       @userrols = current_user.user_roles
       @usersNew = User.where("approved = ?", false)
     end

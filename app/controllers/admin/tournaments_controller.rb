@@ -23,7 +23,7 @@ class Admin::TournamentsController < ApplicationController
       end
       redirect_to @tournament, flash: {notice: "Турнир успешно создан"}
     else
-      redirect_to root_path, flash: {"alert-danger": "Произошла ошибка: " + @tournament.errors.full_messages.join(' ')}
+      redirect_back fallback_location: root_path, flash: {"alert-danger": "Произошла ошибка: " + @tournament.errors.full_messages.join(' ')}
     end
   end
 
@@ -41,7 +41,7 @@ class Admin::TournamentsController < ApplicationController
       end
       redirect_to @tournament, flash: {notice: "Турнир успешно обновлен"}
     else
-      redirect_to @tournament, flash: {"alert-danger": "Произошла ошибка: " + @tournament.errors.full_messages.join(' ')}
+      redirect_back fallback_location: @tournament, flash: {"alert-danger": "Произошла ошибка: " + @tournament.errors.full_messages.join(' ')}
     end
   end
 
@@ -50,7 +50,7 @@ class Admin::TournamentsController < ApplicationController
     if @tournament.destroy
       redirect_to root_path, flash: {notice: "Турнир успешно обновлен"}
     else
-      redirect_to @tournament, flash: {"alert-danger": "Произошла ошибка: " + @tournament.errors.full_messages.join(' ')}
+      redirect_back fallback_location: @tournament, flash: {"alert-danger": "Произошла ошибка: " + @tournament.errors.full_messages.join(' ')}
     end
   end
 

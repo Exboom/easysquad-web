@@ -4,7 +4,10 @@
     <div class="col-md-12">
       <div class="x_panel">
         <div class="x_title">
-          <h2><i class="fa fa-trophy"></i> <%= @tournament.name %></h2>
+          <h2>
+            <a onclick="javascript:history.back(); return false;" data-toggle="tooltip" , data-placement="top" ,
+               title="" , data-original-title="Назад"><i class="fa fa-arrow-left"></i></a>
+            <i class="fa fa-trophy"></i> <%= @tournament.name %></h2>
           <% if (@userrols.find_by role: 1) != nil %>
             <ul class="nav navbar-right panel_toolbox" style="padding-left: 25px;">
               <li>
@@ -42,39 +45,31 @@
             </ul>
             <div id="myTabContent" class="tab-content">
               <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
-                <li> Сезон турнира: <%= @tournament.season %></li>
-                <li> Места проведения:
-                  <ul>
-                    <% @tournament.locations.each do |lct| %>
-                      <li><%= lct.name %></li>
-                    <% end %>
-                  </ul>
-                </li>
-                <li> Федерация, проводящая турнир: <%= @tournament.federation.name %></li>
+                <blockquote>
+                  <p> Сезон турнира: <%= @tournament.season %></p>
+                  <p> Места проведения:
+                    <ul>
+                      <% @tournament.locations.each do |lct| %>
+                        <li><%= lct.name %></li>
+                      <% end %>
+                    </ul>
+                  </p>
+                  <p> Федерация, проводящая турнир: <%= @tournament.federation.name %></p>
+                </blockquote>
               </div>
               <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
                 <% if @tournament.teams.empty? %>
                   <h2>В этом турнире не участвует ни одна команда </h2>
                 <% else %>
-                  <% @tournament.teams.each do |team| %>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <div class="x_panel">
-                        <div class="x_title">
-                          <h2><%= team.name %>
-                            <small><%= @tournament.name %></small>
-                          </h2>
-                          <div class="clearfix"></div>
-                        </div>
-                        <div class="x_content">
-                          <div class="bs-example" data-example-id="simple-jumbotron">
-                            <div class="jumbotron">
-                            </div>
-                          </div>
-                        </div>
+                  <ul class="zebra">
+                    <% @tournament.teams.each do |team| %>
+                      <li>
+                        <h2><%= team.name %>
+                        </h2>
                         <%= link_to "Подробнее", team_path(team), :method => :get, :class => "btn btn-secondary" %>
-                      </div>
-                    </div>
-                  <% end %>
+                      </li>
+                    <% end %>
+                  </ul>
                 <% end %>
               </div>
             </div>
@@ -84,7 +79,3 @@
     </div>
   </div>
 </div>
-
-
-
-
