@@ -6,10 +6,10 @@
         <h2>
           <a onclick="javascript:history.back(); return false;" data-toggle="tooltip" , data-placement="top" ,
              title="" , data-original-title="Назад"><i class="fa fa-arrow-left"></i></a>
-          <i class="fa fa-users"></i> <%= @team.name %></h2>
-        <% if (current_user.id == @owner.id) or ((@userrols.find_by role: 1) != nil) or ((@userrols.find_by role: 3, team: @team) != nil) %>
+          <i class="fa fa-shield"></i> <%= @team.name %></h2>
+        <% if (current_user == @owner) or ((@userrols.find_by role: 1).present?) or ((@userrols.find_by role: 3, team: @team).present?) %>
           <ul class="nav navbar-right panel_toolbox" style="padding-left: 25px;">
-            <% if (@userrols.find_by role: 1) != nil %>
+            <% if (@userrols.find_by role: 1).present? %>
               <li>
                 <%= link_to edit_admin_team_path, :method => :get,
                             :class => "close-link",
@@ -32,8 +32,7 @@
                 <% end %>
               </li>
             <% end %>
-
-            <% if (@userrols.find_by role: 1) != nil %>
+            <% if (@userrols.find_by role: 1).present? %>
               <li>
                 <%= link_to admin_team_path, :method => :delete, :class => "close-link",
                             "data-toggle" => "tooltip",
@@ -64,11 +63,13 @@
           <div id="myTabContent" class="tab-content">
             <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
               <blockquote>
-                <p> Владелец команды: <%= @owner.email %></p>
+                <p> Владелец команды:
+                  <%= owner_team(@owner) %>
+                </p>
                 <p> Капитан команды:
                   <%= cap_team(@cap) %>
                 </p>
-                <% if (current_user.id == @owner.id) or ((@userrols.find_by role: 1) != nil) %>
+                <% if (current_user == @owner) or ((@userrols.find_by role: 1).present?) %>
                   <p>Адмнистраторы команды: </p>
                   <% if @teamadmins.empty? %>
                     <li> Дополнительные администраторы не назначены</li>
@@ -109,7 +110,7 @@
                   <% end %>
                 </ul>
               <% end %>
-              <% if (current_user.id == @owner.id) or ((@userrols.find_by role: 1) != nil) or ((@userrols.find_by team_id: @team.id, user_id: current_user.id, role_id: 3) != nil) %>
+              <% if (current_user == @owner) or ((@userrols.find_by role: 1).present?) or ((@userrols.find_by team_id: @team.id, user_id: current_user.id, role_id: 3).present?) %>
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                     <div class="x_panel">

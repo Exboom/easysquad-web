@@ -1,11 +1,13 @@
 class TournamentsController < ApplicationController
+  include ApplicationHelper
+  before_action :check_input
 
   def index
-    @tournaments_page = (Tournament.all.size/13.0).ceil
+    @tournaments_page = (Tournament.all.size / 13.0).ceil
     if params[:offset].nil?
       @tournaments = Tournament.limit(13).offset(0)
     else
-      @tournaments = Tournament.limit(13).offset(params[:offset].to_i*13)
+      @tournaments = Tournament.limit(13).offset(params[:offset].to_i * 13)
       respond_to do |format|
         format.js
       end

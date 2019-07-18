@@ -17,6 +17,14 @@
   </div>
 
   <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="enemyteam">Владелец
+    </label>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <%= form.collection_select(:user_id, User.all, :id, :email, {:prompt => "Выберите владельца"}, {:id => "owner", :class => "form-control", :onchange => "checkParams()"}) %>
+    </div>
+  </div>
+
+  <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="enemyteam">Капитан
     </label>
     <div class="col-md-4 col-sm-4 col-xs-12">

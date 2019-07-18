@@ -1,1 +1,8 @@
-<li><%= link_to federation.name, federation_path(federation), method: :get %></li>
+<% @federations.each do |federation| %>
+  <li><%= link_to federation.name, federation_path(federation), method: :get %>
+    <div style="display: inline-block; position: absolute; right: 25px;">
+      <%= admin_panf(federation)[0] unless admin_panf(federation).nil? %>
+      <%= admin_panf(federation)[1] unless admin_panf(federation).nil? %>
+    </div>
+  </li>
+<% end %>

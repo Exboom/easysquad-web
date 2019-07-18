@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   patch 'chekins/failed', as: 'failed'
   delete 'players/destroy_together_user', as: 'destroy_together_user'
 
-
   resources :players
   resources :teams, only: [:show, :edit, :update, :index]
   resources :games

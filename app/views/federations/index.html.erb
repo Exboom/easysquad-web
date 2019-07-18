@@ -6,8 +6,17 @@
     </div>
     <div class="x_content">
       <ul id="feder_content" class="border">
-        <% @federations.each do |federation| %>
-          <li><%= link_to federation.name, federation_path(federation), method: :get %></li>
+        <% if @federations.empty? %>
+          <li>Федерации отсутствуют</li>
+        <% else %>
+          <% @federations.each do |federation| %>
+            <li><%= link_to federation.name, federation_path(federation), method: :get %>
+              <div style="display: inline-block; position: absolute; right: 25px;">
+                <%= admin_panf(federation)[0] unless admin_panf(federation).nil? %>
+                <%= admin_panf(federation)[1] unless admin_panf(federation).nil? %>
+              </div>
+            </li>
+          <% end %>
         <% end %>
       </ul>
       <div class="pagination" style="text-align: center">

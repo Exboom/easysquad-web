@@ -1,0 +1,70 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2><i class="fa fa-users"></i> Пользователи</h2>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+      <ul id="user_content" class="border">
+        <% @users.each do |user| %>
+          <li>
+            <%= user.email %>
+            <div style="display: inline-block; position: absolute; right: 25px;">
+              <%= link_to edit_admin_user_path(user), :method => :get,
+                          :class => "close-link",
+                          "data-toggle" => "tooltip",
+                          "data-placement" => "top",
+                          :title => "",
+                          "data-original-title" => "Редактировать профиль" do %>
+                <i class="fa fa-gears"></i>
+              <% end %>
+              <%= link_to admin_user_path(user), :method => :delete, :class => "close-link",
+                          "data-toggle" => "tooltip",
+                          "data-placement" => "top",
+                          :title => "",
+                          "data-original-title" => "Удалить профиль" do %>
+                <i class="fa fa-close"></i>
+              <% end %>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+      <div class="pagination" style="text-align: center">
+        <a id="prev" onclick="checkPageMinus()">❮</a>
+        <a>
+          <input id="page" type="hidden" value="0">
+          <div id="counter" style="display: inline-block" value>1</div>
+          / <%= @users_page %>
+        </a>
+        <a id="next" onclick="checkPagePlus()">❯</a>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    function checkPagePlus() {
+        var counter = $('#page').val();
+        if ((Number(counter) + 1) < <%= @users_page %>) {
+            $('#counter').html(+$('#counter').html() + 1);
+            $('#page').val(+$('#page').val() + 1);
+            $.ajax({
+                url: "/admin/users",
+                type: "GET",
+                data: {offset: (Number(counter) + 1)}
+            })
+        }
+    }
+
+    function checkPageMinus() {
+        var counter = $('#page').val();
+        if ((Number(counter) + 1) != 1) {
+            $('#counter').html(+$('#counter').html() - 1);
+            $('#page').val(+$('#page').val() - 1);
+            $.ajax({
+                url: "/admin/users",
+                type: "GET",
+                data: {offset: (Number(counter) - 1)}
+            })
+        }
+    }
+</script>

@@ -1,4 +1,6 @@
 class ChekinsController < ApplicationController
+  include ApplicationHelper
+  before_action :check_input
 
   def edit
     @chekin = Chekin.find(params[:id])
@@ -8,7 +10,6 @@ class ChekinsController < ApplicationController
   end
 
   def create
-    session[:return_to] ||= request.referer
     @chekin = Chekin.new(chekin_params)
     if @chekin.save
       @event = Event.new(user_id: current_user.id,
@@ -20,9 +21,9 @@ class ChekinsController < ApplicationController
                          team_id: @chekin.team_id,
                          game_id: @chekin.game_id,
                          time_event: DateTime.now)
-      redirect_to session.delete(:return_to), flash: {notice: "Отметка произведена успешно"}
+      redirect_back fallback_location: root_path, flash: {notice: "Отметка произведена успешно"}
     else
-      redirect_to session.delete(:return_to), flash: {"alert-danger": "Произошла ошибка: " + @chekin.errors.full_messages.join(' ')}
+      redirect_back fallback_location: root_path, flash: {"alert-danger": "Произошла ошибка: " + @chekin.errors.full_messages.join(' ')}
     end
   end
 
@@ -44,7 +45,6 @@ class ChekinsController < ApplicationController
   end
 
   def failed
-    session[:return_to] ||= request.referer
     @chekin = Chekin.find(params[:format])
     if @chekin.update(chekin: false, presence: false, comment: "Игрок подвел команду")
       @event = Event.new(user_id: current_user.id,
@@ -55,9 +55,9 @@ class ChekinsController < ApplicationController
                          team_id: @chekin.team_id,
                          game_id: @chekin.game_id,
                          time_event: DateTime.now)
-      redirect_to session.delete(:return_to), flash: {notice: "Отметка изменена"}
+      redirect_back fallback_location: root_path, flash: {notice: "Отметка изменена"}
     else
-      redirect_to session.delete(:return_to), flash: {"alert-danger": "Произошла ошибка: " + @chekin.errors.full_messages.join(' ')}
+      redirect_back fallback_location: root_path, flash: {"alert-danger": "Произошла ошибка: " + @chekin.errors.full_messages.join(' ')}
     end
   end
 

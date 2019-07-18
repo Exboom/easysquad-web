@@ -2,6 +2,18 @@ class Admin::UsersController < ApplicationController
   include ApplicationHelper
   before_action :check_admin
 
+  def index
+    @users_page = (User.all.size / 13.0).ceil
+    if params[:offset].nil?
+      @users = User.limit(13).offset(0)
+    else
+      @users = User.limit(13).offset(params[:offset].to_i * 13)
+      respond_to do |format|
+        format.js
+      end
+    end
+  end
+
   def new
     @user = User.new
   end
@@ -36,7 +48,9 @@ class Admin::UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     if @user.destroy
-      Player.find(@user.id).destroy
+      if Player.find_by(id: @user.id).present?
+        Player.find(@user.id).destroy
+      end
       redirect_back fallback_location: root_path, flash: {notice: "Пользователь удален"}
     else
       redirect_back fallback_location: root_path, flash: {"alert-danger": "Произошла ошибка: " + @user.errors.full_messages.join(' ')}

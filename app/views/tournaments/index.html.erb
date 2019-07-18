@@ -6,8 +6,17 @@
     </div>
     <div class="x_content">
       <ul id="tournament_content" class="border">
-        <% @tournaments.each do |tournament| %>
-          <li><%= link_to tournament.name, tournament_path(tournament), method: :get %></li>
+        <% if @tournaments.empty? %>
+          <li>Турниры отсутствуют</li>
+        <% else %>
+          <% @tournaments.each do |tournament| %>
+            <li><%= link_to tournament.name, tournament_path(tournament), method: :get %>
+              <div style="display: inline-block; position: absolute; right: 25px;">
+                <%= admin_pant(tournament)[0] unless admin_pant(tournament).nil? %>
+                <%= admin_pant(tournament)[1] unless admin_pant(tournament).nil? %>
+              </div>
+            </li>
+          <% end %>
         <% end %>
       </ul>
       <div class="pagination" style="text-align: center">
@@ -19,7 +28,6 @@
         </a>
         <a id="next" onclick="checkPagePlus()">❯</a>
       </div>
-
     </div>
   </div>
 </div>

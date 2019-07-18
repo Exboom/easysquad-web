@@ -1,5 +1,6 @@
 class TeamsController < ApplicationController
-
+  include ApplicationHelper
+  before_action :check_input
   before_action :check_owner, only: [:edit]
 
   def index
@@ -21,9 +22,9 @@ class TeamsController < ApplicationController
   def update
     @team = Team.find(params[:id])
     if @team.update(team_params)
-      redirect_to @team, flash: {notice: "Информация о команде изменена"}
+      redirect_back fallback_location: @team, flash: {notice: "Информация о команде изменена"}
     else
-      redirect_to @team, flash: {"alert-danger": "Произошла ошибка: " + @team.errors.full_messages.join(' ')}
+      redirect_back fallback_location: @team, flash: {"alert-danger": "Произошла ошибка: " + @team.errors.full_messages.join(' ')}
     end
   end
 
@@ -89,7 +90,7 @@ class TeamsController < ApplicationController
   def check_owner
     @team = Team.find(params[:id])
     redirect_to team_path,
-                alert: "У Вас нет прав доступа для данных действий" unless (current_user.id == @team.user_id) or ((@userrols.find_by role: 3, team: @team.id) != nil)
+                alert: "У Вас нет прав доступа для данных действий" unless (current_user.id == @team.user_id) or (@userrols.find_by role: 3, team: @team.id).present?
   end
 
 end

@@ -2,10 +2,6 @@ class Admin::TeamsController < ApplicationController
   include ApplicationHelper
   before_action :check_admin
 
-  def index
-    @teams = Team.all
-  end
-
   def new
     @team = Team.new
     @users = User.all
@@ -19,7 +15,9 @@ class Admin::TeamsController < ApplicationController
     @team = Team.new(team_params)
     if @team.save
       UserRole.new(user_id: @team.user.id, role_id: 2, team_id: @team.id).save!
-      User.find(@team.user.id).update(approved: true)
+      User.find(@team.user.id).update(approved: true, password: params[:team][:default_password], password_confirmation: params[:team][:default_password])
+      @mail = UserMailer.with(user: @team.user, team: @team).new_team
+      @mail.deliver_now
       redirect_to @team, flash: {notice: "Команда успешно создана"}
     else
       redirect_back fallback_location: root_path, flash: {"alert-danger": "Произошла ошибка: " + @team.errors.full_messages.join(' ')}
@@ -37,7 +35,9 @@ class Admin::TeamsController < ApplicationController
 
   def destroy
     @team = Team.find(params[:id])
-    Game.where(team_one: @team) or (Game.where(team_two: @team)).destroy_all
+    @team.gamet_one.destroy_all
+    @team.gamet_two.destroy_all
+    # Game.where(team_one: @team) or (Game.where(team_two: @team)).destroy_all
     if @team.destroy
       redirect_to root_path, flash: {notice: "Команда успешно удалена"}
     else

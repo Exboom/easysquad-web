@@ -20,27 +20,20 @@ class UsersController < ApplicationController
     if @user.save
       @user.update(approved: params[:user][:approved])
       UserRole.new(user_id: @user.id, role_id: 4, team_id: params[:user][:team_id]).save
-      @player=Player.new(id: @user.id, name: params[:user][:name])
+      @player = Player.new(id: @user.id, name: params[:user][:name])
       @player.save
       PlayerTeam.new(player_id: @user.id, team_id: params[:user][:team_id]).save
       # mailer
-      @mail=UserMailer.with(user: @user, team:@team, player:@player).new_player
-      if @mail.deliver_now
-        puts "Все хорошо"
-      else
-        @mail.errors.full_messages.each do |msg|
-          puts msg
-        end
-      end
+      @mail = UserMailer.with(user: @user, team: @team, player: @player).new_player
+      @mail.deliver_now
       # mailer
-      redirect_to session.delete(:return_to), flash: {notice: "Пользователь зарегестрирован"}
+      redirect_back fallback_location: @team, flash: {notice: "Пользователь зарегестрирован"}
     else
-      redirect_to session.delete(:return_to), flash: {"alert-danger": "Произошла ошибка: " + @user.errors.full_messages.join(' ')}
+      redirect_back fallback_location: @team, flash: {"alert-danger": "Произошла ошибка: " + @user.errors.full_messages.join(' ')}
     end
   end
 
   def update
-    session[:return_to] ||= request.referer
     if params[:user][:password].blank?
       params[:user].delete(:password)
       params[:user].delete(:password_confirmation)
@@ -48,9 +41,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.update(user_params)
     if @user.update(user_params)
-      redirect_to session.delete(:return_to), flash: {notice: "Информация обновлена"}
+      redirect_back fallback_location: root_path, flash: {notice: "Информация обновлена"}
     else
-      redirect_to session.delete(:return_to), flash: {"alert-danger": "Произошла ошибка: " + @user.errors.full_messages.join(' ')}
+      redirect_back fallback_location: root_path, flash: {"alert-danger": "Произошла ошибка: " + @user.errors.full_messages.join(' ')}
     end
   end
 
@@ -59,7 +52,7 @@ class UsersController < ApplicationController
   def check_admin
     @team = Team.find(params[:user][:team_id])
     redirect_to team_path,
-                alert: "У Вас нет прав доступа для данных действий" unless (current_user.id == @team.user_id) or !UserRole.where(user_id: current_user, role_id: 3, team_id: @team).nil?
+                alert: "У Вас нет прав доступа для данных действий" unless (current_user.id == @team.user_id) or UserRole.where(user_id: current_user, role_id: 3, team_id: @team).present?
   end
 
   def user_params

@@ -5,10 +5,18 @@
       <div class="clearfix"></div>
     </div>
     <div class="x_content">
-
       <ul id="location_content" class="border">
-        <% @locations.each do |location| %>
-          <li><%= link_to location.name, location_path(location), method: :get %></li>
+        <% if @locations.empty? %>
+          <li>Места проведения отсутствуют</li>
+        <% else %>
+          <% @locations.each do |location| %>
+            <li><%= link_to location.name, location_path(location), method: :get %>
+              <div style="display: inline-block; position: absolute; right: 25px;">
+                <%= admin_panl(location)[0] unless admin_panl(location).nil? %>
+                <%= admin_panl(location)[1] unless admin_panl(location).nil? %>
+              </div>
+            </li>
+          <% end %>
         <% end %>
       </ul>
       <div class="pagination" style="text-align: center">
@@ -20,7 +28,6 @@
         </a>
         <a id="next" onclick="checkPagePlus()">❯</a>
       </div>
-
     </div>
   </div>
 </div>

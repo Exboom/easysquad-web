@@ -1,18 +1,18 @@
 module TeamsHelper
   def tourn_team_out(user, owner, usrrl, team, tourn)
-    if (user.id == owner.id) or ((usrrl.find_by team_id: team.id, user_id: user.id, role_id: 3) != nil) or ((usrrl.find_by role: 1) != nil)
+    if (user == owner) or (usrrl.find_by team_id: team.id, user_id: user.id, role_id: 3).present? or ((usrrl.find_by role: 1).present?)
       link_to "Выйти из турнира", team_tournament_path(team, tourn), :method => :delete, :class => "btn btn-secondary"
     end
   end
 
   def tourn_team_newapp(user, owner, usrrl, team, tourn)
-    if (user.id == owner.id) or ((usrrl.find_by team_id: team.id, user_id: user.id, role_id: 3) != nil) or ((usrrl.find_by role: 1) != nil)
+    if (user == owner) or (usrrl.find_by team_id: team.id, user_id: user.id, role_id: 3).present? or ((usrrl.find_by role: 1).present?)
       link_to "Создать заявку", appfortourn_path(:team => team, :tourn => tourn), :method => :get, :class => "btn btn-secondary"
     end
   end
 
   def plr_team_out(user, owner, usrrl, team, play)
-    if (user.id == owner.id) or ((usrrl.find_by role: 1) != nil) or ((usrrl.find_by team_id: team.id, user_id: user.id, role_id: 3) != nil)
+    if (user == owner) or (usrrl.find_by role: 1).present? or ((usrrl.find_by team_id: team.id, user_id: user.id, role_id: 3).present?)
       link_to 'Убрать из команды', player_team_path(play, team), method: :delete, :class => "btn btn-secondary"
     end
   end
@@ -26,7 +26,7 @@ module TeamsHelper
   end
 
   def new_tourn_team(user, owner, usrrl, team)
-    if (user.id == owner.id) or ((usrrl.find_by team_id: team.id, user_id: user.id, role_id: 3) != nil) or ((usrrl.find_by role: 1) != nil)
+    if (user == owner) or ((usrrl.find_by team_id: team.id, user_id: user.id, role_id: 3).present?) or ((usrrl.find_by role: 1).present?)
       render partial: "new_tourn", locals: {team: team}
     end
   end
@@ -36,6 +36,34 @@ module TeamsHelper
       return "капитан не назначен"
     else
       return cap.name
+    end
+  end
+
+  def owner_team(owner)
+    if owner.nil?
+      return "владелец не назначен"
+    else
+      return owner.email
+    end
+  end
+
+  def admin_panteam(team)
+    if (@userrols.find_by role: 1).present?
+      return (link_to edit_admin_team_path(team), :method => :get,
+                      :class => "close-link",
+                      "data-toggle" => "tooltip",
+                      "data-placement" => "top",
+                      :title => "",
+                      "data-original-title" => "Редактировать команду" do
+        content_tag(:i, "", class: "fa fa-gears")
+      end),
+          (link_to admin_team_path(team), :method => :delete, :class => "close-link",
+                   "data-toggle" => "tooltip",
+                   "data-placement" => "top",
+                   :title => "",
+                   "data-original-title" => "Удалить команду" do
+            content_tag(:i, "", class: "fa fa-close")
+          end)
     end
   end
 

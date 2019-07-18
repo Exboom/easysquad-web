@@ -48,7 +48,7 @@ class Admin::TournamentsController < ApplicationController
   def destroy
     @tournament = Tournament.find(params[:id])
     if @tournament.destroy
-      redirect_to root_path, flash: {notice: "Турнир успешно обновлен"}
+      redirect_to root_path, flash: {notice: "Турнир удален"}
     else
       redirect_back fallback_location: @tournament, flash: {"alert-danger": "Произошла ошибка: " + @tournament.errors.full_messages.join(' ')}
     end

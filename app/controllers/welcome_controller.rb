@@ -1,9 +1,10 @@
 class WelcomeController < ApplicationController
+  include ApplicationHelper
   before_action :check_input
 
   def index
     if (@userrols.find_by role: 1).nil?
-      if (@userrols.find_by role: 4) != nil
+      if (@userrols.find_by role: 4).present?
         @player = Player.find(current_user.id)
         @teampl = @player.teams
         @teamusrng = @teampl
@@ -15,12 +16,12 @@ class WelcomeController < ApplicationController
         end
       end
 
-      if (@userrols.find_by role: 3) != nil
+      if (@userrols.find_by role: 3).present?
         @history = Event.order(id: :desc).first(10)
         @lct = Location.all
       end
 
-      if ((@userrols.find_by role: 2) != nil)
+      if (@userrols.find_by role: 2).present?
         @lct = Location.all
         @teamusr = current_user.teams
         if @history.nil?
@@ -45,12 +46,12 @@ class WelcomeController < ApplicationController
     @tourn = Tournament.find(params[:tournament_id])
     @lct = @tourn.locations
     @alltournteams = @tourn.teams
-    if (@userrols.find_by role: 2) != nil
+    if (@userrols.find_by role: 2).present?
       @teamusrng_adm = @tourn.teams.where(user_id: current_user.id)
       if @teamusrng_adm.size == 1
         @alltournteams = @tourn.teams.where.not(id: @teamusrng_adm[0])
       end
-    elsif (@userrols.find_by role: 3) != nil
+    elsif (@userrols.find_by role: 3).present?
       @player = Player.find(current_user.id)
       @teamusrng_adm = UserRole.where(user_id: current_user.id, role_id: 3).pluck(:team_id)
       @teamusrng_adm = @tourn.teams.where(id: @teamusrng_adm)
@@ -73,11 +74,11 @@ class WelcomeController < ApplicationController
     @rols = current_user.roles
   end
 
-  protected
-
-  def check_input
-    unless user_signed_in?
-      redirect_to new_user_session_path
-    end
-  end
+  # protected
+  #
+  # def check_input
+  #   unless user_signed_in?
+  #     redirect_to new_user_session_path
+  #   end
+  # end
 end

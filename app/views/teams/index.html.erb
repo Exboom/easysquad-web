@@ -1,13 +1,22 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
   <div class="x_panel">
     <div class="x_title">
-      <h2><i class="fa fa-users"></i> Команды</h2>
+      <h2><i class="fa fa-shield"></i> Команды</h2>
       <div class="clearfix"></div>
     </div>
     <div class="x_content">
       <ul id="team_content" class="border">
-        <% @teams.each do |team| %>
-          <li><%= link_to team.name, team_path(team), method: :get %></li>
+        <% if @teams.empty? %>
+          <li>Команды отсутствуют</li>
+        <% else %>
+          <% @teams.each do |team| %>
+            <li><%= link_to team.name, team_path(team), method: :get %>
+              <div style="display: inline-block; position: absolute; right: 25px;">
+                <%= admin_panteam(team)[0] unless admin_panteam(team).nil? %>
+                <%= admin_panteam(team)[1] unless admin_panteam(team).nil? %>
+              </div>
+            </li>
+          <% end %>
         <% end %>
       </ul>
       <div class="pagination" style="text-align: center">
@@ -19,7 +28,6 @@
         </a>
         <a id="next" onclick="checkPagePlus()">❯</a>
       </div>
-
     </div>
   </div>
 </div>
