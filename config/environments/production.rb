@@ -64,6 +64,19 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "easysquad-web_#{Rails.env}"
 
   config.action_mailer.perform_caching = false
+  config.action_mailer.default_url_options = {:host => 'https://easysquad-web.herokuapp.com'}
+  # config.action_mailer.perform_deliveries = true
+  # config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      ssl: true,
+      address: "smtp.yandex.ru",
+      port: 465,
+      domain: "aiweapps.com",
+      user_name: "apo@aiweapps.com",
+      password: "h7kmvg2g",
+      authentication: "plain",
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
