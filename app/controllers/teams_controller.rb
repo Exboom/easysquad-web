@@ -89,7 +89,7 @@ class TeamsController < ApplicationController
 
   def check_owner
     @team = Team.find(params[:id])
-    redirect_to team_path,
+    redirect_to @team,
                 alert: "У Вас нет прав доступа для данных действий" unless (current_user.id == @team.user_id) or (@userrols.find_by role: 3, team: @team.id).present?
   end
 

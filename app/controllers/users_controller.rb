@@ -51,8 +51,8 @@ class UsersController < ApplicationController
 
   def check_admin
     @team = Team.find(params[:user][:team_id])
-    redirect_to team_path,
-                alert: "У Вас нет прав доступа для данных действий" unless (current_user.id == @team.user_id) or UserRole.where(user_id: current_user, role_id: 3, team_id: @team).present?
+    redirect_to @team,
+                alert: "У Вас нет прав доступа для данных действий" unless (current_user.id == @team.user_id) or UserRole.find_by(user_id: current_user, role_id: 1).present? or UserRole.where(user_id: current_user, role_id: 3, team_id: @team).present?
   end
 
   def user_params
