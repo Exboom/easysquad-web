@@ -3,10 +3,13 @@
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <h2><i class="fa fa-bars"></i> Игровой профиль
+        <h2>
+          <a onclick="javascript:history.back(); return false;" data-toggle="tooltip" , data-placement="top" ,
+             title="" , data-original-title="Назад"><i class="fa fa-arrow-left"></i></a>
+          Игровой профиль
         </h2>
         <% if (current_user.id == @player.id) %>
-          <ul class="nav navbar-right panel_toolbox" style="padding-left: 25px;">
+          <ul class="nav navbar-right panel_toolbox" style="padding-left: 50px;">
             <li>
               <%= link_to edit_user_registration_path, :method => :get,
                           :class => "close-link",
@@ -25,15 +28,6 @@
                           :title => "",
                           "data-original-title" => "Редактировать игровой профиль" do %>
                 <i class="fa fa-wrench"></i>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to player_path, :method => :delete, :class => "close-link",
-                          "data-toggle" => "tooltip",
-                          "data-placement" => "top",
-                          :title => "",
-                          "data-original-title" => "Удалить игровой профиль" do %>
-                <i class="fa fa-close"></i>
               <% end %>
             </li>
           </ul>

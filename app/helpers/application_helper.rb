@@ -27,6 +27,12 @@ module ApplicationHelper
     end
   end
 
+  def pagination(page, tournaments)
+    if tournaments.present?
+      return render partial: "layouts/pagination", locals: {page: page}
+    end
+  end
+
   protected
 
   def check_admin()

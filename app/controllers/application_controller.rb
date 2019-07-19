@@ -6,14 +6,6 @@ class ApplicationController < ActionController::Base
   def initialize_support
     if user_signed_in?
       @userrols = current_user.user_roles
-      @usersNew = User.where("approved = ?", false)
-    end
-  end
-
-  def adm_new_up
-    @usersNew = User.where("approved = ?", false)
-    respond_to do |format|
-      format.js
     end
   end
 

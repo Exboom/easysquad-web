@@ -18,26 +18,11 @@
                           "data-original-title" => "Редактировать профиль" do %>
                 <i class="fa fa-gears"></i>
               <% end %>
-              <%= link_to admin_user_path(user), :method => :delete, :class => "close-link",
-                          "data-toggle" => "tooltip",
-                          "data-placement" => "top",
-                          :title => "",
-                          "data-original-title" => "Удалить профиль" do %>
-                <i class="fa fa-close"></i>
-              <% end %>
             </div>
           </li>
         <% end %>
       </ul>
-      <div class="pagination" style="text-align: center">
-        <a id="prev" onclick="checkPageMinus()">❮</a>
-        <a>
-          <input id="page" type="hidden" value="0">
-          <div id="counter" style="display: inline-block" value>1</div>
-          / <%= @users_page %>
-        </a>
-        <a id="next" onclick="checkPagePlus()">❯</a>
-      </div>
+      <%= pagination(@users_page, @users) %>
     </div>
   </div>
 </div>

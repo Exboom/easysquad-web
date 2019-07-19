@@ -82,36 +82,6 @@
                 </li>
               </ul>
             </li>
-            <% if (@userrols.find_by role: 1).present? %>
-              <li role="presentation" class="dropdown">
-                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                  <i class="fa fa-user"></i>
-                  <span id="numeric" class="badge bg-green"><%= @usersNew.size %></span>
-                </a>
-                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                  <% @usersNew.order(id: :desc).first(3).each do |user| %>
-                    <li>
-                      <p class="dropdown-item" style=text-align:center;">
-                        <%= form_with(url: "/admin/users/" + user.id.to_s, method: "PATCH", html: {:style => "text-align: center;"}) do |form| %>
-                          <%= user.email %>
-                          <input type="hidden" name="user[approved]" value=true/>
-                          <%= form.hidden_field :id, value: user.id %>
-                          <%= form.submit "Подтвердить", :id => "newup", :class => "btn btn-success" %>
-                        <% end %>
-                      </p>
-                    </li>
-                  <% end %>
-                  <li>
-                    <div class="text-center">
-                      <a>
-                        <strong>See All Alerts</strong>
-                        <i class="fa fa-angle-right"></i>
-                      </a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-            <% end %>
           </ul>
         </nav>
       </div>

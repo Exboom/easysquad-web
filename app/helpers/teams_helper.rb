@@ -47,7 +47,7 @@ module TeamsHelper
     end
   end
 
-  def admin_panteam(team)
+  def admin_pan_team(team)
     if (@userrols.find_by role: 1).present?
       return (link_to edit_admin_team_path(team), :method => :get,
                       :class => "close-link",
@@ -56,14 +56,7 @@ module TeamsHelper
                       :title => "",
                       "data-original-title" => "Редактировать команду" do
         content_tag(:i, "", class: "fa fa-gears")
-      end),
-          (link_to admin_team_path(team), :method => :delete, :class => "close-link",
-                   "data-toggle" => "tooltip",
-                   "data-placement" => "top",
-                   :title => "",
-                   "data-original-title" => "Удалить команду" do
-            content_tag(:i, "", class: "fa fa-close")
-          end)
+      end)
     end
   end
 

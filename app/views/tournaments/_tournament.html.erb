@@ -1,8 +1,7 @@
 <% @tournaments.each do |tournament| %>
   <li><%= link_to tournament.name, tournament_path(tournament), method: :get %>
     <div style="display: inline-block; position: absolute; right: 25px;">
-      <%= admin_pant(tournament)[0] unless admin_pant(tournament).nil? %>
-      <%= admin_pant(tournament)[1] unless admin_pant(tournament).nil? %>
+      <%= admin_pan_tourn(tournament) %>
     </div>
   </li>
 <% end %>

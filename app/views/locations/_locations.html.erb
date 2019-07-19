@@ -1,8 +1,7 @@
 <% @locations.each do |location| %>
   <li><%= link_to location.name, location_path(location), method: :get %>
     <div style="display: inline-block; position: absolute; right: 25px;">
-      <%= admin_panl(location)[0] unless admin_panl(location).nil? %>
-      <%= admin_panl(location)[1] unless admin_panl(location).nil? %>
+      <%= admin_pan_location(location)%>
     </div>
   </li>
 <% end %>

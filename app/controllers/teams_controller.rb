@@ -33,7 +33,7 @@ class TeamsController < ApplicationController
     @owner = @team.user
     @cap = @team.player
     @teamadmins = @team.user_roles.where(role_id: 3)
-    @cnd = @team.user_roles.where.not(role_id: 3).where.not(role_id: 2)
+    @cnd = @team.user_roles.where.not(role_id: 3).where.not(user_id: @owner)
     @candidates = Array.new(@cnd.size)
     @cnd.each_with_index do |cnd, index|
       if @teamadmins[0].nil?

@@ -1,15 +1,15 @@
 <div class="page-title">
   <div class="clearfix"></div>
   <div class="">
-    <div class="col-md-12">
+    <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="x_panel">
         <div class="x_title">
           <h2>
             <a onclick="javascript:history.back(); return false;" data-toggle="tooltip" , data-placement="top" ,
                title="" , data-original-title="Назад"><i class="fa fa-arrow-left"></i></a>
-            <i class="fa fa-trophy"></i> <%= @tournament.name %></h2>
+            <%= @tournament.name %></h2>
           <% if (@userrols.find_by role: 1).present? %>
-            <ul class="nav navbar-right panel_toolbox" style="padding-left: 25px;">
+            <ul class="nav navbar-right panel_toolbox" style="padding-left: 50px;">
               <li>
                 <%= link_to edit_admin_tournament_path, :method => :get,
                             :class => "close-link",
@@ -17,16 +17,7 @@
                             "data-placement" => "top",
                             :title => "",
                             "data-original-title" => "Редактировать турнир" do %>
-                  <i class="fa fa-wrench"></i>
-                <% end %>
-              </li>
-              <li>
-                <%= link_to admin_tournament_path, :method => :delete, :class => "close-link",
-                            "data-toggle" => "tooltip",
-                            "data-placement" => "top",
-                            :title => "",
-                            "data-original-title" => "Удалить турнир" do %>
-                  <i class="fa fa-close"></i>
+                  <i class="fa fa-gears"></i>
                 <% end %>
               </li>
             </ul>
@@ -48,11 +39,11 @@
                 <blockquote>
                   <p> Сезон турнира: <%= @tournament.season %></p>
                   <p> Места проведения:
-                    <ul>
-                      <% @tournament.locations.each do |lct| %>
-                        <li><%= lct.name %></li>
-                      <% end %>
-                    </ul>
+                  <ul>
+                    <% @tournament.locations.each do |lct| %>
+                      <li><%= lct.name %></li>
+                    <% end %>
+                  </ul>
                   </p>
                   <p> Федерация, проводящая турнир: <%= @tournament.federation.name %></p>
                 </blockquote>

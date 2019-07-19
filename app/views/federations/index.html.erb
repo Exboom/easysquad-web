@@ -7,27 +7,20 @@
     <div class="x_content">
       <ul id="feder_content" class="border">
         <% if @federations.empty? %>
-          <li>Федерации отсутствуют</li>
+          <blockquote>
+            <p>Федерации отсутствуют</p>
+          </blockquote>
         <% else %>
           <% @federations.each do |federation| %>
             <li><%= link_to federation.name, federation_path(federation), method: :get %>
               <div style="display: inline-block; position: absolute; right: 25px;">
-                <%= admin_panf(federation)[0] unless admin_panf(federation).nil? %>
-                <%= admin_panf(federation)[1] unless admin_panf(federation).nil? %>
+                <%= admin_pan_federation(federation) %>
               </div>
             </li>
           <% end %>
         <% end %>
       </ul>
-      <div class="pagination" style="text-align: center">
-        <a id="prev" onclick="checkPageMinus()">❮</a>
-        <a>
-          <input id="page" type="hidden" value="0">
-          <div id="counter" style="display: inline-block" value>1</div>
-          / <%= @federations_page %>
-        </a>
-        <a id="next" onclick="checkPagePlus()">❯</a>
-      </div>
+      <%= pagination(@federations_page, @federations) %>
     </div>
   </div>
 </div>

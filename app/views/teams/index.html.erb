@@ -7,27 +7,20 @@
     <div class="x_content">
       <ul id="team_content" class="border">
         <% if @teams.empty? %>
-          <li>Команды отсутствуют</li>
+          <blockquote>
+            <p>Команды отсутствуют</p>
+          </blockquote>
         <% else %>
           <% @teams.each do |team| %>
             <li><%= link_to team.name, team_path(team), method: :get %>
               <div style="display: inline-block; position: absolute; right: 25px;">
-                <%= admin_panteam(team)[0] unless admin_panteam(team).nil? %>
-                <%= admin_panteam(team)[1] unless admin_panteam(team).nil? %>
+                <%= admin_pan_team(team) %>
               </div>
             </li>
           <% end %>
         <% end %>
       </ul>
-      <div class="pagination" style="text-align: center">
-        <a id="prev" onclick="checkPageMinus()">❮</a>
-        <a>
-          <input id="page" type="hidden" value="0">
-          <div id="counter" style="display: inline-block" value>1</div>
-          / <%= @teams_page %>
-        </a>
-        <a id="next" onclick="checkPagePlus()">❯</a>
-      </div>
+      <%= pagination(@teams_page, @teams) %>
     </div>
   </div>
 </div>

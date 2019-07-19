@@ -6,9 +6,9 @@
         <h2>
           <a onclick="javascript:history.back(); return false;" data-toggle="tooltip" , data-placement="top" ,
              title="" , data-original-title="Назад"><i class="fa fa-arrow-left"></i></a>
-          <i class="fa fa-shield"></i> <%= @team.name %></h2>
+          <%= @team.name %></h2>
         <% if (current_user == @owner) or ((@userrols.find_by role: 1).present?) or ((@userrols.find_by role: 3, team: @team).present?) %>
-          <ul class="nav navbar-right panel_toolbox" style="padding-left: 25px;">
+          <ul class="nav navbar-right panel_toolbox" style="padding-left: 50px;">
             <% if (@userrols.find_by role: 1).present? %>
               <li>
                 <%= link_to edit_admin_team_path, :method => :get,
@@ -17,7 +17,7 @@
                             "data-placement" => "top",
                             :title => "",
                             "data-original-title" => "Редактировать команду" do %>
-                  <i class="fa fa-wrench"></i>
+                  <i class="fa fa-gears"></i>
                 <% end %>
               </li>
             <% else %>
@@ -28,18 +28,7 @@
                             "data-placement" => "top",
                             :title => "",
                             "data-original-title" => "Редактировать команду" do %>
-                  <i class="fa fa-wrench"></i>
-                <% end %>
-              </li>
-            <% end %>
-            <% if (@userrols.find_by role: 1).present? %>
-              <li>
-                <%= link_to admin_team_path, :method => :delete, :class => "close-link",
-                            "data-toggle" => "tooltip",
-                            "data-placement" => "top",
-                            :title => "",
-                            "data-original-title" => "Удалить команду" do %>
-                  <i class="fa fa-close"></i>
+                  <i class="fa fa-gears"></i>
                 <% end %>
               </li>
             <% end %>
