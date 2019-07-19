@@ -42,6 +42,7 @@ class PlayersController < ApplicationController
     if Player.find_by_id(params[:id]).nil?
       redirect_to welcome_notplayer_path(current_user)
     else
+      @user=User.find(params[:id])
       @player = Player.find(params[:id])
       @userrols_plr = User.find(params[:id]).user_roles
       @teams = @player.teams
