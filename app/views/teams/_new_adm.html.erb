@@ -1,7 +1,7 @@
 <%= form_with scope: :user_role, url: user_roles_path, html: {"data-parsley-validate" => "", :class => "form-horizontal form-label-left col-md-12 col-sm-12 col-xs-12", :novalidate => ""}, local: true do |f| %>
-  <div class="form-group">
+  <div class="item form-group">
     <div class="col-md-3 col-sm-3 col-xs-12">
-      <%= f.collection_select(:user_id, candidate, :id, :name, {:prompt => "Выберите кандидата"}, {:class => "form-control"}) %>
+      <%= f.collection_select(:user_id, candidate, :id, :name, {:prompt => "Выберите кандидата"}, {:class => "form-control", :required => ""}) %>
     </div>
   </div>
   <p>

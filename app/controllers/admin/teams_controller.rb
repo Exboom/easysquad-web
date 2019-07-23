@@ -39,7 +39,7 @@ class Admin::TeamsController < ApplicationController
     @team.gamet_two.destroy_all
     # Game.where(team_one: @team) or (Game.where(team_two: @team)).destroy_all
     if @team.destroy
-      redirect_to root_path, flash: {notice: "Команда успешно удалена"}
+      redirect_to root_path, flash: {notice: "Команда удалена"}
     else
       redirect_back fallback_location: @team, flash: {"alert-danger": "Произошла ошибка: " + @team.errors.full_messages.join(' ')}
     end

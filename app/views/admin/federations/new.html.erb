@@ -7,26 +7,13 @@
       <h2>Введите информацию о новой федерации</h2>
     </div>
   </div>
+
   <%= render partial: "federation", locals: {form: form} %>
 
   <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-    <%= form.submit "Создать", :class => "btn btn-success", :id => "submit", :disabled => "true" %>
+    <%= form.submit "Создать", :class => "btn btn-success" %>
     <a onclick="javascript:history.back(); return false;" class="btn btn-success"> Отмена
     </a>
   </div>
 
 <% end %>
-
-<script>
-    function checkParams() {
-        var name = $('#name').val();
-        var url = $('#url').val();
-        var telephone = $('#telephone').val();
-        var description = $('#description').val();
-        if (name.length != 0 && url.length != 0 && telephone.length != 0 && description.length != 0) {
-            $('#submit').removeAttr('disabled');
-        } else {
-            $('#submit').attr('disabled', 'disabled');
-        }
-    }
-</script>

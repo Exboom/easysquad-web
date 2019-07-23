@@ -22,7 +22,7 @@ class TeamsController < ApplicationController
   def update
     @team = Team.find(params[:id])
     if @team.update(team_params)
-      redirect_back fallback_location: @team, flash: {notice: "Информация о команде изменена"}
+      redirect_to @team, flash: {notice: "Информация о команде изменена"}
     else
       redirect_back fallback_location: @team, flash: {"alert-danger": "Произошла ошибка: " + @team.errors.full_messages.join(' ')}
     end

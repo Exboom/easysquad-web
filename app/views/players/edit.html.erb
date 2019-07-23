@@ -11,23 +11,10 @@
   <%= render partial: "player", locals: {form: form} %>
 
   <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-    <%= form.submit "Обновить", :class => "btn btn-success", :id => "submit", :disabled => "true" %>
+    <%= form.submit "Обновить", :class => "btn btn-success" %>
     <%= link_to "Удалить игровой профиль", player_path(@player), :method => :delete, data: {confirm: "Вы уверены?"}, :class => "btn btn-success"%>
     <a onclick="javascript:history.back(); return false;" class="btn btn-success"> Отмена
     </a>
   </div>
 
 <% end %>
-
-<script>
-    function checkParams() {
-        var name = $('#name').val();
-        var date = $('#date').val();
-        var gnum = $('#gnum').val();
-        if (name.length != 0 && date != 0 && gnum.length != 0) {
-            $('#submit').removeAttr('disabled');
-        } else {
-            $('#submit').attr('disabled', 'disabled');
-        }
-    }
-</script>

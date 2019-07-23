@@ -1,5 +1,5 @@
 <%= form_with scope: :game, url: creat_appfortourn_path, html: {:id => "demo-form2", "data-parsley-validate" => "", :class => "form-horizontal form-label-left", :novalidate => ""}, local: true do |form| %>
-  <div class="form-group">
+  <div class="item form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">
     </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -10,7 +10,7 @@
   </div>
   <%= form.hidden_field :team_id, value: @team.id %>
   <%= form.hidden_field :tourn_id, value: @tourn.id %>
-  <div class="form-group">
+  <div class="item form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Ваша команда:
     </label>
     <div class="col-md-6 col-sm-6 col-xs-12">

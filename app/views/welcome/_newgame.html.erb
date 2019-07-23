@@ -1,65 +1,51 @@
 <%= form_with scope: :game, url: games_path, html: {:id => "demo-form2", "data-parsley-validate" => "", :class => "form-horizontal form-label-left", :novalidate => ""}, local: true do |form| %>
-  <div class="form-group">
+  <div class="item form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tourn">Турнир <span class="required">*</span>
     </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
-      <%= form.collection_select(:tournament_id, Tournament.all, :id, :name, {:prompt => "Выберите турнир"}, {:id => "tourn", :class => "form-control", :onchange => "checkParams()"}) %>
+      <%= form.collection_select(:tournament_id, Tournament.all, :id, :name, {:prompt => "Выберите турнир"}, {:id => "tourn", :class => "form-control", :required => ""}) %>
     </div>
   </div>
-  <div class="form-group">
+  <div class="item form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tourn">Место проведения
       <span class="required">*</span>
     </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
-      <%= form.collection_select(:location_id, @lct, :id, :name, {:prompt => "Выберите место"}, {:id => "location", :class => "form-control", :onchange => "checkParams()"}) %>
+      <%= form.collection_select(:location_id, @lct, :id, :name, {:prompt => "Выберите место"}, {:id => "location", :class => "form-control", :required => ""}) %>
     </div>
   </div>
-  <div class="form-group">
+  <div class="item form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Название <span class="required">*</span>
     </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
-      <%= form.text_field :name, :id => "name", :class => "form-control col-md-7 col-xs-12", :onkeyup => "checkParams()" %>
+      <%= form.text_field :name, :id => "name", :class => "form-control col-md-7 col-xs-12", :required => "" %>
     </div>
   </div>
-  <div class="form-group">
+  <div class="item form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="date">Время проведения <span class="required">*</span>
     </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
-      <%= form.datetime_local_field :time, :start_year => Date.today.year, :end_year => Date.today.year, :id => "date", :class => "form-control col-md-7 col-xs-12", :onchange => "checkParams()" %>
+      <%= form.datetime_local_field :time, :start_year => Date.today.year, :end_year => Date.today.year, :id => "date", :class => "form-control col-md-7 col-xs-12", :required => "" %>
     </div>
   </div>
-  <div class="form-group">
+  <div class="item form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Ваша команда <span class="required">*</span>
     </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
-      <%= form.collection_select(:team_one, userteam, :id, :name, {:prompt => "Выберите команду"}, {:id => "myteam", :class => "form-control", :onchange => "checkParams()"}) %>
+      <%= form.collection_select(:team_one, userteam, :id, :name, {:prompt => "Выберите команду"}, {:id => "myteam", :class => "form-control", :required => ""}) %>
     </div>
   </div>
-  <div class="form-group">
+  <div class="item form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="enemyteam">Команда соперника
       <span class="required">*</span>
     </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
-      <select id="enemyteam" class="form-control" name="game[team_two]">
+      <select id="enemyteam" class="form-control" name="game[team_two]" required="required">
         <option value="">Выберите соперника</option>
       </select>
     </div>
   </div>
   <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-    <%= form.submit "Создать", :class => "btn btn-success", :id => "submit", :disabled => "true" %>
+    <%= form.submit "Создать", :class => "btn btn-success"%>
   </div>
 <% end %>
-<script>
-    function checkParams() {
-        var tourn = $('#tourn').val();
-        var loc = $('#location').val();
-        var name = $('#name').val();
-        var time = $('#date').val();
-        var myteam = $('#myteam').val();
-        if (tourn != 0 && loc != 0 && name.length != 0 && time.length != 0 && myteam != 0) {
-            $('#submit').removeAttr('disabled');
-        } else {
-            $('#submit').attr('disabled', 'disabled');
-        }
-    }
-</script>

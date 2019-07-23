@@ -1,31 +1,31 @@
-<div class="form-group">
+<div class="item form-group">
   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Название
   </label>
   <div class="col-md-4 col-sm-4 col-xs-12">
-    <%= form.text_field :name, :id => "name", :class => "form-control col-md-5 col-xs-12", :onkeyup => "checkParams()" %>
+    <%= form.text_field :name, :id => "name", :class => "form-control col-md-5 col-xs-12", :required => "" %>
   </div>
 </div>
 
-<div class="form-group">
+<div class="item form-group">
   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Описание
   </label>
   <div class="col-md-4 col-sm-4 col-xs-12">
-    <%= form.text_area :description, :id => "description", :class => "form-control col-md-5 col-xs-12", :onkeyup => "checkParams()" %>
+    <%= form.text_area :description, :id => "description", :class => "form-control col-md-5 col-xs-12", :required => "" %>
   </div>
 </div>
 
-<div class="form-group">
+<div class="item form-group">
   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Электронный адрес
   </label>
   <div class="col-md-4 col-sm-4 col-xs-12">
-    <%= form.url_field :url, :id => "url", :class => "form-control col-md-5 col-xs-12", :onkeyup => "checkParams()" %>
+    <%= form.url_field :url, :id => "url", :class => "form-control col-md-5 col-xs-12", :required => "", :placeholder=>"www.website.com" %>
   </div>
 </div>
 
-<div class="form-group">
+<div class="item form-group">
   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Контакты
   </label>
   <div class="col-md-4 col-sm-4 col-xs-12">
-    <%= form.telephone_field :contacts, :id => "telephone", :class => "form-control col-md-5 col-xs-12", :onkeyup => "checkParams()" %>
+    <%= form.telephone_field :contacts, :id => "telephone", :class => "form-control col-md-5 col-xs-12", :required => "" %>
   </div>
 </div>

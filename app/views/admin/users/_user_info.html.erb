@@ -1,23 +1,23 @@
-<div class="form-group">
+<div class="item form-group">
   <label class="control-label col-md-3 col-sm-3 col-xs-12">Email
   </label>
   <div class="col-md-4 col-sm-4 col-xs-12">
-    <%= form.email_field :email, :id => "email", :class => "form-control col-md-5 col-xs-12", :onkeyup => "checkParams()" %>
+    <%= form.email_field :email, :id => "email", :name => "email", :class => "form-control col-md-5 col-xs-12", :required => "" %>
   </div>
 </div>
 
-<div class="form-group">
+<div class="item form-group">
   <label class="control-label col-md-3 col-sm-3 col-xs-12">Пароль
   </label>
   <div class="col-md-4 col-sm-4 col-xs-12">
-    <%= form.password_field :password, :id => "pass",:placeholder => "не менее 6 символов", :class => "form-control col-md-5 col-xs-12", :onkeyup => "checkParams()" %>
+    <%= form.password_field :password, :name => "password", :id => "password", :placeholder => "не менее 6 символов", :class => "form-control col-md-5 col-xs-12", :required => "", "data-validate-length"=>"5,8" %>
   </div>
 </div>
 
-<div class="form-group">
+<div class="item form-group">
   <label class="control-label col-md-3 col-sm-3 col-xs-12">Повторите пароль
   </label>
   <div class="col-md-4 col-sm-4 col-xs-12">
-    <%= form.password_field :password_confirmation, :id => "pass_conf", :class => "form-control col-md-5 col-xs-12", :onkeyup => "checkParams()" %>
+    <%= form.password_field :password_confirmation, :id => "password2", :class => "form-control col-md-5 col-xs-12", :required => "", "data-validate-linked"=>"password" %>
   </div>
 </div>

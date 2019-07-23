@@ -21,7 +21,7 @@ module TeamsHelper
     if player.empty?
       return "Нет доступных к заявке игроков"
     else
-      return form.collection_check_boxes(:player_id, player, :id, :name, {}, {:class => "form-control checkbox inline"})
+      return form.collection_check_boxes(:player_id, player, :id, :name, {}, {:class => "form-control checkbox inline", :required => ""})
     end
   end
 

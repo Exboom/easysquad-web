@@ -1,10 +1,10 @@
 <%= form_with scope: :player_team, url: player_teams_path, html: {:id => "demo-form2", "data-parsley-validate" => "", :class => "form-horizontal form-label-left", :novalidate => ""}, local: true do |f| %>
   <%= f.hidden_field :team_id, value: team.id %>
-  <div class="form-group">
+  <div class="item form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tourn">Игрок
     </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
-      <%= f.collection_select(:player_id, Player.where.not(id: team.players), :id, :name, {:prompt => "Выберите игрока"}, {:id => "tourn", :class => "form-control"}) %>
+      <%= f.collection_select(:player_id, Player.where.not(id: team.players), :id, :name, {:prompt => "Выберите игрока"}, { :class => "form-control", :required => ""}) %>
     </div>
   </div>
   <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">

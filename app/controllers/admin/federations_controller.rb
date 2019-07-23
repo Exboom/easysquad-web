@@ -32,7 +32,7 @@ class Admin::FederationsController < ApplicationController
   def destroy
     @federation = Federation.find(params[:id])
     if @federation.destroy
-      redirect_to root_path, flash: {notice: "Федерация успешно обновлена"}
+      redirect_to root_path, flash: {notice: "Федерация удалена"}
     else
       redirect_back fallback_location: @federation, flash: {"alert-danger": "Произошла ошибка: " + @federation.errors.full_messages.join(' ')}
     end

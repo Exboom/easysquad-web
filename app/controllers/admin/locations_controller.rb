@@ -31,7 +31,7 @@ class Admin::LocationsController < ApplicationController
   def destroy
     @location = Location.find(params[:id])
     if @location.destroy
-      redirect_to root_path, flash: {notice: "Место провдения успешно удалено"}
+      redirect_to root_path, flash: {notice: "Место провдения удалено"}
     else
       redirect_back fallback_location: @location, flash: {"alert-danger": "Произошла ошибка: " + @location.errors.full_messages.join(' ')}
     end
