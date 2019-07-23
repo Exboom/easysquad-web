@@ -31,13 +31,13 @@ class Admin::TournamentsController < ApplicationController
     @tournament = Tournament.find(params[:id])
     @lct = params[:tournament][:location_id]
     if @tournament.update(tournament_params)
+      @tournament.locations.clear
       @lct.each do |lct|
         if lct.nil? or lct == ""
           next
         else
           @tournament.locations << Location.find(lct)
         end
-        @tournament.locations = @tournament.locations.uniq
       end
       redirect_to @tournament, flash: {notice: "Турнир успешно обновлен"}
     else

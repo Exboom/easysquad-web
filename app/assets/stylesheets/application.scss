@@ -198,3 +198,11 @@ ul.hr li {
 .zebra li {padding: 10px;}
 .zebra li:nth-child(odd) {background: #E1F1FF;}
 .zebra li:nth-child(even) {background: white;}
+
+.card {
+  overflow-x: auto;
+}
+
+.card::-webkit-scrollbar {
+  display: none;
+}
