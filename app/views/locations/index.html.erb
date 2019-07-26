@@ -14,7 +14,7 @@
           <% @locations.each do |location| %>
             <li><%= link_to location.name, location_path(location), method: :get %>
               <div style="display: inline-block; position: absolute; right: 25px;">
-                <%= admin_pan_location(location)%>
+                <%= admin_pan_location(location) %>
               </div>
             </li>
           <% end %>

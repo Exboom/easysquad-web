@@ -1,18 +1,18 @@
 module TeamsHelper
-  def tourn_team_out(user, owner, usrrl, team, tourn)
-    if (user == owner) or (usrrl.find_by team_id: team.id, user_id: user.id, role_id: 3).present? or ((usrrl.find_by role: 1).present?)
+  def tourn_team_out(team, tourn)
+    if can? :edit, team
       link_to "Выйти из турнира", team_tournament_path(team, tourn), :method => :delete, :class => "btn btn-secondary"
     end
   end
 
-  def tourn_team_newapp(user, owner, usrrl, team, tourn)
-    if (user == owner) or (usrrl.find_by team_id: team.id, user_id: user.id, role_id: 3).present? or ((usrrl.find_by role: 1).present?)
+  def tourn_team_newapp(team, tourn)
+    if can? :edit, team
       link_to "Создать заявку", appfortourn_path(:team => team, :tourn => tourn), :method => :get, :class => "btn btn-secondary"
     end
   end
 
-  def plr_team_out(user, owner, usrrl, team, play)
-    if (user == owner) or (usrrl.find_by role: 1).present? or ((usrrl.find_by team_id: team.id, user_id: user.id, role_id: 3).present?)
+  def plr_team_out(team, play)
+    if can? :edit, team
       link_to 'Убрать из команды', player_team_path(play, team), method: :delete, :class => "btn btn-secondary"
     end
   end
@@ -25,8 +25,8 @@ module TeamsHelper
     end
   end
 
-  def new_tourn_team(user, owner, usrrl, team)
-    if (user == owner) or ((usrrl.find_by team_id: team.id, user_id: user.id, role_id: 3).present?) or ((usrrl.find_by role: 1).present?)
+  def new_tourn_team(team)
+    if can? :edit, team
       render partial: "new_tourn", locals: {team: team}
     end
   end

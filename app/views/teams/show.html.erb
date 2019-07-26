@@ -7,8 +7,8 @@
           <a onclick="javascript:history.back(); return false;" data-toggle="tooltip" , data-placement="top" ,
              title="" , data-original-title="Назад"><i class="fa fa-arrow-left"></i></a>
           <%= @team.name %></h2>
-        <% if (current_user == @owner) or ((@userrols.find_by role: 1).present?) or ((@userrols.find_by role: 3, team: @team).present?) %>
-          <ul class="nav navbar-right panel_toolbox" style="padding-left: 50px;">
+        <ul class="nav navbar-right panel_toolbox" style="padding-left: 100px;">
+          <% if can? :edit, @team %>
             <% if (@userrols.find_by role: 1).present? %>
               <li>
                 <%= link_to edit_admin_team_path, :method => :get,
@@ -32,8 +32,8 @@
                 <% end %>
               </li>
             <% end %>
-          </ul>
-        <% end %>
+          <% end %>
+        </ul>
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
@@ -96,12 +96,12 @@
                   <% @team.players.each do |play| %>
                     <li><h2><%= play.name %></h2>
                       <%= link_to "Подробнее", player_path(play), :method => :get, :class => "btn btn-secondary" %>
-                      <%= plr_team_out(current_user, @owner, @userrols, @team, play) %>
+                      <%= plr_team_out(@team, play) %>
                     </li>
                   <% end %>
                 </ul>
               <% end %>
-              <% if (current_user == @owner) or ((@userrols.find_by role: 1).present?) or ((@userrols.find_by team_id: @team.id, user_id: current_user.id, role_id: 3).present?) %>
+              <% if can? :edit, @team %>
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                     <div class="x_panel">
@@ -156,13 +156,13 @@
                         <small>(<%= tourn.season %>)</small>
                       </h2>
                       <%= link_to "Подробнее", tournament_path(tourn), :method => :get, :class => "btn btn-secondary" %>
-                      <%= tourn_team_out(current_user, @owner, @userrols, @team, tourn) %>
-                      <%= tourn_team_newapp(current_user, @owner, @userrols, @team, tourn) %>
+                      <%= tourn_team_out(@team, tourn) %>
+                      <%= tourn_team_newapp(@team, tourn) %>
                     </li>
                   <% end %>
                 </ul>
               <% end %>
-              <%= new_tourn_team(current_user, @owner, @userrols, @team) %>
+              <%= new_tourn_team(@team) %>
             </div>
           </div>
         </div>

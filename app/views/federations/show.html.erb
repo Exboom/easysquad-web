@@ -6,7 +6,7 @@
            title="" , data-original-title="Назад"><i class="fa fa-arrow-left"></i></a>
         <%= @federation.name %>
       </h2>
-      <% if (@userrols.find_by role: 1).present? %>
+      <% if can? :edit, @federation %>
         <ul class="nav navbar-right panel_toolbox" style="padding-left: 50px;">
           <li>
             <%= link_to edit_admin_federation_path, :method => :get,

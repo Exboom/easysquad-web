@@ -46,34 +46,34 @@ Reason.create([
               ]
 )
 User.destroy_all
-user=User.new
-user.email='admin@mail.ru'
-user.password='123456'
-user.password_confirmation='123456'
+user = User.new
+user.email = 'admin@mail.ru'
+user.password = '123456'
+user.password_confirmation = '123456'
 user.save!
 user.update(approved: true)
 
 UserRole.destroy_all
-UserRole.new(user_id:user.id, role_id:1).save!
+UserRole.new(user_id: user.id, role_id: 1).save!
 
 Location.destroy_all
-location=Location.new
-location.name='Стадион "Лужники"'
-location.address='ул. Лужники, 24, Москва, 119048'
+location = Location.new
+location.name = 'Стадион "Лужники"'
+location.address = 'ул. Лужники, 24, Москва, 119048'
 location.save!
 
 Federation.destroy_all
-federation=Federation.new
-federation.name='РРООФФ'
-federation.url='http://rrooff.ru/'
-federation.contacts='88005553533'
-federation.description='Федерация футбола Ростовской области'
+federation = Federation.new
+federation.name = 'РРООФФ'
+federation.url = 'http://rrooff.ru/'
+federation.contacts = '88005553533'
+federation.description = 'Федерация футбола Ростовской области'
 federation.save!
 
 Tournament.destroy_all
-tournament=Tournament.new
-tournament.name='Кубок чемпионов 2019'
-tournament.season='Лето 2019'
-tournament.federation_id=federation.id
+tournament = Tournament.new
+tournament.name = 'Кубок чемпионов 2019'
+tournament.season = 'Лето 2019'
+tournament.federation_id = federation.id
 tournament.save!
 tournament.locations << location

@@ -14,6 +14,7 @@ gem 'json'
 gem 'pg_search'
 gem 'gentelella-rails'
 gem 'bootstrap', '4.3.1'
+gem 'cancancan'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.11'

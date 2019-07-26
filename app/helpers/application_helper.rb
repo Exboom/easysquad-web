@@ -27,8 +27,8 @@ module ApplicationHelper
     end
   end
 
-  def pagination(page, tournaments)
-    if tournaments.present?
+  def pagination(page, object)
+    if object.present?
       return render partial: "layouts/pagination", locals: {page: page}
     end
   end

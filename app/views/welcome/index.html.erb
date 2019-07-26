@@ -72,7 +72,7 @@
                   </li>
                 <% end %>
               <% end %>
-              <% if ((@userrols.find_by role: 3).present?) or ((@userrols.find_by role: 2).present?) %>
+              <% if can? :edit, Team %>
                 <li role="presentation" class="">
                   <a href="#tab_content4" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="true">История</a>
                 </li>
@@ -421,7 +421,7 @@
               </div>
             <% end %>
             <!-- history for admins-->
-            <% if ((@userrols.find_by role: 3).present?) or ((@userrols.find_by role: 2).present?) %>
+            <% if can? :edit, Team %>
               <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="profile-tab">
                 <%= render partial: "history", locals: {history: @history} %>
               </div>

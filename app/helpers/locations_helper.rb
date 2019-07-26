@@ -1,6 +1,6 @@
 module LocationsHelper
   def admin_pan_location(location)
-    if (@userrols.find_by role: 1).present?
+    if can? :edit, @location
       return (link_to edit_admin_location_path(location), :method => :get,
                       :class => "close-link",
                       "data-toggle" => "tooltip",

@@ -8,18 +8,20 @@
              title="" , data-original-title="Назад"><i class="fa fa-arrow-left"></i></a>
           Игровой профиль
         </h2>
-        <% if (current_user.id == @player.id) %>
+        <% if can? :edit, @player %>
           <ul class="nav navbar-right panel_toolbox" style="padding-left: 50px;">
-            <li>
-              <%= link_to edit_user_registration_path, :method => :get,
-                          :class => "close-link",
-                          "data-toggle" => "tooltip",
-                          "data-placement" => "top",
-                          :title => "",
-                          "data-original-title" => "Изменить пароль/удалить профиль" do %>
-                <i class="fa fa-cogs"></i>
-              <% end %>
-            </li>
+            <% if (current_user.id == @player.id) %>
+              <li>
+                <%= link_to edit_user_registration_path, :method => :get,
+                            :class => "close-link",
+                            "data-toggle" => "tooltip",
+                            "data-placement" => "top",
+                            :title => "",
+                            "data-original-title" => "Изменить пароль/удалить профиль" do %>
+                  <i class="fa fa-cogs"></i>
+                <% end %>
+              </li>
+            <% end %>
             <li>
               <%= link_to edit_player_path, :method => :get,
                           :class => "close-link",

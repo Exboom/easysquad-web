@@ -1,6 +1,6 @@
 module FederationsHelper
   def admin_pan_federation(federation)
-    if (@userrols.find_by role: 1).present?
+    if can? :edit, @federation
       return (link_to edit_admin_federation_path(federation), :method => :get,
                       :class => "close-link",
                       "data-toggle" => "tooltip",
