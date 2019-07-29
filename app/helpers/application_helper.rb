@@ -16,8 +16,8 @@ module ApplicationHelper
     end
   end
 
-  def users_view(role)
-    if (role.find_by role: 1).present?
+  def users_view
+    if can? :manege, :all
       return content_tag(:li,
                          content_tag(:a,
                                      content_tag(:i, "", class: "fa fa-users") + " Пользователи",
@@ -34,10 +34,6 @@ module ApplicationHelper
   end
 
   protected
-
-  def check_admin()
-    redirect_to root_path, alert: "У Вас нет прав доступа для данных действий" unless (@userrols.find_by role: 1).present?
-  end
 
   def check_input
     unless user_signed_in?

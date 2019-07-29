@@ -1,6 +1,6 @@
 class Admin::TeamsController < ApplicationController
-  include ApplicationHelper
-  before_action :check_admin
+
+  load_and_authorize_resource
 
   def new
     @team = Team.new

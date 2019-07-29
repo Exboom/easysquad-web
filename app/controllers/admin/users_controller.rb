@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
-  include ApplicationHelper
-  before_action :check_admin
+
+  load_and_authorize_resource
 
   def index
     @users_page = (User.all.size / 13.0).ceil

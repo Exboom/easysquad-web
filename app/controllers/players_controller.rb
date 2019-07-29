@@ -9,6 +9,7 @@ class PlayersController < ApplicationController
 
   def edit
     @player = Player.find(params[:id])
+    authorize! :edit, @player
   end
 
   def create
@@ -31,6 +32,7 @@ class PlayersController < ApplicationController
 
   def update
     @player = Player.find(params[:id])
+    authorize! :edit, @player
     if @player.update(player_params)
       redirect_to @player, flash: {notice: "Игровой профиль обновлен"}
     else
@@ -55,6 +57,7 @@ class PlayersController < ApplicationController
 
   def destroy
     @player = Player.find(params[:id])
+    authorize! :edit, @player
     if @player.destroy
       UserRole.where(user_id: @player.id, role_id: 4).where(user_id: @player.id, role_id: 3).destroy_all
       redirect_to root_path, flash: {notice: "Игровой профиль удален"}
@@ -65,6 +68,7 @@ class PlayersController < ApplicationController
 
   def destroy_together_user
     @player = Player.find(current_user.id)
+    authorize! :edit, @player
     if @player.destroy
       redirect_to root_path, flash: {notice: "Игровой профиль удален"}
     else

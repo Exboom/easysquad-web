@@ -1,7 +1,6 @@
 class Admin::FederationsController < ApplicationController
 
-  include ApplicationHelper
-  before_action :check_admin
+  load_and_authorize_resource
 
   def new
     @federation = Federation.new

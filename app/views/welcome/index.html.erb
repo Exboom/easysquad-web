@@ -1,4 +1,4 @@
-<% if ((@userrols.find_by role: 1).present?) %>
+<% if can? :manage, :all %>
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
@@ -50,19 +50,18 @@
         <div class="" role="tabpanel" data-example-id="togglable-tabs">
           <div class="card">
             <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist" style="display: flex">
-              <% if ((@userrols.find_by role: 4).present?) %>
+              <% if can? :team_plr, Team %>
                 <li role="presentation" class="active">
                   <a href="#tab_content1" role="tab" id="home-tab" data-toggle="tab" aria-expanded="true">Игрок</a>
                 </li>
               <% end %>
-              <% if ((@userrols.find_by role: 3).present?) %>
+              <% if can? :team_admin, Team %>
                 <li role="presentation" class="">
-                  <a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="true">Администратор
-                    команды</a>
+                  <a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="true">Администратор</a>
                 </li>
               <% end %>
-              <% if ((@userrols.find_by role: 2).present?) %>
-                <% if ((@userrols.find_by role: 2).present?) and ((@userrols.find_by role: 4) == nil) %>
+              <% if can? :team_owner, Team %>
+                <% if (can? :team_owner, Team) and (cannot? :team_plr, Team) %>
                   <li role="presentation" class="active">
                     <a href="#tab_content3" role="tab" id="home-tab" data-toggle="tab" aria-expanded="true">Владелец</a>
                   </li>
@@ -80,7 +79,7 @@
             </ul>
           </div>
           <div id="myTabContent" class="tab-content">
-            <% if ((@userrols.find_by role: 4).present?) %>
+            <% if can? :team_plr, Team %>
               <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
                 <div class="accordion" id="accordion1" role="tablist" aria-multiselectable="true">
                   <div class="panel">
@@ -98,33 +97,30 @@
                                 <div class="x_panel">
                                   <div class="x_title">
                                     <h2><i class="fa fa-bars"></i> <%= @teampl[index].name %>
-                                      <small>ближайшая</small>
                                     </h2>
                                     <div class="clearfix"></div>
                                   </div>
                                   <div class="x_content">
-
-                                    <div class="col-xs-3">
+                                    <div class="col-xs-2">
                                       <!-- required for floating -->
                                       <!-- Nav tabs -->
                                       <ul class="nav nav-tabs tabs-left">
                                         <% idgen = rand(5..100) %>
                                         <li class="active">
-                                          <a href="#home<%= nxtgm.id * 4 + (idgen + 1 + index.to_i * 4) %>" data-toggle="tab" aria-expanded="true">Игра</a>
+                                          <a href="#home<%= nxtgm.id * 4 + (idgen + 1 + index.to_i * 4) %>" data-toggle="tab" aria-expanded="true"><i class="fa fa-futbol-o"></i></a>
                                         </li>
                                         <li class="">
-                                          <a href="#profile<%= nxtgm.id * 4 + (idgen + 1 + index.to_i * 4) %>" data-toggle="tab" aria-expanded="false">Место</a>
+                                          <a href="#profile<%= nxtgm.id * 4 + (idgen + 1 + index.to_i * 4) %>" data-toggle="tab" aria-expanded="false"><i class="fa fa-flag"></i></a>
                                         </li>
                                         <li class="">
-                                          <a href="#messages<%= nxtgm.id * 4 + (idgen + 1 + index.to_i * 4) %>" data-toggle="tab" aria-expanded="false">Отметиться</a>
+                                          <a href="#messages<%= nxtgm.id * 4 + (idgen + 1 + index.to_i * 4) %>" data-toggle="tab" aria-expanded="false"><i class="fa fa-check-square-o"></i></a>
                                         </li>
                                         <li class="">
-                                          <a href="#allcheck<%= nxtgm.id * 4 + (idgen + 1 + index.to_i * 4) %>" data-toggle="tab" aria-expanded="false">Кто
-                                            будет</a>
+                                          <a href="#allcheck<%= nxtgm.id * 4 + (idgen + 1 + index.to_i * 4) %>" data-toggle="tab" aria-expanded="false"><i class="fa fa-group"></i></a>
                                         </li>
                                       </ul>
                                     </div>
-                                    <div class="col-xs-9">
+                                    <div class="col-xs-10">
                                       <!-- Tab panes -->
                                       <div class="tab-content">
                                         <div class="tab-pane active" id="home<%= nxtgm.id * 4 + (idgen + 1 + index.to_i * 4) %>">
@@ -193,7 +189,6 @@
                                 <div class="x_panel">
                                   <div class="x_title">
                                     <h2><i class="fa fa-bars"></i> <%= @teampl[index].name %>
-                                      <small>сыграна</small>
                                     </h2>
                                     <div class="clearfix"></div>
                                   </div>
@@ -249,7 +244,7 @@
               </div>
             <% end %>
             <!-- panel for admin team-->
-            <% if ((@userrols.find_by role: 3).present?) %>
+            <% if can? :team_admin, Team %>
               <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
                 <div class="accordion" id="accordion2" role="tablist" aria-multiselectable="true">
                   <!-- next games-->
@@ -268,7 +263,6 @@
                                 <div class="x_panel">
                                   <div class="x_title">
                                     <h2><i class="fa fa-bars"></i> <%= @teampl[index].name %>
-                                      <small>ближайшая</small>
                                     </h2>
                                     <ul class="nav navbar-right panel_toolbox" style="padding-left: 50px;">
                                       <li>
@@ -353,7 +347,6 @@
                                 <div class="x_panel">
                                   <div class="x_title">
                                     <h2><i class="fa fa-bars"></i> <%= @teampl[index].name %>
-                                      <small>сыграна</small>
                                     </h2>
                                     <div class="clearfix"></div>
                                   </div>
@@ -427,8 +420,8 @@
               </div>
             <% end %>
             <!-- panel for owner-->
-            <% if ((@userrols.find_by role: 2).present?) %>
-              <% if ((@userrols.find_by role: 2).present?) and ((@userrols.find_by role: 4) == nil) %>
+            <% if can? :team_owner, Team %>
+              <% if (can? :team_owner, Team) and (cannot? :team_plr, Team) %>
                 <div role="tabpanel" class="tab-pane fade active in" id="tab_content3" aria-labelledby="home-tab">
               <% else %>
                 <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
@@ -450,7 +443,6 @@
                               <div class="x_panel">
                                 <div class="x_title">
                                   <h2><i class="fa fa-bars"></i> <%= @teamusr[index].name %>
-                                    <small>ближайшая</small>
                                   </h2>
                                   <ul class="nav navbar-right panel_toolbox" style="padding-left: 50px;">
                                     <li>
@@ -535,7 +527,6 @@
                               <div class="x_panel">
                                 <div class="x_title">
                                   <h2><i class="fa fa-bars"></i> <%= @teamusr[index].name %>
-                                    <small>сыграна</small>
                                   </h2>
                                   <div class="clearfix"></div>
                                 </div>

@@ -9,7 +9,7 @@
           <%= @team.name %></h2>
         <ul class="nav navbar-right panel_toolbox" style="padding-left: 100px;">
           <% if can? :edit, @team %>
-            <% if (@userrols.find_by role: 1).present? %>
+            <% if can? :manage, :all %>
               <li>
                 <%= link_to edit_admin_team_path, :method => :get,
                             :class => "close-link",
@@ -60,7 +60,7 @@
                 <p> Капитан команды:
                   <%= cap_team(@cap) %>
                 </p>
-                <% if (current_user == @owner) or ((@userrols.find_by role: 1).present?) %>
+                <% if (can? :team_owner, Team) or (can? :manage, :all) %>
                   <p>Адмнистраторы команды: </p>
                   <% if @teamadmins.empty? %>
                     <li> Дополнительные администраторы не назначены</li>

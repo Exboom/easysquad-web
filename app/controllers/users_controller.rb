@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  before_action :check_admin
 
   def new
     @user = User.new
@@ -16,6 +15,7 @@ class UsersController < ApplicationController
       params[:user].delete(:password_confirmation)
     end
     @team = Team.find(params[:user][:team_id])
+    authorize! :edit, @team
     @user = User.new(email: params[:user][:email], password: @team.default_password, password_confirmation: @team.default_password)
     if @user.save
       @user.update(approved: params[:user][:approved])
@@ -48,12 +48,6 @@ class UsersController < ApplicationController
   end
 
   protected
-
-  def check_admin
-    @team = Team.find(params[:user][:team_id])
-    redirect_to @team,
-                alert: "У Вас нет прав доступа для данных действий" unless (current_user.id == @team.user_id) or UserRole.find_by(user_id: current_user, role_id: 1).present? or UserRole.where(user_id: current_user, role_id: 3, team_id: @team).present?
-  end
 
   def user_params
     params.require(:user).permit(

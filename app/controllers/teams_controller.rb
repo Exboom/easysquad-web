@@ -1,7 +1,6 @@
 class TeamsController < ApplicationController
   include ApplicationHelper
   before_action :check_input
-  before_action :check_owner, only: [:edit]
 
   def index
     @teams_page = (Team.all.size / 13.0).ceil
@@ -17,6 +16,7 @@ class TeamsController < ApplicationController
 
   def edit
     @team = Team.find(params[:id])
+    authorize! :edit, @team
   end
 
   def update
@@ -52,6 +52,7 @@ class TeamsController < ApplicationController
   def appfortourn
     @tourn = Tournament.find(params[:tourn])
     @team = Team.find(params[:team])
+    authorize! :edit, @team
     @allplayers = @team.players
     @players = Array.new(@allplayers.size)
     @allplayers.each_with_index do |plr, index|
@@ -66,6 +67,7 @@ class TeamsController < ApplicationController
 
   def creat_appfortourn
     @team = Team.find(params[:game][:team_id])
+    authorize! :edit, @team
     @plrapp = params[:game][:player_id]
     @plrapp.each do |app|
       if app.nil? or app == ""
@@ -85,12 +87,6 @@ class TeamsController < ApplicationController
 
   def team_params
     params.require(:team).permit(:name, :user_id, :player_id)
-  end
-
-  def check_owner
-    @team = Team.find(params[:id])
-    redirect_to @team,
-                alert: "У Вас нет прав доступа для данных действий" unless (current_user.id == @team.user_id) or (@userrols.find_by role: 3, team: @team.id).present?
   end
 
 end

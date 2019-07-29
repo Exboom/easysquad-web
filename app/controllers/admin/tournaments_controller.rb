@@ -1,6 +1,6 @@
 class Admin::TournamentsController < ApplicationController
-  include ApplicationHelper
-  before_action :check_admin
+
+  load_and_authorize_resource
 
   def new
     @tournament = Tournament.new
