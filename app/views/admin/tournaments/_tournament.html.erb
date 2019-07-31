@@ -1,7 +1,7 @@
 <div class="item form-group">
   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Название
   </label>
-  <div class="col-md-4 col-sm-4 col-xs-12">
+  <div class="col-md-6 col-sm-6 col-xs-12">
     <%= form.text_field :name, :id => "name", :class => "form-control col-md-5 col-xs-12", :required => "" %>
   </div>
 </div>
@@ -9,7 +9,7 @@
 <div class="item form-group">
   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Сезон
   </label>
-  <div class="col-md-4 col-sm-4 col-xs-12">
+  <div class="col-md-6 col-sm-6 col-xs-12">
     <%= form.text_field :season, :id => "season", :class => "form-control col-md-5 col-xs-12", :required => "" %>
   </div>
 </div>
@@ -17,7 +17,7 @@
 <div class="item form-group checkboxes">
   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="enemyteam">Место проведения
   </label>
-  <div class="col-md-4 col-sm-4 col-xs-12">
+  <div class="col-md-6 col-sm-6 col-xs-12">
     <%= form.collection_check_boxes(:location_id, Location.all, :id, :name, {}, {:class => "form-control checkbox inline", :id => "location", :required => ""}) %>
   </div>
 </div>
@@ -25,7 +25,7 @@
 <div class="item form-group">
   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="enemyteam">Федерация
   </label>
-  <div class="col-md-4 col-sm-4 col-xs-12">
+  <div class="col-md-6 col-sm-6 col-xs-12">
     <%= form.collection_select(:federation_id, Federation.all, :id, :name, {:prompt => "Выберите федерацию"}, {:class => "form-control", :id => "federation", :required => ""}) %>
   </div>
 </div>

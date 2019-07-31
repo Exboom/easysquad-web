@@ -103,6 +103,7 @@ ul.hr li {
   margin-left: 20px;
   margin-right: 10px;
 }
+
 .alert-box {
   position: absolute;
   top: 0;
@@ -112,8 +113,9 @@ ul.hr li {
   border-radius: 10px;
   font-family: Tahoma, Geneva, Arial, sans-serif;
   font-size: 11px;
-  padding: 10px 10px 10px 36px;
+  padding: 10px 10px 10px 15px;
   margin: 10px;
+  z-index: 99999;
 }
 
 .alert-box span {
@@ -195,9 +197,18 @@ ul.hr li {
   padding: 0;
   font-family: "Lucida Sans";
 }
-.zebra li {padding: 10px;}
-.zebra li:nth-child(odd) {background: #E1F1FF;}
-.zebra li:nth-child(even) {background: white;}
+
+.zebra li {
+  padding: 10px;
+}
+
+.zebra li:nth-child(odd) {
+  background: #E1F1FF;
+}
+
+.zebra li:nth-child(even) {
+  background: white;
+}
 
 .card {
   overflow-x: auto;
@@ -205,4 +216,60 @@ ul.hr li {
 
 .card::-webkit-scrollbar {
   display: none;
+}
+
+
+.list2b {
+  margin-bottom: 8px;
+  padding: 0;
+  list-style: none;
+  counter-reset: li;
+}
+
+.list2b li {
+  position: relative;
+  max-width: 650px;
+  left: 50%;
+  transform: translate(-50%);
+  border: 2px solid #DDDDDD;
+  background: #FAFAFA;
+  padding: 5px 8px 5px 8px;
+  margin: 8px 0 8px 0px;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+
+.list2b hr {
+  border-top: 1px solid #dddddd;
+}
+
+.list2b h2 {
+  display: flex;
+  justify-content: center;
+}
+
+.list2b i {
+  display: flex;
+  justify-content: center;
+}
+
+.okno {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 15px;
+  background: #f7f7f7;
+  display: none;
+  position: absolute;
+  //position: inherit;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  overflow-y: auto;
+}
+
+.okno:target {
+  display: block;
 }

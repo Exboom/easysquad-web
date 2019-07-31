@@ -1,9 +1,6 @@
-<p class="lead"><%= nxtgm.name %></p>
-<p>Время проведения: <%= nxtgm.time.to_formatted_s(:short) %></p>
 <p><b><i>Игра сыграна?</i></b></p>
-<p>Установите счет:</p>
-<%= form_with(model: nxtgm, local: true) do |form| %>
-  <%= form.text_field :game_score %>
+<%= form_with(model: nxtgm, html: {:style=>"display: flex; justify-content: center; margin-bottom: 10px;"},local: true) do |form| %>
+  <%= form.text_field :game_score, placeholder: "Установите счет"%>
   <%= form.hidden_field :team_id, value: teamprsns[index].id %>
   <%= form.submit("Установить") %>
 <% end %>

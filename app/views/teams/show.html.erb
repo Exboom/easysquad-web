@@ -102,43 +102,27 @@
                 </ul>
               <% end %>
               <% if can? :edit, @team %>
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                  <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                    <div class="x_panel">
-                      <div class="x_title">
-                        <h2> Добавить игрока?</h2>
-                        <div class="clearfix"></div>
+                <hr>
+
+                <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true"
+                     style="position: relative; max-width: 650px; left: 50%; transform: translate(-50%);">
+                  <div class="panel">
+                    <a class="panel-heading collapsed" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                      <h4 class="panel-title">Зарегистрировать нового игрока</h4>
+                    </a>
+                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="height: 0px;">
+                      <div class="panel-body">
+                        <%= render partial: "new_plr_reg", locals: {team: @team} %>
                       </div>
-                      <div class="x_content">
-                        <!-- start accordion -->
-                        <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
-                          <div class="panel">
-                            <a class="panel-heading collapsed" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                              <h4 class="panel-title">Зарегистрировать нового игрока</h4>
-                            </a>
-                            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="height: 0px;">
-                              <div class="panel-body">
-                                <div id="login" class="animate">
-                                  <section class="login_content">
-                                    <%= render partial: "new_plr_reg", locals: {team: @team} %>
-                                  </section>
-                                  <!-- content -->
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="panel">
-                            <a class="panel-heading collapsed" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                              <h4 class="panel-title">Добавить из зарегистрированных</h4>
-                            </a>
-                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false">
-                              <div class="panel-body">
-                                <%= render partial: "new_plr_all", locals: {team: @team} %>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- end of accordion -->
+                    </div>
+                  </div>
+                  <div class="panel">
+                    <a class="panel-heading collapsed" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      <h4 class="panel-title">Добавить из зарегистрированных</h4>
+                    </a>
+                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false">
+                      <div class="panel-body">
+                        <%= render partial: "new_plr_all", locals: {team: @team} %>
                       </div>
                     </div>
                   </div>

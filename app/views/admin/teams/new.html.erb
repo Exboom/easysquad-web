@@ -3,7 +3,7 @@
   <div class="item form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">
     </label>
-    <div class="col-md-4 col-sm-4 col-xs-12">
+    <div class="col-md-6 col-sm-6 col-xs-12">
       <h2> Заполните информацию о новой команде</h2>
     </div>
   </div>
@@ -11,15 +11,15 @@
   <div class="item form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Название
     </label>
-    <div class="col-md-4 col-sm-4 col-xs-12">
-      <%= form.text_field :name, :id => "name", :class => "form-control col-md-5 col-xs-12",:required => "" %>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <%= form.text_field :name, :id => "name", :class => "form-control col-md-5 col-xs-12", :required => "" %>
     </div>
   </div>
 
   <div class="item form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="enemyteam">Владелец
     </label>
-    <div class="col-md-4 col-sm-4 col-xs-12">
+    <div class="col-md-6 col-sm-6 col-xs-12">
       <%= form.collection_select(:user_id, User.all, :id, :email, {:prompt => "Выберите владельца"}, {:id => "owner", :class => "form-control", :required => ""}) %>
     </div>
   </div>
@@ -27,28 +27,19 @@
   <div class="item form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Пароль по умолчанию
     </label>
-    <div class="col-md-4 col-sm-4 col-xs-12">
-      <%= form.password_field :default_password, autocomplete: "new-password", :placeholder => "не менее 6 символов", :class => "form-control", :id => "password", :required => "", "data-validate-length"=>"5,8" %>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <%= form.password_field :default_password, autocomplete: "new-password", :placeholder => "не менее 6 символов", :class => "form-control", :id => "password", :required => "", "data-validate-length" => "5,8" %>
     </div>
   </div>
 
-  <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-    <%= form.submit "Создать", :class => "btn btn-success"%>
-    <a onclick="javascript:history.back(); return false;" class="btn btn-success"> Отмена
-    </a>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <%= form.submit "Создать", :class => "btn btn-success" %>
+      <a onclick="javascript:history.back(); return false;" class="btn btn-success"> Отмена
+      </a>
+    </div>
   </div>
 
 <% end %>
-
-<!--<script>-->
-<!--    function checkParams() {-->
-<!--        var name = $('#name').val();-->
-<!--        var owner = $('#owner').val();-->
-<!--        var password = $('#password').val();-->
-<!--        if (name.length != 0 && password.length >= 6 && owner != 0) {-->
-<!--            $('#submit').removeAttr('disabled');-->
-<!--        } else {-->
-<!--            $('#submit').attr('disabled', 'disabled');-->
-<!--        }-->
-<!--    }-->
-<!--</script>-->

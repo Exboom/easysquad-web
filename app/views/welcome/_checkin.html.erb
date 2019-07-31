@@ -1,4 +1,4 @@
-<%= form_with scope: :chekin, url: chekins_path, local: true do |form| %>
+<%= form_with scope: :chekin, url: chekins_path, html: {:style=>"margin-bottom: 10px;"},local: true do |form| %>
   <%= form.hidden_field :player_id, value: current_user.id %>
   <% varplayers = Roster.where(tournament: nxtgm.tournament.id, team: teamprsns[index]).pluck(:player_id) %>
   <% varsearch = Chekin.where(game: nxtgm, team: teamprsns[index]).pluck(:player_id) %>
@@ -11,8 +11,8 @@
     <%= form.hidden_field :game_id, value: nxtgm.id %>
     <%= form.hidden_field :chekin, value: true %>
     <%= form.hidden_field :admin, value: true %>
-    <p>
-      <%= form.submit("Отметить игрока") %>
-    </p>
+
+    <%= form.submit("Отметить игрока") %>
+
   <% end %>
 <% end %>

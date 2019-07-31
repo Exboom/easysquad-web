@@ -1077,7 +1077,7 @@ h2 {
     float: left;
     display: block;
     text-overflow: ellipsis;
-    overflow: hidden;
+    //overflow: hidden;
     white-space: nowrap
 }
 .x_title h2 small {
@@ -3214,7 +3214,7 @@ ul.project_files li a i {
     display: block !important;
 }
 .form-group .btn {
-    margin-bottom: -6px;
+    margin-bottom: 6px;
 }
 
 .input-group-btn .btn { margin-bottom:0; }

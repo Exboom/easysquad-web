@@ -21,6 +21,7 @@ class GamesController < ApplicationController
                          team_id: params[:game][:team_id],
                          score: @game.game_score,
                          time_event: DateTime.now)
+      @event.save
       redirect_back fallback_location: root_path, flash: {notice: "Счет установлен"}
     else
       redirect_back fallback_location: root_path, flash: {"alert-danger": "Произошла ошибка: " + @game.errors.full_messages.join(' ')}

@@ -3,18 +3,22 @@
   <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">
     </label>
-    <div class="col-md-4 col-sm-4 col-xs-12">
+    <div class="col-md-6 col-sm-6 col-xs-12">
       <h2>Редактирование федерации: <%= @federation.name %></h2>
     </div>
   </div>
 
   <%= render partial: "federation", locals: {form: form} %>
 
-  <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-    <%= form.submit "Обновить", :class => "btn btn-success" %>
-    <%= link_to "Удалить федерацию", admin_federation_path(@federation), :method => :delete, data: {confirm: "Вы уверены?"}, :class => "btn btn-success"%>
-    <a onclick="javascript:history.back(); return false;" class="btn btn-success"> Отмена
-    </a>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <%= form.submit "Обновить", :class => "btn btn-success" %>
+      <%= link_to "Удалить", admin_federation_path(@federation), :method => :delete, data: {confirm: "Вы уверены?"}, :class => "btn btn-success" %>
+      <a onclick="javascript:history.back(); return false;" class="btn btn-success"> Отмена
+      </a>
+    </div>
   </div>
 
 <% end %>

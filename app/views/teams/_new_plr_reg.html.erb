@@ -1,14 +1,28 @@
-<%= form_with scope: :user, url: users_path, local: true do |f| %>
-  <div>
-    <%= f.email_field :email, autofocus: true, :class => "form-control", :placeholder => "Email", :required => "" %>
+<%= form_with scope: :user, url: users_path, html: {:id => "demo-form2", "data-parsley-validate" => "", :class => "form-horizontal form-label-left", :novalidate => ""}, local: true do |f| %>
+
+  <div class="item form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tourn">Email
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <%= f.email_field :email, autofocus: true, :class => "form-control col-md-5 col-xs-12", :required => "" %>
+    </div>
   </div>
-  <div>
-    <%= f.text_field :name, :class => "form-control", :placeholder => "Имя игрока", :required => "" %>
+
+  <div class="item form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tourn">Имя игрока
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <%= f.text_field :name, :class => "form-control col-md-5 col-xs-12", :required => "" %>
+    </div>
   </div>
   <%= f.hidden_field :team_id, value: team.id %>
   <%= f.hidden_field :approved, value: true %>
-  <div>
-    <%= f.submit "Зарегистрировать", :class => "button7" %>
+
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <%= f.submit "Зарегистрировать", :class => "btn btn-success" %>
+    </div>
   </div>
-  <div class="clearfix"></div>
 <% end %>

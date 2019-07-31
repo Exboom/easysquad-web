@@ -1,6 +1,4 @@
 class ChekinsController < ApplicationController
-  include ApplicationHelper
-  before_action :check_input
 
   def edit
     @chekin = Chekin.find(params[:id])
@@ -21,6 +19,7 @@ class ChekinsController < ApplicationController
                          team_id: @chekin.team_id,
                          game_id: @chekin.game_id,
                          time_event: DateTime.now)
+      @event.save
       redirect_back fallback_location: root_path, flash: {notice: "Отметка произведена успешно"}
     else
       redirect_back fallback_location: root_path, flash: {"alert-danger": "Произошла ошибка: " + @chekin.errors.full_messages.join(' ')}
@@ -38,6 +37,7 @@ class ChekinsController < ApplicationController
                          reason_id: params[:chekin][:reason_id],
                          game_id: @chekin.game_id,
                          time_event: DateTime.now)
+      @event.save
       redirect_to root_path, flash: {notice: "Отметка изменена"}
     else
       redirect_to root_path, flash: {"alert-danger": "Произошла ошибка: " + @chekin.errors.full_messages.join(' ')}
@@ -55,6 +55,7 @@ class ChekinsController < ApplicationController
                          team_id: @chekin.team_id,
                          game_id: @chekin.game_id,
                          time_event: DateTime.now)
+      @event.save
       redirect_back fallback_location: root_path, flash: {notice: "Отметка изменена"}
     else
       redirect_back fallback_location: root_path, flash: {"alert-danger": "Произошла ошибка: " + @chekin.errors.full_messages.join(' ')}

@@ -37,7 +37,8 @@
 
   <div>
     <%= f.submit "Изменить", :class => "btn btn-primary" %>
-    <%= link_to "Отмена", :back, :class => "reset_pass" %>
+    <a onclick="javascript:history.back(); return false;" class="reset_pass"> Отмена
+    <%#= link_to "Отмена", :back, :class => "reset_pass" %>
   </div>
 
   <div class="clearfix"></div>
