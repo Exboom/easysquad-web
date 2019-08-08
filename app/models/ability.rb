@@ -19,7 +19,6 @@ class Ability
       can :team_admin, Team
     end
     if (@usrrole.find_by role: 4).present?
-      puts user.id
       can [:edit, :update], Player, id: user.id
       can :team_plr, Team
     end

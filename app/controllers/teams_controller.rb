@@ -64,6 +64,7 @@ class TeamsController < ApplicationController
     authorize! :edit, @team
     @allplayers = @team.players
     @players = Array.new(@allplayers.size)
+    @tournplr= Array.new(@allplayers.size)
     @allplayers.each_with_index do |plr, index|
       if plr.rosters.where(tournament_id: @tourn.id).empty?
         @players[index] = plr
@@ -71,27 +72,17 @@ class TeamsController < ApplicationController
         next
       end
     end
-    @players.reject! {|item| item.nil?}
-  end
-
-  def creat_appfortourn
-    @team = Team.find(params[:game][:team_id])
-    authorize! :edit, @team
-    @plrapp = params[:game][:player_id]
-    @plrapp.each do |app|
-      if app.nil? or app == ""
+    @allplayers.each_with_index do |plr, index|
+      if plr.rosters.where(tournament_id: @tourn.id).empty?
         next
       else
-        @newapp = Roster.new(player_id: app, team_id: @team.id, tournament_id: params[:game][:tourn_id])
-        if @newapp.save
-        else
-          redirect_back fallback_location: @team, flash: {"alert-danger": "Произошла ошибка: " + @newapp.errors.full_messages.join(' ')}
-        end
+        @tournplr[index] = plr
       end
     end
-    redirect_to @team, flash: {notice: "Заявка создана"}
+    @tournplr.reject! {|item| item.nil?}
+    @players.reject! {|item| item.nil?}
   end
-
+  
   private
 
   def team_params

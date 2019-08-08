@@ -1,0 +1,11 @@
+<% if @players.empty? %>
+  Нет доступных к заявке игроков
+<% else %>
+  <% @players.each do |player| %>
+    <%= player.name %>
+    <a data-toggle="tooltip" data-placement="top" title="" rel="nofollow" onClick="plusClick(<%= player.id %>)">
+      <i class="fa fa-plus"></i>
+    </a>
+    <br>
+  <% end %>
+<% end %>

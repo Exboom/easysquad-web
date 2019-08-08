@@ -7,7 +7,7 @@ module TeamsHelper
 
   def tourn_team_newapp(team, tourn)
     if can? :edit, team
-      link_to "Создать заявку", appfortourn_path(:team => team, :tourn => tourn), :method => :get, :class => "btn btn-secondary"
+      link_to "Заявка", appfortourn_path(:team => team, :tourn => tourn), :method => :get, :class => "btn btn-secondary"
     end
   end
 

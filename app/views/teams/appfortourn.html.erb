@@ -11,25 +11,60 @@
   <%= form.hidden_field :team_id, value: @team.id %>
   <%= form.hidden_field :tourn_id, value: @tourn.id %>
   <div class="item form-group">
-    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Ваша команда:
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Доступные к заявке:
     </label>
-    <div class="col-md-6 col-sm-6 col-xs-12" style="max-height:100px; overflow:auto;">
-      <%if @players.empty? %>
+    <div class="col-md-6 col-sm-6 col-xs-12" style="max-height:100px; overflow:auto; padding-top: 8px;" id="appplr">
+      <% if @players.empty? %>
         Нет доступных к заявке игроков
       <% else %>
-        <%= form.collection_check_boxes :player_id, @players, :id, :name do |b| %>
-          <%= b.check_box :required => "" %>
-          <%= b.label %>
+        <% @players.each do |player| %>
+          <%= player.name %>
+          <a data-toggle="tooltip" data-placement="top" title="" rel="nofollow" onClick="plusClick(<%= player.id %>)">
+            <i class="fa fa-plus"></i>
+          </a>
           <br>
         <% end %>
       <% end %>
     </div>
   </div>
+
+  <div class="item form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">Заявленные:
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12" style="max-height:100px; overflow:auto; padding-top: 8px;" id="tournplr">
+      <% if @tournplr.empty? %>
+        Нет заявленных игроков
+      <% else %>
+        <% @tournplr.each do |player| %>
+          <%= player.name %>
+          <a data-toggle="tooltip" data-placement="top" title="" rel="nofollow" onClick="delClick(<%= player.id %>)">
+            <i class="fa fa-close"></i>
+          </a>
+          <br>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
   <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-    <% if @players.present? %>
-      <%= form.submit "Создать", :class => "btn btn-success" %>
-    <% end %>
-    <a onclick="javascript:history.back(); return false;" class="btn btn-success"> Отмена
+    <a onclick="javascript:history.back(); return false;" class="btn btn-success"> Назад
     </a>
   </div>
 <% end %>
+
+<script>
+    function delClick(id) {
+        $.ajax({
+            url: "/rosters/" + id,
+            type: "DELETE",
+            data: {team_id: <%= @team.id %>, tourn_id: <%= @tourn.id %>}
+        })
+    };
+    function plusClick(id) {
+        $.ajax({
+            url: "/rosters",
+            type: "POST",
+            data: {player_id: id,team_id: <%= @team.id %>, tournament_id: <%= @tourn.id %>}
+        })
+    }
+</script>
