@@ -1,0 +1,28 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="x_panel">
+    <div class="x_title">
+      <h2><i class="fa fa-star"></i> Мои команды</h2>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+      <ul id="team_content" class="border">
+        <% if @teams.empty? %>
+          <blockquote>
+            <p>Команды отсутствуют</p>
+          </blockquote>
+        <% else %>
+          <% @teams.each do |team| %>
+            <li><%= link_to team.name, team_path(team), method: :get %>
+              <small>
+                (
+                <% @userrols.where(team_id: team.id).each do |role| %>
+                  <%= role.role.role %>
+                <% end %>)
+              </small>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

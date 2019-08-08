@@ -15,10 +15,14 @@
 </div>
 
 <div class="item form-group checkboxes">
-  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="enemyteam">Место проведения
+  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="enemyteam">Места проведения
   </label>
-  <div class="col-md-6 col-sm-6 col-xs-12">
-    <%= form.collection_check_boxes(:location_id, Location.all, :id, :name, {}, {:class => "form-control checkbox inline", :id => "location", :required => ""}) %>
+  <div class="col-md-6 col-sm-6 col-xs-12" style="max-height:100px; overflow:auto;">
+    <%= form.collection_check_boxes :location_id, Location.all, :id, :name do |b| %>
+      <%= b.check_box :required => "" %>
+      <%= b.label %>
+      <br>
+    <% end %>
   </div>
 </div>
 

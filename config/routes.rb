@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'welcome/update_enemy', as: 'update_enemy'
   get 'application/adm_new_up', as: 'adm_new_up'
   get 'teams/appfortourn', as: 'appfortourn'
+  get 'myteams', to: 'teams#myteams', as: 'myteams'
   post 'teams/creat_appfortourn', as: 'creat_appfortourn'
   patch 'chekins/failed', as: 'failed'
   delete 'players/destroy_together_user', as: 'destroy_together_user'

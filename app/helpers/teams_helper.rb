@@ -17,14 +17,6 @@ module TeamsHelper
     end
   end
 
-  def new_app (player, form)
-    if player.empty?
-      return "Нет доступных к заявке игроков"
-    else
-      return form.collection_check_boxes(:player_id, player, :id, :name, {}, {:class => "form-control checkbox inline", :required => ""})
-    end
-  end
-
   def new_tourn_team(team)
     if can? :edit, team
       render partial: "new_tourn", locals: {team: team}

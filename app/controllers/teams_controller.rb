@@ -14,6 +14,15 @@ class TeamsController < ApplicationController
     end
   end
 
+  def myteams
+    if Player.find_by_id(current_user.id).nil?
+      @teams = current_user.teams
+    else
+      @player = Player.find(current_user.id)
+      @teams = (@player.teams + current_user.teams).uniq
+    end
+  end
+
   def edit
     @team = Team.find(params[:id])
     authorize! :edit, @team

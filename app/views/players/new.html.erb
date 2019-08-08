@@ -11,12 +11,22 @@
   <div class="item form-group checkboxes" id="checkboxes">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">Выберите команды:
     </label>
-    <div class="col-md-5 col-sm-5 col-xs-12">
-      <%= form.collection_check_boxes(:team_ids, @user.teams, :id, :name, {}, {:class => "form-control checkbox inline", :id => "teams", :required => ""}) %>
+    <div class="col-md-6 col-sm-6 col-xs-12" style="max-height:100px; overflow:auto;">
+      <%= form.collection_check_boxes :team_ids, @user.teams, :id, :name do |b| %>
+        <%= b.check_box :required => "" %>
+        <%= b.label %>
+        <br>
+      <% end %>
     </div>
   </div>
-  <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-    <%= form.submit "Создать", :class => "btn btn-success", :onclick => "checkDuplicate()" %>
+  <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <%= form.submit "Создать", :class => "btn btn-success", :onclick => "checkDuplicate()" %>
+      <a onclick="javascript:history.back(); return false;" class="btn btn-success"> Отмена
+      </a>
+    </div>
   </div>
 <% end %>
 

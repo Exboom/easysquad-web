@@ -20,13 +20,3 @@
 
 $(document).ready(function () {
 });
-
-$('#menu1').on('click', 'input', function () {
-    setTimeout(function () {
-        $.ajax({
-            url: "/application/adm_new_up",
-            type: "GET",
-            dataType: "script"
-        })
-    }, 500);
-});

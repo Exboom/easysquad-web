@@ -14,13 +14,16 @@
       <%= form.collection_select(:location_id, @lct, :id, :name, {:prompt => "Выберите место"}, {:id => "location", :class => "form-control", :required => ""}) %>
     </div>
   </div>
+
   <div class="item form-group">
-    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Название <span class="required">*</span>
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Гостевая игра
     </label>
-    <div class="col-md-6 col-sm-6 col-xs-12">
-      <%= form.text_field :name, :id => "name", :class => "form-control col-md-7 col-xs-12", :required => "" %>
+    <div class="col-md-6 col-sm-6 col-xs-12" style="padding-top: 8px;">
+      <%= form.check_box(:guest_game) %>
+      <%= form.label(:guest_game, "Да") %>
     </div>
   </div>
+
   <div class="item form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="date">Время проведения <span class="required">*</span>
     </label>

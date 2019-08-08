@@ -340,7 +340,7 @@ var validator = (function ($) {
             //     $('#submit').attr('disabled', 'disabled');
             // }
             // data.valid = field[0].checked;
-            data.valid = ($('.checkbox').is(':checked') == true);
+            data.valid = ($(':checkbox').is(':checked') == true);
             alertTxt = message.checked;
         }
 

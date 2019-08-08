@@ -3,6 +3,11 @@ class GamesController < ApplicationController
   before_action :check_input
 
   def create
+    if params[:game][:guest_game].to_i == 1
+      params[:game][:name] = Team.find(params[:game][:team_two]).name + " - " + Team.find(params[:game][:team_one]).name
+    else
+      params[:game][:name] = Team.find(params[:game][:team_one]).name + " - " + Team.find(params[:game][:team_two]).name
+    end
     @game = Game.new(game_params)
     if @game.save
       redirect_back fallback_location: root_path, flash: {notice: "Игра успешно добавлена"}

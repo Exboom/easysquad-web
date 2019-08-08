@@ -1,6 +1,16 @@
 <p><b><i>Игра сыграна?</i></b></p>
-<%= form_with(model: nxtgm, html: {:style=>"display: flex; justify-content: center; margin-bottom: 10px;"},local: true) do |form| %>
-  <%= form.text_field :game_score, placeholder: "Установите счет"%>
-  <%= form.hidden_field :team_id, value: teamprsns[index].id %>
-  <%= form.submit("Установить") %>
+<%= form_with(model: nxtgm, html: {:style => " margin-bottom: 10px;", :novalidate => ""}, local: true) do |form| %>
+
+  <div class="item setup form-group">
+    <div class="col-md-6 col-sm-6 col-xs-12" style="text-align: center;">
+      <%= form.text_field :game_score, placeholder: "Установите счет", :required => "", :class => "form-control col-md-5 col-xs-12", :style => "text-align: center;" %>
+    </div>
+    <%= form.hidden_field :team_id, value: teamprsns[index].id %>
+  </div>
+
+  <div class="setup">
+    <br>
+    <%= form.submit "Установить", :style => "margin-left: 5px;" %>
+  </div>
+
 <% end %>

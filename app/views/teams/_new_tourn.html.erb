@@ -2,7 +2,7 @@
   <p>Добавить турнир:</p>
   <%= f.hidden_field :team_id, value: team.id %>
   <div class="item form-group">
-    <div class="col-md-3 col-sm-3 col-xs-12">
+    <div class="col-md-4 col-sm-4 col-xs-12">
       <%= f.collection_select(:tournament_id, Tournament.where.not(id: team.tournaments.ids), :id, :name, {:prompt => "Выберите турнир"}, {:class => "form-control", :required => ""}) %>
     </div>
   </div>
