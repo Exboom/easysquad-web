@@ -64,7 +64,7 @@ class TeamsController < ApplicationController
     authorize! :edit, @team
     @allplayers = @team.players
     @players = Array.new(@allplayers.size)
-    @tournplr= Array.new(@allplayers.size)
+    @tournplr = Array.new(@allplayers.size)
     @allplayers.each_with_index do |plr, index|
       if plr.rosters.where(tournament_id: @tourn.id).empty?
         @players[index] = plr
@@ -82,7 +82,7 @@ class TeamsController < ApplicationController
     @tournplr.reject! {|item| item.nil?}
     @players.reject! {|item| item.nil?}
   end
-  
+
   private
 
   def team_params
