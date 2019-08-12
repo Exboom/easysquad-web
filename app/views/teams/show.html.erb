@@ -161,12 +161,4 @@
             data: {team_id: <%= @team.id %>}
         })
     };
-
-    function plusClick(id) {
-        $.ajax({
-            url: "/rosters",
-            type: "POST",
-            <!--            data: {player_id: id,team_id: <%#= @team.id %>, tournament_id: <%#= @tourn.id %>}-->
-        })
-    }
 </script>
