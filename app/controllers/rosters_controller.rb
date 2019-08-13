@@ -57,7 +57,7 @@ class RostersController < ApplicationController
         end
       end
       @allplayers.each_with_index do |plr, index|
-        if plr.rosters.where(tournament_id: @tourn.id).empty?
+        if plr.rosters.where(tournament_id: @tourn.id, team_id: @team.id).empty?
           next
         else
           @tournplr[index] = plr

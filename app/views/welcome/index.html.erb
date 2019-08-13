@@ -104,7 +104,7 @@
                                 <%= nxtgm.location.name %>
                                 (<%= nxtgm.location.address %>)
                                 <hr>
-                                <% if (@player.rosters.find_by tournament: nxtgm.tournament.id).nil? %>
+                                <% if (@player.rosters.find_by tournament: nxtgm.tournament.id, team: @teampl[index].id).nil? %>
                                   <p class="lead">Вы не заявлены за команду на этот турнир</p>
                                 <% else %>
                                   <% if (Chekin.find_by player: @player, game: nxtgm).nil? %>
@@ -125,13 +125,13 @@
                                     <% end %>
                                   <% end %>
                                 <% end %>
-                                <div class="okno" id="okno<%= nxtgm.id %>">
+                                <div class="okno" id="okno<%= nxtgm.id %><%= @teampl[index].id %>">
                                   <% nxtgm.chekins.where(chekin: true).each do |checks| %>
                                     <%= checks.player.name %><br>
                                   <% end %>
                                   <a style="position: absolute; top: 3px; right: 8px;" title="Закрыть" href="#">×</a>
                                 </div>
-                                <a href="#okno<%= nxtgm.id %>">Кто будет на игре?</a>
+                                <a href="#okno<%= nxtgm.id %><%= @teampl[index].id %>">Кто будет на игре?</a>
                               </li>
                             <% end %>
                           <% end %>
@@ -163,7 +163,7 @@
                                 <%= lstgm.location.name %>
                                 (<%= lstgm.location.address %>)
                                 <hr>
-                                <div class="okno" id="okno<%= lstgm.id %>">
+                                <div class="okno" id="okno<%= lstgm.id %><%= @teampl[index].id %>">
                                   <% lstgm.chekins.where(chekin: true).each do |checks| %>
                                     <p>
                                       <%= checks.player.name %>
@@ -171,7 +171,7 @@
                                   <% end %>
                                   <a style="position: absolute; top: 3px; right: 8px;" data-original-title="Закрыть" href="#">×</a>
                                 </div>
-                                <a href="#okno<%= lstgm.id %>">Кто был на игре?</a>
+                                <a href="#okno<%= lstgm.id %><%= @teampl[index].id %>">Кто был на игре?</a>
                               </li>
                             <% end %>
                           <% end %>
