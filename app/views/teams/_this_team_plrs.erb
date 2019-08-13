@@ -1,0 +1,12 @@
+<% if @team.players.empty? %>
+  <h2>В этой команде нет игроков</h2>
+<% else %>
+  <ul class="zebra">
+    <% @team.players.each do |play| %>
+      <li><h2><%= play.name %></h2>
+        <%= link_to "Подробнее", player_path(play), :method => :get, :class => "btn btn-secondary" %>
+        <%= plr_team_out(@team, play) %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

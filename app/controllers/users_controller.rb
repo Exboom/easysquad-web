@@ -9,25 +9,22 @@ class UsersController < ApplicationController
   end
 
   def create
-    session[:return_to] ||= request.referer
-    if params[:user][:password].blank?
-      params[:user].delete(:password)
-      params[:user].delete(:password_confirmation)
-    end
-    @team = Team.find(params[:user][:team_id])
+    @team = Team.find(params[:team_id])
     authorize! :edit, @team
-    @user = User.new(email: params[:user][:email], password: @team.default_password, password_confirmation: @team.default_password)
+    @user = User.new(email: params[:email], password: @team.default_password, password_confirmation: @team.default_password)
     if @user.save
-      @user.update(approved: params[:user][:approved])
-      UserRole.new(user_id: @user.id, role_id: 4, team_id: params[:user][:team_id]).save
-      @player = Player.new(id: @user.id, name: params[:user][:name])
+      @user.update(approved: params[:approved])
+      UserRole.new(user_id: @user.id, role_id: 4, team_id: params[:team_id]).save
+      @player = Player.new(id: @user.id, name: params[:name])
       @player.save
-      PlayerTeam.new(player_id: @user.id, team_id: params[:user][:team_id]).save
+      PlayerTeam.new(player_id: @user.id, team_id: params[:team_id]).save
       # mailer
       @mail = UserMailer.with(user: @user, team: @team, player: @player).new_player
       @mail.deliver_now
       # mailer
-      redirect_back fallback_location: @team, flash: {notice: "Пользователь зарегестрирован"}
+      respond_to do |format|
+        format.js {flash[:notice] = "Пользователь зарегестрирован"}
+      end
     else
       redirect_back fallback_location: @team, flash: {"alert-danger": "Произошла ошибка: " + @user.errors.full_messages.join(' ')}
     end

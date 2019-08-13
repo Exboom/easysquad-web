@@ -4,7 +4,7 @@
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tourn">Email
     </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
-      <%= f.email_field :email, autofocus: true, :class => "form-control col-md-5 col-xs-12", :required => "" %>
+      <%= f.email_field :email, value: nil, :class => "form-control col-md-5 col-xs-12", :required => "" %>
     </div>
   </div>
 
@@ -22,7 +22,21 @@
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myteam">
     </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
-      <%= f.submit "Зарегистрировать", :class => "btn btn-success" %>
+      <a class="btn btn-success" onclick="regClick()">
+        Зарегистрировать
+      </a>
     </div>
   </div>
 <% end %>
+
+<script>
+    function regClick() {
+        var email = $("#user_email").val()
+        var name = $("#user_name").val()
+        $.ajax({
+            url: "/users",
+            type: "POST",
+            data: {team_id: <%= team.id %>, approved: true, email: email, name: name}
+        })
+    };
+</script>

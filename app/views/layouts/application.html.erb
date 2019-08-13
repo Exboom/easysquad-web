@@ -9,9 +9,9 @@
   <%= stylesheet_link_tag 'application', media: 'all' %>
 </head>
 <body class="nav-md">
-<% flash.each do |key, message| %>
-  <p id="my-alert" class="alert alert-box <%= key %>"><%= message %></p>
-<% end %>
+<div id="flashmsg">
+  <%= render partial: "layouts/flash_msg" %>
+</div>
 <div class="container body">
   <div class="main_container">
     <div class="col-md-3 left_col">

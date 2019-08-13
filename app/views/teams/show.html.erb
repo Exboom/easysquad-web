@@ -87,21 +87,11 @@
               </blockquote>
             </div>
             <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
-              <% if @team.players.empty? %>
-                <h2>В этой команде нет игроков</h2>
-              <% else %>
-                <ul class="zebra">
-                  <% @team.players.each do |play| %>
-                    <li><h2><%= play.name %></h2>
-                      <%= link_to "Подробнее", player_path(play), :method => :get, :class => "btn btn-secondary" %>
-                      <%= plr_team_out(@team, play) %>
-                    </li>
-                  <% end %>
-                </ul>
-              <% end %>
+              <div id="thisteamplrs">
+                <%= render partial: "this_team_plrs", object: @team %>
+              </div>
               <% if can? :edit, @team %>
                 <hr>
-
                 <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true"
                      style="position: relative; max-width: 650px; left: 50%; transform: translate(-50%);">
                   <div class="panel">
@@ -109,7 +99,7 @@
                       <h4 class="panel-title">Зарегистрировать нового игрока</h4>
                     </a>
                     <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="height: 0px;">
-                      <div class="panel-body">
+                      <div class="panel-body" id="plrreg">
                         <%= render partial: "new_plr_reg", locals: {team: @team} %>
                       </div>
                     </div>

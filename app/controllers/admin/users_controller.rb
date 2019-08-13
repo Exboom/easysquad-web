@@ -51,7 +51,7 @@ class Admin::UsersController < ApplicationController
       if Player.find_by(id: @user.id).present?
         Player.find(@user.id).destroy
       end
-      redirect_back fallback_location: root_path, flash: {notice: "Пользователь удален"}
+      redirect_to "/admin/users", flash: {notice: "Пользователь удален"}
     else
       redirect_back fallback_location: root_path, flash: {"alert-danger": "Произошла ошибка: " + @user.errors.full_messages.join(' ')}
     end
