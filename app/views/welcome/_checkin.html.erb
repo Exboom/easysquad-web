@@ -12,6 +12,7 @@
 
       <div class="item form-group checkboxes">
         <div class="col-md-12 col-sm-12 col-xs-12">
+          <%#= form.collection_select(:player_id, varsearch, :id, :name, {}, {:class => "form-control", :id => "exmpl", :required => ""}) %>
           <%= form.collection_check_boxes :player_id, varsearch, :id, :name do |b| %>
             <div class="col-md-5 col-sm-5 col-xs-12">
               <%= b.check_box :required => "" %>
@@ -34,17 +35,12 @@
   <% end %>
 <% end %>
 
-<script>
-    function checkDuplicate() {
-        setTimeout(function () {
-            var seen = {};
-            $('div.checkboxes > div').each(function () {
-                var txt = $(this).text();
-                if (seen[txt])
-                    $(this).remove();
-                else
-                    seen[txt] = true;
-            });
-        }, 30)
-    }
-</script>
+<!--<script>-->
+<!--    $(function () {-->
+<!--        $('#exmpl').select2({-->
+<!--            placeholder: "Выберите игрока",-->
+<!--            language: 'ru',-->
+<!--            width: '100%'-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->

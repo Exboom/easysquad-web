@@ -18,7 +18,8 @@ class GamesController < ApplicationController
 
   def update
     @game = Game.find(params[:id])
-    if @game.update(game_params)
+    # if @game.update(game_params)
+    if @game.update(game_score: params[:game][:game_score1]+" : "+params[:game][:game_score1])
       @event = Event.new(user_id: current_user.id,
                          what_event: "Установлен счет",
                          game_id: @game.id,

@@ -7,6 +7,7 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
 </head>
 <body class="nav-md">
 <div id="flashmsg">
@@ -105,7 +106,6 @@
     <!-- /footer content -->
   </div>
 </div>
-<%= javascript_include_tag 'application' %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/i18n/ru.js"></script>
 <%= javascript_include_tag 'bootstrap.min' %>

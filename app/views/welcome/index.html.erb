@@ -432,5 +432,26 @@
                 document.getElementById('visblock').style.display = 'none';
             }
         }
+
+        function checkDuplicate() {
+            setTimeout(function () {
+                var seen = {};
+                var seen2 = {};
+                $('div.checkboxes > div').each(function () {
+                    var txt = $(this).text();
+                    if (seen[txt])
+                        $(this).remove();
+                    else
+                        seen[txt] = true;
+                });
+                $('div.score > div').each(function () {
+                    var txt2 = $(this).text();
+                    if (seen2[txt2])
+                        $(this).remove();
+                    else
+                        seen2[txt2] = true;
+                });
+            }, 10)
+        }
     </script>
 <% end %>

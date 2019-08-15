@@ -1,16 +1,16 @@
 <p><b><i>Игра сыграна?</i></b></p>
 <%= form_with(model: nxtgm, html: {:style => " margin-bottom: 10px;", :novalidate => ""}, local: true) do |form| %>
 
-  <div class="item setup form-group">
-    <div class="col-md-6 col-sm-6 col-xs-12" style="text-align: center;">
-      <%= form.text_field :game_score, placeholder: "Установите счет", :required => "", :class => "form-control col-md-5 col-xs-12", :style => "text-align: center;" %>
+  <div class="item setup form-group score">
+    <div class="col-md-4 col-sm-4 col-xs-5 setup" style="text-align: center; margin-top: 0;">
+      <%= form.text_field :game_score1, :required => "", class: "col-md-3 col-sm-3 col-xs-3", autocomplete: "off", :style => "text-align: center;" %>
+      &nbsp;:&nbsp;
+      <%= form.text_field :game_score2, :required => "", class: "col-md-3 col-sm-3 col-xs-3", autocomplete: "off", :style => "text-align: center;" %>
     </div>
     <%= form.hidden_field :team_id, value: teamprsns[index].id %>
   </div>
-
   <div class="setup">
     <br>
-    <%= form.submit "Установить", :style => "margin-left: 5px;" %>
+    <%= form.submit "Установить счет", :style => "margin-left: 5px;", :onclick => "checkDuplicate()" %>
   </div>
-
 <% end %>
