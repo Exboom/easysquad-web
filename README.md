@@ -1,6 +1,7 @@
 # README
 
 http://easysquad-web.herokuapp.com/ – задеплоинное приложение
+
 Доступные пользователи:
 * admin@mail.ru
 * owner@mail.ru
